@@ -18,6 +18,7 @@ public:
     luaL_openlibs(L);
     luah::loadScript(L,"./res/props/" + folder + "/data.lua");
     b.initBody(scene,eStaticBody,glm::vec3(0.0f,0.0f,0.0f));
+    this->name = folder;
 
 
     luabridge::LuaRef propRef = luabridge::getGlobal(L,folder.c_str());
@@ -34,6 +35,7 @@ public:
       Object * object = new Object(path,glm::vec4(r,g,b2,1.0f),"./res/basicShader",false);
       object->setPos(pos);
       object->setScale(scale);
+      this->meshScale = scale.x;
       objects.push_back(object);
       // glm::vec3 s;
       // Box * box = new Box();
@@ -91,6 +93,7 @@ public:
     lua_State* L = luaL_newstate();
     luaL_openlibs(L);
     luah::loadScript(L,"./res/props/" + folder + "/data.lua");
+    this->name = folder;
     luabridge::LuaRef propRef = luabridge::getGlobal(L,folder.c_str());
     for (int i = 0; i < propRef.length(); ++i) {
       luabridge::LuaRef prop = propRef[i+1];
@@ -162,12 +165,14 @@ public:
   Box b;
   std::vector<Box*> boxes;
   glm::vec3 offset;
-private:
-  bool collision = false;
-  std::vector<Object*> objects;
-  int id;
   std::string name;
-  glm::vec3 sc = glm::vec3(0.0f,0.0f,0.0f);
+  glm::vec3 sc = glm::vec3(0.0f, 0.0f, 0.0f);
+  float meshScale = 0.0f;
+  std::vector<Object*> objects;
+  bool collision = false;
+
+private:
+  int id;
   Object collisionObject;
 };
 

@@ -30,6 +30,9 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
+extern "C" {
+#include "audio/audio.h"
+}
 using namespace std;
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
@@ -59,6 +62,8 @@ int main()
     const char* glsl_version = "#version 130";
 
     ImGui_ImplOpenGL3_Init(glsl_version);
+    initAudio();
+    playMusic("./res/sounds/music/highlands.wav", SDL_MIX_MAXVOLUME*2.0);
 
 
     // std::cout << e->getType() << "X:" << pos.x << " Y:" << pos.y << " Z:" << pos.z << '\n';
@@ -89,6 +94,8 @@ int main()
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     }
+    endAudio();
+
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();

@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="animatedMesh.cpp" />
     <ClCompile Include="AssimpConverter.cpp" />
+    <ClCompile Include="audio\audio.c" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="EntityAPI.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="animatedMesh.h" />
     <ClInclude Include="animatedObject.h" />
     <ClInclude Include="AssimpConverter.h" />
+    <ClInclude Include="audio\audio.h" />
     <ClInclude Include="BasicComponent.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="CameraComponent.h" />

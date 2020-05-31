@@ -2,7 +2,8 @@
 #define ESYSTEM_H
 #include "entity.h"
 #include "luaLibrary.h"
-
+#define WIDTH 800
+#define HEIGHT 600
 
 #include "camera.h"
 #include "messaging.h"
@@ -30,13 +31,31 @@ extern void drawText();
 class EntitySystem {
 public:
    void drawConsoleWindow() {
-        ImGui::Begin("Sample window");
-        ImGui::SetWindowSize(ImVec2(300, 300));
+        ImGui::Begin("Console Window");
+        ImGui::SetWindowSize(ImVec2(600, 600));
         ImGui::Text("This is a console command window");
         ImGui::Text(commandLog.c_str());
         ImGui::InputText("", command, 255);
         ImGui::End();
     }
+   void drawLevelEditor() {
+
+   }
+   void updateLevelEditor() {
+       drawLevelEditor();
+       SDL_Event e;
+       SDL_PollEvent(&e);
+       int xMouse;
+       int yMouse;
+       SDL_GetMouseState(&xMouse, &yMouse);
+       float xPlacePos = (float)xMouse;
+       float yPlacePos = (float)yMouse;
+       xPlacePos -= WIDTH / 2.0;
+       yPlacePos -= HEIGHT / 2.0;
+       std::cout << "xPlacePos: " << xPlacePos << " yPlacePos: " << yPlacePos << "\n";
+       
+   }
+
   int roundToNearest(int value, int nearest) {
     return value + ((nearest-(value % nearest)) % nearest);
   }
@@ -126,6 +145,8 @@ public:
     // b.init(glm::vec3(0.01f,0.01f,0.01f),glm::vec3(0.0f,0.0f,0.0f),&scene,eDynamicBody);
     addTextBox("DANK MEMES",glm::vec2(0.0f,1.0f), glm::vec3(0.0f,1.0f,0.0f), 30);
     floor.init(glm::vec3(1000.0f,1.0,1000.0f),glm::vec3(0.0f,0.0f,0.0f),&scene, eStaticBody);
+    topDownCamera.InitCam(glm::vec3(0, 380, 0), 70.0, 800.0f / 600.0f, 0.01f, 1000.0f);
+    topDownCamera.Pitch(1.57);
     // luaL_openlibs(L);
     // luah::loadScript(L,script);
     // luabridge::LuaRef entityRef = luabridge::getGlobal(L,"entities");
@@ -198,6 +219,12 @@ public:
     setHeroTarget();
     checkForCollisionError();
     checkForConsole();
+    if (isConsoleOpen || isLevelEditorOpen) {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+    else {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+    }
   //  clearText();
   //  addTextBox(*text,glm::vec2(-0.9f,0.9f), glm::vec3(1.0f,1.0f,0.0f), 30);
     if (FPS < 35.0) {
@@ -368,7 +395,13 @@ public:
       // }
       e->entities = &entities;
       e->setPlayerPos(playerPos);
-      e->isPaused = isConsoleOpen;
+      if (isConsoleOpen || isLevelEditorOpen) {
+          e->isPaused = true;
+      }
+      else {
+          e->isPaused = false;
+      }
+      isTopDown = isLevelEditorOpen;
 
       if (frozen == false && isConsoleOpen == false) {
         e->Update(L,&scene);
@@ -448,6 +481,45 @@ public:
           }
       }
   }
+  void killEntityCommand(std::vector<std::string> tokens) {
+      for (Entity* e : entities) {
+          if (e->type == tokens[1]) {
+              e->kill();
+              commandLog += "killed entity type: " + tokens[1] + "\n";
+          }
+      }
+  }
+  void GodModeCommand() {
+      for (Entity* e : entities) {
+          if (e->type == "player") {
+              e->godmode = true;
+          }
+      }
+  }
+  void ProjColorCommand(std::vector<std::string> tokens) {
+      for (Entity* e : entities) {
+          if (e->type == "player") {
+              auto projc = e->get<ProjectileComponent>();
+              float r = ::atof(tokens[1].c_str());
+              float g = ::atof(tokens[2].c_str());
+              float b = ::atof(tokens[3].c_str());
+              projc->setColor(glm::vec4(r, g, b, 1.0f));
+          }
+      }
+  }
+  void printNumCommand(std::vector<std::string> tokens) {
+      float temp = ::atof(tokens[1].c_str());
+      commandLog += std::to_string(temp) + "\n";
+  }
+  void helpCommand() {
+      commandLog += "print\n";
+      commandLog += "spawnEntity\n";
+      commandLog += "setSpeed\n";
+      commandLog += "killEntity\n";
+      commandLog += "godmode\n";
+      commandLog += "setProjColor\n";
+      commandLog += "printNum\n";
+  }
   void runCommand() {
       std::cout << "run command\n";
       std::string cmd = std::string(command);
@@ -458,16 +530,14 @@ public:
       {
           tokens.push_back(intermediate);
       }
-      
-      if (tokens[0] == "print") {
-          runPrintCommand(tokens);
-      }
-      else if (tokens[0] == "spawnEntity") {
-          spawnEntityCommand(tokens);
-      }
-      else if (tokens[0] == "setSpeed") {
-          setSpeedCommand(tokens);
-      }
+           if (tokens[0] == "print") {runPrintCommand(tokens);}
+      else if (tokens[0] == "help") {helpCommand();}
+      else if (tokens[0] == "spawnEntity") {spawnEntityCommand(tokens);}
+      else if (tokens[0] == "setSpeed") {setSpeedCommand(tokens);}
+      else if (tokens[0] == "killEntity") {killEntityCommand(tokens);}
+      else if (tokens[0] == "godmode") {GodModeCommand();}
+      else if (tokens[0] == "setProjColor") {ProjColorCommand(tokens);}
+      else if (tokens[0] == "printNum") { printNumCommand(tokens); }
   }
   void checkForConsole() {
       Uint8* keys;
@@ -495,9 +565,7 @@ public:
           case SDL_KEYDOWN:
               int key = e.key.keysym.sym & ~SDLK_SCANCODE_MASK;
               bool isKeyDown = (e.type == SDL_KEYDOWN);
-
               std::cout << key << "\n";
-
               if (key == 8) {
                   std::cout << "backspace\n";
                   io.KeysDown[io.KeyMap[ImGuiKey_Backspace]] = true;
@@ -506,10 +574,7 @@ public:
                   runCommand();
               }
           }
-              
-         
       }
-
       if (keys[SDL_SCANCODE_BACKSLASH]) {
           if (isConsoleOpen == true && canKey == true) {
               isConsoleOpen = false;
@@ -522,7 +587,19 @@ public:
       } else {
           canKey = true;
       }
-      
+      if (keys[SDL_SCANCODE_EQUALS]) {
+          if (isLevelEditorOpen == true && canKey2 == true) {
+              isLevelEditorOpen = false;
+              canKey2 = false;
+          }
+          else if (isLevelEditorOpen == false && canKey2 == true) {
+              isLevelEditorOpen = true;
+              canKey2 = false;
+          }
+      }
+      else {
+          canKey2 = true;
+      }
       
 
   }
@@ -532,20 +609,12 @@ public:
             p->Draw(getMainCam());
             p->Update();
         }
-        SDL_SetRelativeMouseMode(SDL_TRUE);
-
     }
-    else {
-        SDL_SetRelativeMouseMode(SDL_FALSE);
-
-    }
-    
     for (Entity * e : entities) {
       e->Draw(getMainCam(), frozen);
     }
-    if (isConsoleOpen == true) {
-        drawConsoleWindow();
-    }
+    if (isConsoleOpen == true) { drawConsoleWindow();}
+    if (isLevelEditorOpen == true) {updateLevelEditor();}
     
   }
   void setHeroTarget() {
@@ -579,7 +648,11 @@ public:
       auto camc = e->get<CameraComponent>();
       if (camc) {
         // playerPos = camc->getCamera().m_position;
-        return camc->getCamera();
+          if (isTopDown) {
+              return topDownCamera;
+          }else {
+              return camc->getCamera();
+          }
       }
     }
     Camera badCam;
@@ -592,22 +665,29 @@ public:
   bool printDelta = false;
   bool firstCollisionUpdate = true;
   bool isConsoleOpen = false;
+  bool isLevelEditorOpen = false;
+  bool mouseOpen;
   char command[255] = "Input Command Here";
-  std::string commandLog = "\n";
+  std::string commandLog = "type commands here.\n type help for command list \n";
+  std::vector<Entity*> entities;
+  std::vector<Prop*> props;
+  std::vector<Entity*> startEnt;
+
 private:
   std::string * text;
   bool dumped = false;
-  std::vector<Entity*> startEnt;
   q3Scene scene;
-  std::vector<Prop*> props;
   int count;
-  std::vector<Entity*> entities;
   int collisions = 0;
   double speedMultiplier = 1.0;
   double FPSToUse = 60;
   std::vector<double> FPS_List;
   Box floor;
   bool canKey = true;
+  bool canKey2 = true;
   lua_State* L;
+  Camera topDownCamera;
+
+  bool isTopDown = true;
 };
 #endif

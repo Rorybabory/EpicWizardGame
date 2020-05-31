@@ -6,10 +6,42 @@
 #include <LuaBridge/LuaBridge.h>
 #include <vector>
 #include "entitySystem.h"
+#include <iostream>
+#include <fstream>
 
 class Map {
 public:
+    void writeToFile() {
+        ofstream mapFile;
+        mapFile.open("map.lua");
+        mapFile << fileName << " = {\n";
+        for (Prop* prop : eSystem.props) {
+            mapFile << "    {\n";
+            mapFile << "        type = \"prop\",\n";
+            mapFile << "        file = \"" << prop->name << "\",\n";
+            mapFile << "        scale = " << prop->meshScale << ",\n";
+            mapFile << "        x = " << prop->objects[0]->getPos().x << ",\n";
+            mapFile << "        y = " << prop->objects[0]->getPos().z << ",\n";
+            if (prop->collision == true) {
+                mapFile << "        collides = true\n";
+            }else {
+                mapFile << "        collides = false\n";
+            }
+            mapFile << "    },\n";
+        }
+        for (Entity* entity : eSystem.entities) {
+            mapFile << "    {\n";
+            mapFile << "        type = \"entity\",\n";
+            mapFile << "        file = \"" << entity->type << "\",\n";
+            mapFile << "        x = " << entity->pos.x << ",\n";
+            mapFile << "        y = " << entity->pos.z << ",\n";
+            mapFile << "    },\n";
+        }
+        mapFile << "}\n";
+        mapFile.close();
+    }
   void init(std::string fileName, lua_State* L) {
+      this->fileName = fileName;
     luah::loadScript(L,"./res/maps/" + fileName + ".lua");
     luabridge::LuaRef mapRef = luabridge::getGlobal(L,fileName.c_str());
 
@@ -31,8 +63,12 @@ public:
         std::cout << "ERROR: MAP: " << fileName << " HAS INVALID TYPED ITEM..." << "\n";
       }
     }
+    writeToFile();
+    
+
   }
   EntitySystem eSystem;
+  std::string fileName;
 private:
 };
 

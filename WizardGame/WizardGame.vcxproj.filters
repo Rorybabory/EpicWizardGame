@@ -22,6 +22,9 @@
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{865e5a41-f307-44c5-9d6c-a3b817900e09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{52273530-8257-4afb-9498-b7881de9681e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animatedMesh.cpp">
@@ -98,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_sdl.cpp">
       <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\audio.c">
+      <Filter>audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_sdl.h">
       <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\audio.h">
+      <Filter>audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

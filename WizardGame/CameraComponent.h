@@ -29,7 +29,7 @@ public:
     return camera;
   }
   void setFOV(float fov) {
-    camera.InitCam(glm::vec3(0,0,-5), fov, 800.0f/600.0f,0.01f, 1000.0f);
+    camera.InitCam(glm::vec3(0,0,0), fov, 800.0f/600.0f,0.01f, 1000.0f);
   }
   void setPos(glm::vec3 p) {
     camera.m_position = p;

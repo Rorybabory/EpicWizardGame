@@ -135,6 +135,9 @@ public:
     auto cameraC = get<CameraComponent>();
     auto sgraphics = get<StaticGraphicsComponent>();
     textPointer = new std::string("DANK");
+    if (godmode == true) {
+        hp = 99;
+    }
     if (cameraC != NULL) {
       cameraC->camera.m_position = pos;
       cameraC->UpdateCamera();
@@ -423,11 +426,7 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
-  // void Damage() {
-  //   Hit()
-  // }
   float getDefaultSpeed() { return mainSpeed; }
-
   void setUIText(std::string text);
   void Delay(int milliseconds);
   void setCollisionBox(float width, float height, float length);
@@ -586,6 +585,7 @@ public:
   bool modText = false;
   bool isPaused;
   float mainSpeed = 0.5f;
+  bool godmode = false;
 protected:
 private:
   Uint8* keys;
