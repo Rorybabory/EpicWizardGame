@@ -51,6 +51,20 @@ float Entity::getDistanceFromNearest(std::string targetType) {
     }
     return nearestDist;
 }
+float Entity::getDistanceFromNearestEnt() {
+    float nearestDist = 100000.0;
+    for (Entity* e : *allEntities) {
+        if (e->type != type) {
+            float x;
+            x = sqrt(pow(e->pos.x - pos.x, 2) +
+                pow(e->pos.z - pos.z, 2));
+            if (x < nearestDist) {
+                nearestDist = x;
+            }
+        }
+    }
+    return nearestDist;
+}
 void Entity::setDamageAnimation(int anim) {
   damageAnim = anim;
 }
@@ -190,6 +204,20 @@ void Entity::lookAtPlayer() {
     // std::cout << "target is " << targetAngle << " abs is " << std::abs(rotDegs-targetAngle) << " current rotation: " << rotDegs << std::endl;
 }
 
+void Entity::copyPlayerRot() {
+    for (Entity* e : *allEntities) {
+        if (e->type == "player") {
+            rot.y = e->rot.y;
+            float angle = e->getForward().y;
+            float degrees = 180 * angle / 3.1415f;
+            int val = (int)(360.0f + round(degrees)) % 360;
+            rot.y = (float)val;
+            std::cout << angle << "\n";
+        }
+        break;
+    }
+}
+
 void Entity::lookAt(float x, float y) {
     glm::vec2 targetPos = glm::vec2(x,y);
     targetPos.x = targetPos.x - pos.x;
@@ -225,6 +253,8 @@ void Entity::moveForward(float amount) {
 void Entity::moveBackward(float amount) {
     pos.x = pos.x-(cos(rot.y*180/3.14)*-amount * speedModifier);
     pos.z = pos.z-(sin(rot.y*180/3.14)*-amount * speedModifier);
+    //pos.x += getForward().x * -amount * speedModifier;
+    //pos.z += getForward().z * -amount * speedModifier;
 }
 
 void Entity::setAnimation(int id) {
@@ -500,6 +530,12 @@ void Entity::playAnimationTag(std::string tag) {
     gfxc->playAnimTag(tag);
   }
 }
+void Entity::resetFrame() {
+    auto gfxc = get<GraphicsComponent>();
+    if (gfxc != NULL) {
+        gfxc->resetFrame();
+    }
+}
 bool Entity::isAnimationPlaying(std::string tag) {
   auto gfxc = get<GraphicsComponent>();
   if (gfxc != NULL) {
@@ -531,4 +567,60 @@ void Entity::Delay(int milliseconds) {
 void Entity::setUIText(std::string text) {
     textPointer = new std::string(text);
     modText = true;
+}
+Entity* Entity::getNearestEntity() {
+    Entity* nearest = nullptr;
+    float dist = 10000.0f;
+    for (Entity* e : *allEntities) {
+        if (e->type != type) {
+            if (dist > getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z))) {
+                nearest = e;
+                dist = getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z));
+            }
+        }
+    }
+    if (nearest == nullptr) {
+        return NULL;
+    }
+    else {
+        std::cout << "got nearest\n";
+        return nearest;
+
+    }
+}
+void Entity::damageNearest(int damage) {
+    Entity* nearest = nullptr;
+    float dist = 10000.0f;
+    for (Entity* e : *allEntities) {
+        if (e->type != type) {
+            if (dist > getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z))) {
+                nearest = e;
+                dist = getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z));
+            }
+        }
+    }
+    Hit(damage, nearest);
+}
+void Entity::setBrightness(float b) {
+    brightness = b;
+}
+float Entity::getProjCount() {
+    auto projc = get<ProjectileComponent>();
+    return projc->delayCount;
+}
+void Entity::setProjCount(float count) {
+    auto projc = get<ProjectileComponent>();
+    projc->delayCount = count;
+}
+void Entity::Emit(int num, float r, float g, float b, float a) {
+    emitter.addParticles(num, glm::vec3(pos.x, pos.y + 6.0, pos.z), glm::vec4(r,g,b,a));
+}
+void Entity::setRot(float x, float y, float z) {
+    rot = glm::vec3(x,y,z);
+}
+void Entity::setPlayerTag(std::string tag) {
+    playerTag = tag;
+}
+std::string Entity::getPlayerTag() {
+    return playerTag;
 }

@@ -24,17 +24,22 @@ class FrameBuffer
                 glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+
+
         }
         virtual ~FrameBuffer();
         void BindFrameBuffer();
         void RenderFrameBuffer();
+        Shader ppShader;
+        bool horizontal = false;
+
     protected:
     private:
         unsigned int framebuffer;
         unsigned int textureColorbuffer;
         unsigned int rbo;
         Mesh quad;
-        Shader ppShader;
 };
 
 #endif // FRAMEBUFFER_H

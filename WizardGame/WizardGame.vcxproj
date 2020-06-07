@@ -189,9 +189,11 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="obj_loader.cpp" />
+    <ClCompile Include="particle.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="SkeletalAnimation\SkeletalModel.cpp" />
     <ClCompile Include="SkeletalAnimation\SkeletalModelSerializer.cpp" />
+    <ClCompile Include="skybox.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -238,7 +240,7 @@
     <ClInclude Include="object.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="ozzMesh.h" />
-    <ClInclude Include="particleSystem.h" />
+    <ClInclude Include="particle.h" />
     <ClInclude Include="postProcessing.h" />
     <ClInclude Include="ProjComponent.h" />
     <ClInclude Include="projectile.h" />
@@ -249,6 +251,7 @@
     <ClInclude Include="SkeletalAnimation\SkeletalModel.h" />
     <ClInclude Include="SkeletalAnimation\SkeletalModelSerializer.h" />
     <ClInclude Include="SkeletalAnimation\Types.h" />
+    <ClInclude Include="skybox.h" />
     <ClInclude Include="StaticGraphicsComponent.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="text.h" />

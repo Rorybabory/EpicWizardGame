@@ -71,9 +71,7 @@ public:
 
     animID = AnimationTags[tag];
     testingCount = 0;
-    resetFrame();
   }
-
   void UpdateSlow(double deltaTime) {
     // if (slowCount == 0) {
     //   object.Update(deltaTime*2.0,animID);

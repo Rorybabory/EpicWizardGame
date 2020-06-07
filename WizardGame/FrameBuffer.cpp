@@ -4,6 +4,9 @@
 void FrameBuffer::BindFrameBuffer() {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
     glEnable(GL_DEPTH_TEST);
+    int h = glGetUniformLocation(ppShader.m_program, "horizontal");
+    glUniform1i(h, horizontal);
+
 }
 void FrameBuffer::RenderFrameBuffer() {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);

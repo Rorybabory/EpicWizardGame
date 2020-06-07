@@ -35,7 +35,6 @@ public:
   bool CheckCollision(glm::vec3 point);
   void UpdateMinMax();
   glm::vec3 getMeshPos();
-  virtual ~Object();
   void Draw(Camera camera);
   void Update();
   Box projB;
@@ -56,6 +55,9 @@ public:
   int delay = 0;
   int timesBounced = 0;
   glm::vec3 lastDir;
+  glm::vec3 startPos;
+  std::vector<glm::vec3> locations;
+  Shader outline;
 protected:
 private:
 

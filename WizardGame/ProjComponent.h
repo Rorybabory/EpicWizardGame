@@ -9,7 +9,6 @@
 
 
 #include "Component.h"
-#include "particleSystem.h"
 
 class ProjectileComponent : public Component {
 public:
@@ -43,12 +42,18 @@ public:
   void setModel(std::string model) {
     this->model = model;
   }
+  void drawLineBetweenTwoPoints(glm::vec3 pos1, glm::vec3 pos2) {
+      glLineWidth(10.0);
+      glBegin(GL_LINES);
+      glVertex3f(pos1.x, pos1.y, pos1.z);
+      glVertex3f(pos2.x, pos2.y, pos2.z);
+      glEnd();
+  }
   void Draw(Camera camera) {
     if (!objects.empty()) {
       for (int i = 0; i < objects.size(); i++) {
         if (objects[i]->destroy == false) {
           objects[i]->Draw(camera);
-          projectileEmitters[i]->Draw(camera);
         }
       }
     }
@@ -73,7 +78,6 @@ public:
   // }
   void Update() {
     for (int i = 0; i < objects.size(); i++) {
-      projectileEmitters[i]->Update();
       // std::cout << objects[i]->counter << " ";
       // std::cout << glm::degrees(FrontToRadians(objects[i]->lastDir).y) << '\n';
       if (objects[i]->hasInit) {
@@ -84,18 +88,14 @@ public:
               // std::cout << "CHANGE DIRECTION" << '\n';
               objects[i]->timesBounced++;
         }
-
         objects[i]->projB.body->SetToAwake();
         objects[i]->setPos(glm::vec3(objects[i]->projB.getPos().x,objects[i]->projB.getPos().y,objects[i]->projB.getPos().z));
-        projectileEmitters[i]->setPos(objects[i]->getPos());
         if (objects[i]->destroy == false) {
           objects[i]->delay++;
           if (objects[i]->delay > range) {
             //projectileEmitters[i]->Emit(1);
             objects[i]->delay = 0;
           }
-        }else {
-            projectileEmitters[i]->deleteParticles();
         }
 
       }
@@ -144,12 +144,12 @@ public:
     delayCount++;
     if (delayCount>delay) {
       delayCount = 0;
+      color.a = 1.0;
       Object * o = new Object(model,color,"./res/basicShader",glm::vec3(startPos.x+(forward.x*7.0f),height+(forward.y*2.0f),startPos.y+(forward.z*7.0f)),false);
       o->forward = forward;
       objects.push_back(o);
       o->setScale(glm::vec3(2.0f,2.0f,2.0f));
-      Emitter * e = new Emitter(0.02f, 20, glm::vec4(color.r,color.g,color.b,0.5f));
-      projectileEmitters.push_back(e);
+      //o->startPos = glm::vec3(startPos.x,height,startPos.y);
       return true;
     }
     return false;
@@ -174,7 +174,6 @@ public:
   }
 Object object;
 std::vector<Object*> objects;
-std::vector<Emitter*> projectileEmitters;
 double SpeedMultiplier;
 float speed;
 float height;

@@ -6,6 +6,7 @@
 #include "transform.h"
 #include "camera.h"
 #include "mesh.h"
+#include "camera.h"
 class Shader {
 public:
   Shader(const std::string& fileName);
@@ -21,21 +22,20 @@ public:
   glm::vec4 color = glm::vec4(0.0f,0.0f,0.0f,1.0f);
   int x;
   int y;
-protected:
-private:
   static const unsigned int NUM_SHADERS = 2;
   Shader(const Shader& other) {}
   void operator=(const Shader& other) {}
-
   enum {
-    TRANSFORM_U,
-    NUM_UNIFORMS
+      TRANSFORM_U,
+      NUM_UNIFORMS
   };
-
   std::string LoadShader(const std::string& fileName);
   void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
   GLuint m_program;
   GLuint m_shaders[NUM_SHADERS];
   GLuint m_uniforms[NUM_UNIFORMS];
+protected:
+private:
+  
 };
 #endif

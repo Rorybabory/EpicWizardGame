@@ -63,6 +63,9 @@ void animatedMesh::calculateMesh() {
 void animatedMesh::Draw()
 {
   if (MeshStored) {
+      glStencilFunc(GL_ALWAYS, 1, 0xFF);
+      glStencilMask(0xFF);
+
     glBindVertexArray(m_vertexArrayObject);
     glDrawArrays(GL_TRIANGLES,0,numIndices);
     glBindVertexArray(0);

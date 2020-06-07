@@ -5,6 +5,7 @@
 #include "GL/glew.h"
 #include "mesh.h"
 extern int screenInverted;
+extern float brightness;
 void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 std::string LoadShader(const std::string& fileName);
 static GLuint CreateShader(const std::string& text, GLenum shaderType);
@@ -103,6 +104,8 @@ void Shader::Bind() {
   int colorLocation = glGetUniformLocation(m_program,"color");
   glUniform4f(colorLocation, 1.0f,0.0f,1.0f,1.0f);
   int BoolLocation = glGetUniformLocation(m_program,"inverted");
+  int BrightLocation = glGetUniformLocation(m_program, "brightness");
+  glUniform1f(BrightLocation, brightness);
   if (screenInverted == true) {glUniform1i(BoolLocation, 1);}
   if (screenInverted == false) {glUniform1i(BoolLocation, 0);}
 

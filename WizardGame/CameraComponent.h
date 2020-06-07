@@ -15,7 +15,7 @@ public:
     auto fovRef = componentTable["fov"];
     auto fPersonRef = componentTable["fPersonRef"];
     if (fovRef.isNumber()) {
-      camera.InitCam(glm::vec3(0,0,-5), fovRef.cast<float>(), 800.0f/600.0f,0.01f, 1000.0f);
+      camera.InitCam(glm::vec3(0,0,-5), fovRef.cast<float>(), 800.0f/600.0f,0.01f, 3000.0f);
       camera.m_position = glm::vec3(0.0f,0.0f,0.0f);
       isFirstPerson = fPersonRef.cast<bool>();
       if (isFirstPerson == false) {
@@ -29,7 +29,7 @@ public:
     return camera;
   }
   void setFOV(float fov) {
-    camera.InitCam(glm::vec3(0,0,0), fov, 800.0f/600.0f,0.01f, 1000.0f);
+    camera.ReInitCam(fov, 800.0f/600.0f,0.01f, 1000.0f);
   }
   void setPos(glm::vec3 p) {
     camera.m_position = p;
@@ -38,9 +38,9 @@ public:
     camera.Shake(amount);
   }
   void UpdateCamera() {
-    if (isFirstPerson == false) {
-      camera.m_position = glm::vec3(0.0f,500.0f,0.0f);
-    }
+    //if (isFirstPerson == false) {
+    //  camera.m_position = glm::vec3(0.0f,500.0f,0.0f);
+    //}
     camera.UpdateShake();
   }
 

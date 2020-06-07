@@ -6,7 +6,18 @@ varying vec3 position0;
 uniform sampler2D sampler;
 uniform vec4 color;
 uniform int inverted;
+uniform float brightness;
 const float offset = 1.0 / 300.0;
+float near = 0.2; 
+float far  = 1000.0; 
+  
+
+float LinearizeDepth(float depth) 
+{
+    float z = depth * 2.0 - 1.0; // back to NDC 
+    return (2.0 * near * far) / (far + near - z * (far - near));	
+}
+
 void main() {
     bool isEdge = false;
     vec2 offsets[9] = vec2[](
@@ -46,12 +57,18 @@ void main() {
     if (inverted == 1.0) {
         value = vec3(1.0)-value;
     }
+	
     float edge = (colEdge.r+colEdge.g+colEdge.b)*2.0;
-    if (edge > 0.000001) {
+	if (1.0-texCoord0.y<1.0/350.0) {
+		edge = 0.0f;
+	}
+    if (edge > 0.2) {
         edge = 1.0;
         isEdge = true;
         gl_FragColor = vec4(vec3(0.0),1.0);
     }else {
-        gl_FragColor = vec4(value,1.0);
+        gl_FragColor = vec4(value*brightness,1.0);
     }
+	float depth = LinearizeDepth(gl_FragCoord.z) / far;
+	gl_FragColor = vec4(value,1.0);
 }

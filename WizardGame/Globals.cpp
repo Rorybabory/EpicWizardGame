@@ -5,15 +5,17 @@
 #include "camera.h"
 #include "text.h"
 #include <glm/glm.hpp>
-glm::vec2 levelSize = glm::vec2(145,145);
+glm::vec2 levelSize = glm::vec2(290, 290);
 int globalVariable = 69;
 std::map<std::string, std::vector<animatedMesh*>> storedObjectData;
 double FPS = 60.0;
 int screenInverted = 0;
+float brightness = 1;
 std::vector<Text*> texts;
 std::vector<glm::vec2> textPositions;
 std::vector<std::string> textStrings;
 std::vector<glm::vec3> colors;
+std::string playerTag;
 void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale) {
 	Text * object = new Text(scale, "./res/Ubuntu-B.ttf");
 	textPositions.push_back(pos);

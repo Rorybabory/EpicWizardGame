@@ -13,6 +13,7 @@ public:
     this->textSize = size;
     Font.init(file.c_str(), size);
   }
+  Text() {}
   int CalculateLocX(float val, float size) {
     float size2 = size-(size/10);
     return (int) ((((val/1.0f)*size)/2)+(size/2));

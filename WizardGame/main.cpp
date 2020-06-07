@@ -33,6 +33,7 @@
 extern "C" {
 #include "audio/audio.h"
 }
+#include "skybox.h"
 using namespace std;
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
@@ -64,30 +65,22 @@ int main()
     ImGui_ImplOpenGL3_Init(glsl_version);
     initAudio();
     playMusic("./res/sounds/music/highlands.wav", SDL_MIX_MAXVOLUME*2.0);
-
+    Skybox skybox;
 
     // std::cout << e->getType() << "X:" << pos.x << " Y:" << pos.y << " Z:" << pos.z << '\n';
     while(!display.isClosed()) {
+        world.Update();
         postProcessing.BindFrameBuffer();
+
         display.Clear(0.294f,0.463f,0.639f,1.0f);
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL2_NewFrame(display.m_window);
-
         ImGui::NewFrame();
-        world.Update();
+        skybox.Draw(world.testMap.eSystem.getMainCam());
 
-        //ImGui::ShowDemoWindow();
         world.Draw();
-
-        //pp.Bind();
-
-
-
-
-        // gfxc->Update(world.deltaTime);
-        // gfxc->Draw(world.player.GetCamera());
         counter+=0.01f;
-        //pp.Render();
         display.Update();
         postProcessing.RenderFrameBuffer();
         ImGui::Render();

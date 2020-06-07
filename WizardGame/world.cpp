@@ -43,7 +43,7 @@ void World::Update() {
     lastTime = time;
     time = 0;
   }
-  testMap.eSystem.Update(L);
+  testMap.Update(L);
 
   //std::cout << deltaTime << '\n';
   // UpdateMessages();

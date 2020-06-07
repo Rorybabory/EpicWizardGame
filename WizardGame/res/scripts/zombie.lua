@@ -42,7 +42,7 @@ end
 function zombie_Start(e)
     e:setHP(5)
     e:lookAtPlayer()
-    e:setScale(1.0)
+    e:setScale(0.9+e:random(0,0.2))
     e:setFloat("raiseCount", 0)
     e:setCollisionBox(3.0,3.0,7.5)
     e:restartCollisionBox()

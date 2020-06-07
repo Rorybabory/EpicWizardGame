@@ -7,6 +7,8 @@ Object::Object(string file, glm::vec4 Color, string shaderFile, bool hasUVs) {
   IndexedModel model = OBJModel(file, hasUVs).ToIndexedModel();
   mesh.InitMesh(model);
   shader.InitShader(shaderFile);
+  outline.InitShader("./res/outline");
+
   color = Color;
   lastDir = glm::vec3(0.0f,0.0f,0.0f);
 }
@@ -14,6 +16,7 @@ Object::Object(string file, glm::vec4 Color, string shaderFile,glm::vec3 pos, bo
   IndexedModel model = OBJModel(file, hasUVs).ToIndexedModel();
   mesh.InitMesh(model);
   shader.InitShader(shaderFile);
+  outline.InitShader("./res/outline");
   color = Color;
   setPos(pos);
   lastDir = glm::vec3(0.0f,0.0f,0.0f);
@@ -26,6 +29,8 @@ void Object::initObject(string file, glm::vec4 Color, string shaderFile, bool ha
   IndexedModel model = OBJModel(file, hasUVs).ToIndexedModel();
   mesh.InitMesh(model);
   shader.InitShader(shaderFile);
+  outline.InitShader("./res/outline");
+
   color = Color;
   lastDir = glm::vec3(0.0f,0.0f,0.0f);
 }
@@ -119,17 +124,14 @@ bool Object::CheckCollision(glm::vec3 point) {
           (point.z >= min.z && point.z <= max.z);
 }
 
-Object::~Object() {
-
-}
 void Object::Update() {
   //transform.getRot().y += 0.01f;
   max = mesh.max+transform.getPos();
   min = mesh.min+transform.getPos();
 }
 void Object::Draw(Camera camera) {
-  shader.Bind(color);
-  shader.Update(transform, camera);
-  mesh.Draw();
-  shader.UnBind();
+    shader.Bind(color);
+    shader.Update(transform, camera);
+    mesh.Draw();
+    shader.UnBind();
 }

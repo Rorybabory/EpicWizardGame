@@ -2,7 +2,7 @@ newMap = {
     {
         type = "prop",
         file = "floor",
-        scale = 75,
+        scale = 150,
         x = 0,
         y = 0,
         collides = false
@@ -10,32 +10,32 @@ newMap = {
     {
         type = "prop",
         file = "wall1",
-        scale = 19,
+        scale = 38,
         x = 0,
-        y = 150,
+        y = 300,
         collides = true
     },
     {
         type = "prop",
         file = "wall1",
-        scale = 19,
+        scale = 38,
         x = 0,
-        y = -150,
+        y = -300,
         collides = true
     },
     {
         type = "prop",
         file = "wall2",
-        scale = 19,
-        x = 150,
+        scale = 38,
+        x = 300,
         y = 0,
         collides = true
     },
     {
         type = "prop",
         file = "wall2",
-        scale = 19,
-        x = -150,
+        scale = 38,
+        x = -300,
         y = 0,
         collides = true
     },
@@ -47,6 +47,7 @@ newMap = {
         y = 30,
         collides = true
     },
+	
     {
         type = "prop",
         file = "house5",
@@ -69,10 +70,11 @@ newMap = {
         x = 0,
         y = 0,
     },
-    {
-        type = "entity",
-        file = "necromancer",
-        x = 100,
-        y = 100,
-    },
+    --{
+    --    type = "entity",
+    --    file = "hand",
+    --    x = 100,
+    --    y = 100,
+    --},
+	
 }

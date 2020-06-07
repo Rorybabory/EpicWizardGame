@@ -4,7 +4,7 @@
 #include "luaLibrary.h"
 #define WIDTH 800
 #define HEIGHT 600
-
+#include "skybox.h"
 #include "camera.h"
 #include "messaging.h"
 #include "CollisionSystem.h"
@@ -20,6 +20,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
+#include <cmath> 
 
 extern double FPS;
 
@@ -37,9 +38,56 @@ public:
         ImGui::Text(commandLog.c_str());
         ImGui::InputText("", command, 255);
         ImGui::End();
-    }
-   void drawLevelEditor() {
+   }
+   void drawPropEditor() {
+       ImGui::Begin("ADD PROP");
+       ImGui::SetWindowSize(ImVec2(200, 400));
+       ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));
+       ImGui::InputText("", propEditor, 255);
+       ImGui::SliderInt("Size", &propSize, 0, 50, "%d");
+       ImGui::Checkbox("Collides", &collideCheckbox);
+       if (ImGui::Button("Create Prop") == true) {
+           std::cout << "PROP CREATED\n";
+           addProp(propEditor, glm::vec3((float)propSize), glm::vec3(clickPos.x, 0.0f, clickPos.y), collideCheckbox);
+       }
+       if (ImGui::Button("Undo") == true) {
+           props[props.size() - 1]->b.setPos(glm::vec3(-999.0f, -999.0f, -999.0f));
+           props.erase(props.begin() + props.size() - 1);
+       }
+       ImGui::End();
+   }
+   void drawEntityEditor() {
+       ImGui::Begin("ADD ENTITY");
+       ImGui::SetWindowSize(ImVec2(200, 400));
+       ImGui::SetWindowPos(ImVec2(600.0f, 0.0f));
 
+       ImGui::InputText("", entityEditor, 255);
+       if (ImGui::Button("Create Entity") == true) {
+           addEntityAtPos("res/scripts/entities.lua", entityEditor, clickPos, L);
+       }
+       if (ImGui::Button("Undo") == true) {
+           entities[entities.size() - 1]->collider.setPos(glm::vec3(-999.0f, -999.0f, -999.0f));
+           entities.erase(entities.begin() + entities.size() - 1);
+       }
+       ImGui::End();
+   }
+   void drawSaveLoad() {
+       ImGui::Begin("Save Load");
+       ImGui::SetWindowSize(ImVec2(200, 100));
+       ImGui::SetWindowPos(ImVec2(300.0f, 0.0f));
+       ImGui::InputText("", mapPath, 255);
+       if (ImGui::Button("Save") == true) {
+           save = true;
+       }
+       if (ImGui::Button("Load") == true) {
+           load = true;
+       }
+       ImGui::End();
+   }
+   void drawLevelEditor() {
+       drawPropEditor();
+       drawEntityEditor();
+       drawSaveLoad();
    }
    void updateLevelEditor() {
        drawLevelEditor();
@@ -52,8 +100,17 @@ public:
        float yPlacePos = (float)yMouse;
        xPlacePos -= WIDTH / 2.0;
        yPlacePos -= HEIGHT / 2.0;
-       std::cout << "xPlacePos: " << xPlacePos << " yPlacePos: " << yPlacePos << "\n";
-       
+       xPlacePos = -xPlacePos/1.7f;
+       yPlacePos = -yPlacePos/1.7f;
+       xPlacePos *= 2.0;
+       yPlacePos *= 2.0;
+       Uint8* keys;
+       keys = const_cast <Uint8*> (SDL_GetKeyboardState(NULL));
+       if (keys[SDL_SCANCODE_SPACE] == true) {
+           clickPos.x = xPlacePos;
+           clickPos.y = yPlacePos;
+           clickObject.setPos(glm::vec3(clickPos.x, 0.0f, clickPos.y));
+       }
    }
 
   int roundToNearest(int value, int nearest) {
@@ -139,13 +196,13 @@ public:
       prop->setUpCollider(&scene);
     }
   }
-  EntitySystem ()  : scene(1.0/60.0) {
+  EntitySystem ()  : scene(1.0/60.0), clickObject("./res/X.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",false) {
     // Box b;
     text = new std::string("MEME");
     // b.init(glm::vec3(0.01f,0.01f,0.01f),glm::vec3(0.0f,0.0f,0.0f),&scene,eDynamicBody);
     addTextBox("DANK MEMES",glm::vec2(0.0f,1.0f), glm::vec3(0.0f,1.0f,0.0f), 30);
     floor.init(glm::vec3(1000.0f,1.0,1000.0f),glm::vec3(0.0f,0.0f,0.0f),&scene, eStaticBody);
-    topDownCamera.InitCam(glm::vec3(0, 380, 0), 70.0, 800.0f / 600.0f, 0.01f, 1000.0f);
+    topDownCamera.InitCam(glm::vec3(0, 800, 0), 70.0, 800.0f / 600.0f, 0.01f, 1000.0f);
     topDownCamera.Pitch(1.57);
     // luaL_openlibs(L);
     // luah::loadScript(L,script);
@@ -162,6 +219,9 @@ public:
   }
   Entity* getEntityByID(int id) {
     return entities[id];
+  }
+  void clearScene() {
+      scene.RemoveAllBodies();
   }
   void checkSpawnedEntities(lua_State* L) {
     for (Entity * e : entities) {
@@ -227,7 +287,7 @@ public:
     }
   //  clearText();
   //  addTextBox(*text,glm::vec2(-0.9f,0.9f), glm::vec3(1.0f,1.0f,0.0f), 30);
-    if (FPS < 35.0) {
+    if (FPS < 45.0) {
       std::cout << "FPS: " << FPS << std::endl;
     }
 
@@ -270,12 +330,14 @@ public:
           exit(0);
         }
       }
+      if (entities[i]->hasCollision) {
+          if (entities[i]->type != "player" || entities[i]->type != "AIHero") {
+              entities[i]->collider.setPos(glm::vec3(entities[i]->pos.x, 0.0f, entities[i]->pos.z));
+          }
+          else {
 
-      if (entities[i]->type != "player" || entities[i]->type != "AIHero") {
-        entities[i]->collider.setPos(glm::vec3(entities[i]->pos.x,0.0f,entities[i]->pos.z));
-      }else {
-
-        entities[i]->collider.setPos(glm::vec3(playerPos.x,0.0f,playerPos.z));
+              entities[i]->collider.setPos(glm::vec3(playerPos.x, 0.0f, playerPos.z));
+          }
       }
       // if (entities[i]->killed == true) {
       //   // scene.RemoveBody(entities[i]->collider.body);
@@ -296,13 +358,17 @@ public:
       //   e->pos.z = e->startingPos.y;
       //   e->collider.setPos(glm::vec3(e->startingPos.x, 0.0, e->startingPos.y));
       // }
-      if (e->type != "player") {
-        e->pos = glm::vec3(e->collider.getPos().x,0.0f,e->collider.getPos().z);
-      }else {
-        e->pos = glm::vec3(e->collider.getPos().x,0.0f,e->collider.getPos().z);
+      if (e->hasCollision) {
+          if (e->type != "player") {
+              e->pos = glm::vec3(e->collider.getPos().x, 0.0f, e->collider.getPos().z);
+          }
+          else {
+              e->pos = glm::vec3(e->collider.getPos().x, 0.0f, e->collider.getPos().z);
 
-        //e->setCamPos(glm::vec3(e->collider.getPos().x,2.0f,e->collider.getPos().z));
-        //e->collider.setPos(e->getCamPos());
+              //e->setCamPos(glm::vec3(e->collider.getPos().x,2.0f,e->collider.getPos().z));
+              //e->collider.setPos(e->getCamPos());
+          }
+
       }
       collisions++;
       if (collisions == 2) {
@@ -403,10 +469,10 @@ public:
       }
       isTopDown = isLevelEditorOpen;
 
-      if (frozen == false && isConsoleOpen == false) {
+      if (frozen == false && isConsoleOpen == false && isLevelEditorOpen == false) {
         e->Update(L,&scene);
       }else {
-        if (e->type == "player") {
+        if (e->type == "player" && isConsoleOpen == false && isLevelEditorOpen == false) {
           e->Update(L,&scene);
         }
       }
@@ -426,7 +492,6 @@ public:
          auto projc = eTarget->get<ProjectileComponent>();
 
          if (projc != NULL) {
-            projc->Draw(getMainCam());
            for (Object * o : projc->objects) {
             // o->Draw(getMainCam());
             if (eTarget->type != e->type) {
@@ -440,7 +505,7 @@ public:
                 if (e->canBeHit && frozen == false && o->destroy == false) {
                   coll = true;
                   o->destroy = true;
-                  eTarget->Hit(L, o->timesBounced,e);
+                  eTarget->Hit(o->timesBounced,e);
                 }
               }
             }
@@ -565,9 +630,8 @@ public:
           case SDL_KEYDOWN:
               int key = e.key.keysym.sym & ~SDLK_SCANCODE_MASK;
               bool isKeyDown = (e.type == SDL_KEYDOWN);
-              std::cout << key << "\n";
               if (key == 8) {
-                  std::cout << "backspace\n";
+                  //std::cout << "backspace\n";
                   io.KeysDown[io.KeyMap[ImGuiKey_Backspace]] = true;
               }
               if (key == 13) {
@@ -600,8 +664,6 @@ public:
       else {
           canKey2 = true;
       }
-      
-
   }
   void Draw(double deltaTime) {
     if (isConsoleOpen == false) {
@@ -611,10 +673,25 @@ public:
         }
     }
     for (Entity * e : entities) {
-      e->Draw(getMainCam(), frozen);
+        auto projc = e->get<ProjectileComponent>();
+        if (projc != NULL) {
+            projc->Draw(getMainCam());
+        }
+
+      if (!isLevelEditorOpen) {
+          e->Draw(getMainCam(), frozen);
+      }else {
+          float posX = -(e->pos.x * 3.4);
+          float posY = (e->pos.z * 3.4);
+          e->editorText.Draw(e->type, glm::vec2(posX/WIDTH, posY/HEIGHT), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), WIDTH, HEIGHT);
+      }
     }
-    if (isConsoleOpen == true) { drawConsoleWindow();}
-    if (isLevelEditorOpen == true) {updateLevelEditor();}
+    if (isConsoleOpen) { drawConsoleWindow();}
+    if (isLevelEditorOpen) {
+        updateLevelEditor();
+        clickObject.Draw(getMainCam());
+        clickObject.setScale(glm::vec3(3.0f));
+    }
     
   }
   void setHeroTarget() {
@@ -668,11 +745,20 @@ public:
   bool isLevelEditorOpen = false;
   bool mouseOpen;
   char command[255] = "Input Command Here";
+  char propEditor[255] = "";
+  char entityEditor[255] = "";
+  char mapPath[255] = "save directory";
+  int propSize = 0;
   std::string commandLog = "type commands here.\n type help for command list \n";
   std::vector<Entity*> entities;
   std::vector<Prop*> props;
   std::vector<Entity*> startEnt;
-
+  glm::vec2 clickPos;
+  std::string playerTag;
+  Object clickObject;
+  bool save = false;
+  bool load = false;
+  bool collideCheckbox;
 private:
   std::string * text;
   bool dumped = false;
@@ -687,7 +773,6 @@ private:
   bool canKey2 = true;
   lua_State* L;
   Camera topDownCamera;
-
   bool isTopDown = true;
 };
 #endif

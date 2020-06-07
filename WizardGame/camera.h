@@ -28,11 +28,22 @@ public:
     m_up = glm::vec3(0,1,0);
     m_perspective = glm::perspective(fov, aspect,zNear,zFar);
   }
+  void ReInitCam(float fov, float aspect, float zNear, float zFar) {
+      m_perspective = glm::perspective(fov, aspect, zNear, zFar);
+  }
+
   inline glm::mat4 GetViewProjection() const
   {
     return m_perspective * glm::lookAt(m_position,m_position+m_forward, m_up);
   }
-  
+  inline glm::mat4 GetViewCubemap() const
+  {
+      return m_perspective * glm::mat4(glm::mat3(glm::lookAt(m_position, m_position + m_forward, m_up)));
+  }
+  inline glm::mat4 GetViewMatrix() const
+  {
+      return glm::lookAt(m_position, m_position + m_forward, m_up);
+  }
   void MoveForward(float amt)
 	{
 		m_position += m_forward * amt;
@@ -42,7 +53,11 @@ public:
   }
   void UpdateShake() {
     float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-    m_position = m_position+((r-0.5f)*shakeAmount);
+    glm::vec2 posChange = glm::vec2(0.0f,0.0f);
+    posChange.x = (r - 0.5f)* shakeAmount;
+    posChange.y = (r - 0.5f) * shakeAmount;
+    MoveRight(posChange.x);
+    m_position.y += posChange.y;
     if (shakeAmount > 0.0f) {
       shakeAmount-=0.1f;
     }else {

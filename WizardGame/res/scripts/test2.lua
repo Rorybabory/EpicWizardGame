@@ -44,7 +44,7 @@ function test2_Update(e)
   e:setFloat("SpawnCount", e:getFloat("SpawnCount")+1)
 
   if (e:isAnimationPlaying("damaged") == false and e:isAnimationPlaying("attack") == false) then
-    e:moveForward(0.35)
+    e:moveForward(0.8)
     e:lookAtPlayer()
   end
   if (e:getDistanceFromNearest("player") < 30 and e:isAnimationPlaying("attack") == false) then

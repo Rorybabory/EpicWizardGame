@@ -8,11 +8,11 @@
 #include <glm/glm.hpp>
 #include <math.h>
 #include <cmath>
-
+#include "text.h"
 #include <stdlib.h>
 #include "animatedObject.h"
 #include "luaLibrary.h"
-
+#include "particle.h"
 #include <LuaBridge/LuaBridge.h>
 #include <memory>
 #include "GraphicsComponent.h"
@@ -23,9 +23,12 @@
 #include <qu3e/q3.h>
 #include "CollisionSystem.h"
 #include "ProjComponent.h"
+
 #include <map>
 #ifndef ENTITY_H
 #define ENTITY_H
+extern float brightness;
+extern std::string playerTag;
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
                   pow(y-y2, 2));
@@ -85,22 +88,28 @@ public:
       delete c.second;
     }
   }
-  Entity(lua_State* L) : UpdateFunction(L), OnStartFunction(L), CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
-                                                                CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true) {
+  Entity(lua_State* L) : UpdateFunction(L), OnStartFunction(L), HitFunction(L), CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
+                                                                CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
+                                                                editorText(15,"./res/Avara.ttf"), 
+                                                                emitter(glm::vec3(0.0), 500, 1000, 1.0, true){
+      UICam.InitCam(glm::vec3(0, 0, 0), 70, 800.0f / 600.0f, 0.01f, 1000.0f);
+
   }
   void CompileLuaFunctions(lua_State* L) {
     std::string UpdateString = type + "_Update";
     UpdateFunction = luabridge::getGlobal(L,UpdateString.c_str());
     std::string OnStartString = type + "_Start";
     OnStartFunction = luabridge::getGlobal(L,OnStartString.c_str());
+    std::string HitString = type + "_Hit";
+    HitFunction = luabridge::getGlobal(L, HitString.c_str());
   }
-  void Hit(lua_State* L, int hits, Entity * ent) {
+  void Hit(int hits, Entity * ent) {
     if (!dead) {
       // std::cout << "YOU HIT A " << type << " AT " << pos.x << " " << pos.z << " with " << hits << " hits" << '\n';
       std::string HitString = type + "_Hit";
       try {
-        auto hit = luabridge::getGlobal(L,HitString.c_str());
-        hit(this,ent,hits);
+//        auto hit = luabridge::getGlobal(L,HitString.c_str());
+        HitFunction(this,ent,hits);
       }catch(luabridge::LuaException const& e) {
         std::cout << "MISSING HIT FUNCTION..." << '\n';
       }
@@ -108,13 +117,18 @@ public:
   }
   void Draw(Camera cam, bool f) {
     auto gfxc = get<GraphicsComponent>();
+    emitter.drawParticles(cam);
     if (gfxc != NULL && !dead) {
       if (f == false && frozen == false && isPaused == false) {
         gfxc->Update(speedModifier);
       }
       if (isPaused != true) {
-          gfxc->Draw(cam);
-
+          if (type == "hand") {
+              gfxc->Draw(UICam);
+          }
+          else {
+              gfxc->Draw(cam);
+          }
       }
       CollisionObject.Draw(cam);
       CollisionObject2.Draw(cam);
@@ -131,6 +145,8 @@ public:
             (point.z >= projMin.z-3.0f && point.z <= projMax.z+3.0f);
   }
   void Update(lua_State* L, q3Scene * scene) {
+    emitter.updateParticles();
+    
     auto graphics = get<GraphicsComponent>();
     auto cameraC = get<CameraComponent>();
     auto sgraphics = get<StaticGraphicsComponent>();
@@ -274,11 +290,18 @@ public:
     }
   }
   void setUpCollider(q3Scene * scene, glm::vec3 scale) {
-    if (type != "player") {
-      collider.init(scale,glm::vec3(0.0f,0.0f,0.0f),scene,eDynamicBody);
-    }else {
-      collider.init(scale,glm::vec3(0.0f,0.0f,0.0f),scene,eDynamicBody);
+    if (hasCollision) {
+          if (type != "player") {
+              collider.init(scale, glm::vec3(0.0f, 0.0f, 0.0f), scene, eDynamicBody);
+          }
+          else {
+              collider.init(scale, glm::vec3(0.0f, 0.0f, 0.0f), scene, eDynamicBody);
+          }
     }
+    else {
+        collider.init(scale, glm::vec3(500.0f, 500.0f, 0.0f), scene, eDynamicBody);
+    }
+    
   }
   //ADDS FUNTIONS FOR API
   void addFunctions(lua_State* L) {
@@ -333,6 +356,7 @@ public:
       .addFunction("isFirstPerson", &Entity::isFirstPerson)
       .addFunction("lookAtNearest", &Entity::lookAtNearest)
       .addFunction("getDistanceFromNearest", &Entity::getDistanceFromNearest)
+      .addFunction("getDistanceFromNearestEnt", &Entity::getDistanceFromNearestEnt)
       .addFunction("getPositionFromNearestX", &Entity::getPositionFromNearestX)
       .addFunction("getPositionFromNearestY", &Entity::getPositionFromNearestY)
       .addFunction("doesEntityExist", &Entity::doesEntityExist)
@@ -341,6 +365,7 @@ public:
       .addFunction("setFrozen", &Entity::setFrozen)
       .addFunction("getFrozen", &Entity::getFrozen)
       .addFunction("getNearestEntWithName", &Entity::getNearestEntWithName)
+      .addFunction("getNearestEntity", &Entity::getNearestEntity)
       .addFunction("getDistanceBetweenTwoPointsAPI", &Entity::getDistanceBetweenTwoPointsAPI)
       .addFunction("Shake", &Entity::Shake)
       .addFunction("isPlayer", &Entity::isPlayer)
@@ -361,15 +386,20 @@ public:
       .addFunction("setUIText", &Entity::setUIText)
       .addFunction("getPaused", &Entity::getPaused)
       .addFunction("getDefaultSpeed", &Entity::getDefaultSpeed)
-
+      .addFunction("damageNearest", &Entity::damageNearest)
+      .addFunction("setBrightness", &Entity::setBrightness)
+      .addFunction("getProjCount", &Entity::getProjCount)
+      .addFunction("setProjCount", &Entity::setProjCount)
+      .addFunction("Emit", &Entity::Emit)
+      .addFunction("copyPlayerRot", &Entity::copyPlayerRot)
+      .addFunction("setRot", &Entity::setRot)
+      .addFunction("setPlayerTag", &Entity::setPlayerTag)
+      .addFunction("getPlayerTag", &Entity::getPlayerTag)
+      .addFunction("resetFrame", &Entity::resetFrame)
       .endClass();
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
-    if (val == false) {
-      std::cout << "SHIELD: " << countSHIELD << std::endl;
-      countSHIELD++;
-    }
   }
   void setFloat(std::string name, float value) {
     FloatsVars[name] = value;
@@ -426,6 +456,15 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  std::string getPlayerTag();
+  void resetFrame();
+  void setPlayerTag(std::string tag);
+  void copyPlayerRot();
+  void setRot(float x, float y, float z);
+  float getProjCount();
+  void setProjCount(float count);
+  void setBrightness(float b);
+  void damageNearest(int damage);
   float getDefaultSpeed() { return mainSpeed; }
   void setUIText(std::string text);
   void Delay(int milliseconds);
@@ -443,12 +482,14 @@ public:
   float getDistanceBetweenTwoPoints(glm::vec2 pos1, glm::vec2 pos2);
   void setGlobalFrozen(bool f);
   Entity* getNearestEntWithName(std::string entityName);
+  Entity* getNearestEntity();
   bool getGlobalFrozen();
   void setFrozen(bool f);
   bool getFrozen();
   float lookAtNearest(std::string targetType);
   bool doesEntityExist(std::string targetType);
   float getDistanceFromNearest(std::string targetType);
+  float getDistanceFromNearestEnt();
   float getPositionFromNearestX(std::string targetType);
   float getPositionFromNearestY(std::string targetType);
   void isFirstPerson(bool firstPerson);
@@ -493,6 +534,7 @@ public:
   bool isAnimationPlaying(std::string tag);
   void Damage(int numHits);
   bool getPaused() { return isPaused; }
+  void Emit(int num, float r, float g, float b, float a);
   //END API FUNCTIONS
 
   template <typename T>
@@ -562,6 +604,7 @@ public:
   double speedModifier = 1.0;
   luabridge::LuaRef UpdateFunction;
   luabridge::LuaRef OnStartFunction;
+  luabridge::LuaRef HitFunction;
   q3Scene * scenePointer;
   glm::vec3 lastCollSize = glm::vec3(0.0f,0.0f,0.0f);
   glm::vec3 projMin = glm::vec3(0.0f,0.0f,0.0f);
@@ -584,8 +627,13 @@ public:
   std::string * textPointer;
   bool modText = false;
   bool isPaused;
-  float mainSpeed = 0.5f;
+  float mainSpeed = 0.6f;
   bool godmode = false;
+  Text editorText;
+  std::vector<glm::vec3> locations;
+  Emitter emitter;
+  int emitCount = 0;
+  bool hasCollision = false;
 protected:
 private:
   Uint8* keys;
@@ -595,6 +643,7 @@ private:
   bool countData = false;
   SDL_Event e;
   std::vector<glm::vec2> proj;
+  Camera UICam;
 };
 template <typename T>
 void addComponent(Entity* e, luabridge::LuaRef& componentTable) {
@@ -640,6 +689,7 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
       e->Max.y = y.cast<float>();
       e->Max.z = z.cast<float>();
       e->scaleColl = glm::vec3(x.cast<float>(),z.cast<float>(),y.cast<float>());
+      e->hasCollision = true;
     }
     // std::cout << "Added " << componentName << " to " << type << '\n';
   }
