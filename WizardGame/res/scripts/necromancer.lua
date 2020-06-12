@@ -41,6 +41,12 @@ function necromancer_Update(e)
         e:lookAtPlayer()
     end
     e:setFloat("raiseCount", e:getFloat("raiseCount")+1)
+	e:setFloat("teleportCount", e:getFloat("teleportCount")+1)
+	if (e:getFloat("teleportCount") > 720) then
+		e:Emit(100, 0.4,0.3,0.8,0.5);
+		e:setPos(e:random(-150, 150)+e:getX(),0.0,e:random(-150, 150)+e:getZ())
+		e:setFloat("teleportCount", 0)
+	end
     if (e:getFloat("raiseCount") > 240) then
         e:setFloat("raiseCount", 0)
         e:playAnimationTag("raise")
@@ -48,13 +54,15 @@ function necromancer_Update(e)
     end
 end
 function necromancer_Start(e)
-    e:setHP(20)
+    e:setHP(15)
     e:lookAtPlayer()
     e:setScale(3.0)
     e:setFloat("raiseCount", 0)
+    e:setFloat("teleportCount", 0)
     e:setCollisionBox(1.0,1.0,2.5)
     e:restartCollisionBox()
     e:setAnimationTag("default",0)
     e:setAnimationTag("raise",1)
     e:setAnimationTag("damage",0)
+	
 end

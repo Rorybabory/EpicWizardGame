@@ -41,18 +41,31 @@ public:
    }
    void drawPropEditor() {
        ImGui::Begin("ADD PROP");
-       ImGui::SetWindowSize(ImVec2(200, 400));
+       ImGui::SetWindowSize(ImVec2(250, 400));
        ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));
        ImGui::InputText("", propEditor, 255);
        ImGui::SliderInt("Size", &propSize, 0, 50, "%d");
+       ImGui::PushItemWidth(30);
+       ImGui::InputInt("Rotation", &propRotation, 0);
        ImGui::Checkbox("Collides", &collideCheckbox);
        if (ImGui::Button("Create Prop") == true) {
            std::cout << "PROP CREATED\n";
-           addProp(propEditor, glm::vec3((float)propSize), glm::vec3(clickPos.x, 0.0f, clickPos.y), collideCheckbox);
+           addProp(propEditor, glm::vec3((float)propSize), glm::vec3(clickPos.x, 0.0f, clickPos.y), glm::radians((float)propRotation), collideCheckbox);
        }
        if (ImGui::Button("Undo") == true) {
            props[props.size() - 1]->b.setPos(glm::vec3(-999.0f, -999.0f, -999.0f));
            props.erase(props.begin() + props.size() - 1);
+       }
+       ImGui::End();
+   }
+   void drawCursorEditor() {
+       ImGui::Begin("Set Cursor Positon");
+       ImGui::SetWindowSize(ImVec2(200, 150));
+       ImGui::SetWindowPos(ImVec2(0.0f, 400.0f));
+       ImGui::InputInt("X", &cursorPosX, 0);
+       ImGui::InputInt("Y", &cursorPosY, 0);
+       if (ImGui::Button("Set Position") == true) {
+           clickObject.setPos(glm::vec3((float) cursorPosX, 0.0f, (float)cursorPosY));
        }
        ImGui::End();
    }
@@ -88,6 +101,7 @@ public:
        drawPropEditor();
        drawEntityEditor();
        drawSaveLoad();
+       drawCursorEditor();
    }
    void updateLevelEditor() {
        drawLevelEditor();
@@ -130,8 +144,8 @@ public:
     e->OnStart(L);
     entities.push_back(e);
   }
-  void addProp(std::string folder,glm::vec3 scale,glm::vec3 pos1, bool collide) {
-    Prop * p = new Prop(folder,scale,pos1,&scene, collide);
+  void addProp(std::string folder,glm::vec3 scale,glm::vec3 pos1, float rot, bool collide) {
+    Prop * p = new Prop(folder,scale,pos1, rot, &scene, collide);
     p->b.setPos(pos1);
     props.push_back(p);
   }
@@ -202,7 +216,7 @@ public:
     // b.init(glm::vec3(0.01f,0.01f,0.01f),glm::vec3(0.0f,0.0f,0.0f),&scene,eDynamicBody);
     addTextBox("DANK MEMES",glm::vec2(0.0f,1.0f), glm::vec3(0.0f,1.0f,0.0f), 30);
     floor.init(glm::vec3(1000.0f,1.0,1000.0f),glm::vec3(0.0f,0.0f,0.0f),&scene, eStaticBody);
-    topDownCamera.InitCam(glm::vec3(0, 800, 0), 70.0, 800.0f / 600.0f, 0.01f, 1000.0f);
+    topDownCamera.InitCam(glm::vec3(0, 1000, 0), 70.0, 800.0f / 600.0f, 0.01f, 2000.0f);
     topDownCamera.Pitch(1.57);
     // luaL_openlibs(L);
     // luah::loadScript(L,script);
@@ -266,11 +280,11 @@ public:
     if (pFile == NULL) {
       std::cout << "error opening file..." << '\n';
     }
-    for (Entity * e : entities) {
+    /*for (Entity * e : entities) {
       if (e->type == "player") {
         e->collider.body->Dump(pFile,1);
       }
-    }
+    }*/
   }
   void Update(lua_State* L) {
     checkCollision();
@@ -324,11 +338,20 @@ public:
         projc->collUpdate();
         projc->setSpeedMultiplier(speedMultiplier);
       }
+      
       if (entities[i]->type == "player") {
         if (entities[i]->killed == true) {
           DumpToFile();
           exit(0);
         }
+      }
+      if (entities[i]->killed == true) {
+          //delete entities[i];
+          entities[i]->emitter.particles.clear();
+          free(entities[i]);
+
+          entities.erase(entities.begin() + i);
+          //std::cout << "killed entity\n";
       }
       if (entities[i]->hasCollision) {
           if (entities[i]->type != "player" || entities[i]->type != "AIHero") {
@@ -689,8 +712,10 @@ public:
     if (isConsoleOpen) { drawConsoleWindow();}
     if (isLevelEditorOpen) {
         updateLevelEditor();
+        glDisable(GL_DEPTH_TEST);
         clickObject.Draw(getMainCam());
         clickObject.setScale(glm::vec3(3.0f));
+        glEnable(GL_DEPTH_TEST);
     }
     
   }
@@ -749,6 +774,7 @@ public:
   char entityEditor[255] = "";
   char mapPath[255] = "save directory";
   int propSize = 0;
+  int propRotation = 0;
   std::string commandLog = "type commands here.\n type help for command list \n";
   std::vector<Entity*> entities;
   std::vector<Prop*> props;
@@ -759,6 +785,8 @@ public:
   bool save = false;
   bool load = false;
   bool collideCheckbox;
+  int cursorPosX;
+  int cursorPosY;
 private:
   std::string * text;
   bool dumped = false;

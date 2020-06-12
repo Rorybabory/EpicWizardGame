@@ -17,11 +17,17 @@ class FrameBuffer
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
+                glCreateTextures(GL_TEXTURE_2D, 1, &depthbuffer);
+                glBindTexture(GL_TEXTURE_2D, depthbuffer);
+                glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, 800, 600);
+
+
                 glGenRenderbuffers(1, &rbo);
                 glBindRenderbuffer(GL_RENDERBUFFER, rbo);
                 glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
 
                 glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthbuffer, 0);
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
@@ -38,6 +44,7 @@ class FrameBuffer
     private:
         unsigned int framebuffer;
         unsigned int textureColorbuffer;
+        unsigned int depthbuffer;
         unsigned int rbo;
         Mesh quad;
 };

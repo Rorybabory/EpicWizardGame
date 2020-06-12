@@ -1,5 +1,6 @@
 #include "entity.h"
 extern int screenInverted;
+extern glm::vec3 hsv;
 extern glm::vec2 levelSize;
 float Entity::lookAtNearest(std::string targetType) {
     float nearestDist = 100000.0;
@@ -374,7 +375,7 @@ void Entity::FPSControllerUpdate(float speed) {
 //    playerVel = glm::vec3(0.0f,0.0f,0.0f);
     glm::vec3 startPlayerVel = glm::vec3(0.0f,0.0f,0.0f);
     if (keys[SDL_SCANCODE_S]){
-      pos += cameraC->getCamera().m_forward*-speed;
+      pos += cameraC->getCamera().m_forward * -speed;
       moved = true;
     }
     if (keys[SDL_SCANCODE_W]){
@@ -623,4 +624,13 @@ void Entity::setPlayerTag(std::string tag) {
 }
 std::string Entity::getPlayerTag() {
     return playerTag;
+}
+void Entity::setHue(float hue) {
+    hsv.x = hue;
+}
+void Entity::setSaturation(float saturation) {
+    hsv.y = saturation;
+}
+void Entity::setValue(float value) {
+    hsv.z = value;
 }

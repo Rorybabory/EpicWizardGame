@@ -106,6 +106,8 @@ void Shader::Bind() {
   int BoolLocation = glGetUniformLocation(m_program,"inverted");
   int BrightLocation = glGetUniformLocation(m_program, "brightness");
   glUniform1f(BrightLocation, brightness);
+  int HSVLocation = glGetUniformLocation(m_program, "hsv");
+  glUniform3f(HSVLocation, hsv.x,hsv.y,hsv.z);
   if (screenInverted == true) {glUniform1i(BoolLocation, 1);}
   if (screenInverted == false) {glUniform1i(BoolLocation, 0);}
 

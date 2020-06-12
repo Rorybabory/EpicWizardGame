@@ -7,6 +7,7 @@
 #include "camera.h"
 #include "mesh.h"
 #include "camera.h"
+extern glm::vec3 hsv;
 class Shader {
 public:
   Shader(const std::string& fileName);

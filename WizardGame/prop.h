@@ -11,9 +11,11 @@
 #include "CollisionSystem.h"
 
 #include "luaLibrary.h" 
+
 class Prop {
 public:
-  Prop(std::string folder,glm::vec3 scale,glm::vec3 pos,q3Scene * scene, bool collision)  : collisionObject("./res/cube.obj",glm::vec4(1.0,0.0,0.0,1.0),"./res/basicShader",false) {
+    
+  Prop(std::string folder,glm::vec3 scale,glm::vec3 pos,float rot,q3Scene * scene, bool collision)  : collisionObject("./res/cube.obj",glm::vec4(1.0,0.0,0.0,1.0),"./res/basicShader",false) {
     lua_State* L = luaL_newstate();
     luaL_openlibs(L);
     luah::loadScript(L,"./res/props/" + folder + "/data.lua");
@@ -25,7 +27,7 @@ public:
     for (int i = 0; i < propRef.length(); ++i) {
       luabridge::LuaRef prop = propRef[i+1];
       std::string name = prop["name"];
-
+      luabridge::LuaRef red = prop["r"];
       float r = prop["r"];
       float g = prop["g"];
       float b2 = prop["b"];
@@ -33,6 +35,7 @@ public:
 
       std::string path = "./res/props/"+folder+"/"+name+".obj";
       Object * object = new Object(path,glm::vec4(r,g,b2,1.0f),"./res/basicShader",false);
+      object->setRot(glm::vec3(0,rot,0));
       object->setPos(pos);
       object->setScale(scale);
       this->meshScale = scale.x;
@@ -70,12 +73,15 @@ public:
       sc.y += 3.0;
       sc.z += 3.0;
       sc.y *= 2.0f;
-      b.addBox(pos,sc);
+      b.addBox(glm::vec3(0.0),sc,rot);
       if (sc.z != sc.z) {
         std::cout << "SCALE IS NULL" << std::endl;
       }
       // std::cout << folder << " " << sc.x << " " << sc.y << " " << sc.z << std::endl;
     }
+    std::cout << "posY for prop: " << b.getPos().y << "\n";
+
+    b.body->SetTransform(q3Vec3(pos.x,pos.y,pos.z), q3Vec3(0,1,0), rot);
     // texture.InitTex("./res/props/"+folder+"/texture.png");
     // std::cout << folder << ": " <<
     // b.setPos(pos);
@@ -141,7 +147,7 @@ public:
     }
     b.body->SetToAwake();
     // b.setPos(pos);
-    b.body->SetTransform(q3Vec3(0.0f,0.0f,0.0f));
+    //b.body->SetTransform(q3Vec3(0.0f,0.0f,0.0f));
     // if (pos.x < -1000.0f || pos.x > 1000.0f ||
     //     pos.y < -1000.0f || pos.y > 1000.0f ||
     //     pos.z < -1000.0f || pos.z > 1000.0f) {

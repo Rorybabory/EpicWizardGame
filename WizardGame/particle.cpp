@@ -10,10 +10,7 @@ Emitter::Emitter(glm::vec3 Velocity, float Life, int max_particles, float Random
 	this->Life = Life;
 	this->max_particles = max_particles;
 	this->Randomness = Randomness;
-	particles.reserve(max_particles);
-	for (int i = 0; i < max_particles; i++) {
-		particles.emplace_back(glm::vec3(0.0,0.0,0.0),Velocity, glm::vec4(0.0f,0.0f,0.0f,1.0f), Life);
-	}
+	particles.resize(max_particles);
 }
 int Emitter::getFirstInactiveParticle() {
 	for (int i = 0; i < max_particles; i++) {

@@ -41,6 +41,17 @@ public:
     // bodyDef.gravityScale = 0.0f;
     body = scene->CreateBody(bodyDef);
   }
+  void addBox(glm::vec3 pos, glm::vec3 scale, float rot) {
+      q3BoxDef boxDef;
+      q3Transform localSpace;
+      q3Identity(localSpace);
+      localSpace.position = q3Vec3(pos.x, pos.y, pos.z);
+      boxDef.Set(localSpace, q3Vec3(scale.x, scale.y, scale.z));
+      this->sc = scale;
+      this->boxPos = pos;
+      body->AddBox(boxDef);
+  }
+
   void addBox(glm::vec3 pos, glm::vec3 scale) {
     q3BoxDef boxDef;
     q3Transform localSpace;

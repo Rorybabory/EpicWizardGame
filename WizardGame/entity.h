@@ -80,18 +80,21 @@ public:
           return -1;
     } else {
           return 1;
-    }
+    } 
   }
   // virtual Entity* clone() = 0;
   ~Entity() {
     for (auto& c : components) {
       delete c.second;
     }
+    delete &emitter;
+    std::cout << "deleted entity\n";
+
   }
   Entity(lua_State* L) : UpdateFunction(L), OnStartFunction(L), HitFunction(L), CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 editorText(15,"./res/Avara.ttf"), 
-                                                                emitter(glm::vec3(0.0), 500, 1000, 1.0, true){
+                                                                emitter(glm::vec3(0.0), 300, 100, 1.0, true){
       UICam.InitCam(glm::vec3(0, 0, 0), 70, 800.0f / 600.0f, 0.01f, 1000.0f);
 
   }
@@ -220,6 +223,7 @@ public:
       projMin.y += scaleColl.y;
       projMax.y += scaleColl.y;
     }
+    
     // if (type == "player") {
     //   std::cout << "max.y: " << Max.y << " min.y: " << Min.y << " coll Y: " << scaleColl.y << "\n";
     // }
@@ -396,7 +400,10 @@ public:
       .addFunction("setPlayerTag", &Entity::setPlayerTag)
       .addFunction("getPlayerTag", &Entity::getPlayerTag)
       .addFunction("resetFrame", &Entity::resetFrame)
-      .endClass();
+      .addFunction("setHue", &Entity::setHue)
+      .addFunction("setSaturation", &Entity::setSaturation)
+      .addFunction("setValue", &Entity::setValue)
+        .endClass();
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
@@ -456,6 +463,9 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void setHue(float hue);
+  void setSaturation(float saturation);
+  void setValue(float value);
   std::string getPlayerTag();
   void resetFrame();
   void setPlayerTag(std::string tag);
@@ -634,6 +644,7 @@ public:
   Emitter emitter;
   int emitCount = 0;
   bool hasCollision = false;
+  glm::vec2 velocity;
 protected:
 private:
   Uint8* keys;
@@ -658,9 +669,7 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
     std::string componentName = entityRef[i+1]["componentName"];
     if (componentName == "GraphicsComponent") {
       luabridge::LuaRef gcTable = entityRef[i+1];
-
       addComponent<GraphicsComponent>(e,gcTable);
-
     }if (componentName == "StaticGraphicsComponent") {
       luabridge::LuaRef sgcTable = entityRef[i+1];
       addComponent<StaticGraphicsComponent>(e,sgcTable);

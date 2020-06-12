@@ -72,7 +72,9 @@ public:
                 float x = item["x"];
                 float y = item["y"];
                 bool collide = item["collides"];
-                eSystem.addProp(file, glm::vec3(scale, scale, scale), glm::vec3(x, 0.0f, y), collide);
+                float rot = item["rot"];
+
+                eSystem.addProp(file, glm::vec3(scale, scale, scale), glm::vec3(x, 0.0f, y), rot, collide);
             }
             else if (item["type"] == "entity") {
                 std::string file = item["file"];
@@ -99,7 +101,8 @@ public:
         float x = item["x"];
         float y = item["y"];
         bool collide = item["collides"];
-        eSystem.addProp(file,glm::vec3(scale,scale,scale),glm::vec3(x,0.0f,y),collide);
+        float rot = item["rot"];
+        eSystem.addProp(file,glm::vec3(scale,scale,scale),glm::vec3(x,0.0f,y), rot, collide);
       }else if (item["type"] == "entity") {
         std::string file = item["file"];
         float x = item["x"];

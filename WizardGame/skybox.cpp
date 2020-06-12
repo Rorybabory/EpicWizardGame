@@ -106,5 +106,4 @@ void Skybox::Draw(Camera camera) {
     shader.UnBind();
     glDepthMask(GL_TRUE);
     glDepthFunc(GL_LESS);
-
 }
