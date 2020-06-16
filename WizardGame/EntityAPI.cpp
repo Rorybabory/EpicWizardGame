@@ -634,3 +634,9 @@ void Entity::setSaturation(float saturation) {
 void Entity::setValue(float value) {
     hsv.z = value;
 }
+void Entity::setParticleSpread(float spread) {
+    emitter.Randomness = spread;
+}
+void Entity::setParticleModel(std::string model) {
+    emitter.setModel(model);
+}

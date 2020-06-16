@@ -34,7 +34,6 @@ extern "C" {
 #include "audio/audio.h"
 }
 #include "skybox.h"
-using namespace std;
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #endif

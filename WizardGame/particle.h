@@ -42,6 +42,7 @@ public:
     void drawParticles(Camera camera);
     void updateParticles();
     void updateVelocity(int i);
+    void setModel(std::string filename);
     std::vector<Particle> particles;
     glm::vec3 Velocity;
     float Life;

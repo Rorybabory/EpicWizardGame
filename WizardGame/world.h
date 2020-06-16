@@ -23,7 +23,6 @@
 #include "text.h"
 #include "menuSystem.h"
 // #include "ui.h"
-using namespace std;
 class World {
 public:
   World() : menu("TestMenu"){

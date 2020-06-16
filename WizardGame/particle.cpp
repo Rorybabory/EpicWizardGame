@@ -80,3 +80,6 @@ void Emitter::updateParticles() {
 		}
 	}
 }
+void Emitter::setModel(std::string filename) {
+	mesh = Mesh(filename,false);
+}

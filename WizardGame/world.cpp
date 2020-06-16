@@ -61,20 +61,6 @@ void World::Draw() {
   // std::cout << (int) testMap.eSystem.getMainCam().m_position.x << " " << (int) testMap.eSystem.getMainCam().m_position.z << std::endl;
   
   testMap.eSystem.Draw(deltaTime);
-  // pManager.Draw(eSystem.getMainCam());
-  //enemy.Draw(player.GetCamera());
-  //enemy2.Draw(player.GetCamera());
-
-  //throne.Draw(player.GetCamera());
-  //throneVines.Draw(player.GetCamera());
-  //obj.Draw(player.GetCamera(),0);
-  // shader.Bind(glm::vec4(0.804f,0.361f,0.361f,1.0f));
-  // shader.Update(transform, player.GetCamera());
-  // m.Draw();
-  // shader.UnBind();
-  // testText.Draw("HELLO",-1.0f,1.0f,glm::vec3(1.0f,0.0f,0.0f));
-  // testText.Draw("HELLO",0.6f,-1.0f,glm::vec3(1.0f,0.0f,0.0f));
-  // testText.Draw("HELLO",-1.0f,-1.0f,glm::vec3(1.0f,0.0f,0.0f));
   menu.Draw(800,600);
   
 }

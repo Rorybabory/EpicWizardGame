@@ -36,17 +36,29 @@ function zombie_Hit(e,e2,hits)
 end
 
 function zombie_Update(e)
-    e:moveForward(0.25)
     e:lookAtPlayer()
+	if (e:getDistanceFromNearest("player") < 5 and e:isAnimationPlaying("attack") == false) then
+		e:resetFrame()
+		e:playAnimationTag("attack")
+		print("attack")
+	end
+	if (e:isAnimationPlaying("attack") == true) then
+		if (e:getDistanceFromNearest("player") < 12 and e:getAnimFrame() == 55) then
+			e:damageNearest(1)
+		end
+	else 
+		e:moveForward(0.25)
+	end
 end
 function zombie_Start(e)
     e:setHP(5)
     e:lookAtPlayer()
-    e:setScale(0.9+e:random(0,0.2))
+    e:setScale(1.2+e:random(0,0.2))
     e:setFloat("raiseCount", 0)
-    e:setCollisionBox(3.0,3.0,7.5)
+    e:setCollisionBox(1.5,1.5,4.2)
     e:restartCollisionBox()
-    e:setAnimationTag("default",0)
-    e:setAnimationTag("damage",0)
+    e:setAnimationTag("default",2)
+	e:setAnimationTag("attack",0)
+    e:setAnimationTag("damage",1)
 end
 

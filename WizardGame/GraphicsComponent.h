@@ -72,13 +72,27 @@ public:
     animID = AnimationTags[tag];
     testingCount = 0;
   }
-  void UpdateSlow(double deltaTime) {
-    // if (slowCount == 0) {
-    //   object.Update(deltaTime*2.0,animID);
-    //   slowCount = 1;
-    // }else {
-    //   slowCount = 0;
-    // }
+  void UpdateSlow(double speedModifier) {
+      object.isSlow = true;
+      if (slowCount == 4) {
+          object.Update(animID, speedModifier);
+          slowCount = 0;
+      }
+      frame = object.frame;
+      //std::cout << "playing default: " << playingDefault << "\n";
+      if (playingDefault == true) {
+          animID = AnimationTags["default"];
+      }
+      else {
+          testingCount++;
+      }
+      if (frame >= object.duration) {
+          playingDefault = true;
+      }
+      //std::cout << "duration: " << object.duration << "\n";
+      object.setColor(color);
+      object.isSlow = false;
+      slowCount++;
   }
   void UpdateSlowSlow(double deltaTime) {
     // if (slowCount == 3) {

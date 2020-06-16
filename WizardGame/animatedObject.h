@@ -88,12 +88,19 @@ public:
     shader.UnBind();
   }
   bool Update(int id, double speedModifier) {
+      std::cout << "duration: " << duration << "\n";
     duration = animations[id]->Duration;
     if (id != lastAnimID) {
       lastAnimID = id;
       calculateMesh();
     }
     frame++;
+
+    //if (isSlow == true) {
+    //    frame+=3;
+    //}
+    //else {
+    //}
     bool stopped = animations[id]->Update(frame);
     if (stopped) {
       frame = 0;
@@ -144,6 +151,7 @@ public:
   Texture tex;
   int duration = 0;
   int idStored = 0;
+  bool isSlow = false;
 protected:
 private:
 const double maxFPS = 60.0;

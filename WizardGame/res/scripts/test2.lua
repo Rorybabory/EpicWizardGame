@@ -47,7 +47,7 @@ function test2_Update(e)
     e:moveForward(0.8)
     e:lookAtPlayer()
   end
-  if (e:getDistanceFromNearest("player") < 30 and e:isAnimationPlaying("attack") == false) then
+  if (e:getDistanceFromNearest("player") < 20 and e:isAnimationPlaying("attack") == false) then
     e:playAnimationTag("attack")
     test2_Hit(e,e:getNearestEntWithName("player"),1)
   end

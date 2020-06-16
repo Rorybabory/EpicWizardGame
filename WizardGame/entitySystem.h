@@ -20,6 +20,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
+#include <chrono>
 #include <cmath> 
 
 extern double FPS;
@@ -28,7 +29,29 @@ extern int globalVariable;
 extern void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale);
 extern void clearText();
 extern void drawText();
+class Timer {
+public:
+    Timer(std::string name) {
+        m_StartTimePoint = std::chrono::high_resolution_clock::now();
+        this->name = name;
+    }
+    ~Timer() {
+        Stop();
+    }
+    void Stop() {
+        auto endTimepoint = std::chrono::high_resolution_clock::now();
+        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimePoint).time_since_epoch().count();
+        auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
+        auto duration = stop - start;
+        double ms = duration * 0.001;
+
+        std::cout << "Timer " << name << " is:" << duration << "in microseconds" << "\n";
+    }
+private:
+    std::string name;
+    std::chrono::time_point <std::chrono::high_resolution_clock> m_StartTimePoint;
+};
 class EntitySystem {
 public:
    void drawConsoleWindow() {
@@ -41,7 +64,7 @@ public:
    }
    void drawPropEditor() {
        ImGui::Begin("ADD PROP");
-       ImGui::SetWindowSize(ImVec2(250, 400));
+       ImGui::SetWindowSize(ImVec2(200, 500));
        ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));
        ImGui::InputText("", propEditor, 255);
        ImGui::SliderInt("Size", &propSize, 0, 50, "%d");
@@ -60,8 +83,10 @@ public:
    }
    void drawCursorEditor() {
        ImGui::Begin("Set Cursor Positon");
-       ImGui::SetWindowSize(ImVec2(200, 150));
-       ImGui::SetWindowPos(ImVec2(0.0f, 400.0f));
+       ImGui::PushItemWidth(30);
+
+       ImGui::SetWindowSize(ImVec2(800, 100));
+       ImGui::SetWindowPos(ImVec2(0.0f, 500));
        ImGui::InputInt("X", &cursorPosX, 0);
        ImGui::InputInt("Y", &cursorPosY, 0);
        if (ImGui::Button("Set Position") == true) {
@@ -71,7 +96,7 @@ public:
    }
    void drawEntityEditor() {
        ImGui::Begin("ADD ENTITY");
-       ImGui::SetWindowSize(ImVec2(200, 400));
+       ImGui::SetWindowSize(ImVec2(200, 500));
        ImGui::SetWindowPos(ImVec2(600.0f, 0.0f));
 
        ImGui::InputText("", entityEditor, 255);
@@ -86,8 +111,8 @@ public:
    }
    void drawSaveLoad() {
        ImGui::Begin("Save Load");
-       ImGui::SetWindowSize(ImVec2(200, 100));
-       ImGui::SetWindowPos(ImVec2(300.0f, 0.0f));
+       ImGui::SetWindowSize(ImVec2(400, 100));
+       ImGui::SetWindowPos(ImVec2(200.0f, 0.0f));
        ImGui::InputText("", mapPath, 255);
        if (ImGui::Button("Save") == true) {
            save = true;
@@ -218,6 +243,14 @@ public:
     floor.init(glm::vec3(1000.0f,1.0,1000.0f),glm::vec3(0.0f,0.0f,0.0f),&scene, eStaticBody);
     topDownCamera.InitCam(glm::vec3(0, 1000, 0), 70.0, 800.0f / 600.0f, 0.01f, 2000.0f);
     topDownCamera.Pitch(1.57);
+    //mapOfConsoleCommands["print"] = &runPrintCommand;
+    //mapOfConsoleCommands.emplace("help", &EntitySystem::helpCommand);
+    //mapOfConsoleCommands.emplace("spawnEntity", &EntitySystem::spawnEntityCommand);
+    //mapOfConsoleCommands.emplace("setSpeed", &EntitySystem::setSpeedCommand);
+    //mapOfConsoleCommands.emplace("killEntity", &EntitySystem::killEntityCommand);
+    //mapOfConsoleCommands.emplace("godmode", &EntitySystem::GodModeCommand);
+    //mapOfConsoleCommands.emplace("setProjColor", &EntitySystem::ProjColorCommand);
+    //mapOfConsoleCommands.emplace("printNum", &EntitySystem::printNumCommand);
     // luaL_openlibs(L);
     // luah::loadScript(L,script);
     // luabridge::LuaRef entityRef = luabridge::getGlobal(L,"entities");
@@ -247,22 +280,6 @@ public:
       }
     }
   }
-  void checkCollision() {
-    for (Entity * e : entities) {
-      bool c = false;
-      for (int i = 0; i<messager.getMessage().Vec2Vector.size(); i++) {
-        if (sqrt(pow(messager.getMessage().Vec2Vector[i].x-e->pos.x,2)+
-                 pow(messager.getMessage().Vec2Vector[i].y-e->pos.z,2))<2.0f) {
-              if (!messager.getMessage().StringVector.empty()) {
-                if (messager.getMessage().StringVector[i] != e->type) {
-                  c = true;
-                }
-              }
-        }
-      }
-      e->projColliding = c;
-    }
-  }
   void checkForCollisionError() {
     for (Entity * e : entities) {
       if (e->type == "player" && e->hasCollisionError == true) {
@@ -287,12 +304,14 @@ public:
     }*/
   }
   void Update(lua_State* L) {
-    checkCollision();
+    //checkCollision();
     checkSpawnedEntities(L);
     // UpdateDistances();
     setHeroTarget();
     checkForCollisionError();
     checkForConsole();
+    double timer = SDL_GetTicks();
+
     if (isConsoleOpen || isLevelEditorOpen) {
         SDL_SetRelativeMouseMode(SDL_FALSE);
     }
@@ -301,8 +320,8 @@ public:
     }
   //  clearText();
   //  addTextBox(*text,glm::vec2(-0.9f,0.9f), glm::vec3(1.0f,1.0f,0.0f), 30);
-    if (FPS < 45.0) {
-      std::cout << "FPS: " << FPS << std::endl;
+    if (FPS < 50.0) {
+        std::cout << "FPS: " << FPS << std::endl;
     }
 
     if (printDelta==true) {
@@ -370,6 +389,8 @@ public:
         entities[i]->lastPos = entities[i]->pos;
     }
     scene.Step();
+    
+    
 
     for (Entity * e : entities) {
       if (e->modText == true) {
@@ -499,17 +520,6 @@ public:
           e->Update(L,&scene);
         }
       }
-      if (e->firing == true && e->canFire == true) {
-        if (e->type == "player") {
-          e->canFire = false;
-          messager.sendMessage(Message("ProjectileManager", glm::vec2(e->getCamPos().x-(e->getPlayerRot().x*3.5f),e->getCamPos().z-(e->getPlayerRot().z*3.5f)),e->getPlayerRot(),e->fire_type));
-        }else {
-          messager.sendMessage(Message("ProjectileManager", glm::vec2(e->pos.x-(e->getForward().x*3.5f),e->pos.z-(e->getForward().z*3.5f)),e->getForward(),e->fire_type));
-        }
-        e->firing = false;
-      }else if (e->type == "player") {
-        messager.clearBus();
-      }
        bool coll = false;
        for (Entity * eTarget : entities) {
          auto projc = eTarget->get<ProjectileComponent>();
@@ -538,6 +548,8 @@ public:
       }
       e->projColliding = coll;
     } // end of loop
+    //std::cout << SDL_GetTicks() << "\n";
+
   }
   Entity* getEntity(std::string type) {
       for (Entity* e : entities) {
@@ -577,7 +589,7 @@ public:
           }
       }
   }
-  void GodModeCommand() {
+  void GodModeCommand(std::vector<std::string> tokens) {
       for (Entity* e : entities) {
           if (e->type == "player") {
               e->godmode = true;
@@ -599,7 +611,7 @@ public:
       float temp = ::atof(tokens[1].c_str());
       commandLog += std::to_string(temp) + "\n";
   }
-  void helpCommand() {
+  void helpCommand(std::vector<std::string> tokens) {
       commandLog += "print\n";
       commandLog += "spawnEntity\n";
       commandLog += "setSpeed\n";
@@ -618,14 +630,15 @@ public:
       {
           tokens.push_back(intermediate);
       }
-           if (tokens[0] == "print") {runPrintCommand(tokens);}
-      else if (tokens[0] == "help") {helpCommand();}
-      else if (tokens[0] == "spawnEntity") {spawnEntityCommand(tokens);}
-      else if (tokens[0] == "setSpeed") {setSpeedCommand(tokens);}
-      else if (tokens[0] == "killEntity") {killEntityCommand(tokens);}
-      else if (tokens[0] == "godmode") {GodModeCommand();}
-      else if (tokens[0] == "setProjColor") {ProjColorCommand(tokens);}
-      else if (tokens[0] == "printNum") { printNumCommand(tokens); }
+            if (tokens[0] == "print") { runPrintCommand(tokens); 
+      }else if (tokens[0] == "help") { helpCommand(tokens); 
+      }else if (tokens[0] == "spawnEntity") { spawnEntityCommand(tokens); 
+      }else if (tokens[0] == "setSpeed") { setSpeedCommand(tokens); 
+      }else if (tokens[0] == "killEntity") { killEntityCommand(tokens); 
+      }else if (tokens[0] == "godmode") { GodModeCommand(tokens); 
+      }else if (tokens[0] == "setProjColor") { ProjColorCommand(tokens);
+      }else if (tokens[0] == "printNum") { printNumCommand(tokens); }
+
   }
   void checkForConsole() {
       Uint8* keys;
@@ -689,12 +702,14 @@ public:
       }
   }
   void Draw(double deltaTime) {
+
     if (isConsoleOpen == false) {
         for (Prop* p : props) {
             p->Draw(getMainCam());
             p->Update();
         }
     }
+
     for (Entity * e : entities) {
         auto projc = e->get<ProjectileComponent>();
         if (projc != NULL) {
@@ -761,7 +776,7 @@ public:
     std::cout << "No entity with a camera" << '\n';
     return badCam;
   }
-  Messager messager;
+  //vector storing player pos.
   glm::vec3 playerPos;
   bool frozen = false;
   bool printDelta = false;
@@ -776,30 +791,43 @@ public:
   int propSize = 0;
   int propRotation = 0;
   std::string commandLog = "type commands here.\n type help for command list \n";
+
+  //vector storing all entitys in this system
   std::vector<Entity*> entities;
+  //vector storing all props in this system
+
   std::vector<Prop*> props;
+
+
   std::vector<Entity*> startEnt;
   glm::vec2 clickPos;
   std::string playerTag;
   Object clickObject;
   bool save = false;
   bool load = false;
-  bool collideCheckbox;
+  bool collideCheckbox = true;
+  // cursor positions from level editor sliders
   int cursorPosX;
   int cursorPosY;
+  // a map of commands being stored with std::string and a function pointer
+
 private:
   std::string * text;
+  // has collision been dumped
   bool dumped = false;
+  // the collision scene for qu3e
   q3Scene scene;
   int count;
   int collisions = 0;
   double speedMultiplier = 1.0;
   double FPSToUse = 60;
   std::vector<double> FPS_List;
+  //The collision box for the map floor
   Box floor;
   bool canKey = true;
   bool canKey2 = true;
   lua_State* L;
+  //Camera for top down level editor
   Camera topDownCamera;
   bool isTopDown = true;
 };

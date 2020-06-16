@@ -28,6 +28,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 extern float brightness;
+extern float cullDistance;
 extern std::string playerTag;
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
@@ -94,7 +95,7 @@ public:
   Entity(lua_State* L) : UpdateFunction(L), OnStartFunction(L), HitFunction(L), CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 editorText(15,"./res/Avara.ttf"), 
-                                                                emitter(glm::vec3(0.0), 300, 100, 1.0, true){
+                                                                emitter(glm::vec3(0.0), 100, 100, 1.0, true){
       UICam.InitCam(glm::vec3(0, 0, 0), 70, 800.0f / 600.0f, 0.01f, 1000.0f);
 
   }
@@ -118,12 +119,35 @@ public:
       }
     }
   }
+  void checkCulling() {
+      glm::vec3 playerPos = glm::vec3 (0.0f);
+      for (Entity* e : *allEntities) {
+          if (e->type == "player") {
+              playerPos = e->pos;
+              break;
+          }
+      }
+      float dist = getDistanceBetweenTwoPoints(glm::vec2(pos.x,pos.z),glm::vec2(playerPos.x, playerPos.z));
+      if (dist < cullDistance) {
+          cull = false;
+      }
+      else {
+          cull = true;
+      }
+  }
   void Draw(Camera cam, bool f) {
     auto gfxc = get<GraphicsComponent>();
+    checkCullingCount++;
+    if (checkCullingCount > 20) {
+        checkCullingCount = 0;
+        checkCulling();
+    }
+    
     emitter.drawParticles(cam);
     if (gfxc != NULL && !dead) {
       if (f == false && frozen == false && isPaused == false) {
         gfxc->Update(speedModifier);
+
       }
       if (isPaused != true) {
           if (type == "hand") {
@@ -403,7 +427,10 @@ public:
       .addFunction("setHue", &Entity::setHue)
       .addFunction("setSaturation", &Entity::setSaturation)
       .addFunction("setValue", &Entity::setValue)
-        .endClass();
+      .addFunction("setParticleSpread", &Entity::setParticleSpread)
+      .addFunction("setParticleModel", &Entity::setParticleModel)
+
+      .endClass();
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
@@ -463,6 +490,8 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void setParticleSpread(float spread);
+  void setParticleModel(std::string model);
   void setHue(float hue);
   void setSaturation(float saturation);
   void setValue(float value);
@@ -647,6 +676,8 @@ public:
   glm::vec2 velocity;
 protected:
 private:
+  int checkCullingCount = 0;
+  bool cull = false;
   Uint8* keys;
   std::map<std::type_index, Component*> components;
   // LuaEntityHandle handle;

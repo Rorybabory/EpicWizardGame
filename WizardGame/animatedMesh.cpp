@@ -19,7 +19,8 @@ animatedMesh::animatedMesh(std::string fileName) {
   AssimpConverter::Convert(pScene,sModel);
 
   const SA::sAnimatedMesh& model1 = sModel.m_Meshes[0];
-  
+  verts.reserve(model1.NumVertices);
+  indices.reserve(model1.NumIndices);
   for (int i = 0; i < model1.NumVertices; i++) {
     verts.push_back(Vertex(model1.pVertices[i],model1.pTexCoords[i],glm::vec3(0,0,0)));
   }
@@ -238,7 +239,7 @@ void animatedMesh::InitMeshModel(const IndexedModel& model)
 
   glBindVertexArray(0);
   // std::cout << "Animation Time: " << sModel.m_Animation.Duration*60.0f << '\n';
-  Duration = sModel.m_Animation.Duration*57.5998;
+  Duration = sModel.m_Animation.Duration*60;
   // std::cout << "Durration = " << Duration << " for: " << fileName << '\n';
   MeshStored = true;
 }

@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "text.h"
 #include <glm/glm.hpp>
+float cullDistance = 70;
 glm::vec2 levelSize = glm::vec2(290, 290);
 int globalVariable = 69;
 std::map<std::string, std::vector<animatedMesh*>> storedObjectData;
