@@ -25,7 +25,7 @@ zombie = {
 }
 function zombie_Hit(e,e2,hits)
   -- e2:setColor(0.0,0.0,0.0,1.0)
-  e2:setHP(e2:getHP()-1)
+  e2:setHP(e2:getHP()-hits)
   -- if (e:getAnimation() == 2) then
   --   e:playAnimation(0)
   -- end
@@ -44,14 +44,13 @@ function zombie_Update(e)
 	end
 	if (e:isAnimationPlaying("attack") == true) then
 		if (e:getDistanceFromNearest("player") < 12 and e:getAnimFrame() == 55) then
-			e:damageNearest(1)
+			e:damageNearestEnt("player", 2)
 		end
-	else 
-		e:moveForward(0.25)
 	end
+	e:moveForward(0.45)
 end
 function zombie_Start(e)
-    e:setHP(5)
+    e:setHP(6)
     e:lookAtPlayer()
     e:setScale(1.2+e:random(0,0.2))
     e:setFloat("raiseCount", 0)
@@ -59,6 +58,6 @@ function zombie_Start(e)
     e:restartCollisionBox()
     e:setAnimationTag("default",2)
 	e:setAnimationTag("attack",0)
-    e:setAnimationTag("damage",1)
+    e:setAnimationTag("damaged",1)
 end
 

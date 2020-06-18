@@ -36,9 +36,7 @@ function player_Hit(e,e2,hits)
     e:Shake(2.5)
 	e2:Emit(50, 0.5,1.0,1.0,0.8);
   end
-  if (e:random(0.0,1.0) > 0.0) then
-	e2:playAnimationTag("damaged")
-  end
+  e2:playAnimationTag("damaged")
   
 end
 function player_RunAbility(e)
@@ -46,17 +44,17 @@ function player_RunAbility(e)
   if (e:getKeyPressed() == "LSHIFT") then
 	if (e:getString("Ability") == "Fire") then
 		if (e:getFloat("FireCount") <= 0) then
-			if (e:getDistanceFromNearestEnt() < 20) then
-				e:damageNearest(3)
+			if (e:getDistanceFromNearestEnt() < 30) then
+				e:damageNearest(2)
 			end
 			e:Emit(100,1.0,0.5,0.3,0.8)
-			e:setFloat("FireCount", 3)
+			e:setFloat("FireCount", 10)
 			print("fire")
 		end
 	end
     if (e:getString("Ability") == "Teleport") then
 	e:setFloat("AbilityCount", e:getFloat("AbilityCount")+1)
-      if (e:getFloat("AbilityCount") > 30) then
+      if (e:getFloat("AbilityCount") > 10) then
         e:moveForward(100.0)
         e:setFloat("AbilityCount", 0)
       end
@@ -102,7 +100,7 @@ function player_RunAbility(e)
   end
 end
 function player_Update(e)
-  e:setSaturation(0.06+e:getFloat("FireCount")/3.0)
+  e:setSaturation(0.06+e:getFloat("FireCount")/10.0)
   player_RunAbility(e)
   e:setValue(e:getFloat("AbilityCount")/30.0-0.05)
   

@@ -25,7 +25,7 @@ necromancer = {
 }
 function necromancer_Hit(e,e2,hits)
   -- e2:setColor(0.0,0.0,0.0,1.0)
-  e2:setHP(e2:getHP()-1)
+  e2:setHP(e2:getHP()-hits)
   -- if (e:getAnimation() == 2) then
   --   e:playAnimation(0)
   -- end
@@ -36,6 +36,7 @@ function necromancer_Hit(e,e2,hits)
 end
 
 function necromancer_Update(e)
+	print(e:getHP())
     if (e:isAnimationPlaying("raise") == false) then
         e:moveForward(0.05)
         e:lookAtPlayer()
@@ -44,7 +45,7 @@ function necromancer_Update(e)
 	e:setFloat("teleportCount", e:getFloat("teleportCount")+1)
 	if (e:getFloat("teleportCount") > 720) then
 		e:Emit(100, 0.4,0.3,0.8,0.5);
-		e:setPos(e:random(-150, 150)+e:getX(),0.0,e:random(-150, 150)+e:getZ())
+		e:setPos(e:random(-50, 50)+e:getX(),0.0,e:random(-50, 50)+e:getZ())
 		e:setFloat("teleportCount", 0)
 	end
     if (e:getFloat("raiseCount") > 240) then
@@ -54,7 +55,7 @@ function necromancer_Update(e)
     end
 end
 function necromancer_Start(e)
-    e:setHP(15)
+    e:setHP(10)
     e:lookAtPlayer()
     e:setScale(3.0)
     e:setFloat("raiseCount", 0)
@@ -63,6 +64,5 @@ function necromancer_Start(e)
     e:restartCollisionBox()
     e:setAnimationTag("default",0)
     e:setAnimationTag("raise",1)
-    e:setAnimationTag("damage",0)
-	
+    e:setAnimationTag("damaged",0)
 end

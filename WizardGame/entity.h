@@ -415,6 +415,7 @@ public:
       .addFunction("getPaused", &Entity::getPaused)
       .addFunction("getDefaultSpeed", &Entity::getDefaultSpeed)
       .addFunction("damageNearest", &Entity::damageNearest)
+      .addFunction("damageNearestEnt", &Entity::damageNearestEnt)
       .addFunction("setBrightness", &Entity::setBrightness)
       .addFunction("getProjCount", &Entity::getProjCount)
       .addFunction("setProjCount", &Entity::setProjCount)
@@ -504,6 +505,7 @@ public:
   void setProjCount(float count);
   void setBrightness(float b);
   void damageNearest(int damage);
+  void damageNearestEnt(std::string ent, int damage);
   float getDefaultSpeed() { return mainSpeed; }
   void setUIText(std::string text);
   void Delay(int milliseconds);

@@ -538,11 +538,10 @@ public:
                 if (e->canBeHit && frozen == false && o->destroy == false) {
                   coll = true;
                   o->destroy = true;
-                  eTarget->Hit(o->timesBounced,e);
+                  eTarget->Hit(o->timesBounced+1,e);
                 }
               }
             }
-
           }
         }
       }

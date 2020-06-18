@@ -88,7 +88,6 @@ public:
     shader.UnBind();
   }
   bool Update(int id, double speedModifier) {
-      std::cout << "duration: " << duration << "\n";
     duration = animations[id]->Duration;
     if (id != lastAnimID) {
       lastAnimID = id;

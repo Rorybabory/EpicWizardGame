@@ -74,7 +74,7 @@ newMap = {
     },
     {
         type = "entity",
-        file = "test2",
+        file = "skeleton",
         x = 200,
         y = 0,
     }

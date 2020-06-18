@@ -602,6 +602,20 @@ void Entity::damageNearest(int damage) {
     }
     Hit(damage, nearest);
 }
+void Entity::damageNearestEnt(std::string ent, int damage) {
+    Entity* nearest = nullptr;
+    float dist = 10000.0f;
+    for (Entity* e : *allEntities) {
+        if (e->type == ent) {
+            if (dist > getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z))) {
+                nearest = e;
+                dist = getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z));
+            }
+        }
+    }
+    Hit(damage, nearest);
+
+}
 void Entity::setBrightness(float b) {
     brightness = b;
 }
