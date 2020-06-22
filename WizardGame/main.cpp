@@ -48,7 +48,6 @@ int main()
     //                      Vertex(glm::vec3(0.0f,0.5f,0),      glm::vec2(0.5,1.0)),
     //                      Vertex(glm::vec3(0.5f,-0.5f,0),  glm::vec2(1.0,0.0))
     //                     };
-
     unsigned int indices[] = {0,1,2};
     Display display(WIDTH,HEIGHT, "Wizard Game!");
     float counter = 0.0f;
@@ -63,9 +62,8 @@ int main()
 
     ImGui_ImplOpenGL3_Init(glsl_version);
     initAudio();
-    playMusic("./res/sounds/door1.wav", SDL_MIX_MAXVOLUME);
-    Skybox skybox;
 
+    Skybox skybox;
     // std::cout << e->getType() << "X:" << pos.x << " Y:" << pos.y << " Z:" << pos.z << '\n';
     while(!display.isClosed()) {
         world.Update();

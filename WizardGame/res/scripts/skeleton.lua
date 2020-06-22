@@ -37,7 +37,29 @@ end
 
 function skeleton_Update(e)
     e:lookAtPlayer()
-	e:moveForward(0.45)
+	if (e:getDistanceFromNearest("player") < 5 and e:isAnimationPlaying("attack") == false and e:getBool("backup") == false) then
+		e:resetFrame()
+		e:playAnimationTag("attack")
+	end
+	if (e:isAnimationPlaying("attack") == true) then
+		if (e:getDistanceFromNearest("player") < 12 and e:getAnimFrame() == 55) then
+			e:damageNearestEnt("player", 2)
+			e:setBool("backup", true)
+		end
+	end
+	if (e:getBool("backup") == true) then
+		e:moveBackward(0.7)
+		e:setAnimationTag("default",1)
+		e:setFloat("switchMode", e:getFloat("switchMode")+1)
+		if (e:getFloat("switchMode") > 240) then
+			e:setBool("backup", false)
+			e:setFloat("switchMode", 0);
+		end
+	else
+		e:moveForward(0.7)
+		e:setAnimationTag("default",3)
+	end
+	
 end
 function skeleton_Start(e)
     e:setHP(6)
@@ -45,6 +67,11 @@ function skeleton_Start(e)
     e:setScale(0.8)
     e:setCollisionBox(2.0,2.0,8)
     e:restartCollisionBox()
-    e:setAnimationTag("default",0)
+	e:setFloat("switchMode", 0.0)
+	e:setBool("backup", false)
+    e:setAnimationTag("default",3)
+	e:setAnimationTag("attack",0)
+	e:setAnimationTag("damaged",2)
+	e:setAnimationTag("backward",1)
 end
 

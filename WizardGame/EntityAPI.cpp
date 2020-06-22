@@ -616,6 +616,11 @@ void Entity::damageNearestEnt(std::string ent, int damage) {
     Hit(damage, nearest);
 
 }
+void Entity::playSound(std::string file) {
+    sound.setFile(file);
+    sound.reset();
+    sound.play();
+}
 void Entity::setBrightness(float b) {
     brightness = b;
 }

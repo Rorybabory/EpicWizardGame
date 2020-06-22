@@ -99,7 +99,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;C:\Users\lambe\source\repos\WizardGame\WizardGame\freetype2-master\objs\Win32\Debug;.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;portaudio_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;portaudio_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;C:\Users\lambe\source\repos\WizardGame\WizardGame\freetype2-master\objs\Win32\Debug;C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkStatus>Yes</LinkStatus>
     </Link>
@@ -144,7 +144,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;C:\Users\lambe\source\repos\WizardGame\WizardGame\freetype2-master\objs\Win32\Debug;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;portaudio_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,7 +166,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;C:\Users\lambe\source\repos\WizardGame\WizardGame\freetype2-master\objs\Win32\Debug;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;portaudio_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -204,6 +204,7 @@
     <ClInclude Include="animatedMesh.h" />
     <ClInclude Include="animatedObject.h" />
     <ClInclude Include="AssimpConverter.h" />
+    <ClInclude Include="Audio.h" />
     <ClInclude Include="audio\audio.h" />
     <ClInclude Include="BasicComponent.h" />
     <ClInclude Include="camera.h" />

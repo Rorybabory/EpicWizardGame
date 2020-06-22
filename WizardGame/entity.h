@@ -23,7 +23,7 @@
 #include <qu3e/q3.h>
 #include "CollisionSystem.h"
 #include "ProjComponent.h"
-
+#include "Audio.h"
 #include <map>
 #ifndef ENTITY_H
 #define ENTITY_H
@@ -430,6 +430,7 @@ public:
       .addFunction("setValue", &Entity::setValue)
       .addFunction("setParticleSpread", &Entity::setParticleSpread)
       .addFunction("setParticleModel", &Entity::setParticleModel)
+      .addFunction("playSound", &Entity::playSound)
 
       .endClass();
   }
@@ -491,6 +492,7 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void playSound(std::string file);
   void setParticleSpread(float spread);
   void setParticleModel(std::string model);
   void setHue(float hue);
@@ -676,6 +678,7 @@ public:
   int emitCount = 0;
   bool hasCollision = false;
   glm::vec2 velocity;
+  Sound sound = Sound("./res/sounds/shoot.wav");
 protected:
 private:
   int checkCullingCount = 0;

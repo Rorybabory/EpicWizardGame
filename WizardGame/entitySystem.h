@@ -45,8 +45,9 @@ public:
 
         auto duration = stop - start;
         double ms = duration * 0.001;
-
-        std::cout << "Timer " << name << " is:" << duration << "in microseconds" << "\n";
+        if (duration > 500) {
+            std::cout << "Timer " << name << " is:" << duration << "in microseconds" << "\n";
+        }
     }
 private:
     std::string name;
@@ -311,7 +312,6 @@ public:
     checkForCollisionError();
     checkForConsole();
     double timer = SDL_GetTicks();
-
     if (isConsoleOpen || isLevelEditorOpen) {
         SDL_SetRelativeMouseMode(SDL_FALSE);
     }
@@ -323,7 +323,7 @@ public:
     if (FPS < 50.0) {
         std::cout << "FPS: " << FPS << std::endl;
     }
-
+    
     if (printDelta==true) {
       printDelta=false;
     }else {

@@ -102,10 +102,11 @@ end
 function player_Update(e)
   e:setSaturation(0.06+e:getFloat("FireCount")/10.0)
   player_RunAbility(e)
-  e:setValue(e:getFloat("AbilityCount")/30.0-0.05)
+  e:setValue(e:getFloat("AbilityCount")/240.0-0.05)
   
   if (e:getProjCount() >= 40) then
 	e:setPlayerTag("fire")
+	--e:playSound("./res/sounds/shoot.wav")
   end
 
   if (e:getKeyPressed() == "SPACE") then
@@ -156,7 +157,7 @@ function player_Start(e)
     e:setFloat("ShieldCount", 0)
     -- e:TopDown_Start()
     e:setFloat("TimeCount", 0)
-    e:setString("Ability", "Fire")
+    e:setString("Ability", "Time")
 	e:setFloat("MeleeCount", 0)
     e:setFloat("Speed", 0.5)
     e:setBool("justTeleported", false)
