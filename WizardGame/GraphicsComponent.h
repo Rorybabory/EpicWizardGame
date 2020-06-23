@@ -27,7 +27,10 @@ public:
   }
   void setFolder(const std::string& folder) {
     this->folder = folder;
+    std::cout << "hasent run object\n";
     object.reset(this->folder,color);
+    std::cout << "run object\n";
+
   }
   std::string getFolder() const {
     return folder;

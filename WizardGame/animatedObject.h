@@ -29,11 +29,11 @@ public:
   animatedObject () {};
   void reset(const std::string& fileName, glm::vec4 c) {
     color = c;
-    shader.InitShader("./res/aShader");
+    //shader.InitShader("./res/aShader");
     transform.m_scale = glm::vec3(0.3f,0.3f,0.3f);
     transform.m_rot = glm::vec3(-1.57f,0.0f,0.0f);
     transform.m_pos = glm::vec3(0.0f,-2.0f,0.0f);
-    for (const auto & entry : fs::directory_iterator(fileName)) {
+    /*for (const auto & entry : fs::directory_iterator(fileName)) {
       std::string temp = absolute(entry.path()).string();
       eraseSubStr(temp,fs::current_path().string());
       eraseSubStr(temp,"/");
@@ -41,8 +41,6 @@ public:
       if (temp[0] == '\\') {
           temp.erase(0, 1);
       }
-      //animatedMesh tempMesh = animatedMesh("./res/char/charNew.dae");
-      // std::cout << "File is " << temp << " FileName is " << fileName << " " << fileName+"/"+temp << std::endl;
       if (temp.find(".png") == std::string::npos) {
         files.push_back(temp);
         animations.push_back(new animatedMesh(temp));
@@ -51,7 +49,7 @@ public:
         std::cout << "INIT MESH TEXTURE" << std::endl;
       }
 
-    }
+    }*/
     folder = fileName;
   }
   void calculateMesh() {
@@ -79,7 +77,30 @@ public:
     }
     folder = fileName;
   }
+  void init() {
+      shader.InitShader("./res/aShader");
+      for (const auto& entry : fs::directory_iterator(folder)) {
+          std::string temp = absolute(entry.path()).string();
+          eraseSubStr(temp, fs::current_path().string());
+          eraseSubStr(temp, "/");
+          if (temp[0] == '\\') {
+              temp.erase(0, 1);
+          }
+          if (temp.find(".png") == std::string::npos) {
+              files.push_back(temp);
+              animations.push_back(new animatedMesh(temp));
+          }
+          else {
+              tex.InitTex(temp);
+              std::cout << "INIT MESH TEXTURE" << std::endl;
+          }
+      }
+  }
   void Draw(Camera camera, int id) {
+      if (hasInit == false) {
+          init();
+          hasInit = true;
+      }
     shader.Bind(color);
     tex.Bind(0);
     shader.Update(transform, camera);
@@ -88,6 +109,9 @@ public:
     shader.UnBind();
   }
   bool Update(int id, double speedModifier) {
+      if (animations.size()<=0) {
+          return false;
+    }
     duration = animations[id]->Duration;
     if (id != lastAnimID) {
       lastAnimID = id;
@@ -151,6 +175,7 @@ public:
   int duration = 0;
   int idStored = 0;
   bool isSlow = false;
+  bool hasInit = false;
 protected:
 private:
 const double maxFPS = 60.0;
