@@ -52,6 +52,7 @@ public:
   bool destroy = false;
   bool boxDestroy = false;
   bool hasInit = false;
+  bool hasInitMesh = false;
   int delay = 0;
   int timesBounced = 0;
   glm::vec3 lastDir;

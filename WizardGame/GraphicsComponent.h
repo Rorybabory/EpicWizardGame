@@ -23,6 +23,7 @@ public:
       std::cout << "Error, Folder Name is not a string!" << '\n';
     }
     std::cout << " created entity: " << "\n";
+
   }
   void setFolder(const std::string& folder) {
     this->folder = folder;

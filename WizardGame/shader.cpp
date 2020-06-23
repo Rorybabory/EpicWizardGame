@@ -75,11 +75,11 @@ Shader::Shader(const std::string& fileName) {
   m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 }
 Shader::~Shader() {
-  for(unsigned int i = 0; i < NUM_SHADERS; i++) {
+  /*for(unsigned int i = 0; i < NUM_SHADERS; i++) {
     glDetachShader(m_program, m_shaders[i]);
     glDeleteShader(m_shaders[i]);
   }
-  glDeleteProgram(m_program);
+  glDeleteProgram(m_program);*/
 }
 static GLuint CreateShader(const std::string& text, GLenum shaderType) {
   GLuint shader = glCreateShader(shaderType);

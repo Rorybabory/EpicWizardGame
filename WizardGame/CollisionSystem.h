@@ -3,7 +3,6 @@
 #include <qu3e/q3.h>
 #include "messaging.h"
 #include "camera.h"
-#include "object.h"
 class Box {
 public:
   Box(glm::vec3 scale, q3Scene * scene) {

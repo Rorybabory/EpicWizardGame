@@ -77,6 +77,12 @@ newMap = {
         file = "player",
         x = 0,
         y = 0,
+    },
+    {
+        type = "entity",
+        file = "necromancer",
+        x = 200,
+        y = 0,
     }
 	
 }

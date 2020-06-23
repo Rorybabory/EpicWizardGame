@@ -92,10 +92,11 @@ public:
     std::cout << "deleted entity\n";
 
   }
-  Entity(lua_State* L) : UpdateFunction(L), OnStartFunction(L), HitFunction(L), CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
-                                                                CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
-                                                                editorText(15,"./res/Avara.ttf"), 
+  Entity(lua_State* L) : UpdateFunction(L), OnStartFunction(L), HitFunction(L), 
+  //CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
+  //                                                              CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 emitter(glm::vec3(0.0), 100, 100, 1.0, true){
+      std::cout << "finished emitter init\n";
       UICam.InitCam(glm::vec3(0, 0, 0), 70, 800.0f / 600.0f, 0.01f, 1000.0f);
 
   }
@@ -157,8 +158,6 @@ public:
               gfxc->Draw(cam);
           }
       }
-      CollisionObject.Draw(cam);
-      CollisionObject2.Draw(cam);
     }
     auto sgfxc = get<StaticGraphicsComponent>();
     if (sgfxc != NULL && !dead) {
@@ -270,12 +269,12 @@ public:
     }
     vel = pos-lastPos;
     if (type != "player") {
-      CollisionObject.setPos(glm::vec3(projMin.x,projMin.y,projMin.z));
-      CollisionObject2.setPos(projMax);
-      CollisionObject.setScale(glm::vec3(0.3,0.3,0.3));
-      CollisionObject2.setScale(glm::vec3(0.3,0.3,0.3));
-      CollisionObject.Update();
-      CollisionObject2.Update();
+      //CollisionObject.setPos(glm::vec3(projMin.x,projMin.y,projMin.z));
+      //CollisionObject2.setPos(projMax);
+      //CollisionObject.setScale(glm::vec3(0.3,0.3,0.3));
+      //CollisionObject2.setScale(glm::vec3(0.3,0.3,0.3));
+      //CollisionObject.Update();
+      //CollisionObject2.Update();
     }
     // if (type == "player") {
     //   auto playerCamC = get<CameraComponent>();
@@ -654,8 +653,6 @@ public:
   glm::vec3 projMax = glm::vec3(0.0f,0.0f,0.0f);
   glm::vec3 projPos = glm::vec3(0.0f,0.0f,0.0f);
   glm::vec3 projScale = glm::vec3(0.0f,0.0f,0.0f);
-  Object CollisionObject;
-  Object CollisionObject2;
   float largestScale = 0.0f;
   glm::vec3 projPosDiff = glm::vec3(0.0f,0.0f,0.0f);
   glm::vec2 startingPos = glm::vec2(0.0f,0.0f);
@@ -672,7 +669,6 @@ public:
   bool isPaused;
   float mainSpeed = 0.6f;
   bool godmode = false;
-  Text editorText;
   std::vector<glm::vec3> locations;
   Emitter emitter;
   int emitCount = 0;
@@ -697,15 +693,22 @@ void addComponent(Entity* e, luabridge::LuaRef& componentTable) {
   e->addComponent(std::type_index(typeid(T)), new T(componentTable));
 }
 static Entity* loadEntity(lua_State* L, const std::string& type) {
+
   auto e = new Entity(L);
+
   e->setType(type);
   e->addFunctions(L);
+  std::cout << "added functions\n";
+
   luabridge::LuaRef entityRef = luabridge::getGlobal(L,type.c_str());
   for (int i = 0; i < entityRef.length(); ++i) {
     std::string componentName = entityRef[i+1]["componentName"];
     if (componentName == "GraphicsComponent") {
       luabridge::LuaRef gcTable = entityRef[i+1];
+      std::cout << "about to add graphics component\n";
       addComponent<GraphicsComponent>(e,gcTable);
+      std::cout << "added graphics component\n";
+
     }if (componentName == "StaticGraphicsComponent") {
       luabridge::LuaRef sgcTable = entityRef[i+1];
       addComponent<StaticGraphicsComponent>(e,sgcTable);

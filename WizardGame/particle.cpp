@@ -4,13 +4,13 @@ float random(float min, float max) {
 	float range = max - min;
 	return (random * range) + min;
 }
-Emitter::Emitter(glm::vec3 Velocity, float Life, int max_particles, float Randomness, bool gravity) : mesh("./res/particle.obj", false),
-																													   shader("./res/basicShader"){
+Emitter::Emitter(glm::vec3 Velocity, float Life, int max_particles, float Randomness, bool gravity){
 	this->Velocity = Velocity;
 	this->Life = Life;
 	this->max_particles = max_particles;
 	this->Randomness = Randomness;
 	particles.resize(max_particles);
+	std::cout << "init emitter\n";
 }
 int Emitter::getFirstInactiveParticle() {
 	for (int i = 0; i < max_particles; i++) {
@@ -37,6 +37,12 @@ void Emitter::addParticles(int num, glm::vec3 pos, glm::vec4 Color) {
 	}
 }
 void Emitter::drawParticles(Camera camera) {
+	if (hasInit == false) {
+		std::cout << "drawn\n";
+		mesh = Mesh("./res/particle.obj", false);
+		shader.LoadShader("./res/basicShader");
+		hasInit = true;
+	}
 	shader.Bind();
 	int ColorLocation = glGetUniformLocation(shader.m_program, "color");
 	for (int i = 0; i < max_particles; i++) {
@@ -81,5 +87,5 @@ void Emitter::updateParticles() {
 	}
 }
 void Emitter::setModel(std::string filename) {
-	mesh = Mesh(filename,false);
+	//mesh = Mesh(filename,false);
 }

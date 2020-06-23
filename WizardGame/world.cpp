@@ -3,6 +3,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
+#include <future>
 
 extern double FPS;
 void World::Update() {
@@ -43,7 +44,10 @@ void World::Update() {
     lastTime = time;
     time = 0;
   }
-  testMap.Update(L);
+
+  //testMap.Update(L);
+  testMap.eSystem.checkForConsole();
+  auto f = std::async(&Map::Update, &testMap, L);
 
   //std::cout << deltaTime << '\n';
   // UpdateMessages();
@@ -59,7 +63,7 @@ void World::Draw() {
   // gfxc->Draw(player.GetCamera());
   
   // std::cout << (int) testMap.eSystem.getMainCam().m_position.x << " " << (int) testMap.eSystem.getMainCam().m_position.z << std::endl;
-  
+  //auto f = std::async(&EntitySystem::Draw, &testMap.eSystem, deltaTime);
   testMap.eSystem.Draw(deltaTime);
   menu.Draw(800,600);
   

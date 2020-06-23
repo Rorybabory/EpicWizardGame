@@ -34,7 +34,6 @@ public:
     ~Emitter() {
         std::cout << "deleted emitter\n";
         particles.clear();
-
     }
     void addParticles(int num, glm::vec3 pos, glm::vec4 Color);
     int getFirstInactiveParticle();
@@ -53,6 +52,7 @@ public:
     Transform transform;
     Shader shader;
     Texture texture;
+    bool hasInit = false;
 private:
     int max_particles;
     int num_particles;

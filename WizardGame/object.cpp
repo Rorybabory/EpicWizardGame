@@ -30,7 +30,7 @@ void Object::initObject(string file, glm::vec4 Color, string shaderFile, bool ha
   mesh.InitMesh(model);
   shader.InitShader(shaderFile);
   outline.InitShader("./res/outline");
-
+  hasInitMesh = true;
   color = Color;
   lastDir = glm::vec3(0.0f,0.0f,0.0f);
 }

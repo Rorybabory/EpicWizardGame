@@ -52,8 +52,11 @@ public:
   void Draw(Camera camera) {
     if (!objects.empty()) {
       for (int i = 0; i < objects.size(); i++) {
+          if (objects[i]->hasInitMesh == false) {
+              objects[i]->initObject(model, color, "./res/basicShader", false);
+          }
         if (objects[i]->destroy == false) {
-          objects[i]->Draw(camera);
+          objects[i]->Draw(camera);          
         }
       }
     }
@@ -145,13 +148,18 @@ public:
     if (delayCount>delay) {
       delayCount = 0;
       color.a = 1.0;
-      Object * o = new Object(model,color,"./res/basicShader",glm::vec3(startPos.x+(forward.x*7.0f),height+(forward.y*2.0f),startPos.y+(forward.z*7.0f)),false);
+      //Object * o = new Object(model,color,"./res/basicShader",glm::vec3(startPos.x+(forward.x*7.0f),height+(forward.y*2.0f),startPos.y+(forward.z*7.0f)),false);
+      Object* o = new Object();
+      o->hasInit = false;
+      o->setPos(glm::vec3(startPos.x + (forward.x * 7.0f), height + (forward.y * 2.0f), startPos.y + (forward.z * 7.0f)));
+
       o->forward = forward;
+      o->startPos = glm::vec3(startPos.x,0.0,startPos.y);
       objects.push_back(o);
       o->setScale(glm::vec3(2.0f,2.0f,2.0f));
       //o->startPos = glm::vec3(startPos.x,height,startPos.y);
       return true;
-    }
+    } 
     return false;
   }
   void setSpeedMultiplier(double SpeedMultiplier) {

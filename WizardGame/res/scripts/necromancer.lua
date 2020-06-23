@@ -44,7 +44,7 @@ function necromancer_Update(e)
     e:setFloat("raiseCount", e:getFloat("raiseCount")+1)
 	e:setFloat("teleportCount", e:getFloat("teleportCount")+1)
 	if (e:getFloat("teleportCount") > 720) then
-		e:Emit(100, 0.4,0.3,0.8,0.5);
+		--e:Emit(100, 0.4,0.3,0.8,0.5);
 		e:setPos(e:random(-50, 50)+e:getX(),0.0,e:random(-50, 50)+e:getZ())
 		e:setFloat("teleportCount", 0)
 	end

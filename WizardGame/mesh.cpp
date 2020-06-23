@@ -81,8 +81,8 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 
 Mesh::~Mesh()
 {
-	glDeleteBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
-	glDeleteVertexArrays(1, &m_vertexArrayObject);
+	//glDeleteBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	//glDeleteVertexArrays(1, &m_vertexArrayObject);
 }
 
 void Mesh::Draw()

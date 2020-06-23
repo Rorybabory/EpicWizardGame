@@ -24,7 +24,16 @@
 #include <cmath> 
 
 extern double FPS;
-
+struct drawData {
+    bool isConsoleOpen = false;
+    std::vector<Prop*> propsPointer;
+    std::vector<Entity*> entitiesPointer;
+    bool frozen = false;
+    bool isLevelEditorOpen = false;
+    Object * clickObject;
+    double deltaTime = 0.0;
+    Camera* mainCam;
+};
 extern int globalVariable;
 extern void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale);
 extern void clearText();
@@ -176,15 +185,18 @@ public:
     props.push_back(p);
   }
   void addEntityAtPos(std::string script, std::string type, glm::vec2 pos, lua_State* L) {
+
     luaL_openlibs(L);
     luah::loadScript(L,script);
     luabridge::LuaRef entityRef = luabridge::getGlobal(L,"entities");
+
     for (int i = 0; i < entityRef.length(); ++i) {
       std::string name = entityRef[i+1].cast<std::string>();
     }
     luah::loadScript(L,"res/scripts/" + type + ".lua");
 
     Entity * e = loadEntity(L,type);
+    std::cout << "added entity with type: " << type << "\n";
 
     if (type != "player") {
       e->setPos(pos.x,0.0f,pos.y);
@@ -193,7 +205,9 @@ public:
       e->setCamPos(glm::vec3(pos.x,-15.0f,pos.y));
     }
     e->setUpCollider(&scene,e->scaleColl);
+
     e->OnStart(L);
+
     entities.push_back(e);
     e->startingPos = pos;
     e->pos = glm::vec3(pos.x, 0.0f, pos.y);
@@ -310,7 +324,7 @@ public:
     // UpdateDistances();
     setHeroTarget();
     checkForCollisionError();
-    checkForConsole();
+    //checkForConsole();
     double timer = SDL_GetTicks();
     if (isConsoleOpen || isLevelEditorOpen) {
         SDL_SetRelativeMouseMode(SDL_FALSE);
@@ -321,9 +335,9 @@ public:
   //  clearText();
   //  addTextBox(*text,glm::vec2(-0.9f,0.9f), glm::vec3(1.0f,1.0f,0.0f), 30);
     if (FPS < 50.0) {
-        std::cout << "FPS: " << FPS << std::endl;
+        
     }
-    
+    std::cout << "FPS: " << FPS << std::endl;
     if (printDelta==true) {
       printDelta=false;
     }else {
@@ -340,7 +354,7 @@ public:
     //   DumpToFile();
     //   dumped = true;
     // }
-
+    
     for (int i = 0; i<entities.size(); i++) {
       // if (entities[i]->type == "player") {
       //   std::cout << entities[i]->collider.body->GetTransform( ).position.z << "\n";
@@ -700,15 +714,45 @@ public:
           canKey2 = true;
       }
   }
-  void Draw(double deltaTime) {
+  
+  void DrawASync(drawData data) {
+      if (isConsoleOpen == false) {
+          for (Prop* p : data.propsPointer) {
+              p->Draw(getMainCam());
+              p->Update();
+          }
+      }
+      for (Entity* e : data.entitiesPointer) {
+          auto projc = e->get<ProjectileComponent>();
+          if (projc != NULL) {
+              projc->Draw(getMainCam());
+          }
 
+          /*if (!data.isLevelEditorOpen) {
+              e->Draw(getMainCam(), data.frozen);
+          }
+          else {
+              float posX = -(e->pos.x * 3.4);
+              float posY = (e->pos.z * 3.4);
+              e->editorText.Draw(e->type, glm::vec2(posX / WIDTH, posY / HEIGHT), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), WIDTH, HEIGHT);
+          }*/
+      }
+      /*if (isConsoleOpen) { drawConsoleWindow(); }
+      if (isLevelEditorOpen) {
+          updateLevelEditor();
+          glDisable(GL_DEPTH_TEST);
+          data.clickObject->Draw(getMainCam());
+          data.clickObject->setScale(glm::vec3(3.0f));
+          glEnable(GL_DEPTH_TEST);
+      }*/
+  }
+  void Draw(double deltaTime) {
     if (isConsoleOpen == false) {
         for (Prop* p : props) {
             p->Draw(getMainCam());
             p->Update();
         }
     }
-
     for (Entity * e : entities) {
         auto projc = e->get<ProjectileComponent>();
         if (projc != NULL) {
@@ -720,7 +764,7 @@ public:
       }else {
           float posX = -(e->pos.x * 3.4);
           float posY = (e->pos.z * 3.4);
-          e->editorText.Draw(e->type, glm::vec2(posX/WIDTH, posY/HEIGHT), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), WIDTH, HEIGHT);
+          //e->editorText.Draw(e->type, glm::vec2(posX/WIDTH, posY/HEIGHT), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), WIDTH, HEIGHT);
       }
     }
     if (isConsoleOpen) { drawConsoleWindow();}
