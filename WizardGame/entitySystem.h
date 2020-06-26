@@ -22,7 +22,7 @@
 #include "imgui/imgui_impl_sdl.h"
 #include <chrono>
 #include <cmath> 
-
+#include "Timer.h"
 extern double FPS;
 struct drawData {
     bool isConsoleOpen = false;
@@ -38,30 +38,6 @@ extern int globalVariable;
 extern void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale);
 extern void clearText();
 extern void drawText();
-class Timer {
-public:
-    Timer(std::string name) {
-        m_StartTimePoint = std::chrono::high_resolution_clock::now();
-        this->name = name;
-    }
-    ~Timer() {
-        Stop();
-    }
-    void Stop() {
-        auto endTimepoint = std::chrono::high_resolution_clock::now();
-        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimePoint).time_since_epoch().count();
-        auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
-
-        auto duration = stop - start;
-        double ms = duration * 0.001;
-        if (duration > 500) {
-            std::cout << "Timer " << name << " is:" << duration << "in microseconds" << "\n";
-        }
-    }
-private:
-    std::string name;
-    std::chrono::time_point <std::chrono::high_resolution_clock> m_StartTimePoint;
-};
 class EntitySystem {
 public:
    void drawConsoleWindow() {

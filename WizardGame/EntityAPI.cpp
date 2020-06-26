@@ -290,15 +290,28 @@ float Entity::getZ() {
     return pos.z;
 }
 
-void Entity::setColor(float r, float g, float b, float a) {
+void Entity::setColorFlash(float r, float g, float b, float a) {
     auto graphics = get<GraphicsComponent>();
     auto sgraphics = get<StaticGraphicsComponent>();
     if (graphics != NULL) {
-      graphics->setColor(glm::vec4(r,g,b,a));
+        graphics->setColorFlash (glm::vec4(r, g, b, a));
     }else if (sgraphics != NULL) {
       sgraphics->setColor(glm::vec4(r,g,b,a));
     }else {
       std::cout << "COULD NOT SET COLOR OF ENTITY OF TYPE: " << type << std::endl;
+    }
+}
+void Entity::setColor(float r, float g, float b, float a) {
+    auto graphics = get<GraphicsComponent>();
+    auto sgraphics = get<StaticGraphicsComponent>();
+    if (graphics != NULL) {
+        graphics->setColor(glm::vec4(r, g, b, a));
+    }
+    else if (sgraphics != NULL) {
+        sgraphics->setColor(glm::vec4(r, g, b, a));
+    }
+    else {
+        std::cout << "COULD NOT SET COLOR OF ENTITY OF TYPE: " << type << std::endl;
     }
 }
 bool Entity::isPlayer() {

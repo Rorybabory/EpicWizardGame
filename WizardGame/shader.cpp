@@ -121,10 +121,13 @@ void Shader::TextBind(int x, int y) {
   int getY = glGetUniformLocation(m_program,"y");
   glUniform1i(getY, y);
 }
-void Shader::Bind(glm::vec4 color) {
+void Shader::Bind(glm::vec4 color, glm::vec4 colorFlash) {
   glUseProgram(m_program);
   int colorLocation = glGetUniformLocation(m_program,"color");
   glUniform4f(colorLocation, color.x,color.y,color.z,color.w);
+  int colorFlashLocation = glGetUniformLocation(m_program, "colorFlash");
+  glUniform4f(colorFlashLocation, colorFlash.x, colorFlash.y, colorFlash.z, colorFlash.w);
+
   int BoolLocation = glGetUniformLocation(m_program,"inverted");
   glUniform1i(BoolLocation, screenInverted);
 }

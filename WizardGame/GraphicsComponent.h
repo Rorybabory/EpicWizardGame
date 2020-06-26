@@ -28,7 +28,7 @@ public:
   void setFolder(const std::string& folder) {
     this->folder = folder;
     std::cout << "hasent run object\n";
-    object.reset(this->folder,color);
+    object.reset(this->folder, colorFlash);
     std::cout << "run object\n";
 
   }
@@ -58,6 +58,7 @@ public:
     }
     //std::cout << "duration: " << object.duration << "\n";
     object.setColor(color);
+    object.setColorFlash(colorFlash);
   }
   void playAnim(int id) {
     if (id != animID) {
@@ -94,7 +95,7 @@ public:
           playingDefault = true;
       }
       //std::cout << "duration: " << object.duration << "\n";
-      object.setColor(color);
+      object.setColor(colorFlash);
       object.isSlow = false;
       slowCount++;
   }
@@ -116,12 +117,18 @@ public:
     //std::cout << "Zombie model is: " << folder << "\n";
     object.runDebug();
   }
+  void setColorFlash(glm::vec4 color) {
+    this->colorFlash = color;
+    //object.setColor(color);
+  }
+  glm::vec4 getColorFlash() {
+    return colorFlash;
+  }
   void setColor(glm::vec4 color) {
-    this->color = color;
-    object.setColor(color);
+      this->color = color;
   }
   glm::vec4 getColor() {
-    return color;
+      return color;
   }
   void setPos(glm::vec3 pos) {
     object.setPos(pos);
@@ -143,7 +150,8 @@ public:
   int lastAnimID;
   int frame;
   bool playingDefault = true;
-  glm::vec4 color = glm::vec4(0.0f,0.7f,1.0f,1.0f);
+  glm::vec4 colorFlash = glm::vec4(0.0f,0.7f,1.0f,1.0f);
+  glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     std::string folder;
 
 protected:

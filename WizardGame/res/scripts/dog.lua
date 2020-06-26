@@ -1,0 +1,52 @@
+dog = {
+  {
+    componentName = "GraphicsComponent",
+    folder = "./res/models/dog"
+  },
+  {
+    componentName = "CollisionComponent",
+    scale = {
+      x = 0.3,
+      y = 0.6,
+      z = 0.3
+    }
+  },
+  {
+    componentName = "ProjComponent",
+    model = "res/models/projectiles/fireball.obj",
+    colorR = 0.028,
+    colorG = 0.027,
+    colorB = 0.004,
+    speed = 1.0,
+    range = 100,
+    height = 8.0,
+    delay = 96
+  }
+}
+function dog_Hit(e,e2,hits)
+  -- e2:setColor(0.0,0.0,0.0,1.0)
+  e2:setHP(e2:getHP()-1)
+  -- if (e:getAnimation() == 2) then
+  --   e:playAnimation(0)
+  -- end
+  if (e2:isPlayer() == true) then
+    e2:Shake(5.0)
+  end
+  e2:write(e2:getHP())
+end
+
+function dog_Update(e)
+    e:moveForward(0.1)
+    e:lookAtPlayer()
+end
+function dog_Start(e)
+    e:setHP(5)
+    e:lookAtPlayer()
+    e:setScale(2.0)
+    e:setCollisionBox(0.5,0.5,1.5)
+    e:restartCollisionBox()
+	e:setColor(0.0,1.0,1.0,1.0)
+    e:setAnimationTag("default",0)
+    e:setAnimationTag("damage",0)
+end
+

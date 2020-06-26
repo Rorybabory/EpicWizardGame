@@ -130,7 +130,7 @@ void Object::Update() {
   min = mesh.min+transform.getPos();
 }
 void Object::Draw(Camera camera) {
-    shader.Bind(color);
+    shader.Bind(color, glm::vec4(0.0));
     shader.Update(transform, camera);
     mesh.Draw();
     shader.UnBind();

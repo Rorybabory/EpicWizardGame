@@ -258,6 +258,7 @@
     <ClInclude Include="text.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="texture.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="util.h" />

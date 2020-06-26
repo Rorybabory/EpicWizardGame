@@ -44,10 +44,12 @@ function zombie_Update(e)
 	end
 	if (e:isAnimationPlaying("attack") == true) then
 		if (e:getDistanceFromNearest("player") < 12 and e:getAnimFrame() == 55) then
-			e:damageNearestEnt("player", 2)
+			e:damageNearestEnt("player", 3)
 		end
 	end
 	e:moveForward(0.45)
+	e:setColor(1.0,1.0,1.0,1.0)
+
 end
 function zombie_Start(e)
     e:setHP(6)

@@ -5,9 +5,10 @@ varying vec3 normal0;
 varying vec3 position0;
 uniform sampler2D sampler;
 uniform vec4 color;
+uniform vec4 colorFlash;
 uniform int inverted;
 
 void main() {
 	vec3 colorT = texture2D(sampler, texCoord0).xyz;
-    gl_FragColor = vec4(colorT.rgb+color.rgb,1.0);
+    gl_FragColor = vec4((colorT.rgb*color.rgb)+colorFlash.rgb,1.0);
 }

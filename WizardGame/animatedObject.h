@@ -101,7 +101,7 @@ public:
           init();
           hasInit = true;
       }
-    shader.Bind(color);
+    shader.Bind(color, colorFlash);
     tex.Bind(0);
     shader.Update(transform, camera);
     animations[id]->Draw();
@@ -154,8 +154,10 @@ public:
   void setRot(glm::vec3 rot) {transform.setRot(rot);}
   void setPos(glm::vec3 position) {transform.setPos(position);}
   void setModel(std::string fileName);
-  void setColor(glm::vec4 color) {this->color = color;}
+  void setColor(glm::vec4 color) { this->color = color; }
+  void setColorFlash(glm::vec4 colorFlash) { this->colorFlash = colorFlash; }
   glm::vec4 color;
+  glm::vec4 colorFlash;
   Transform transform;
 
   glm::vec3 noTransMin = glm::vec3(-4.9751f, 0.0f, 0.7091f);

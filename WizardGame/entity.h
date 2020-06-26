@@ -204,12 +204,12 @@ public:
         if (sgraphics->color.z < 0.0) {sgraphics->color.z = 0.0;}
     }
     if (graphics != NULL) {
-      if (graphics->color.x > 0.0) {graphics->color.x-=0.03;}
-      if (graphics->color.y > 0.0) {graphics->color.y-=0.03;}
-      if (graphics->color.z > 0.0) {graphics->color.z-=0.03;}
-      if (graphics->color.x < 0.0) {graphics->color.x = 0.0;}
-      if (graphics->color.y < 0.0) {graphics->color.y = 0.0;}
-      if (graphics->color.z < 0.0) {graphics->color.z = 0.0;}
+      if (graphics->colorFlash.x > 0.0) {graphics->colorFlash.x-=0.03;}
+      if (graphics->colorFlash.y > 0.0) {graphics->colorFlash.y-=0.03;}
+      if (graphics->colorFlash.z > 0.0) {graphics->colorFlash.z-=0.03;}
+      if (graphics->colorFlash.x < 0.0) {graphics->colorFlash.x = 0.0;}
+      if (graphics->colorFlash.y < 0.0) {graphics->colorFlash.y = 0.0;}
+      if (graphics->colorFlash.z < 0.0) {graphics->colorFlash.z = 0.0;}
       projMin = glm::vec3(graphics->object.transform.GetModelColl() * glm::vec4(Min, 1.0));
       projMax = glm::vec3(graphics->object.transform.GetModelColl() * glm::vec4(Max, 1.0));
       if (projMin.x > 0.0f) {projMin.x = -projMin.x;}
@@ -346,7 +346,8 @@ public:
       .addFunction("getX",&Entity::getX)
       .addFunction("getY",&Entity::getY)
       .addFunction("getZ",&Entity::getZ)
-      .addFunction("setColor",&Entity::setColor)
+      .addFunction("setColorFlash",&Entity::setColorFlash)
+      .addFunction("setColor", &Entity::setColor)
       .addFunction("lookAt",&Entity::lookAt)
       .addFunction("lookAtPlayer",&Entity::lookAtPlayer)
       .addFunction("moveForward",&Entity::moveForward)
@@ -556,6 +557,7 @@ public:
   float getX();
   float getY();
   float getZ();
+  void setColorFlash(float r, float g, float b, float a);
   void setColor(float r, float g, float b, float a);
   float getKeyDirectionX();
   float getKeyDirectionY();

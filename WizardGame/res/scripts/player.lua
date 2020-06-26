@@ -21,12 +21,12 @@ player = {
     speed = 5.0,
     range = 300,
     height = 8.0,
-    delay = 50
+    delay = 55
   }
 }
 function player_Hit(e,e2,hits)
   e2:setHP(e2:getHP()-hits)
-  e2:setColor(e:random(0.0,0.3),e:random(0.6,1),e:random(0.6,1),1.0)
+  e2:setColorFlash(e:random(0.0,0.3),e:random(0.6,1),e:random(0.6,1),1.0)
   -- e2:moveForwards(-30.0)
   -- e2:setFrozen(true)
   if (e2:getHP() == 0) then
@@ -100,10 +100,10 @@ function player_RunAbility(e)
   end
 end
 function player_Update(e)
+  --e:drawText("TestText", 0.0,0.0)
   e:setSaturation(0.06+e:getFloat("FireCount")/10.0)
   player_RunAbility(e)
   e:setValue(e:getFloat("AbilityCount")/240.0-0.05)
-  
   if (e:getProjCount() >= 40) then
 	e:setPlayerTag("fire")
 	--e:playSound("./res/sounds/shoot.wav")
@@ -115,7 +115,7 @@ function player_Update(e)
 		e:setFloat("SpeedMod",e:getFloat("SpeedMod")-0.01)
 	end
   else
-	e:setProjCount(0)
+	e:setProjCount(30)
 	e:setFloat("SpeedMod",1.0)
 	if (e:getFloat("SpeedMod") < 1.0) then
 		e:setFloat("SpeedMod",e:getFloat("SpeedMod")+0.01)

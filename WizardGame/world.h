@@ -45,7 +45,7 @@ public:
   Map testMap;
   // Script script;
   bool countData;
-  const double maxFPS = 62.0;
+  const double maxFPS = 65.0;
   const double maxPeriod = 1.0/maxFPS;
   double lastTime = 0.0;
   double time;

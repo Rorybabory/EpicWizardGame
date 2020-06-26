@@ -14,7 +14,7 @@ public:
   Shader();
   void InitPPShader(const std::string& fileName);
   void Bind();
-  void Bind(glm::vec4 color);
+  void Bind(glm::vec4 color, glm::vec4 colorFlash);
   void TextBind(int x, int y);
   void UnBind();
   void Update(const Transform& transform, const Camera& camera);

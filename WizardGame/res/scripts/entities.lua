@@ -12,5 +12,7 @@ entities = {
   "zombie",
   "hand",
   "funRobot",
-  "skeleton"
+  "skeleton",
+  "spawner",
+  "dog"
 }
