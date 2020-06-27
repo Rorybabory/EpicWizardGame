@@ -22,7 +22,11 @@ function spawner_Update(e)
 		if (e:getFloat("entitiesSpawned") % 10 == 0) then
 			e:spawnEntity("test2", e:random(-260,260), e:random(-260,260))
 		else
-			e:spawnEntity("zombie", e:random(-260,260), e:random(-260,260))
+			if (e:getFloat("entitiesSpawned") % 5 == 0) then
+				e:spawnEntity("skeleton", e:random(-260,260), e:random(-260,260))
+			else
+				e:spawnEntity("zombie", e:random(-260,260), e:random(-260,260))
+			end
 		end
 		
 		e:setFloat("entitiesSpawned", e:getFloat("entitiesSpawned")+1)

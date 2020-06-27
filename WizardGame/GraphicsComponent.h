@@ -67,7 +67,7 @@ public:
       NonLoop = true;
       frame = 0;
     }
-  }
+  } 
   void resetFrame() {
     object.frame = 0;
   }
