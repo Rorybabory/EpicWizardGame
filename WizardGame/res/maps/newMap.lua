@@ -80,7 +80,7 @@ newMap = {
     },
     {
         type = "entity",
-        file = "spawner",
+        file = "stoneMonster",
         x = 200,
         y = 0,
     }

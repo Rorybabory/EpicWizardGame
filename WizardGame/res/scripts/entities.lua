@@ -14,5 +14,6 @@ entities = {
   "funRobot",
   "skeleton",
   "spawner",
-  "dog"
+  "dog",
+  "stoneMonster"
 }
