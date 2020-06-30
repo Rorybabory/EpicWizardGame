@@ -672,3 +672,30 @@ void Entity::setParticleSpread(float spread) {
 void Entity::setParticleModel(std::string model) {
     emitter.setModel(model);
 }
+void Entity::setCollide(bool enable) {
+    
+    if (enable) {
+        collider.body->SetToAwake();
+    }
+    else {
+        collider.body->SetToSleep();
+    }
+}
+std::string Entity::getDefaultAnim() {
+    auto graphicsC = get<GraphicsComponent>();
+    if (graphicsC != NULL) {
+        return graphicsC->defaultAnim;
+    }
+}
+int Entity::getAnimationID(std::string tag) {
+    auto graphicsC = get<GraphicsComponent>();
+    if (graphicsC != NULL) {
+        return graphicsC->AnimationTags[tag];
+    }
+}
+bool Entity::hasAnimation(std::string anim) {
+    auto graphicsC = get<GraphicsComponent>();
+    if (graphicsC != nullptr) {
+        return (graphicsC->AnimationTags.count(anim) > 0);
+    }
+}

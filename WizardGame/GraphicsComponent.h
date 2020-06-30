@@ -70,6 +70,7 @@ public:
   } 
   void resetFrame() {
     object.frame = 0;
+    //frame = 0;
   }
   void playAnimTag(std::string tag) {
     playingDefault = false;
@@ -153,15 +154,16 @@ public:
   glm::vec4 colorFlash = glm::vec4(0.0f,0.7f,1.0f,1.0f);
   glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     std::string folder;
-
+    std::string defaultAnim;
+    std::map<std::string, int> AnimationTags;
 protected:
 private:
-  std::string defaultAnim;
+  
   int slowCount = 0;
   int animID = 0;
 
   int testingCount = 0;
 
-  std::map<std::string, int> AnimationTags;
+  
 };
 #endif

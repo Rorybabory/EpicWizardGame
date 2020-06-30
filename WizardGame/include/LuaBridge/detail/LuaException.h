@@ -128,7 +128,7 @@ protected:
 private:
   static int throwAtPanic (lua_State* L)
   {
-    throw LuaException (L, -1);
+     throw LuaException (L, -1);
   }
 };
 

@@ -311,9 +311,9 @@ public:
   //  clearText();
   //  addTextBox(*text,glm::vec2(-0.9f,0.9f), glm::vec3(1.0f,1.0f,0.0f), 30);
     if (FPS < 50.0) {
-        
+        std::cout << "FPS: " << FPS << std::endl;
     }
-    std::cout << "FPS: " << FPS << std::endl;
+    
     if (printDelta==true) {
       printDelta=false;
     }else {
@@ -525,7 +525,7 @@ public:
                                   pow(e->pos.z - o->getPos().z, 2) * 1.0);
               // std::cout << "PROJECTILE Y: " << o->getPos().y << " MIN Y: " << e->projMin.y << "\n";
               if (e->getCollisionWithPoint(o->getPos()) == true && e->type != eTarget->type && !e->dead) {
-                if (e->canBeHit && frozen == false && o->destroy == false) {
+                if (e->canBeHit && frozen == false && o->destroy == false && e->canBeHit == true) {
                   coll = true;
                   o->destroy = true;
                   eTarget->Hit(o->timesBounced+1,e);

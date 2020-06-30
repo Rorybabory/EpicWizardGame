@@ -431,8 +431,11 @@ public:
       .addFunction("setParticleSpread", &Entity::setParticleSpread)
       .addFunction("setParticleModel", &Entity::setParticleModel)
       .addFunction("playSound", &Entity::playSound)
-
-      .endClass();
+      .addFunction("setCollide", &Entity::setCollide)
+      .addFunction("getDefaultAnim", &Entity::getDefaultAnim)
+      .addFunction("getAnimationID", &Entity::getAnimationID)
+      .addFunction("hasAnimation", &Entity::hasAnimation)
+        .endClass();
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
@@ -492,6 +495,9 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  int getAnimationID(std::string tag);
+  std::string getDefaultAnim();
+  void setCollide(bool enable);
   void playSound(std::string file);
   void setParticleSpread(float spread);
   void setParticleModel(std::string model);
@@ -579,6 +585,7 @@ public:
   void Damage(int numHits);
   bool getPaused() { return isPaused; }
   void Emit(int num, float r, float g, float b, float a);
+  bool hasAnimation(std::string anim);
   //END API FUNCTIONS
 
   template <typename T>

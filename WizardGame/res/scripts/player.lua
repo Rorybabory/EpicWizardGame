@@ -36,8 +36,9 @@ function player_Hit(e,e2,hits)
     e:Shake(2.5)
 	e2:Emit(50, 0.5,1.0,1.0,0.8);
   end
-  e2:playAnimationTag("damaged")
-  
+  if (e2:hasAnimation("damaged") == true) then
+	e2:playAnimationTag("damaged")
+  end
 end
 function player_RunAbility(e)
   --print(e:getFloat("AbilityCount"))
