@@ -81,8 +81,9 @@ C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(256,18): warning
 C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(642,17): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(646,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Generating code
-  0 of 5448 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(701): warning C4715: 'Entity::hasAnimation': not all control paths return a value
+  1 of 5448 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    25 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   WizardGame.vcxproj -> C:\Users\lambe\source\repos\WizardGame\x64\Release\WizardGame.exe
