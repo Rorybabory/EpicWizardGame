@@ -24,6 +24,7 @@
 #include "CollisionSystem.h"
 #include "ProjComponent.h"
 #include "Audio.h"
+#include "HealthBar.h"
 #include <map>
 #ifndef ENTITY_H
 #define ENTITY_H
@@ -138,6 +139,10 @@ public:
   }
   void Draw(Camera cam, bool f) {
     auto gfxc = get<GraphicsComponent>();
+    if (type != "player") {
+        bar.Draw(cam, pos + glm::vec3(0.0, projMax.y+1.0, 0.0));
+    }
+    
     checkCullingCount++;
     if (checkCullingCount > 20) {
         checkCullingCount = 0;
@@ -684,6 +689,8 @@ public:
   bool hasCollision = false;
   glm::vec2 velocity;
   Sound sound = Sound("./res/sounds/shoot.wav");
+  HealthBar bar;
+  float maxHP = -1.0;
 protected:
 private:
   int checkCullingCount = 0;

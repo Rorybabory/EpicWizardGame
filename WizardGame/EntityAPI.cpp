@@ -447,6 +447,12 @@ int Entity::getHP() {
 
 void Entity::setHP(int hp) {
     this->hp = hp;
+    if (maxHP == -1.0) {
+        maxHP = hp;
+        std::cout << "max HP set\n";
+    }
+    bar.setValue(hp / maxHP);
+    std::cout << bar.getValue() << "is the bar value\n";
 }
 
 void Entity::addCounter(int start) {

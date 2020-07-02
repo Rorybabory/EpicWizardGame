@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2017-09-11, commit time:10:43, hash:5bd8ac9</authoring_tool>
     </contributor>
-    <created>2020-06-30T19:43:21</created>
-    <modified>2020-06-30T19:43:21</modified>
+    <created>2020-07-01T11:39:31</created>
+    <modified>2020-07-01T11:39:31</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -89,1881 +89,477 @@
     </geometry>
   </library_geometries>
   <library_animations>
-    <animation id="Cube_pose_bones__Bone___location_X">
-      <source id="Cube_pose_bones__Bone___location_X-input">
-        <float_array id="Cube_pose_bones__Bone___location_X-input-array" count="3">0 0.5 1</float_array>
+    <animation id="Cube_location_X">
+      <source id="Cube_location_X-input">
+        <float_array id="Cube_location_X-input-array" count="1">0.6</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_X-input-array" count="3" stride="1">
+          <accessor source="#Cube_location_X-input-array" count="1" stride="1">
             <param name="TIME" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_X-output">
-        <float_array id="Cube_pose_bones__Bone___location_X-output-array" count="3">0 0 0</float_array>
+      <source id="Cube_location_X-output">
+        <float_array id="Cube_location_X-output-array" count="1">0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_X-output-array" count="3" stride="1">
+          <accessor source="#Cube_location_X-output-array" count="1" stride="1">
             <param name="X" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone___location_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <source id="Cube_location_X-interpolation">
+        <Name_array id="Cube_location_X-interpolation-array" count="1">BEZIER</Name_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_X-interpolation-array" count="3" stride="1">
+          <accessor source="#Cube_location_X-interpolation-array" count="1" stride="1">
             <param name="INTERPOLATION" type="name"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_X-intangent">
-        <float_array id="Cube_pose_bones__Bone___location_X-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
+      <source id="Cube_location_X-intangent">
+        <float_array id="Cube_location_X-intangent-array" count="2">0.5916666 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_X-intangent-array" count="3" stride="2">
+          <accessor source="#Cube_location_X-intangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone___location_X-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
+      <source id="Cube_location_X-outtangent">
+        <float_array id="Cube_location_X-outtangent-array" count="2">0.6083334 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_X-outtangent-array" count="3" stride="2">
+          <accessor source="#Cube_location_X-outtangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <sampler id="Cube_pose_bones__Bone___location_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone___location_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone___location_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone___location_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone___location_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone___location_X-outtangent"/>
+      <sampler id="Cube_location_X-sampler">
+        <input semantic="INPUT" source="#Cube_location_X-input"/>
+        <input semantic="OUTPUT" source="#Cube_location_X-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_location_X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_location_X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_location_X-outtangent"/>
       </sampler>
-      <channel source="#Cube_pose_bones__Bone___location_X-sampler" target="Cube/location.X"/>
+      <channel source="#Cube_location_X-sampler" target="Cube/location.X"/>
     </animation>
-    <animation id="Cube_pose_bones__Bone___location_Y">
-      <source id="Cube_pose_bones__Bone___location_Y-input">
-        <float_array id="Cube_pose_bones__Bone___location_Y-input-array" count="3">0 0.5 1</float_array>
+    <animation id="Cube_location_Y">
+      <source id="Cube_location_Y-input">
+        <float_array id="Cube_location_Y-input-array" count="1">0.6</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Y-input-array" count="3" stride="1">
+          <accessor source="#Cube_location_Y-input-array" count="1" stride="1">
             <param name="TIME" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Y-output">
-        <float_array id="Cube_pose_bones__Bone___location_Y-output-array" count="3">0 0 0</float_array>
+      <source id="Cube_location_Y-output">
+        <float_array id="Cube_location_Y-output-array" count="1">0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Y-output-array" count="3" stride="1">
+          <accessor source="#Cube_location_Y-output-array" count="1" stride="1">
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone___location_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <source id="Cube_location_Y-interpolation">
+        <Name_array id="Cube_location_Y-interpolation-array" count="1">BEZIER</Name_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Y-interpolation-array" count="3" stride="1">
+          <accessor source="#Cube_location_Y-interpolation-array" count="1" stride="1">
             <param name="INTERPOLATION" type="name"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone___location_Y-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
+      <source id="Cube_location_Y-intangent">
+        <float_array id="Cube_location_Y-intangent-array" count="2">0.5916666 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Y-intangent-array" count="3" stride="2">
+          <accessor source="#Cube_location_Y-intangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone___location_Y-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
+      <source id="Cube_location_Y-outtangent">
+        <float_array id="Cube_location_Y-outtangent-array" count="2">0.6083334 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Y-outtangent-array" count="3" stride="2">
+          <accessor source="#Cube_location_Y-outtangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <sampler id="Cube_pose_bones__Bone___location_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone___location_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone___location_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone___location_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone___location_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone___location_Y-outtangent"/>
+      <sampler id="Cube_location_Y-sampler">
+        <input semantic="INPUT" source="#Cube_location_Y-input"/>
+        <input semantic="OUTPUT" source="#Cube_location_Y-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_location_Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_location_Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_location_Y-outtangent"/>
       </sampler>
-      <channel source="#Cube_pose_bones__Bone___location_Y-sampler" target="Cube/location.Y"/>
+      <channel source="#Cube_location_Y-sampler" target="Cube/location.Y"/>
     </animation>
-    <animation id="Cube_pose_bones__Bone___location_Z">
-      <source id="Cube_pose_bones__Bone___location_Z-input">
-        <float_array id="Cube_pose_bones__Bone___location_Z-input-array" count="3">0 0.5 1</float_array>
+    <animation id="Cube_location_Z">
+      <source id="Cube_location_Z-input">
+        <float_array id="Cube_location_Z-input-array" count="1">0.6</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Z-input-array" count="3" stride="1">
+          <accessor source="#Cube_location_Z-input-array" count="1" stride="1">
             <param name="TIME" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Z-output">
-        <float_array id="Cube_pose_bones__Bone___location_Z-output-array" count="3">0 0 0</float_array>
+      <source id="Cube_location_Z-output">
+        <float_array id="Cube_location_Z-output-array" count="1">0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Z-output-array" count="3" stride="1">
+          <accessor source="#Cube_location_Z-output-array" count="1" stride="1">
             <param name="Z" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone___location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <source id="Cube_location_Z-interpolation">
+        <Name_array id="Cube_location_Z-interpolation-array" count="1">BEZIER</Name_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Z-interpolation-array" count="3" stride="1">
+          <accessor source="#Cube_location_Z-interpolation-array" count="1" stride="1">
             <param name="INTERPOLATION" type="name"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone___location_Z-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
+      <source id="Cube_location_Z-intangent">
+        <float_array id="Cube_location_Z-intangent-array" count="2">0.5916666 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Z-intangent-array" count="3" stride="2">
+          <accessor source="#Cube_location_Z-intangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___location_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone___location_Z-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
+      <source id="Cube_location_Z-outtangent">
+        <float_array id="Cube_location_Z-outtangent-array" count="2">0.6083334 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___location_Z-outtangent-array" count="3" stride="2">
+          <accessor source="#Cube_location_Z-outtangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <sampler id="Cube_pose_bones__Bone___location_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone___location_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone___location_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone___location_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone___location_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone___location_Z-outtangent"/>
+      <sampler id="Cube_location_Z-sampler">
+        <input semantic="INPUT" source="#Cube_location_Z-input"/>
+        <input semantic="OUTPUT" source="#Cube_location_Z-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_location_Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_location_Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_location_Z-outtangent"/>
       </sampler>
-      <channel source="#Cube_pose_bones__Bone___location_Z-sampler" target="Cube/location.Z"/>
+      <channel source="#Cube_location_Z-sampler" target="Cube/location.Z"/>
     </animation>
-    <animation id="Cube_pose_bones__Bone___scale_X">
-      <source id="Cube_pose_bones__Bone___scale_X-input">
-        <float_array id="Cube_pose_bones__Bone___scale_X-input-array" count="3">0 0.5 1</float_array>
+    <animation id="Cube_rotation_euler_X">
+      <source id="Cube_rotation_euler_X-input">
+        <float_array id="Cube_rotation_euler_X-input-array" count="1">0.6</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_X-input-array" count="3" stride="1">
+          <accessor source="#Cube_rotation_euler_X-input-array" count="1" stride="1">
             <param name="TIME" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_X-output">
-        <float_array id="Cube_pose_bones__Bone___scale_X-output-array" count="3">1 1 1</float_array>
+      <source id="Cube_rotation_euler_X-output">
+        <float_array id="Cube_rotation_euler_X-output-array" count="1">0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
+          <accessor source="#Cube_rotation_euler_X-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone___scale_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <source id="Cube_rotation_euler_X-interpolation">
+        <Name_array id="Cube_rotation_euler_X-interpolation-array" count="1">BEZIER</Name_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_X-interpolation-array" count="3" stride="1">
+          <accessor source="#Cube_rotation_euler_X-interpolation-array" count="1" stride="1">
             <param name="INTERPOLATION" type="name"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_X-intangent">
-        <float_array id="Cube_pose_bones__Bone___scale_X-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
+      <source id="Cube_rotation_euler_X-intangent">
+        <float_array id="Cube_rotation_euler_X-intangent-array" count="2">0.5916666 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_X-intangent-array" count="3" stride="2">
+          <accessor source="#Cube_rotation_euler_X-intangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone___scale_X-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
+      <source id="Cube_rotation_euler_X-outtangent">
+        <float_array id="Cube_rotation_euler_X-outtangent-array" count="2">0.6083334 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_X-outtangent-array" count="3" stride="2">
+          <accessor source="#Cube_rotation_euler_X-outtangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <sampler id="Cube_pose_bones__Bone___scale_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone___scale_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone___scale_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone___scale_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone___scale_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone___scale_X-outtangent"/>
+      <sampler id="Cube_rotation_euler_X-sampler">
+        <input semantic="INPUT" source="#Cube_rotation_euler_X-input"/>
+        <input semantic="OUTPUT" source="#Cube_rotation_euler_X-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_rotation_euler_X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_rotation_euler_X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_rotation_euler_X-outtangent"/>
       </sampler>
-      <channel source="#Cube_pose_bones__Bone___scale_X-sampler" target="Cube/scale.X"/>
+      <channel source="#Cube_rotation_euler_X-sampler" target="Cube/rotationX.ANGLE"/>
     </animation>
-    <animation id="Cube_pose_bones__Bone___scale_Y">
-      <source id="Cube_pose_bones__Bone___scale_Y-input">
-        <float_array id="Cube_pose_bones__Bone___scale_Y-input-array" count="3">0 0.5 1</float_array>
+    <animation id="Cube_rotation_euler_Y">
+      <source id="Cube_rotation_euler_Y-input">
+        <float_array id="Cube_rotation_euler_Y-input-array" count="1">0.6</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Y-input-array" count="3" stride="1">
+          <accessor source="#Cube_rotation_euler_Y-input-array" count="1" stride="1">
             <param name="TIME" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Y-output">
-        <float_array id="Cube_pose_bones__Bone___scale_Y-output-array" count="3">1 1 1</float_array>
+      <source id="Cube_rotation_euler_Y-output">
+        <float_array id="Cube_rotation_euler_Y-output-array" count="1">0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
+          <accessor source="#Cube_rotation_euler_Y-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone___scale_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <source id="Cube_rotation_euler_Y-interpolation">
+        <Name_array id="Cube_rotation_euler_Y-interpolation-array" count="1">BEZIER</Name_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Y-interpolation-array" count="3" stride="1">
+          <accessor source="#Cube_rotation_euler_Y-interpolation-array" count="1" stride="1">
             <param name="INTERPOLATION" type="name"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone___scale_Y-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
+      <source id="Cube_rotation_euler_Y-intangent">
+        <float_array id="Cube_rotation_euler_Y-intangent-array" count="2">0.5916666 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Y-intangent-array" count="3" stride="2">
+          <accessor source="#Cube_rotation_euler_Y-intangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone___scale_Y-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
+      <source id="Cube_rotation_euler_Y-outtangent">
+        <float_array id="Cube_rotation_euler_Y-outtangent-array" count="2">0.6083334 0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Y-outtangent-array" count="3" stride="2">
+          <accessor source="#Cube_rotation_euler_Y-outtangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <sampler id="Cube_pose_bones__Bone___scale_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone___scale_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone___scale_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone___scale_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone___scale_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone___scale_Y-outtangent"/>
+      <sampler id="Cube_rotation_euler_Y-sampler">
+        <input semantic="INPUT" source="#Cube_rotation_euler_Y-input"/>
+        <input semantic="OUTPUT" source="#Cube_rotation_euler_Y-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_rotation_euler_Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_rotation_euler_Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_rotation_euler_Y-outtangent"/>
       </sampler>
-      <channel source="#Cube_pose_bones__Bone___scale_Y-sampler" target="Cube/scale.Y"/>
+      <channel source="#Cube_rotation_euler_Y-sampler" target="Cube/rotationY.ANGLE"/>
     </animation>
-    <animation id="Cube_pose_bones__Bone___scale_Z">
-      <source id="Cube_pose_bones__Bone___scale_Z-input">
-        <float_array id="Cube_pose_bones__Bone___scale_Z-input-array" count="3">0 0.5 1</float_array>
+    <animation id="Cube_rotation_euler_Z">
+      <source id="Cube_rotation_euler_Z-input">
+        <float_array id="Cube_rotation_euler_Z-input-array" count="1">0.6</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Z-input-array" count="3" stride="1">
+          <accessor source="#Cube_rotation_euler_Z-input-array" count="1" stride="1">
             <param name="TIME" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Z-output">
-        <float_array id="Cube_pose_bones__Bone___scale_Z-output-array" count="3">1 1 1</float_array>
+      <source id="Cube_rotation_euler_Z-output">
+        <float_array id="Cube_rotation_euler_Z-output-array" count="1">0</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Z-output-array" count="3" stride="1">
+          <accessor source="#Cube_rotation_euler_Z-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_rotation_euler_Z-interpolation">
+        <Name_array id="Cube_rotation_euler_Z-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Cube_rotation_euler_Z-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_rotation_euler_Z-intangent">
+        <float_array id="Cube_rotation_euler_Z-intangent-array" count="2">0.5916666 0</float_array>
+        <technique_common>
+          <accessor source="#Cube_rotation_euler_Z-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_rotation_euler_Z-outtangent">
+        <float_array id="Cube_rotation_euler_Z-outtangent-array" count="2">0.6083334 0</float_array>
+        <technique_common>
+          <accessor source="#Cube_rotation_euler_Z-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Cube_rotation_euler_Z-sampler">
+        <input semantic="INPUT" source="#Cube_rotation_euler_Z-input"/>
+        <input semantic="OUTPUT" source="#Cube_rotation_euler_Z-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_rotation_euler_Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_rotation_euler_Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_rotation_euler_Z-outtangent"/>
+      </sampler>
+      <channel source="#Cube_rotation_euler_Z-sampler" target="Cube/rotationZ.ANGLE"/>
+    </animation>
+    <animation id="Cube_scale_X">
+      <source id="Cube_scale_X-input">
+        <float_array id="Cube_scale_X-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_X-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_X-output">
+        <float_array id="Cube_scale_X-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_X-output-array" count="1" stride="1">
+            <param name="X" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_X-interpolation">
+        <Name_array id="Cube_scale_X-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Cube_scale_X-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_X-intangent">
+        <float_array id="Cube_scale_X-intangent-array" count="2">0.5916666 1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_X-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_X-outtangent">
+        <float_array id="Cube_scale_X-outtangent-array" count="2">0.6083334 1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_X-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Cube_scale_X-sampler">
+        <input semantic="INPUT" source="#Cube_scale_X-input"/>
+        <input semantic="OUTPUT" source="#Cube_scale_X-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_scale_X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_scale_X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_scale_X-outtangent"/>
+      </sampler>
+      <channel source="#Cube_scale_X-sampler" target="Cube/scale.X"/>
+    </animation>
+    <animation id="Cube_scale_Y">
+      <source id="Cube_scale_Y-input">
+        <float_array id="Cube_scale_Y-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Y-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_Y-output">
+        <float_array id="Cube_scale_Y-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Y-output-array" count="1" stride="1">
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_Y-interpolation">
+        <Name_array id="Cube_scale_Y-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Y-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_Y-intangent">
+        <float_array id="Cube_scale_Y-intangent-array" count="2">0.5916666 1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Y-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_Y-outtangent">
+        <float_array id="Cube_scale_Y-outtangent-array" count="2">0.6083334 1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Y-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Cube_scale_Y-sampler">
+        <input semantic="INPUT" source="#Cube_scale_Y-input"/>
+        <input semantic="OUTPUT" source="#Cube_scale_Y-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_scale_Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_scale_Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_scale_Y-outtangent"/>
+      </sampler>
+      <channel source="#Cube_scale_Y-sampler" target="Cube/scale.Y"/>
+    </animation>
+    <animation id="Cube_scale_Z">
+      <source id="Cube_scale_Z-input">
+        <float_array id="Cube_scale_Z-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Z-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Cube_scale_Z-output">
+        <float_array id="Cube_scale_Z-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#Cube_scale_Z-output-array" count="1" stride="1">
             <param name="Z" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone___scale_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <source id="Cube_scale_Z-interpolation">
+        <Name_array id="Cube_scale_Z-interpolation-array" count="1">BEZIER</Name_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Z-interpolation-array" count="3" stride="1">
+          <accessor source="#Cube_scale_Z-interpolation-array" count="1" stride="1">
             <param name="INTERPOLATION" type="name"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone___scale_Z-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
+      <source id="Cube_scale_Z-intangent">
+        <float_array id="Cube_scale_Z-intangent-array" count="2">0.5916666 1</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Z-intangent-array" count="3" stride="2">
+          <accessor source="#Cube_scale_Z-intangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <source id="Cube_pose_bones__Bone___scale_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone___scale_Z-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
+      <source id="Cube_scale_Z-outtangent">
+        <float_array id="Cube_scale_Z-outtangent-array" count="2">0.6083334 1</float_array>
         <technique_common>
-          <accessor source="#Cube_pose_bones__Bone___scale_Z-outtangent-array" count="3" stride="2">
+          <accessor source="#Cube_scale_Z-outtangent-array" count="1" stride="2">
             <param name="X" type="float"/>
             <param name="Y" type="float"/>
           </accessor>
         </technique_common>
       </source>
-      <sampler id="Cube_pose_bones__Bone___scale_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone___scale_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone___scale_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone___scale_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone___scale_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone___scale_Z-outtangent"/>
+      <sampler id="Cube_scale_Z-sampler">
+        <input semantic="INPUT" source="#Cube_scale_Z-input"/>
+        <input semantic="OUTPUT" source="#Cube_scale_Z-output"/>
+        <input semantic="INTERPOLATION" source="#Cube_scale_Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Cube_scale_Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Cube_scale_Z-outtangent"/>
       </sampler>
-      <channel source="#Cube_pose_bones__Bone___scale_Z-sampler" target="Cube/scale.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_001___location_X">
-      <source id="Cube_pose_bones__Bone_001___location_X-input">
-        <float_array id="Cube_pose_bones__Bone_001___location_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_X-output">
-        <float_array id="Cube_pose_bones__Bone_001___location_X-output-array" count="3">0 0.0186389 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_001___location_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_001___location_X-intangent-array" count="6">-0.1952057 0 0.3047943 0.0186389 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_001___location_X-outtangent-array" count="6">0.1952057 0 0.6952058 0.0186389 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_001___location_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_001___location_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_001___location_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_001___location_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_001___location_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_001___location_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_001___location_X-sampler" target="Cube/location.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_001___location_Y">
-      <source id="Cube_pose_bones__Bone_001___location_Y-input">
-        <float_array id="Cube_pose_bones__Bone_001___location_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Y-output">
-        <float_array id="Cube_pose_bones__Bone_001___location_Y-output-array" count="3">0 0.1583085 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_001___location_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_001___location_Y-intangent-array" count="6">-0.1952057 0 0.3047943 0.1583085 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_001___location_Y-outtangent-array" count="6">0.1952057 0 0.6952058 0.1583085 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_001___location_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_001___location_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_001___location_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_001___location_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_001___location_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_001___location_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_001___location_Y-sampler" target="Cube/location.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_001___location_Z">
-      <source id="Cube_pose_bones__Bone_001___location_Z-input">
-        <float_array id="Cube_pose_bones__Bone_001___location_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Z-output">
-        <float_array id="Cube_pose_bones__Bone_001___location_Z-output-array" count="3">0 0.06602394 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_001___location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_001___location_Z-intangent-array" count="6">-0.1952057 0 0.3047943 0.06602394 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___location_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_001___location_Z-outtangent-array" count="6">0.1952057 0 0.6952058 0.06602394 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___location_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_001___location_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_001___location_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_001___location_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_001___location_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_001___location_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_001___location_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_001___location_Z-sampler" target="Cube/location.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_001___scale_X">
-      <source id="Cube_pose_bones__Bone_001___scale_X-input">
-        <float_array id="Cube_pose_bones__Bone_001___scale_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_X-output">
-        <float_array id="Cube_pose_bones__Bone_001___scale_X-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_001___scale_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_001___scale_X-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_001___scale_X-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_001___scale_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_001___scale_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_001___scale_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_001___scale_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_001___scale_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_001___scale_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_001___scale_X-sampler" target="Cube/scale.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_001___scale_Y">
-      <source id="Cube_pose_bones__Bone_001___scale_Y-input">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Y-output">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Y-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_001___scale_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Y-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Y-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_001___scale_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_001___scale_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_001___scale_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_001___scale_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_001___scale_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_001___scale_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_001___scale_Y-sampler" target="Cube/scale.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_001___scale_Z">
-      <source id="Cube_pose_bones__Bone_001___scale_Z-input">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Z-output">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Z-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_001___scale_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Z-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_001___scale_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_001___scale_Z-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_001___scale_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_001___scale_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_001___scale_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_001___scale_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_001___scale_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_001___scale_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_001___scale_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_001___scale_Z-sampler" target="Cube/scale.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_002___location_X">
-      <source id="Cube_pose_bones__Bone_002___location_X-input">
-        <float_array id="Cube_pose_bones__Bone_002___location_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_X-output">
-        <float_array id="Cube_pose_bones__Bone_002___location_X-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_002___location_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_002___location_X-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_002___location_X-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_002___location_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_002___location_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_002___location_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_002___location_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_002___location_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_002___location_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_002___location_X-sampler" target="Cube/location.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_002___location_Y">
-      <source id="Cube_pose_bones__Bone_002___location_Y-input">
-        <float_array id="Cube_pose_bones__Bone_002___location_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Y-output">
-        <float_array id="Cube_pose_bones__Bone_002___location_Y-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_002___location_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_002___location_Y-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_002___location_Y-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_002___location_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_002___location_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_002___location_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_002___location_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_002___location_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_002___location_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_002___location_Y-sampler" target="Cube/location.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_002___location_Z">
-      <source id="Cube_pose_bones__Bone_002___location_Z-input">
-        <float_array id="Cube_pose_bones__Bone_002___location_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Z-output">
-        <float_array id="Cube_pose_bones__Bone_002___location_Z-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_002___location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_002___location_Z-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___location_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_002___location_Z-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___location_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_002___location_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_002___location_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_002___location_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_002___location_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_002___location_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_002___location_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_002___location_Z-sampler" target="Cube/location.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_002___scale_X">
-      <source id="Cube_pose_bones__Bone_002___scale_X-input">
-        <float_array id="Cube_pose_bones__Bone_002___scale_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_X-output">
-        <float_array id="Cube_pose_bones__Bone_002___scale_X-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_002___scale_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_002___scale_X-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_002___scale_X-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_002___scale_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_002___scale_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_002___scale_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_002___scale_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_002___scale_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_002___scale_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_002___scale_X-sampler" target="Cube/scale.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_002___scale_Y">
-      <source id="Cube_pose_bones__Bone_002___scale_Y-input">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Y-output">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Y-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_002___scale_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Y-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Y-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_002___scale_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_002___scale_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_002___scale_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_002___scale_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_002___scale_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_002___scale_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_002___scale_Y-sampler" target="Cube/scale.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_002___scale_Z">
-      <source id="Cube_pose_bones__Bone_002___scale_Z-input">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Z-output">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Z-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_002___scale_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Z-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_002___scale_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_002___scale_Z-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_002___scale_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_002___scale_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_002___scale_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_002___scale_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_002___scale_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_002___scale_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_002___scale_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_002___scale_Z-sampler" target="Cube/scale.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_003___location_X">
-      <source id="Cube_pose_bones__Bone_003___location_X-input">
-        <float_array id="Cube_pose_bones__Bone_003___location_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_X-output">
-        <float_array id="Cube_pose_bones__Bone_003___location_X-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_003___location_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_003___location_X-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_003___location_X-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_003___location_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_003___location_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_003___location_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_003___location_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_003___location_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_003___location_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_003___location_X-sampler" target="Cube/location.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_003___location_Y">
-      <source id="Cube_pose_bones__Bone_003___location_Y-input">
-        <float_array id="Cube_pose_bones__Bone_003___location_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Y-output">
-        <float_array id="Cube_pose_bones__Bone_003___location_Y-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_003___location_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_003___location_Y-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_003___location_Y-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_003___location_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_003___location_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_003___location_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_003___location_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_003___location_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_003___location_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_003___location_Y-sampler" target="Cube/location.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_003___location_Z">
-      <source id="Cube_pose_bones__Bone_003___location_Z-input">
-        <float_array id="Cube_pose_bones__Bone_003___location_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Z-output">
-        <float_array id="Cube_pose_bones__Bone_003___location_Z-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_003___location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_003___location_Z-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___location_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_003___location_Z-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___location_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_003___location_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_003___location_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_003___location_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_003___location_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_003___location_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_003___location_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_003___location_Z-sampler" target="Cube/location.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_003___scale_X">
-      <source id="Cube_pose_bones__Bone_003___scale_X-input">
-        <float_array id="Cube_pose_bones__Bone_003___scale_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_X-output">
-        <float_array id="Cube_pose_bones__Bone_003___scale_X-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_003___scale_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_003___scale_X-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_003___scale_X-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_003___scale_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_003___scale_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_003___scale_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_003___scale_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_003___scale_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_003___scale_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_003___scale_X-sampler" target="Cube/scale.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_003___scale_Y">
-      <source id="Cube_pose_bones__Bone_003___scale_Y-input">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Y-output">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Y-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_003___scale_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Y-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Y-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_003___scale_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_003___scale_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_003___scale_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_003___scale_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_003___scale_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_003___scale_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_003___scale_Y-sampler" target="Cube/scale.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_003___scale_Z">
-      <source id="Cube_pose_bones__Bone_003___scale_Z-input">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Z-output">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Z-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_003___scale_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Z-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_003___scale_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_003___scale_Z-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_003___scale_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_003___scale_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_003___scale_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_003___scale_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_003___scale_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_003___scale_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_003___scale_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_003___scale_Z-sampler" target="Cube/scale.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_004___location_X">
-      <source id="Cube_pose_bones__Bone_004___location_X-input">
-        <float_array id="Cube_pose_bones__Bone_004___location_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_X-output">
-        <float_array id="Cube_pose_bones__Bone_004___location_X-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_004___location_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_004___location_X-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_004___location_X-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_004___location_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_004___location_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_004___location_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_004___location_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_004___location_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_004___location_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_004___location_X-sampler" target="Cube/location.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_004___location_Y">
-      <source id="Cube_pose_bones__Bone_004___location_Y-input">
-        <float_array id="Cube_pose_bones__Bone_004___location_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Y-output">
-        <float_array id="Cube_pose_bones__Bone_004___location_Y-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_004___location_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_004___location_Y-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_004___location_Y-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_004___location_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_004___location_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_004___location_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_004___location_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_004___location_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_004___location_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_004___location_Y-sampler" target="Cube/location.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_004___location_Z">
-      <source id="Cube_pose_bones__Bone_004___location_Z-input">
-        <float_array id="Cube_pose_bones__Bone_004___location_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Z-output">
-        <float_array id="Cube_pose_bones__Bone_004___location_Z-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_004___location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_004___location_Z-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___location_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_004___location_Z-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___location_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_004___location_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_004___location_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_004___location_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_004___location_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_004___location_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_004___location_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_004___location_Z-sampler" target="Cube/location.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_004___scale_X">
-      <source id="Cube_pose_bones__Bone_004___scale_X-input">
-        <float_array id="Cube_pose_bones__Bone_004___scale_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_X-output">
-        <float_array id="Cube_pose_bones__Bone_004___scale_X-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_004___scale_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_004___scale_X-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_004___scale_X-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_004___scale_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_004___scale_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_004___scale_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_004___scale_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_004___scale_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_004___scale_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_004___scale_X-sampler" target="Cube/scale.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_004___scale_Y">
-      <source id="Cube_pose_bones__Bone_004___scale_Y-input">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Y-output">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Y-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_004___scale_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Y-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Y-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_004___scale_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_004___scale_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_004___scale_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_004___scale_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_004___scale_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_004___scale_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_004___scale_Y-sampler" target="Cube/scale.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_004___scale_Z">
-      <source id="Cube_pose_bones__Bone_004___scale_Z-input">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Z-output">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Z-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_004___scale_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Z-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_004___scale_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_004___scale_Z-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_004___scale_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_004___scale_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_004___scale_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_004___scale_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_004___scale_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_004___scale_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_004___scale_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_004___scale_Z-sampler" target="Cube/scale.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_005___location_X">
-      <source id="Cube_pose_bones__Bone_005___location_X-input">
-        <float_array id="Cube_pose_bones__Bone_005___location_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_X-output">
-        <float_array id="Cube_pose_bones__Bone_005___location_X-output-array" count="3">0 -6.47491e-4 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_005___location_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_005___location_X-intangent-array" count="6">-0.1952057 0 0.3047943 -6.47491e-4 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_005___location_X-outtangent-array" count="6">0.1952057 0 0.6952058 -6.47491e-4 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_005___location_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_005___location_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_005___location_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_005___location_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_005___location_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_005___location_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_005___location_X-sampler" target="Cube/location.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_005___location_Y">
-      <source id="Cube_pose_bones__Bone_005___location_Y-input">
-        <float_array id="Cube_pose_bones__Bone_005___location_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Y-output">
-        <float_array id="Cube_pose_bones__Bone_005___location_Y-output-array" count="3">0 -0.0207197 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_005___location_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_005___location_Y-intangent-array" count="6">-0.1952057 0 0.3047943 -0.0207197 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_005___location_Y-outtangent-array" count="6">0.1952057 0 0.6952058 -0.0207197 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_005___location_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_005___location_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_005___location_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_005___location_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_005___location_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_005___location_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_005___location_Y-sampler" target="Cube/location.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_005___location_Z">
-      <source id="Cube_pose_bones__Bone_005___location_Z-input">
-        <float_array id="Cube_pose_bones__Bone_005___location_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Z-output">
-        <float_array id="Cube_pose_bones__Bone_005___location_Z-output-array" count="3">0 0 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_005___location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_005___location_Z-intangent-array" count="6">-0.1952057 0 0.3047943 0 0.8047943 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___location_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_005___location_Z-outtangent-array" count="6">0.1952057 0 0.6952058 0 1.195206 0</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___location_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_005___location_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_005___location_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_005___location_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_005___location_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_005___location_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_005___location_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_005___location_Z-sampler" target="Cube/location.Z"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_005___scale_X">
-      <source id="Cube_pose_bones__Bone_005___scale_X-input">
-        <float_array id="Cube_pose_bones__Bone_005___scale_X-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_X-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_X-output">
-        <float_array id="Cube_pose_bones__Bone_005___scale_X-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_X-output-array" count="3" stride="1">
-            <param name="X" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_X-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_005___scale_X-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_X-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_X-intangent">
-        <float_array id="Cube_pose_bones__Bone_005___scale_X-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_X-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_X-outtangent">
-        <float_array id="Cube_pose_bones__Bone_005___scale_X-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_X-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_005___scale_X-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_005___scale_X-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_005___scale_X-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_005___scale_X-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_005___scale_X-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_005___scale_X-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_005___scale_X-sampler" target="Cube/scale.X"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_005___scale_Y">
-      <source id="Cube_pose_bones__Bone_005___scale_Y-input">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Y-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Y-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Y-output">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Y-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Y-output-array" count="3" stride="1">
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Y-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_005___scale_Y-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Y-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Y-intangent">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Y-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Y-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Y-outtangent">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Y-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Y-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_005___scale_Y-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_005___scale_Y-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_005___scale_Y-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_005___scale_Y-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_005___scale_Y-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_005___scale_Y-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_005___scale_Y-sampler" target="Cube/scale.Y"/>
-    </animation>
-    <animation id="Cube_pose_bones__Bone_005___scale_Z">
-      <source id="Cube_pose_bones__Bone_005___scale_Z-input">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Z-input-array" count="3">0 0.5 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Z-input-array" count="3" stride="1">
-            <param name="TIME" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Z-output">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Z-output-array" count="3">1 1 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Z-output-array" count="3" stride="1">
-            <param name="Z" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Z-interpolation">
-        <Name_array id="Cube_pose_bones__Bone_005___scale_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Z-interpolation-array" count="3" stride="1">
-            <param name="INTERPOLATION" type="name"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Z-intangent">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Z-intangent-array" count="6">-0.1952057 1 0.3047943 1 0.8047943 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Z-intangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <source id="Cube_pose_bones__Bone_005___scale_Z-outtangent">
-        <float_array id="Cube_pose_bones__Bone_005___scale_Z-outtangent-array" count="6">0.1952057 1 0.6952058 1 1.195206 1</float_array>
-        <technique_common>
-          <accessor source="#Cube_pose_bones__Bone_005___scale_Z-outtangent-array" count="3" stride="2">
-            <param name="X" type="float"/>
-            <param name="Y" type="float"/>
-          </accessor>
-        </technique_common>
-      </source>
-      <sampler id="Cube_pose_bones__Bone_005___scale_Z-sampler">
-        <input semantic="INPUT" source="#Cube_pose_bones__Bone_005___scale_Z-input"/>
-        <input semantic="OUTPUT" source="#Cube_pose_bones__Bone_005___scale_Z-output"/>
-        <input semantic="INTERPOLATION" source="#Cube_pose_bones__Bone_005___scale_Z-interpolation"/>
-        <input semantic="IN_TANGENT" source="#Cube_pose_bones__Bone_005___scale_Z-intangent"/>
-        <input semantic="OUT_TANGENT" source="#Cube_pose_bones__Bone_005___scale_Z-outtangent"/>
-      </sampler>
-      <channel source="#Cube_pose_bones__Bone_005___scale_Z-sampler" target="Cube/scale.Z"/>
+      <channel source="#Cube_scale_Z-sampler" target="Cube/scale.Z"/>
     </animation>
     <animation id="Armature_Bone_pose_matrix">
       <source id="Armature_Bone_pose_matrix-input">
-        <float_array id="Armature_Bone_pose_matrix-input-array" count="3">0 0.5 1</float_array>
+        <float_array id="Armature_Bone_pose_matrix-input-array" count="3">0 0.6 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_pose_matrix-input-array" count="3" stride="1">
             <param name="TIME" type="float"/>
@@ -1971,7 +567,7 @@
         </technique_common>
       </source>
       <source id="Armature_Bone_pose_matrix-output">
-        <float_array id="Armature_Bone_pose_matrix-output-array" count="48">1 0 0 0 0 0 -1 0 0 1 0 0 0 0 0 1 0.9832199 0 -0.1824241 0 -0.1824241 0 -0.9832199 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 -1 0 0 1 0 0 0 0 0 1</float_array>
+        <float_array id="Armature_Bone_pose_matrix-output-array" count="48">1 0 0 0 0 0 -1 0 0 1 0 0 0 0 0 1 0.9947999 0 0.1018492 0 0.1018492 0 -0.9947999 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 -1 0 0 1 0 0 0 0 0 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_pose_matrix-output-array" count="3" stride="16">
             <param name="TRANSFORM" type="float4x4"/>
@@ -1995,7 +591,7 @@
     </animation>
     <animation id="Armature_Bone_001_pose_matrix">
       <source id="Armature_Bone_001_pose_matrix-input">
-        <float_array id="Armature_Bone_001_pose_matrix-input-array" count="3">0 0.5 1</float_array>
+        <float_array id="Armature_Bone_001_pose_matrix-input-array" count="3">0 0.6 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_001_pose_matrix-input-array" count="3" stride="1">
             <param name="TIME" type="float"/>
@@ -2003,7 +599,7 @@
         </technique_common>
       </source>
       <source id="Armature_Bone_001_pose_matrix-output">
-        <float_array id="Armature_Bone_001_pose_matrix-output-array" count="48">0.1169305 0.99314 7.25621e-8 0.3773714 -0.99314 0.1169305 -6.26078e-7 0.04375327 -6.30267e-7 1.14329e-9 1 5.87863e-9 0 0 0 1 0.1169305 0.99314 7.25621e-8 0.5367734 -0.99314 0.1169305 -6.26078e-7 0.04375327 -6.30267e-7 1.14329e-9 1 0.06602394 0 0 0 1 0.1169305 0.99314 7.25621e-8 0.3773714 -0.99314 0.1169305 -6.26078e-7 0.04375327 -6.30267e-7 1.14329e-9 1 5.87863e-9 0 0 0 1</float_array>
+        <float_array id="Armature_Bone_001_pose_matrix-output-array" count="48">0.1169305 0.99314 7.25621e-8 0.3773714 -0.99314 0.1169305 -6.26078e-7 0.04375327 -6.30267e-7 1.14329e-9 1 5.87863e-9 0 0 0 1 0.115021 0.9769202 -0.1799918 1.717867 -0.99314 0.1169305 -6.21441e-7 0.04375327 0.02104592 0.1787571 0.9836681 0.1413116 0 0 0 1 0.1169305 0.99314 7.25621e-8 0.3773714 -0.99314 0.1169305 -6.26078e-7 0.04375327 -6.30267e-7 1.14329e-9 1 5.87863e-9 0 0 0 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_001_pose_matrix-output-array" count="3" stride="16">
             <param name="TRANSFORM" type="float4x4"/>
@@ -2027,7 +623,7 @@
     </animation>
     <animation id="Armature_Bone_002_pose_matrix">
       <source id="Armature_Bone_002_pose_matrix-input">
-        <float_array id="Armature_Bone_002_pose_matrix-input-array" count="3">0 0.5 1</float_array>
+        <float_array id="Armature_Bone_002_pose_matrix-input-array" count="3">0 0.6 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_002_pose_matrix-input-array" count="3" stride="1">
             <param name="TIME" type="float"/>
@@ -2035,7 +631,7 @@
         </technique_common>
       </source>
       <source id="Armature_Bone_002_pose_matrix-output">
-        <float_array id="Armature_Bone_002_pose_matrix-output-array" count="48">0.05521876 0.0285489 -0.9980661 0.03281486 -0.9981403 0.02743371 -0.05443816 0.04375327 0.0258265 0.999216 0.03001065 0.3883099 0 0 0 1 0.05890129 0.6641384 -0.7452857 0.03281486 -0.9981403 0.0274337 -0.05443816 0.04375327 -0.01570852 0.7471062 0.6645192 0.3883099 0 0 0 1 0.05521876 0.0285489 -0.9980661 0.03281486 -0.9981403 0.02743371 -0.05443816 0.04375327 0.0258265 0.999216 0.03001065 0.3883099 0 0 0 1</float_array>
+        <float_array id="Armature_Bone_002_pose_matrix-output-array" count="48">0.05521876 0.0285489 -0.9980661 0.03281486 -0.9981403 0.02743371 -0.05443816 0.04375327 0.0258265 0.999216 0.03001065 0.3883099 0 0 0 1 0.05521876 0.0285489 -0.9980661 0.03281486 -0.9981403 0.02743371 -0.05443816 0.04375327 0.0258265 0.999216 0.03001065 0.3883099 0 0 0 1 0.05521876 0.0285489 -0.9980661 0.03281486 -0.9981403 0.02743371 -0.05443816 0.04375327 0.0258265 0.999216 0.03001065 0.3883099 0 0 0 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_002_pose_matrix-output-array" count="3" stride="16">
             <param name="TRANSFORM" type="float4x4"/>
@@ -2059,7 +655,7 @@
     </animation>
     <animation id="Armature_Bone_003_pose_matrix">
       <source id="Armature_Bone_003_pose_matrix-input">
-        <float_array id="Armature_Bone_003_pose_matrix-input-array" count="3">0 0.5 1</float_array>
+        <float_array id="Armature_Bone_003_pose_matrix-input-array" count="3">0 0.6 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_003_pose_matrix-input-array" count="3" stride="1">
             <param name="TIME" type="float"/>
@@ -2091,7 +687,7 @@
     </animation>
     <animation id="Armature_Bone_004_pose_matrix">
       <source id="Armature_Bone_004_pose_matrix-input">
-        <float_array id="Armature_Bone_004_pose_matrix-input-array" count="3">0 0.5 1</float_array>
+        <float_array id="Armature_Bone_004_pose_matrix-input-array" count="3">0 0.6 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_004_pose_matrix-input-array" count="3" stride="1">
             <param name="TIME" type="float"/>
@@ -2099,7 +695,7 @@
         </technique_common>
       </source>
       <source id="Armature_Bone_004_pose_matrix-output">
-        <float_array id="Armature_Bone_004_pose_matrix-output-array" count="48">0.05546068 -0.02854874 -0.9980528 0.008203566 0.998127 0.02743371 0.05468011 0.04375327 0.02581923 -0.9992161 0.03001664 -0.3773715 0 0 0 1 0.04496463 0.2770776 -0.959795 0.008203566 0.998127 0.02743371 0.05468012 0.04375327 0.04148137 -0.960456 -0.2753253 -0.3773715 0 0 0 1 0.05546068 -0.02854874 -0.9980528 0.008203566 0.998127 0.02743371 0.05468011 0.04375327 0.02581923 -0.9992161 0.03001664 -0.3773715 0 0 0 1</float_array>
+        <float_array id="Armature_Bone_004_pose_matrix-output-array" count="48">0.05546068 -0.02854874 -0.9980528 0.008203566 0.998127 0.02743371 0.05468011 0.04375327 0.02581923 -0.9992161 0.03001664 -0.3773715 0 0 0 1 0.05546068 -0.02854874 -0.9980528 0.008203566 0.998127 0.02743371 0.05468011 0.04375327 0.02581923 -0.9992161 0.03001664 -0.3773715 0 0 0 1 0.05546068 -0.02854874 -0.9980528 0.008203566 0.998127 0.02743371 0.05468011 0.04375327 0.02581923 -0.9992161 0.03001664 -0.3773715 0 0 0 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_004_pose_matrix-output-array" count="3" stride="16">
             <param name="TRANSFORM" type="float4x4"/>
@@ -2123,7 +719,7 @@
     </animation>
     <animation id="Armature_Bone_005_pose_matrix">
       <source id="Armature_Bone_005_pose_matrix-input">
-        <float_array id="Armature_Bone_005_pose_matrix-input-array" count="3">0 0.5 1</float_array>
+        <float_array id="Armature_Bone_005_pose_matrix-input-array" count="3">0 0.6 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_005_pose_matrix-input-array" count="3" stride="1">
             <param name="TIME" type="float"/>
@@ -2131,7 +727,7 @@
         </technique_common>
       </source>
       <source id="Armature_Bone_005_pose_matrix-output">
-        <float_array id="Armature_Bone_005_pose_matrix-output-array" count="48">0.03123486 0.999512 1.38599e-8 0.3773714 -0.999512 0.03123471 -4.43517e-7 0.9090348 -4.43733e-7 0 1 5.87863e-9 0 0 0 1 0.03123486 0.999512 1.38599e-8 0.3566416 -0.999512 0.03123471 -4.43517e-7 0.9090348 -4.43733e-7 0 1 5.87863e-9 0 0 0 1 0.03123486 0.999512 1.38599e-8 0.3773714 -0.999512 0.03123471 -4.43517e-7 0.9090348 -4.43733e-7 0 1 5.87863e-9 0 0 0 1</float_array>
+        <float_array id="Armature_Bone_005_pose_matrix-output-array" count="48">0.09651846 0.9953312 4.28284e-8 0.3773714 -0.9953312 0.09651831 -4.41662e-7 0.9090348 -4.43733e-7 0 1 5.87863e-9 0 0 0 1 0.09651846 0.9953312 4.28284e-8 1.05011 -0.9953312 0.09651831 -4.41662e-7 0.9090348 -4.43733e-7 0 1 0.09749102 0 0 0 1 0.09651846 0.9953312 4.28284e-8 0.3773714 -0.9953312 0.09651831 -4.41662e-7 0.9090348 -4.43733e-7 0 1 5.87863e-9 0 0 0 1</float_array>
         <technique_common>
           <accessor source="#Armature_Bone_005_pose_matrix-output-array" count="3" stride="16">
             <param name="TRANSFORM" type="float4x4"/>
@@ -2152,6 +748,474 @@
         <input semantic="INTERPOLATION" source="#Armature_Bone_005_pose_matrix-interpolation"/>
       </sampler>
       <channel source="#Armature_Bone_005_pose_matrix-sampler" target="Armature_Bone_005/transform"/>
+    </animation>
+    <animation id="Armature_location.X">
+      <source id="Armature_location.X-input">
+        <float_array id="Armature_location.X-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.X-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.X-output">
+        <float_array id="Armature_location.X-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.X-output-array" count="1" stride="1">
+            <param name="X" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.X-interpolation">
+        <Name_array id="Armature_location.X-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_location.X-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.X-intangent">
+        <float_array id="Armature_location.X-intangent-array" count="2">0.5916666 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.X-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.X-outtangent">
+        <float_array id="Armature_location.X-outtangent-array" count="2">0.6083334 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.X-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_location.X-sampler">
+        <input semantic="INPUT" source="#Armature_location.X-input"/>
+        <input semantic="OUTPUT" source="#Armature_location.X-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_location.X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_location.X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_location.X-outtangent"/>
+      </sampler>
+      <channel source="#Armature_location.X-sampler" target="Armature/location.X"/>
+    </animation>
+    <animation id="Armature_location.Y">
+      <source id="Armature_location.Y-input">
+        <float_array id="Armature_location.Y-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Y-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Y-output">
+        <float_array id="Armature_location.Y-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Y-output-array" count="1" stride="1">
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Y-interpolation">
+        <Name_array id="Armature_location.Y-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_location.Y-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Y-intangent">
+        <float_array id="Armature_location.Y-intangent-array" count="2">0.5916666 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Y-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Y-outtangent">
+        <float_array id="Armature_location.Y-outtangent-array" count="2">0.6083334 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Y-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_location.Y-sampler">
+        <input semantic="INPUT" source="#Armature_location.Y-input"/>
+        <input semantic="OUTPUT" source="#Armature_location.Y-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_location.Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_location.Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_location.Y-outtangent"/>
+      </sampler>
+      <channel source="#Armature_location.Y-sampler" target="Armature/location.Y"/>
+    </animation>
+    <animation id="Armature_location.Z">
+      <source id="Armature_location.Z-input">
+        <float_array id="Armature_location.Z-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Z-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Z-output">
+        <float_array id="Armature_location.Z-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Z-output-array" count="1" stride="1">
+            <param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Z-interpolation">
+        <Name_array id="Armature_location.Z-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_location.Z-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Z-intangent">
+        <float_array id="Armature_location.Z-intangent-array" count="2">0.5916666 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Z-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_location.Z-outtangent">
+        <float_array id="Armature_location.Z-outtangent-array" count="2">0.6083334 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_location.Z-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_location.Z-sampler">
+        <input semantic="INPUT" source="#Armature_location.Z-input"/>
+        <input semantic="OUTPUT" source="#Armature_location.Z-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_location.Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_location.Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_location.Z-outtangent"/>
+      </sampler>
+      <channel source="#Armature_location.Z-sampler" target="Armature/location.Z"/>
+    </animation>
+    <animation id="Armature_rotation_euler.X">
+      <source id="Armature_rotation_euler.X-input">
+        <float_array id="Armature_rotation_euler.X-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.X-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.X-output">
+        <float_array id="Armature_rotation_euler.X-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.X-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.X-interpolation">
+        <Name_array id="Armature_rotation_euler.X-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.X-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.X-intangent">
+        <float_array id="Armature_rotation_euler.X-intangent-array" count="2">0.5916666 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.X-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.X-outtangent">
+        <float_array id="Armature_rotation_euler.X-outtangent-array" count="2">0.6083334 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.X-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_rotation_euler.X-sampler">
+        <input semantic="INPUT" source="#Armature_rotation_euler.X-input"/>
+        <input semantic="OUTPUT" source="#Armature_rotation_euler.X-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_rotation_euler.X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_rotation_euler.X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_rotation_euler.X-outtangent"/>
+      </sampler>
+      <channel source="#Armature_rotation_euler.X-sampler" target="Armature/rotationX.ANGLE"/>
+    </animation>
+    <animation id="Armature_rotation_euler.Y">
+      <source id="Armature_rotation_euler.Y-input">
+        <float_array id="Armature_rotation_euler.Y-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Y-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Y-output">
+        <float_array id="Armature_rotation_euler.Y-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Y-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Y-interpolation">
+        <Name_array id="Armature_rotation_euler.Y-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Y-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Y-intangent">
+        <float_array id="Armature_rotation_euler.Y-intangent-array" count="2">0.5916666 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Y-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Y-outtangent">
+        <float_array id="Armature_rotation_euler.Y-outtangent-array" count="2">0.6083334 0</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Y-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_rotation_euler.Y-sampler">
+        <input semantic="INPUT" source="#Armature_rotation_euler.Y-input"/>
+        <input semantic="OUTPUT" source="#Armature_rotation_euler.Y-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_rotation_euler.Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_rotation_euler.Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_rotation_euler.Y-outtangent"/>
+      </sampler>
+      <channel source="#Armature_rotation_euler.Y-sampler" target="Armature/rotationY.ANGLE"/>
+    </animation>
+    <animation id="Armature_rotation_euler.Z">
+      <source id="Armature_rotation_euler.Z-input">
+        <float_array id="Armature_rotation_euler.Z-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Z-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Z-output">
+        <float_array id="Armature_rotation_euler.Z-output-array" count="1">-85</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Z-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Z-interpolation">
+        <Name_array id="Armature_rotation_euler.Z-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Z-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Z-intangent">
+        <float_array id="Armature_rotation_euler.Z-intangent-array" count="2">0.5916666 -85</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Z-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_rotation_euler.Z-outtangent">
+        <float_array id="Armature_rotation_euler.Z-outtangent-array" count="2">0.6083334 -85</float_array>
+        <technique_common>
+          <accessor source="#Armature_rotation_euler.Z-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_rotation_euler.Z-sampler">
+        <input semantic="INPUT" source="#Armature_rotation_euler.Z-input"/>
+        <input semantic="OUTPUT" source="#Armature_rotation_euler.Z-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_rotation_euler.Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_rotation_euler.Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_rotation_euler.Z-outtangent"/>
+      </sampler>
+      <channel source="#Armature_rotation_euler.Z-sampler" target="Armature/rotationZ.ANGLE"/>
+    </animation>
+    <animation id="Armature_scale.X">
+      <source id="Armature_scale.X-input">
+        <float_array id="Armature_scale.X-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.X-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.X-output">
+        <float_array id="Armature_scale.X-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.X-output-array" count="1" stride="1">
+            <param name="X" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.X-interpolation">
+        <Name_array id="Armature_scale.X-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_scale.X-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.X-intangent">
+        <float_array id="Armature_scale.X-intangent-array" count="2">0.5916666 1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.X-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.X-outtangent">
+        <float_array id="Armature_scale.X-outtangent-array" count="2">0.6083334 1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.X-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_scale.X-sampler">
+        <input semantic="INPUT" source="#Armature_scale.X-input"/>
+        <input semantic="OUTPUT" source="#Armature_scale.X-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_scale.X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_scale.X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_scale.X-outtangent"/>
+      </sampler>
+      <channel source="#Armature_scale.X-sampler" target="Armature/scale.X"/>
+    </animation>
+    <animation id="Armature_scale.Y">
+      <source id="Armature_scale.Y-input">
+        <float_array id="Armature_scale.Y-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Y-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Y-output">
+        <float_array id="Armature_scale.Y-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Y-output-array" count="1" stride="1">
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Y-interpolation">
+        <Name_array id="Armature_scale.Y-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Y-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Y-intangent">
+        <float_array id="Armature_scale.Y-intangent-array" count="2">0.5916666 1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Y-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Y-outtangent">
+        <float_array id="Armature_scale.Y-outtangent-array" count="2">0.6083334 1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Y-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_scale.Y-sampler">
+        <input semantic="INPUT" source="#Armature_scale.Y-input"/>
+        <input semantic="OUTPUT" source="#Armature_scale.Y-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_scale.Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_scale.Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_scale.Y-outtangent"/>
+      </sampler>
+      <channel source="#Armature_scale.Y-sampler" target="Armature/scale.Y"/>
+    </animation>
+    <animation id="Armature_scale.Z">
+      <source id="Armature_scale.Z-input">
+        <float_array id="Armature_scale.Z-input-array" count="1">0.6</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Z-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Z-output">
+        <float_array id="Armature_scale.Z-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Z-output-array" count="1" stride="1">
+            <param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Z-interpolation">
+        <Name_array id="Armature_scale.Z-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Z-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Z-intangent">
+        <float_array id="Armature_scale.Z-intangent-array" count="2">0.5916666 1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Z-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="Armature_scale.Z-outtangent">
+        <float_array id="Armature_scale.Z-outtangent-array" count="2">0.6083334 1</float_array>
+        <technique_common>
+          <accessor source="#Armature_scale.Z-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="Armature_scale.Z-sampler">
+        <input semantic="INPUT" source="#Armature_scale.Z-input"/>
+        <input semantic="OUTPUT" source="#Armature_scale.Z-output"/>
+        <input semantic="INTERPOLATION" source="#Armature_scale.Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#Armature_scale.Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#Armature_scale.Z-outtangent"/>
+      </sampler>
+      <channel source="#Armature_scale.Z-sampler" target="Armature/scale.Z"/>
     </animation>
   </library_animations>
   <library_controllers>

@@ -222,6 +222,7 @@
     <ClInclude Include="gl3.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />

@@ -51,7 +51,7 @@ function necromancer_Update(e)
     if (e:getFloat("raiseCount") > 240) then
         e:setFloat("raiseCount", 0)
         e:playAnimationTag("raise")
-        e:spawnEntity("zombie", e:getX(), e:getZ())
+        e:spawnEntity("slime", e:getX(), e:getZ())
     end
 end
 function necromancer_Start(e)

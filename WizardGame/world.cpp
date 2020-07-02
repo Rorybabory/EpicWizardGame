@@ -45,9 +45,9 @@ void World::Update() {
     time = 0;
   }
 
-  //testMap.Update(L);
+  testMap.Update(L);
   testMap.eSystem.checkForConsole();
-  auto f = std::async(&Map::Update, &testMap, L);
+  //auto f = std::async(&Map::Update, &testMap, L);
 
   //std::cout << deltaTime << '\n';
   // UpdateMessages();

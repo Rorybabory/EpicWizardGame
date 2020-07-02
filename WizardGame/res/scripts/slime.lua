@@ -38,6 +38,10 @@ end
 function slime_Update(e)
     e:moveForward(0.4)
     e:lookAtPlayer()
+	if (e:getAnimation() == 1 and e:getAnimFrame() == 55) then
+		e:playAnimationTag("fire")
+	end
+	print(e:getAnimFrame())
 end
 function slime_Start(e)
     e:setHP(5)
@@ -45,7 +49,10 @@ function slime_Start(e)
     e:setScale(2.8+e:random(0,0.2))
     e:setCollisionBox(1.5,1.5,1.5)
     e:restartCollisionBox()
-    e:setAnimationTag("default",0)
-    e:setAnimationTag("damage",0)
+    e:setAnimationTag("default",1)
+    e:setAnimationTag("damage",1)
+	e:setAnimationTag("fire",2)
+	--e:playAnimationTag("spawn")
+	e:setBool("hasStarted", false)
 end
 
