@@ -13,7 +13,11 @@
 #include "CollisionSystem.h"
 using namespace std;
 class Box;
-
+struct Data {
+    std::string file;
+    std::string shaderFile;
+    bool hasUVS;
+};
 class Object {
 public:
   Object(string file, glm::vec4 Color, string shaderFile, bool hasUVs);
@@ -53,12 +57,15 @@ public:
   bool boxDestroy = false;
   bool hasInit = false;
   bool hasInitMesh = false;
+  bool hasInitMesh2 = false;
   int delay = 0;
   int timesBounced = 0;
   glm::vec3 lastDir;
   glm::vec3 startPos;
   std::vector<glm::vec3> locations;
   Shader outline;
+  Data d;
+  IndexedModel model;
 protected:
 private:
 

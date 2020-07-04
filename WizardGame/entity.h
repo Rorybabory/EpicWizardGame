@@ -139,7 +139,8 @@ public:
   }
   void Draw(Camera cam, bool f) {
     auto gfxc = get<GraphicsComponent>();
-    if (type != "player") {
+    if (type != "player" && showHP == true) {
+        
         bar.Draw(cam, pos + glm::vec3(0.0, projMax.y+1.0, 0.0));
     }
     
@@ -360,6 +361,7 @@ public:
       .addFunction("Strafe",&Entity::Strafe)
       .addFunction("write",&Entity::write)
       .addFunction("random",&Entity::random)
+      .addFunction("randomInt", &Entity::randomInt)
       .addFunction("setScale",&Entity::setScale)
       .addFunction("getPlayerDistance",&Entity::getPlayerDistance)
       .addFunction("getKeyDirectionX",&Entity::getKeyDirectionX)
@@ -440,7 +442,9 @@ public:
       .addFunction("getDefaultAnim", &Entity::getDefaultAnim)
       .addFunction("getAnimationID", &Entity::getAnimationID)
       .addFunction("hasAnimation", &Entity::hasAnimation)
-        .endClass();
+      .addFunction("showHealth", &Entity::showHealth)
+      .addFunction("setHPColor", &Entity::setHPColor)
+    .endClass();
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
@@ -500,6 +504,8 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void setHPColor(float r, float g,  float b);
+  void showHealth(bool value);
   int getAnimationID(std::string tag);
   std::string getDefaultAnim();
   void setCollide(bool enable);
@@ -557,6 +563,8 @@ public:
   void write(const std::string& str);
   void setScale(float scale);
   float random(float min, float max);
+  int randomInt(int min, int max);
+
   void lookAtPlayer();
   void lookAt(float x, float y);
   void Strafe(float amount);
@@ -615,6 +623,7 @@ public:
   void setPlayerPos(glm::vec3 playerPos) {
     this->playerPos = playerPos;
   }
+  bool showHP = true;
   int collisionUpdateCounter = 0;
   float nearestEntityDist;
   std::string nearestEntityType;

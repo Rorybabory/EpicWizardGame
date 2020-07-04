@@ -192,6 +192,12 @@ float Entity::random(float min, float max) {
     return (random*range) + min;
 }
 
+int Entity::randomInt(int min, int max) {
+    float random = ((float)rand()) / (float)RAND_MAX;
+    float range = max - min;
+    return (int) (random * range) + min;
+}
+
 void Entity::lookAtPlayer() {
     glm::vec2 targetPos = glm::vec2(playerPos.x,playerPos.z);
     targetPos.x = targetPos.x - pos.x;
@@ -449,10 +455,8 @@ void Entity::setHP(int hp) {
     this->hp = hp;
     if (maxHP == -1.0) {
         maxHP = hp;
-        std::cout << "max HP set\n";
     }
     bar.setValue(hp / maxHP);
-    std::cout << bar.getValue() << "is the bar value\n";
 }
 
 void Entity::addCounter(int start) {
@@ -704,4 +708,10 @@ bool Entity::hasAnimation(std::string anim) {
     if (graphicsC != nullptr) {
         return (graphicsC->AnimationTags.count(anim) > 0);
     }
+}
+void Entity::showHealth(bool value) {
+    showHP = value;
+}
+void Entity::setHPColor(float r, float g, float b) {
+    bar.setColor(glm::vec4(r,g,b,1.0));
 }

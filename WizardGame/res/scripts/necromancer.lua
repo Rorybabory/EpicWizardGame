@@ -51,11 +51,11 @@ function necromancer_Update(e)
     if (e:getFloat("raiseCount") > 240) then
         e:setFloat("raiseCount", 0)
         e:playAnimationTag("raise")
-        e:spawnEntity("slime", e:getX(), e:getZ())
+        e:spawnEntity("zombie", e:getX(), e:getZ())
     end
 end
 function necromancer_Start(e)
-    e:setHP(10)
+    e:setHP(7)
     e:lookAtPlayer()
     e:setScale(3.0)
     e:setFloat("raiseCount", 0)
@@ -65,4 +65,5 @@ function necromancer_Start(e)
     e:setAnimationTag("default",0)
     e:setAnimationTag("raise",1)
     e:setAnimationTag("damaged",0)
+	e:setHPColor(0.2,0.5,0.2)
 end

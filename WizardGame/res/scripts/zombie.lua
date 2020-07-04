@@ -61,5 +61,6 @@ function zombie_Start(e)
     e:setAnimationTag("default",2)
 	e:setAnimationTag("attack",0)
     e:setAnimationTag("damaged",1)
+	e:setHPColor(0.2,0.5,0.2)
 end
 

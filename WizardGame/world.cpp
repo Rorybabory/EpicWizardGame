@@ -45,10 +45,10 @@ void World::Update() {
     time = 0;
   }
 
-  testMap.Update(L);
+  //testMap.Update(L);
   testMap.eSystem.checkForConsole();
-  //auto f = std::async(&Map::Update, &testMap, L);
-
+  auto update = std::async(&Map::Update, &testMap, L);
+  auto spawn = std::async(&EntitySystem::spawnEntities, &testMap.eSystem, L);
   //std::cout << deltaTime << '\n';
   // UpdateMessages();
   // if (house.isColliding(eSystem.playerPos)) {

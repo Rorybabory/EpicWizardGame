@@ -3,33 +3,33 @@
 #include <fstream>
 #include <string>
 Object::Object(string file, glm::vec4 Color, string shaderFile, bool hasUVs) {
-
-  IndexedModel model = OBJModel(file, hasUVs).ToIndexedModel();
-  mesh.InitMesh(model);
-  shader.InitShader(shaderFile);
-  outline.InitShader("./res/outline");
+    d.file = file;
+    d.shaderFile = shaderFile;
+    d.hasUVS = hasUVs;
+    model = OBJModel(d.file, d.hasUVS).ToIndexedModel();
 
   color = Color;
   lastDir = glm::vec3(0.0f,0.0f,0.0f);
 }
 Object::Object(string file, glm::vec4 Color, string shaderFile,glm::vec3 pos, bool hasUVs) {
-  IndexedModel model = OBJModel(file, hasUVs).ToIndexedModel();
-  mesh.InitMesh(model);
-  shader.InitShader(shaderFile);
-  outline.InitShader("./res/outline");
+  d.file = file;
+  d.shaderFile = shaderFile;
+  d.hasUVS = hasUVs;
+  model = OBJModel(d.file, d.hasUVS).ToIndexedModel();
+
   color = Color;
   setPos(pos);
-  lastDir = glm::vec3(0.0f,0.0f,0.0f);
-
+  lastDir = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 void Object::moveBy(glm::vec3 vel) {
   setPos(getPos()+vel);
 }
 void Object::initObject(string file, glm::vec4 Color, string shaderFile, bool hasUVs) {
-  IndexedModel model = OBJModel(file, hasUVs).ToIndexedModel();
-  mesh.InitMesh(model);
-  shader.InitShader(shaderFile);
-  outline.InitShader("./res/outline");
+    d.file = file;
+    d.shaderFile = shaderFile;
+    d.hasUVS = hasUVs;
+    model = OBJModel(d.file, d.hasUVS).ToIndexedModel();
+
   hasInitMesh = true;
   color = Color;
   lastDir = glm::vec3(0.0f,0.0f,0.0f);
@@ -78,7 +78,7 @@ void Object::UpdateMinMax() {
   glm::vec3 tempMin = glm::vec3(0.0f,0.0f,0.0f);
   glm::vec3 tempMax = glm::vec3(0.0f,0.0f,0.0f);
 
-for(glm::vec3 v : mesh.modelSave.positions) {
+for(glm::vec3 v : model.positions) {
   if (v.x < tempMin.x) {
     tempMin.x = v.x;
   }
@@ -130,6 +130,12 @@ void Object::Update() {
   min = mesh.min+transform.getPos();
 }
 void Object::Draw(Camera camera) {
+    if (hasInitMesh2 == false) {
+        mesh.InitMesh(model);
+        shader.InitShader(d.shaderFile);
+        outline.InitShader("./res/outline");
+        hasInitMesh2 = true;
+    }
     shader.Bind(color, glm::vec4(0.0));
     shader.Update(transform, camera);
     

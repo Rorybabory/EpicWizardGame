@@ -41,7 +41,7 @@ function slime_Update(e)
 	if (e:getAnimation() == 1 and e:getAnimFrame() == 55) then
 		e:playAnimationTag("fire")
 	end
-	print(e:getAnimFrame())
+	--print(e:getAnimFrame())
 end
 function slime_Start(e)
     e:setHP(5)

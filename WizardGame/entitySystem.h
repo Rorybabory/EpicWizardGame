@@ -34,6 +34,12 @@ struct drawData {
     double deltaTime = 0.0;
     Camera* mainCam;
 };
+struct entitySpawnData {
+    std::string script;
+    std::string type;
+    glm::vec2 pos;
+    lua_State* L;
+};
 extern int globalVariable;
 extern void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale);
 extern void clearText();
@@ -161,33 +167,12 @@ public:
     props.push_back(p);
   }
   void addEntityAtPos(std::string script, std::string type, glm::vec2 pos, lua_State* L) {
-
-    luaL_openlibs(L);
-    luah::loadScript(L,script);
-    luabridge::LuaRef entityRef = luabridge::getGlobal(L,"entities");
-
-    for (int i = 0; i < entityRef.length(); ++i) {
-      std::string name = entityRef[i+1].cast<std::string>();
-    }
-    luah::loadScript(L,"res/scripts/" + type + ".lua");
-
-    Entity * e = loadEntity(L,type);
-    std::cout << "added entity with type: " << type << "\n";
-
-    if (type != "player") {
-      e->setPos(pos.x,0.0f,pos.y);
-    }else {
-      e->setPos(pos.x,0.0f,pos.y);
-      e->setCamPos(glm::vec3(pos.x,-15.0f,pos.y));
-    }
-    e->setUpCollider(&scene,e->scaleColl);
-
-    e->OnStart(L);
-
-    entities.push_back(e);
-    e->startingPos = pos;
-    e->pos = glm::vec3(pos.x, 0.0f, pos.y);
-    this->L = L;
+      entitySpawnData data;
+      data.script = script;
+      data.type = type;
+      data.pos = pos;
+      data.L = L;
+      spawnData.push_back(data);
   }
   void UpdateDistances() {
     for (Entity * mainEnt : entities) {
@@ -294,6 +279,40 @@ public:
       }
     }*/
   }
+
+  void spawnEntities(lua_State * L) {
+      for (entitySpawnData data : spawnData) {
+          luaL_openlibs(L);
+          luah::loadScript(L, data.script);
+          luabridge::LuaRef entityRef = luabridge::getGlobal(L, "entities");
+
+          for (int i = 0; i < entityRef.length(); ++i) {
+              std::string name = entityRef[i + 1].cast<std::string>();
+          }
+          luah::loadScript(L, "res/scripts/" + data.type + ".lua");
+
+          Entity* e = loadEntity(L, data.type);
+          std::cout << "added entity with type: " << data.type << "\n";
+
+          if (data.type != "player") {
+              e->setPos(data.pos.x, 0.0f, data.pos.y);
+          }
+          else {
+              e->setPos(data.pos.x, 0.0f, data.pos.y);
+              e->setCamPos(glm::vec3(data.pos.x, -15.0f, data.pos.y));
+          }
+          e->setUpCollider(&scene, e->scaleColl);
+
+          e->OnStart(L);
+
+          entities.push_back(e);
+          e->startingPos = data.pos;
+          e->pos = glm::vec3(data.pos.x, 0.0f, data.pos.y);
+          this->L = L;
+      }
+      spawnData.clear();
+  }
+
   void Update(lua_State* L) {
     //checkCollision();
     checkSpawnedEntities(L);
@@ -816,7 +835,7 @@ public:
   //vector storing all props in this system
 
   std::vector<Prop*> props;
-
+  std::vector<entitySpawnData> spawnData;
 
   std::vector<Entity*> startEnt;
   glm::vec2 clickPos;

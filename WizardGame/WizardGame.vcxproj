@@ -232,6 +232,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="imgui_sdl.h" />
+    <ClInclude Include="Interpolation.h" />
     <ClInclude Include="luaLibrary.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="menuSystem.h" />

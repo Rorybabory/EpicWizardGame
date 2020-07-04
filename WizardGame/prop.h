@@ -36,6 +36,7 @@ public:
       std::string path = "./res/props/"+folder+"/"+name+".obj";
       Object * object = new Object(path,glm::vec4(r,g,b2,1.0f),"./res/basicShader",false);
       object->setRot(glm::vec3(0,rot,0));
+      this->rot = rot;
       object->setPos(pos);
       object->setScale(scale);
       this->meshScale = scale.x;
@@ -54,8 +55,9 @@ public:
         if (tempSize.z>sc.z) {
           sc.z = tempSize.z;
         }
-
       }
+      b.body->SetTransform(q3Vec3(pos.x, pos.y, pos.z), q3Vec3(0, 1, 0), rot);
+
       // if (collision == true) {
       //   b.addBox(pos,object->getSize());
       // }
@@ -131,6 +133,10 @@ public:
   }
   void Draw(Camera camera) {
 //    texture.Bind(0);
+      /*if (hasInitColl == false) {
+          initCollision();
+          hasInitColl = true;
+    }*/
     for (Object * o : objects) {
       o->Draw(camera);
     }
@@ -139,7 +145,40 @@ public:
     // collisionObject.setPos(pos);
     // collisionObject.Draw(camera);
   }
+  void initCollision() {
+      for (Object* object : objects) {
+          glm::vec3 tempSize = object->getSize();
+          if (tempSize.z == tempSize.z) {
+              std::cout << "SCALE ISN'T NULL" << std::endl;
+              if (tempSize.x > sc.x) {
+                  sc.x = tempSize.x;
+              }
+              if (tempSize.y > sc.y) {
+                  sc.y = tempSize.y;
+              }
+              if (tempSize.z > sc.z) {
+                  sc.z = tempSize.z;
+              }
+          }
+      }
+      if (collision == true) {
+          if (sc.x < 10.0) { sc.x = 10.0; }
+          if (sc.y < 10.0) { sc.y = 10.0; }
+          if (sc.z < 10.0) { sc.z = 10.0; }
+          sc.x += 3.0;
+          sc.y += 3.0;
+          sc.z += 3.0;
+          sc.y *= 2.0f;
+          b.addBox(glm::vec3(0.0), sc, rot);
+          if (sc.z != sc.z) {
+              std::cout << "SCALE IS NULL" << std::endl;
+          }
+          // std::cout << folder << " " << sc.x << " " << sc.y << " " << sc.z << std::endl;
+      }
 
+      b.body->SetTransform(q3Vec3(pos.x, pos.y, pos.z), q3Vec3(0, 1, 0), rot);
+
+  }
   void Update() {
     for (Object * o : objects) {
       o->Update();
@@ -176,7 +215,8 @@ public:
   float meshScale = 0.0f;
   std::vector<Object*> objects;
   bool collision = false;
-
+  float rot;
+  bool hasInitColl = false;
 private:
   int id;
   Object collisionObject;

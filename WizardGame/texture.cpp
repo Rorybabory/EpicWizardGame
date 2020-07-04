@@ -65,6 +65,7 @@ void Texture::BindAsRenderTarget() {
 
 }
 Texture::~Texture() {
-    if (m_frameBuffer) {glDeleteFramebuffers(1, &m_frameBuffer);}
-    glDeleteTextures(1, &m_texture);
+    //if (m_frameBuffer) {glDeleteFramebuffers(1, &m_frameBuffer);}
+    //glDeleteTextures(1, &m_texture);
+    
 }
