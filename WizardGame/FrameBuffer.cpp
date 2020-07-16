@@ -1,6 +1,6 @@
 #include "FrameBuffer.h"
-
-
+#include <string>
+extern float red;
 void FrameBuffer::BindFrameBuffer() {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
     glEnable(GL_DEPTH_TEST);
@@ -18,9 +18,12 @@ void FrameBuffer::RenderFrameBuffer() {
     ppShader.Bind();
     int colorTexLocation = glGetUniformLocation(ppShader.m_program, "sampler");
     int depthTexLocation = glGetUniformLocation(ppShader.m_program, "depth");
+    int redLocation = glGetUniformLocation(ppShader.m_program, "red");
 
     glUniform1i(colorTexLocation, 0);
     glUniform1i(depthTexLocation, 1);
+    glUniform1f(redLocation, red);
+
     glActiveTexture(GL_TEXTURE0 + 0);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
     glActiveTexture(GL_TEXTURE0 + 1);

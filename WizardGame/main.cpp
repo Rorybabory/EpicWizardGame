@@ -38,6 +38,7 @@ extern "C" {
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 #undef main
+extern std::vector<std::string> mods;
 
 int main()
 {
@@ -51,18 +52,18 @@ int main()
     unsigned int indices[] = {0,1,2};
     Display display(WIDTH,HEIGHT, "Wizard Game!");
     float counter = 0.0f;
+    mods.push_back("testMod");
     World world;
     FrameBuffer postProcessing;
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
-
     ImGui_ImplSDL2_InitForOpenGL(display.m_window, display.m_glContext);
     const char* glsl_version = "#version 130";
 
     ImGui_ImplOpenGL3_Init(glsl_version);
     initAudio();
-
+    
     Skybox skybox;
     // std::cout << e->getType() << "X:" << pos.x << " Y:" << pos.y << " Z:" << pos.z << '\n';
     while(!display.isClosed()) {

@@ -32,7 +32,6 @@ class Emitter
 public:
     Emitter(glm::vec3 Velocity, float Life, int max_particles, float Randomness, bool gravity);
     ~Emitter() {
-        std::cout << "deleted emitter\n";
         particles.clear();
     }
     void addParticles(int num, glm::vec3 pos, glm::vec4 Color);

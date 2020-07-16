@@ -44,26 +44,27 @@ function test2_Update(e)
   e:setFloat("SpawnCount", e:getFloat("SpawnCount")+1)
 
   if (e:isAnimationPlaying("damaged") == false and e:isAnimationPlaying("attack") == false) then
-    e:moveForward(0.35)
+    e:moveForward(0.8)
     e:lookAtPlayer()
   end
-  if (e:getDistanceFromNearest("player") < 30 and e:isAnimationPlaying("attack") == false) then
+  if (e:getDistanceFromNearest("player") < 20 and e:isAnimationPlaying("attack") == false) then
     e:playAnimationTag("attack")
     test2_Hit(e,e:getNearestEntWithName("player"),1)
   end
 end
 function test2_Start(e)
   e:setFloat("SpawnCount", 0)
-  e:setHP(20)
+  e:setHP(6)
   e:lookAtPlayer()
   e:setScale(3.0)
   e:write("RAN START")
-  e:setColor(0.0,0.0,0.0,0.0)
+  e:setColorFlash(0.0,0.0,0.0,0.0)
   e:setCollisionBox(5.0,2.0,2.0)
   e:restartCollisionBox()
   e:setDamageAnimation(1)
   e:setAnimationTag("default",3)
   e:setAnimationTag("damaged",1)
   e:setAnimationTag("attack",0)
+  e:setFloat("scoreInc", 1000)
   e:setBool("isCounting", false)
 end

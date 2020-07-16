@@ -36,7 +36,6 @@ function necromancer_Hit(e,e2,hits)
 end
 
 function necromancer_Update(e)
-	print(e:getHP())
     if (e:isAnimationPlaying("raise") == false) then
         e:moveForward(0.05)
         e:lookAtPlayer()
@@ -51,7 +50,9 @@ function necromancer_Update(e)
     if (e:getFloat("raiseCount") > 240) then
         e:setFloat("raiseCount", 0)
         e:playAnimationTag("raise")
-        e:spawnEntity("zombie", e:getX(), e:getZ())
+		if (e:getEntityCount() < 12) then
+			e:spawnEntity("zombie", e:getX(), e:getZ())
+		end
     end
 end
 function necromancer_Start(e)
@@ -66,4 +67,5 @@ function necromancer_Start(e)
     e:setAnimationTag("raise",1)
     e:setAnimationTag("damaged",0)
 	e:setHPColor(0.2,0.5,0.2)
+	e:setFloat("scoreInc", 3000)
 end

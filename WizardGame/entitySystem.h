@@ -23,7 +23,9 @@
 #include <chrono>
 #include <cmath> 
 #include "Timer.h"
+#include "Minimap.h"
 extern double FPS;
+extern int entityCount;
 struct drawData {
     bool isConsoleOpen = false;
     std::vector<Prop*> propsPointer;
@@ -44,8 +46,38 @@ extern int globalVariable;
 extern void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale);
 extern void clearText();
 extern void drawText();
+extern bool restartFile;
+extern std::vector<std::string> mods;
+extern std::vector<glm::vec2> entityPos;
+
 class EntitySystem {
 public:
+    std::string removeWord(std::string str, std::string word)
+    {
+        if (str.find(word) != std::string::npos)
+        {
+            size_t p = -1;
+            std::string tempWord = word + " ";
+            while ((p = str.find(word)) != std::string::npos)
+                str.replace(p, tempWord.length(), "");
+            tempWord = " " + word;
+            while ((p = str.find(word)) != std::string::npos)
+                str.replace(p, tempWord.length(), "");
+        }
+        return str;
+    }
+    std::string convertPath(std::string input) {
+        std::string temp = input;
+        for (std::string folder : mods) {
+            std::string fileToCheck = std::string("./mods/" + folder + "/" + removeWord(input, "./res"));
+            //std::cout << "checking for mod file: " << fileToCheck << "\n";
+            bool exist = std::experimental::filesystem::exists(fileToCheck);
+            if (exist) {
+                temp = "./mods/" + folder + "/" + removeWord(input, "./res");
+            }
+        }
+        return temp;
+    }
    void drawConsoleWindow() {
         ImGui::Begin("Console Window");
         ImGui::SetWindowSize(ImVec2(600, 600));
@@ -167,6 +199,36 @@ public:
     props.push_back(p);
   }
   void addEntityAtPos(std::string script, std::string type, glm::vec2 pos, lua_State* L) {
+      {
+          Timer t = Timer("loading entity script");
+          luaL_openlibs(L);
+          entityPos.push_back(pos);
+          luah::loadScript(L, convertPath("./res/scripts/" + type + ".lua"));
+          //std::cout << "path is: " << convertPath("./res/scripts/" + type + ".lua") << "\n";
+      }
+      Entity* e;
+      {
+          Timer t = Timer("adding entity");
+          e = loadEntity(L, type);
+          //std::cout << "loaded entity with type: " << type << "\n";
+          if (type != "player") {
+              e->setPos(pos.x, 0.0f, pos.y);
+          }
+          else {
+              e->setPos(pos.x, 0.0f, pos.y);
+              e->setCamPos(glm::vec3(pos.x, -15.0f, pos.y));
+          }
+          e->setUpCollider(&scene, e->scaleColl);
+          e->OnStart(L);
+          entities.push_back(e);
+          e->startingPos = pos;
+          e->pos = glm::vec3(pos.x, 0.0f, pos.y);
+          this->L = L;
+
+      }
+      
+  }
+  void addEntityAtPos2(std::string script, std::string type, glm::vec2 pos, lua_State* L) {
       entitySpawnData data;
       data.script = script;
       data.type = type;
@@ -211,12 +273,12 @@ public:
       prop->setUpCollider(&scene);
     }
   }
-  EntitySystem ()  : scene(1.0/60.0), clickObject("./res/X.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",false) {
-    // Box b;
-    text = new std::string("MEME");
-    // b.init(glm::vec3(0.01f,0.01f,0.01f),glm::vec3(0.0f,0.0f,0.0f),&scene,eDynamicBody);
-    addTextBox("DANK MEMES",glm::vec2(0.0f,1.0f), glm::vec3(0.0f,1.0f,0.0f), 30);
-    floor.init(glm::vec3(1000.0f,1.0,1000.0f),glm::vec3(0.0f,0.0f,0.0f),&scene, eStaticBody);
+  void resetFloor() {
+      floor.init(glm::vec3(1000.0f, 1.0, 1000.0f), glm::vec3(0.0f, 0.0f, 0.0f), &scene, eStaticBody);
+  }
+  EntitySystem ()  : scene(1.0/180.0), clickObject("./res/X.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",false) {
+    floor.init(glm::vec3(1000.0f, 1.0, 1000.0f), glm::vec3(0.0f, 0.0f, 0.0f), &scene, eStaticBody);
+
     topDownCamera.InitCam(glm::vec3(0, 1000, 0), 70.0, 800.0f / 600.0f, 0.01f, 2000.0f);
     topDownCamera.Pitch(1.57);
     //mapOfConsoleCommands["print"] = &runPrintCommand;
@@ -312,7 +374,12 @@ public:
       }
       spawnData.clear();
   }
-
+  void restartText() {
+      for (Entity* e : entities) {
+          auto guiC = e->get<GUIComponent>();
+          guiC->freeData();
+      }
+  }
   void Update(lua_State* L) {
     //checkCollision();
     checkSpawnedEntities(L);
@@ -320,6 +387,7 @@ public:
     setHeroTarget();
     checkForCollisionError();
     //checkForConsole();
+    entityCount = entities.size();
     double timer = SDL_GetTicks();
     if (isConsoleOpen || isLevelEditorOpen) {
         SDL_SetRelativeMouseMode(SDL_FALSE);
@@ -351,6 +419,8 @@ public:
     // }
     
     for (int i = 0; i<entities.size(); i++) {
+      entityPos[i] = glm::vec2(entities[i]->pos.x, entities[i]->pos.z);
+      
       // if (entities[i]->type == "player") {
       //   std::cout << entities[i]->collider.body->GetTransform( ).position.z << "\n";
       // }
@@ -369,15 +439,16 @@ public:
       
       if (entities[i]->type == "player") {
         if (entities[i]->killed == true) {
-          DumpToFile();
-          exit(0);
+          /*DumpToFile();
+          exit(0);*/
+            load = true;
         }
       }
       if (entities[i]->killed == true) {
           //delete entities[i];
           entities[i]->emitter.particles.clear();
           free(entities[i]);
-
+          entityPos.erase(entityPos.begin() + i);
           entities.erase(entities.begin() + i);
           //std::cout << "killed entity\n";
       }
@@ -398,10 +469,15 @@ public:
         entities[i]->lastPos = entities[i]->pos;
     }
     scene.Step();
-    
-    
+    scene.Step();
+    scene.Step();
 
     for (Entity * e : entities) {
+        if (e->map != "") {
+            std::string val = e->map;
+            mapPath[255] = *(val.c_str());
+        }
+        
       if (e->modText == true) {
         text = e->textPointer;
         e->modText = false;
@@ -722,24 +798,7 @@ public:
           if (projc != NULL) {
               projc->Draw(getMainCam());
           }
-
-          /*if (!data.isLevelEditorOpen) {
-              e->Draw(getMainCam(), data.frozen);
-          }
-          else {
-              float posX = -(e->pos.x * 3.4);
-              float posY = (e->pos.z * 3.4);
-              e->editorText.Draw(e->type, glm::vec2(posX / WIDTH, posY / HEIGHT), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), WIDTH, HEIGHT);
-          }*/
       }
-      /*if (isConsoleOpen) { drawConsoleWindow(); }
-      if (isLevelEditorOpen) {
-          updateLevelEditor();
-          glDisable(GL_DEPTH_TEST);
-          data.clickObject->Draw(getMainCam());
-          data.clickObject->setScale(glm::vec3(3.0f));
-          glEnable(GL_DEPTH_TEST);
-      }*/
   }
   void Draw(double deltaTime) {
     if (isConsoleOpen == false) {
@@ -759,7 +818,6 @@ public:
       }else {
           float posX = -(e->pos.x * 3.4);
           float posY = (e->pos.z * 3.4);
-          //e->editorText.Draw(e->type, glm::vec2(posX/WIDTH, posY/HEIGHT), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), WIDTH, HEIGHT);
       }
     }
     if (isConsoleOpen) { drawConsoleWindow();}
@@ -770,7 +828,14 @@ public:
         clickObject.setScale(glm::vec3(3.0f));
         glEnable(GL_DEPTH_TEST);
     }
-    
+
+    //draw text
+    glPushMatrix();
+    glLoadIdentity();
+    for (Entity* e : entities) {
+        e->DrawText();
+    }
+    glPopMatrix();
   }
   void setHeroTarget() {
     glm::vec3 target;
@@ -825,15 +890,15 @@ public:
   char command[255] = "Input Command Here";
   char propEditor[255] = "";
   char entityEditor[255] = "";
-  char mapPath[255] = "save directory";
+  char mapPath[255] = "mainMap";
+
   int propSize = 0;
   int propRotation = 0;
   std::string commandLog = "type commands here.\n type help for command list \n";
-
+  //Minimap minimap;
   //vector storing all entitys in this system
   std::vector<Entity*> entities;
   //vector storing all props in this system
-
   std::vector<Prop*> props;
   std::vector<entitySpawnData> spawnData;
 

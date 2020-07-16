@@ -2,6 +2,7 @@
 extern int screenInverted;
 extern glm::vec3 hsv;
 extern glm::vec2 levelSize;
+extern int entityCount;
 float Entity::lookAtNearest(std::string targetType) {
     float nearestDist = 100000.0;
     glm::vec2 nearestPos;
@@ -28,18 +29,23 @@ float Entity::lookAtNearest(std::string targetType) {
 }
 
 bool Entity::doesEntityExist(std::string targetType) {
-	for (Entity * e : *allEntities) {
-		if (e->type == targetType && !e->dead) {
-			return true;
-		}
-	}
-	return false;
+    if (allEntities != nullptr) {
+        for (Entity* e : *allEntities) {
+            if (e->type == targetType && !e->dead) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 void Entity::setInverted(int i) {
   screenInverted = i;
 }
 float Entity::getDistanceFromNearest(std::string targetType) {
     float nearestDist = 100000.0;
+    if (allEntities == nullptr) {
+        return nearestDist;
+    }
     for (Entity * e : *allEntities) {
       if (e->type == targetType) {
         float x;
@@ -52,10 +58,30 @@ float Entity::getDistanceFromNearest(std::string targetType) {
     }
     return nearestDist;
 }
+std::string Entity::getTypeLua() {
+    return type;
+}
+float Entity::getDistanceFromNearestNot(std::string targetType) {
+    float nearestDist = 100000.0;
+    if (allEntities == nullptr) {
+        return nearestDist;
+    }
+    for (Entity* e : *allEntities) {
+        if (e->type != targetType) {
+            float x;
+            x = sqrt(pow(e->pos.x - pos.x, 2) +
+                pow(e->pos.z - pos.z, 2));
+            if (x < nearestDist) {
+                nearestDist = x;
+            }
+        }
+    }
+    return nearestDist;
+}
 float Entity::getDistanceFromNearestEnt() {
     float nearestDist = 100000.0;
     for (Entity* e : *allEntities) {
-        if (e->type != type) {
+        if (e->type != type && e->type != "spawner") {
             float x;
             x = sqrt(pow(e->pos.x - pos.x, 2) +
                 pow(e->pos.z - pos.z, 2));
@@ -245,16 +271,9 @@ void Entity::Strafe(float amount) {
 }
 
 void Entity::moveForward(float amount) {
-    // pos.x = pos.x+(sin(rot.y*180/3.14)*amount);
-    // pos.z = pos.z+(cos(rot.y*180/3.14)*amount);
-    auto cameraC = get<CameraComponent>();
-    if (cameraC != NULL) {
-      cameraC->getCamera().MoveForward(amount);
-    }else {
-      pos.x += getForward().x*amount * speedModifier;
-      pos.z += getForward().z*amount * speedModifier;
-    }
-
+    pos.x += getForward().x * amount * speedModifier;
+    pos.z += getForward().z * amount * speedModifier;
+   // collider.setVelocity(glm::vec3(getForward().x * amount, 0.0, ))
 }
 
 void Entity::moveBackward(float amount) {
@@ -409,9 +428,9 @@ void Entity::FPSControllerUpdate(float speed) {
       pos += glm::cross(cameraC->getCamera().m_up, cameraC->getCamera().m_forward) * -speed;
       moved = true;
     }
-    if (startPlayerVel != glm::vec3(0.0f,0.0f,0.0f)) {
-        playerVel = startPlayerVel;
-    }
+    //if (startPlayerVel != glm::vec3(0.0f,0.0f,0.0f)) {
+    //    playerVel = startPlayerVel;
+    //}
 
     if (startPos == pos) {
       collider.resetVelocity();
@@ -427,17 +446,33 @@ void Entity::UpdateKeyPresses() {
   if (keys[SDL_SCANCODE_ESCAPE]){
     tempKeyPressed = "ESCAPE";
   }
-  if (keys[SDL_SCANCODE_LCTRL]) {
+  else if (keys[SDL_SCANCODE_LCTRL]) {
     tempKeyPressed = "LCTRL";
   }
-  if (keys[SDL_SCANCODE_TAB]) {
+  else if (keys[SDL_SCANCODE_TAB]) {
     tempKeyPressed = "TAB";
   }
-  if (keys[SDL_SCANCODE_SPACE]) {
+  else if (keys[SDL_SCANCODE_SPACE]) {
     tempKeyPressed = "SPACE";
   }
-  if (keys[SDL_SCANCODE_LSHIFT]){
+  else if (keys[SDL_SCANCODE_LSHIFT]){
     tempKeyPressed = "LSHIFT";
+  }
+  else if (keys[SDL_SCANCODE_Q]) {
+      tempKeyPressed = "Q";
+  }
+  moveDirection = glm::vec2(0.0, 0.0);
+  if (keys[SDL_SCANCODE_W]) {
+      moveDirection.y += 1.0;
+  }
+  if (keys[SDL_SCANCODE_A]) {
+      moveDirection.x -= 1.0;
+  }
+  if (keys[SDL_SCANCODE_S]) {
+      moveDirection.y -= 1.0;
+  }
+  if (keys[SDL_SCANCODE_D]) {
+      moveDirection.x += 1.0;
   }
   if (tempKeyPressed != keypressed) {
     keyCount++;
@@ -507,6 +542,9 @@ void Entity::setGlobalFrozen(bool f) {
 Entity* Entity::getNearestEntWithName(std::string entityName) {
     Entity * nearest = nullptr;
     float dist = 10000.0f;
+    if (allEntities == nullptr) {
+        return nearest;
+    }
     for (Entity * e : *allEntities) {
       if (e->type == entityName) {
         if (dist > getDistanceBetweenTwoPoints(glm::vec2(pos.x,pos.z), glm::vec2(e->pos.x,e->pos.z))) {
@@ -714,4 +752,26 @@ void Entity::showHealth(bool value) {
 }
 void Entity::setHPColor(float r, float g, float b) {
     bar.setColor(glm::vec4(r,g,b,1.0));
+}
+void Entity::setText(std::string tag, std::string text, float x, float y) {
+    auto guiC = get<GUIComponent>();
+    if (guiC != NULL) {
+        guiC->setText(tag, text, glm::vec2(x, y), currentColor);
+    }
+    else {
+        std::cout << "can't draw gui without GUI Component\n";
+    }
+    
+}
+int Entity::getEntityCount() {
+    return entityCount;
+}
+void Entity::setTextColor(float r, float g, float b, float a) {
+    currentColor = glm::vec4(r, g, b, a);
+}
+void Entity::addAbility(std::string ability) {
+    playerAbilities.push_back(ability);
+}
+std::string Entity::getAbility(int val) {
+    return playerAbilities[val];
 }

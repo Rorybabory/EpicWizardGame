@@ -158,12 +158,8 @@ public:
     std::map<std::string, int> AnimationTags;
 protected:
 private:
-  
   int slowCount = 0;
   int animID = 0;
-
   int testingCount = 0;
-
-  
 };
 #endif

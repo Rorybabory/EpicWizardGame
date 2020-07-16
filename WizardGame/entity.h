@@ -18,6 +18,7 @@
 #include "GraphicsComponent.h"
 #include "StaticGraphicsComponent.h"
 #include "NpcComponent.h"
+#include "GUIComponent.h"
 #include "CameraComponent.h"
 #include "Component.h"
 #include <qu3e/q3.h>
@@ -30,7 +31,12 @@
 #define ENTITY_H
 extern float brightness;
 extern float cullDistance;
+extern float red;
+extern std::map<std::string, float> GlobalFloatsVars;
+
 extern std::string playerTag;
+extern std::vector<std::string> playerAbilities;
+
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
                   pow(y-y2, 2));
@@ -46,6 +52,7 @@ public:
   std::string name;
 private:
 };
+
 class Entity {
 public:
   float sign (glm::vec2 p1, glm::vec2 p2, glm::vec2 p3) {
@@ -97,9 +104,7 @@ public:
   //CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
   //                                                              CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 emitter(glm::vec3(0.0), 100, 100, 1.0, true){
-      std::cout << "finished emitter init\n";
       UICam.InitCam(glm::vec3(0, 0, 0), 70, 800.0f / 600.0f, 0.01f, 1000.0f);
-
   }
   void CompileLuaFunctions(lua_State* L) {
     std::string UpdateString = type + "_Update";
@@ -122,28 +127,34 @@ public:
     }
   }
   void checkCulling() {
-      glm::vec3 playerPos = glm::vec3 (0.0f);
-      for (Entity* e : *allEntities) {
-          if (e->type == "player") {
-              playerPos = e->pos;
-              break;
+      if (allEntities != nullptr) {
+          glm::vec3 playerPos = glm::vec3(0.0f);
+          for (Entity* e : *allEntities) {
+              if (e->type == "player") {
+                  playerPos = e->pos;
+                  break;
+              }
+          }
+          float dist = getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(playerPos.x, playerPos.z));
+          if (dist < cullDistance) {
+              cull = false;
+          }
+          else {
+              cull = true;
           }
       }
-      float dist = getDistanceBetweenTwoPoints(glm::vec2(pos.x,pos.z),glm::vec2(playerPos.x, playerPos.z));
-      if (dist < cullDistance) {
-          cull = false;
-      }
-      else {
-          cull = true;
+  }
+  void DrawText() {
+      auto guiC = get<GUIComponent>();
+      if (guiC != NULL) {
+          guiC->Draw();
       }
   }
   void Draw(Camera cam, bool f) {
     auto gfxc = get<GraphicsComponent>();
     if (type != "player" && showHP == true) {
-        
         bar.Draw(cam, pos + glm::vec3(0.0, projMax.y+1.0, 0.0));
     }
-    
     checkCullingCount++;
     if (checkCullingCount > 20) {
         checkCullingCount = 0;
@@ -164,12 +175,14 @@ public:
               gfxc->Draw(cam);
           }
       }
+      
     }
     auto sgfxc = get<StaticGraphicsComponent>();
     if (sgfxc != NULL && !dead) {
       sgfxc->Update();
       sgfxc->Draw(cam);
     }
+    
   }
   bool getCollisionWithPoint(glm::vec3 point) {
     return  (point.x >= projMin.x-3.0f && point.x <= projMax.x+3.0f) &&
@@ -178,13 +191,22 @@ public:
   }
   void Update(lua_State* L, q3Scene * scene) {
     emitter.updateParticles();
-    
+    pushInsideLevel();
     auto graphics = get<GraphicsComponent>();
     auto cameraC = get<CameraComponent>();
     auto sgraphics = get<StaticGraphicsComponent>();
     textPointer = new std::string("DANK");
     if (godmode == true) {
         hp = 99;
+    }
+    if (type == "player") {
+        red = getDistanceFromNearestEnt();
+        if (red < 40) {
+            red /= 160.0;
+            red = 0.25 - red;
+        } else {
+            red = 0.0;
+        }
     }
     if (cameraC != NULL) {
       cameraC->camera.m_position = pos;
@@ -252,10 +274,6 @@ public:
       projMin.y += scaleColl.y;
       projMax.y += scaleColl.y;
     }
-    
-    // if (type == "player") {
-    //   std::cout << "max.y: " << Max.y << " min.y: " << Min.y << " coll Y: " << scaleColl.y << "\n";
-    // }
     if (sgraphics != NULL) {
       pos = glm::vec3(startingPos.x, 0.0f, startingPos.y);
       sgraphics->object.setPos(glm::vec3(startingPos.x,0.0f,startingPos.y));
@@ -271,28 +289,10 @@ public:
       }
 
     }catch(luabridge::LuaException const& e) {
-      std::cout << "UPDATE FAILED" << '\n';
+      std::cout << "UPDATE FAILED ON ENTITY: " << type << '\n';
     }
     vel = pos-lastPos;
-    if (type != "player") {
-      //CollisionObject.setPos(glm::vec3(projMin.x,projMin.y,projMin.z));
-      //CollisionObject2.setPos(projMax);
-      //CollisionObject.setScale(glm::vec3(0.3,0.3,0.3));
-      //CollisionObject2.setScale(glm::vec3(0.3,0.3,0.3));
-      //CollisionObject.Update();
-      //CollisionObject2.Update();
-    }
-    // if (type == "player") {
-    //   auto playerCamC = get<CameraComponent>();
-    //   glm::vec3 playerPos = playerCamC->camera.m_position;
-    //   // std::cout << "X: " << playerCamC->camera.m_position.x << " Y: " << playerCamC->camera.m_position.z << std::endl;
-    //   if (playerPos.x != playerPos.x ||
-    //       playerPos.y != playerPos.y ||
-    //       playerPos.z != playerPos.z) {
-    //     // DumpToFile();
-    //     std::cout << "PLAYER BOX RECREATED" << std::endl;
-    //   }
-    // }
+    
   }
 
   void DumpToFile() {
@@ -379,6 +379,8 @@ public:
       .addFunction("Fire", &Entity::Fire)
       .addFunction("getFloat", &Entity::getFloat)
       .addFunction("setFloat", &Entity::setFloat)
+      .addFunction("getGlobalFloat", &Entity::getGlobalFloat)
+      .addFunction("setGlobalFloat", &Entity::setGlobalFloat)
       .addFunction("getBool", &Entity::getBool)
       .addFunction("setBool", &Entity::setBool)
       .addFunction("getString", &Entity::getString)
@@ -391,6 +393,7 @@ public:
       .addFunction("isFirstPerson", &Entity::isFirstPerson)
       .addFunction("lookAtNearest", &Entity::lookAtNearest)
       .addFunction("getDistanceFromNearest", &Entity::getDistanceFromNearest)
+      .addFunction("getDistanceFromNearestNot", &Entity::getDistanceFromNearestNot)
       .addFunction("getDistanceFromNearestEnt", &Entity::getDistanceFromNearestEnt)
       .addFunction("getPositionFromNearestX", &Entity::getPositionFromNearestX)
       .addFunction("getPositionFromNearestY", &Entity::getPositionFromNearestY)
@@ -444,7 +447,21 @@ public:
       .addFunction("hasAnimation", &Entity::hasAnimation)
       .addFunction("showHealth", &Entity::showHealth)
       .addFunction("setHPColor", &Entity::setHPColor)
+      .addFunction("getType", &Entity::getTypeLua)
+      .addFunction("setText", &Entity::setText)
+      .addFunction("getEntityCount", &Entity::getEntityCount)
+      .addFunction("setTextColor", &Entity::setTextColor)
+      .addFunction("getMoveDirX", &Entity::getMoveDirX)
+      .addFunction("getMoveDirY", &Entity::getMoveDirY)
+      .addFunction("setMapTarget", &Entity::setMapTarget)
+      .addFunction("swapMap", &Entity::swapMap)
+      .addFunction("round", &Entity::Round)
+      .addFunction("addAbility", &Entity::addAbility)
+      .addFunction("getAbility", &Entity::getAbility)
     .endClass();
+  }
+  float Round(float x) {
+      return round(x);
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
@@ -455,7 +472,12 @@ public:
   float getFloat(std::string name) {
     return FloatsVars[name];
   }
-
+  void setGlobalFloat(std::string name, float value) {
+      GlobalFloatsVars[name] = value;
+  }
+  float getGlobalFloat(std::string name) {
+      return GlobalFloatsVars[name];
+  }
   void setString(std::string name, std::string value) {
     StringVars[name] = value;
   }
@@ -491,12 +513,16 @@ public:
     return cameraC->getCamera().m_forward;
   }
   glm::vec3 getForward() {
-    static const glm::vec3 UP(0.0f, 1.0f, 0.0f);
-
-    glm::mat4 rotation = glm::rotate(rot.y, UP);
-
-    glm::vec3 forward = glm::vec3(glm::normalize(rotation * glm::vec4(glm::vec3(0,0,1), 0.0)));
-    return forward;
+    auto cameraC = get<CameraComponent>();
+    if (cameraC != NULL) {
+        return cameraC->camera.m_forward;
+    }
+    else {
+        static const glm::vec3 UP(0.0f, 1.0f, 0.0f);
+        glm::mat4 rotation = glm::rotate(rot.y, UP);
+        glm::vec3 forward = glm::vec3(glm::normalize(rotation * glm::vec4(glm::vec3(0, 0, 1), 0.0)));
+        return forward;
+    }
   }
   void DrawProj(Camera camera) {
     auto projC = get<ProjectileComponent>();
@@ -504,6 +530,17 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void addAbility(std::string ability);
+  std::string getAbility(int val);
+  void swapMap() { changeMap = true; }
+  void setMapTarget(std::string val) { map = val; }
+  float getMoveDirX() { return moveDirection.x; }
+  float getMoveDirY() { return moveDirection.y; }
+  void setTextColor(float r, float g, float b, float a);
+  int getEntityCount();
+  void setText(std::string tag, std::string text, float x, float y);
+  std::string getTypeLua();
+  float getDistanceFromNearestNot(std::string targetType);
   void setHPColor(float r, float g,  float b);
   void showHealth(bool value);
   int getAnimationID(std::string tag);
@@ -700,6 +737,10 @@ public:
   Sound sound = Sound("./res/sounds/shoot.wav");
   HealthBar bar;
   float maxHP = -1.0;
+  glm::vec2 moveDirection;
+  glm::vec4 currentColor = glm::vec4(0.0,0.0,0.0,1.0);
+  std::string map;
+  bool changeMap = false;
 protected:
 private:
   int checkCullingCount = 0;
@@ -737,9 +778,9 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
     }if (componentName == "StaticGraphicsComponent") {
       luabridge::LuaRef sgcTable = entityRef[i+1];
       addComponent<StaticGraphicsComponent>(e,sgcTable);
-    }else if (componentName == "NpcComponent") {
-      luabridge::LuaRef npcTable = entityRef[i+1];
-      addComponent<NpcComponent>(e,npcTable);
+    }else if (componentName == "GUIComponent") {
+      luabridge::LuaRef guiTable = entityRef[i+1];
+      addComponent<GUIComponent>(e,guiTable);
     }else if (componentName == "CameraComponent") {
       luabridge::LuaRef camTable = entityRef[i+1];
       addComponent<CameraComponent>(e,camTable);

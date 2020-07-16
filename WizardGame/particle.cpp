@@ -10,7 +10,6 @@ Emitter::Emitter(glm::vec3 Velocity, float Life, int max_particles, float Random
 	this->max_particles = max_particles;
 	this->Randomness = Randomness;
 	particles.resize(max_particles);
-	std::cout << "init emitter\n";
 }
 int Emitter::getFirstInactiveParticle() {
 	for (int i = 0; i < max_particles; i++) {
@@ -38,7 +37,6 @@ void Emitter::addParticles(int num, glm::vec3 pos, glm::vec4 Color) {
 }
 void Emitter::drawParticles(Camera camera) {
 	if (hasInit == false) {
-		std::cout << "drawn\n";
 		mesh = Mesh("./res/particle.obj", false);
 		shader.LoadShader("./res/basicShader");
 		hasInit = true;

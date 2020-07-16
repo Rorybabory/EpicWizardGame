@@ -23,7 +23,7 @@ public:
     q3BodyDef bodyDef;
     bodyDef.axis = q3Vec3(0.01f,0.01f,0.01f);
     bodyDef.bodyType = type;
-    // bodyDef.gravityScale = 0.0f;
+    bodyDef.gravityScale = 2.5f;
     body = scene->CreateBody(bodyDef);
     body->SetTransform(q3Vec3(pos.x,pos.y,pos.z));
     q3BoxDef boxDef;

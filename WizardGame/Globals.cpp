@@ -5,6 +5,8 @@
 #include "camera.h"
 #include "text.h"
 #include <glm/glm.hpp>
+#include "GUIComponent.h"
+float red = 0.5;
 float cullDistance = 70;
 glm::vec2 levelSize = glm::vec2(290, 290);
 int globalVariable = 69;
@@ -17,8 +19,17 @@ std::vector<glm::vec2> textPositions;
 std::vector<std::string> textStrings;
 std::vector<glm::vec3> colors;
 std::string playerTag;
-
+std::vector<glm::vec2> entityPos;
 glm::vec3 hsv = glm::vec3(0.0);
+std::vector<std::string> mods;
+std::map<std::string, float> GlobalFloatsVars;
+bool restartFile = false;
+int entityCount = 0;
+std::map<std::string, TextData> textMap;
+char mapPath[255] = "newMap";
+
+std::vector<std::string> playerAbilities;
+
 
 void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale) {
 	Text * object = new Text(scale, "./res/Ubuntu-B.ttf");

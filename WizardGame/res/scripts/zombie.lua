@@ -43,7 +43,7 @@ function zombie_Update(e)
 		print("attack")
 	end
 	if (e:isAnimationPlaying("attack") == true) then
-		if (e:getDistanceFromNearest("player") < 12 and e:getAnimFrame() == 55) then
+		if (e:getDistanceFromNearest("player") < 16 and e:getAnimFrame() == 55) then
 			e:damageNearestEnt("player", 3)
 		end
 	end
@@ -52,7 +52,7 @@ function zombie_Update(e)
 
 end
 function zombie_Start(e)
-    e:setHP(6)
+    e:setHP(4)
     e:lookAtPlayer()
     e:setScale(1.2+e:random(0,0.2))
     e:setFloat("raiseCount", 0)
@@ -61,6 +61,7 @@ function zombie_Start(e)
     e:setAnimationTag("default",2)
 	e:setAnimationTag("attack",0)
     e:setAnimationTag("damaged",1)
+	e:setFloat("scoreInc", 100)
 	e:setHPColor(0.2,0.5,0.2)
 end
 

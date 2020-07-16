@@ -72,7 +72,7 @@ newMap = {
         collides = true,
 		rot = 0,
     },
-    {
+	{
         type = "entity",
         file = "player",
         x = 0,
@@ -80,7 +80,7 @@ newMap = {
     },
     {
         type = "entity",
-        file = "zombie",
+        file = "tutorial",
         x = 200,
         y = 0,
     }

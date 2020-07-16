@@ -11,14 +11,15 @@
 #include "CollisionSystem.h"
 
 #include "luaLibrary.h" 
+extern std::vector<std::string> mods;
 
 class Prop {
 public:
-    
+  
   Prop(std::string folder,glm::vec3 scale,glm::vec3 pos,float rot,q3Scene * scene, bool collision)  : collisionObject("./res/cube.obj",glm::vec4(1.0,0.0,0.0,1.0),"./res/basicShader",false) {
     lua_State* L = luaL_newstate();
     luaL_openlibs(L);
-    luah::loadScript(L,"./res/props/" + folder + "/data.lua");
+    luah::loadScript(L, convertPath("./res/props/" + folder + "/data.lua"));
     b.initBody(scene,eStaticBody,glm::vec3(0.0f,0.0f,0.0f));
     this->name = folder;
 
@@ -33,7 +34,8 @@ public:
       float b2 = prop["b"];
       // std::cout << name << '\n';
 
-      std::string path = "./res/props/"+folder+"/"+name+".obj";
+      std::string path = convertPath("./res/props/"+folder+"/"+name+".obj");
+
       Object * object = new Object(path,glm::vec4(r,g,b2,1.0f),"./res/basicShader",false);
       object->setRot(glm::vec3(0,rot,0));
       this->rot = rot;
@@ -218,6 +220,32 @@ public:
   float rot;
   bool hasInitColl = false;
 private:
+    std::string removeWord(std::string str, std::string word)
+    {
+        if (str.find(word) != std::string::npos)
+        {
+            size_t p = -1;
+            std::string tempWord = word + " ";
+            while ((p = str.find(word)) != std::string::npos)
+                str.replace(p, tempWord.length(), "");
+            tempWord = " " + word;
+            while ((p = str.find(word)) != std::string::npos)
+                str.replace(p, tempWord.length(), "");
+        }
+        return str;
+    }
+    std::string convertPath(std::string input) {
+        std::string temp = input;
+        for (std::string folder : mods) {
+            std::string fileToCheck = std::string("./mods/" + folder + "/" + removeWord(input, "./res"));
+            std::cout << "checking for mod file: " << fileToCheck << "\n";
+            bool exist = std::experimental::filesystem::exists(fileToCheck);
+            if (exist) {
+                temp = "./mods/" + folder + "/" + removeWord(input, "./res");
+            }
+        }
+        return temp;
+    }
   int id;
   Object collisionObject;
 };

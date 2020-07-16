@@ -16,6 +16,8 @@
 #include "obj_loader.h"
 #include "transform.h"
 #include "animatedMesh.h"
+#include <future>
+
 namespace fs = std::experimental::filesystem;
 extern std::map<std::string, std::vector<animatedMesh*>> storedObjectData;
 class animatedObject {
@@ -58,6 +60,7 @@ public:
     }else {
       storedObjectData[folder] = animations;
     }
+    calculatedMesh = true;
   }
   animatedObject (std::string fileName, glm::vec4 c) {
     color = c;
@@ -101,6 +104,9 @@ public:
           init();
           hasInit = true;
       }
+      if (calculatedMesh == false) {
+          return;
+      }
     shader.Bind(color, colorFlash);
     tex.Bind(0);
     shader.Update(transform, camera);
@@ -115,8 +121,14 @@ public:
     duration = animations[id]->Duration;
     if (id != lastAnimID) {
       lastAnimID = id;
-      calculateMesh();
+      auto calculate = std::async(&animatedObject::calculateMesh, this);
+
+//      calculateMesh();
     }
+    if (calculatedMesh == false) {
+        return false;
+    }
+
     frame++;
 
     //if (isSlow == true) {
@@ -178,6 +190,7 @@ public:
   int idStored = 0;
   bool isSlow = false;
   bool hasInit = false;
+  bool calculatedMesh = false;
 protected:
 private:
 const double maxFPS = 60.0;

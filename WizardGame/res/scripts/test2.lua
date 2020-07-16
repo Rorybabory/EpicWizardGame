@@ -65,5 +65,6 @@ function test2_Start(e)
   e:setAnimationTag("default",3)
   e:setAnimationTag("damaged",1)
   e:setAnimationTag("attack",0)
+  e:setFloat("scoreInc", 1000)
   e:setBool("isCounting", false)
 end
