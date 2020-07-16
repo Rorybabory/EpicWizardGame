@@ -775,3 +775,11 @@ void Entity::addAbility(std::string ability) {
 std::string Entity::getAbility(int val) {
     return playerAbilities[val];
 }
+
+void Entity::setScreenColor(glm::vec4 ScreenColor) {
+    screenColor = ScreenColor;
+}
+
+void Entity::setDrawScene(bool val) {
+    drawScene = val;
+}

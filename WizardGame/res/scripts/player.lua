@@ -193,13 +193,13 @@ function player_Update(e)
   end
   -- if (e:doesEntityExist("test2") == true) then
   --   print(e:getPo
-  if (e:getPaused() == false) then
+  if (e:getPaused() == false and e:getGlobalBool("canPlayerMove") == true) then
     e:FPSControllerUpdate(e:getFloat("Speed")*e:getFloat("SpeedMod"))
   end
   e:UpdateKeyPresses();
   
   e:setUIText(e:getString("Ability") .. ": " .. e:getFloat("TimeCount"))
-  
+  e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 end
 function player_Start(e)
 	e:setParticleSpread(1.5)
@@ -212,7 +212,7 @@ function player_Start(e)
 	e:setBool("CanDash", true)
     -- e:TopDown_Start()
     e:setFloat("TimeCount", 0)
-    e:setString("Ability", "Dash")
+    
 	e:setBool("hasDamagedDash", false)
 	e:setFloat("Score", 0)
 	e:setFloat("ScoreDisplay", 0)
@@ -229,4 +229,5 @@ function player_Start(e)
 	e:addAbility("Teleport")
 	e:addAbility("Fire")
 	e:addAbility("Dash")
+	e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 end

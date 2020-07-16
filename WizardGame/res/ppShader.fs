@@ -11,6 +11,7 @@ uniform float brightness;
 uniform vec2 entityPos[];
 uniform float entityPosSize;
 uniform float red;
+uniform vec4 screenColor;
 uniform vec3 hsv;
 struct Box {
 	vec2 pos;
@@ -54,4 +55,7 @@ void main() {
 	float redGradient = (1.0-texCoord0.y)*red;
 	finalValue.r += redGradient/2.0;
 	gl_FragColor = vec4(finalValue,1.0);
+	if (screenColor.a != 0.0) {
+		gl_FragColor = screenColor;
+	}
 }

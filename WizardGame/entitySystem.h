@@ -26,6 +26,8 @@
 #include "Minimap.h"
 extern double FPS;
 extern int entityCount;
+extern bool drawScene;
+
 struct drawData {
     bool isConsoleOpen = false;
     std::vector<Prop*> propsPointer;
@@ -828,14 +830,16 @@ public:
         clickObject.setScale(glm::vec3(3.0f));
         glEnable(GL_DEPTH_TEST);
     }
+    
+  }
 
-    //draw text
-    glPushMatrix();
-    glLoadIdentity();
-    for (Entity* e : entities) {
-        e->DrawText();
-    }
-    glPopMatrix();
+  void drawText() {
+      glPushMatrix();
+      glLoadIdentity();
+      for (Entity* e : entities) {
+          e->DrawText();
+      }
+      glPopMatrix();
   }
   void setHeroTarget() {
     glm::vec3 target;

@@ -4,7 +4,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
 #include <future>
-
+extern bool drawScene;
 extern double FPS;
 void World::Update() {
   time = SDL_GetTicks();
@@ -32,6 +32,10 @@ void World::Update() {
   testMap.checkLoad(L);
 }
 void World::Draw() {
-  testMap.eSystem.Draw(deltaTime);
+  if (drawScene == true) {
+        testMap.eSystem.Draw(deltaTime);
+  }
+  
+  testMap.eSystem.drawText();
 }
 World::~World() {}

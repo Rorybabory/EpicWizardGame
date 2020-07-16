@@ -1,6 +1,7 @@
 #include "FrameBuffer.h"
 #include <string>
 extern float red;
+extern glm::vec4 screenColor;
 void FrameBuffer::BindFrameBuffer() {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
     glEnable(GL_DEPTH_TEST);
@@ -23,7 +24,7 @@ void FrameBuffer::RenderFrameBuffer() {
     glUniform1i(colorTexLocation, 0);
     glUniform1i(depthTexLocation, 1);
     glUniform1f(redLocation, red);
-
+    glUniform4f(glGetUniformLocation(ppShader.m_program, "screenColor"), screenColor.r, screenColor.g, screenColor.b, screenColor.a);
     glActiveTexture(GL_TEXTURE0 + 0);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
     glActiveTexture(GL_TEXTURE0 + 1);

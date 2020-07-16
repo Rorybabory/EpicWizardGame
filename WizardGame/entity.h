@@ -33,9 +33,13 @@ extern float brightness;
 extern float cullDistance;
 extern float red;
 extern std::map<std::string, float> GlobalFloatsVars;
+extern std::map<std::string, bool> GlobalBoolsVars;
+extern glm::vec4 screenColor;
 
 extern std::string playerTag;
 extern std::vector<std::string> playerAbilities;
+extern bool drawScene;
+
 
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
@@ -381,6 +385,8 @@ public:
       .addFunction("setFloat", &Entity::setFloat)
       .addFunction("getGlobalFloat", &Entity::getGlobalFloat)
       .addFunction("setGlobalFloat", &Entity::setGlobalFloat)
+      .addFunction("getGlobalBool", &Entity::getGlobalBool)
+      .addFunction("setGlobalBool", &Entity::setGlobalBool)
       .addFunction("getBool", &Entity::getBool)
       .addFunction("setBool", &Entity::setBool)
       .addFunction("getString", &Entity::getString)
@@ -423,6 +429,7 @@ public:
       .addFunction("Delay", &Entity::Delay)
       .addFunction("setUIText", &Entity::setUIText)
       .addFunction("getPaused", &Entity::getPaused)
+      .addFunction("setPaused", &Entity::setPaused)
       .addFunction("getDefaultSpeed", &Entity::getDefaultSpeed)
       .addFunction("damageNearest", &Entity::damageNearest)
       .addFunction("damageNearestEnt", &Entity::damageNearestEnt)
@@ -458,6 +465,8 @@ public:
       .addFunction("round", &Entity::Round)
       .addFunction("addAbility", &Entity::addAbility)
       .addFunction("getAbility", &Entity::getAbility)
+      .addFunction("setScreenColor", &Entity::setScreenColor)
+      .addFunction("setDrawScene", &Entity::setDrawScene)
     .endClass();
   }
   float Round(float x) {
@@ -477,6 +486,12 @@ public:
   }
   float getGlobalFloat(std::string name) {
       return GlobalFloatsVars[name];
+  }
+  void setGlobalBool(std::string name, bool value) {
+      GlobalBoolsVars[name] = value;
+  }
+  bool getGlobalBool(std::string name) {
+      return GlobalBoolsVars[name];
   }
   void setString(std::string name, std::string value) {
     StringVars[name] = value;
@@ -530,6 +545,8 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void setDrawScene(bool val);
+  void setScreenColor(glm::vec4 ScreenColor);
   void addAbility(std::string ability);
   std::string getAbility(int val);
   void swapMap() { changeMap = true; }
@@ -634,6 +651,7 @@ public:
   bool isAnimationPlaying(std::string tag);
   void Damage(int numHits);
   bool getPaused() { return isPaused; }
+  void setPaused(bool val) { isPaused = val; }
   void Emit(int num, float r, float g, float b, float a);
   bool hasAnimation(std::string anim);
   //END API FUNCTIONS

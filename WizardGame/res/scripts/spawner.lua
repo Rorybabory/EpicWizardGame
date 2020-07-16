@@ -8,7 +8,7 @@ spawner = {
 		g = 0,
 		b = 1
 	},
-	size = 35
+	size = 30
   }
 }
 function spawner_Hit(e,e2,hits)
@@ -59,7 +59,7 @@ function spawner_newSpawn(e)
 		e:setBool("isBetween", true)
 		if (e:getGlobalFloat("wave") ~= 0) then
 			e:setTextColor(1.0,1.0,1.0,1.0)
-			e:setText("betweenText", "Press TAB to go to next wave.", -0.85, 0.0)
+			e:setText("betweenText", "Press TAB to go to next wave.", -0.75, 0.0)
 			if (e:getKeyPressed() == "TAB") then
 				e:setText("betweenText", "", -1.0, 0.0)
 				spawner_startWave(e)
@@ -120,46 +120,63 @@ function spawner_waveAlphaState(e)
 	end
 end
 function spawner_drawAbility(e)
-	e:setTextColor(0.0,0.4,1.0,1.0)
-	--e:setText("ability1", e:getAbility(0), -0.85, 0.5)
+	e:setTextColor(1.0,1.0,1.0,1.0)
+	e:setText("menuCloseTip", "Press LCONTROL to close", -0.75, 0.8)
+	e:setGlobalBool("canPlayerMove", false)
+	e:setDrawScene(false)
+	if (e:getMoveDirY() ~= 0) then
+		e:setFloat("selectCounter", e:getFloat("selectCounter")+1)
+		if (e:getFloat("selectCounter") > 15) then
+			e:setFloat("selectCounter", 0)
+			e:setGlobalFloat("selectedAbility", e:getGlobalFloat("selectedAbility")-e:getMoveDirY())
+		end
+	end
 	value = 0
 	while (value < 5)
 	do
-		e:setText("ability"..value, e:getAbility(value), -0.85, 0.5-(value/5))
+		if (e:getGlobalFloat("selectedAbility") == value) then
+			e:setTextColor(0.0,0.4,1.0,1.0)
+		else
+			e:setTextColor(1.0,0.1,0.0,1.0)
+		end
+		
+		e:setText("ability"..value, e:getAbility(value), -0.75, 0.4-(value/5))
 		value=value+1
 	end
 end
 function spawner_eraseAbility(e)
+	e:setDrawScene(true)
+	e:setGlobalBool("canPlayerMove", true)
+	e:setTextColor(1.0,1.0,1.0,0.0)
+	e:setText("menuCloseTip", "", -0.75, 0.8)
 	value = 0
+	
 	while (value < 5)
 	do
-		e:setText("ability"..value, "", -0.85, 0.5-(value/3))
+		e:setText("ability"..value, "", -0.75, 0.5-(value/5))
 		value=value+1
 	end
 end
 function spawner_Update(e)
 	if (e:getBool("isBetween") == true and e:getBool("isInMenu") == false) then
 		e:setTextColor(1.0,1.0,1.0,1.0)
-		e:setText("menuTip", "Press Q to Open Ability Menu", -0.85, -0.4)
+		e:setText("menuTip", "Press Q to Open Ability Menu", -0.75, -0.4)
 		if (e:getKeyPressed() == "Q") then
 			e:setBool("isInMenu", true)
 		end
 	else
 		e:setTextColor(1.0,1.0,1.0,0.0)
-		e:setText("menuTip", "", -0.85, -0.4)
+		e:setText("menuTip", "", -0.75, -0.4)
 	end
 	
 	if (e:getBool("isInMenu") == true) then
-		e:setTextColor(1.0,1.0,1.0,1.0)
-		e:setText("menuCloseTip", "Press LCONTROL to close", -0.85, 0.8)
 		spawner_drawAbility(e)
 		if (e:getKeyPressed() == "LCTRL") then
 			e:setBool("isInMenu", false)
 		end
 	else
 		spawner_eraseAbility(e)
-		e:setTextColor(1.0,1.0,1.0,0.0)
-		e:setText("menuCloseTip", "", -0.85, 0.8)
+		
 	end
 	e:setCanBeHit(false)
 	if (e:getBool("enabled") == true) then
@@ -201,6 +218,8 @@ function spawner_Start(e)
 	e:setFloat("waveAlphaState", 0)
 	e:setFloat("waveTimer", 0)
 	e:setFloat("betweenWaveTimer", 0)
+	e:setGlobalFloat("selectedAbility", 0)
+	e:setFloat("selectCounter", 0)
 	e:setBool("betweenState", false)
 	e:setBool("enabled", false)
 	e:setBool("isBetween", false)

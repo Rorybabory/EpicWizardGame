@@ -23,13 +23,14 @@ std::vector<glm::vec2> entityPos;
 glm::vec3 hsv = glm::vec3(0.0);
 std::vector<std::string> mods;
 std::map<std::string, float> GlobalFloatsVars;
+std::map<std::string, bool> GlobalBoolsVars;
 bool restartFile = false;
 int entityCount = 0;
 std::map<std::string, TextData> textMap;
 char mapPath[255] = "newMap";
-
+glm::vec4 screenColor;
 std::vector<std::string> playerAbilities;
-
+bool drawScene = true;
 
 void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale) {
 	Text * object = new Text(scale, "./res/Ubuntu-B.ttf");

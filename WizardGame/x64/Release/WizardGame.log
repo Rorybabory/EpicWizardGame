@@ -16,44 +16,44 @@ C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(9,24): warning C42
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(12,33): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(27,1): warning C4305: '+=': truncation from 'double' to 'float'
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(30,1): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(77,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(80,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(124,45): warning C4101: 'e': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(206,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(227,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(81,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(84,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(128,45): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(210,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(231,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(228,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(232,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(229,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(233,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(235,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(239,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(236,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(240,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(237,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(241,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(282,1): warning C4102: 'std': unreferenced label
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(291,43): warning C4101: 'e': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(303,10): warning C4101: 'buffer': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(321,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(286,1): warning C4102: 'std': unreferenced label
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(295,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(307,10): warning C4101: 'buffer': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(325,43): warning C4101: 'e': unreferenced local variable
 C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(100,70): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
           with
           [
@@ -93,19 +93,6 @@ C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(281,18): warning
 C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(492,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(690,17): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(694,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Globals.cpp
-C:\Users\lambe\source\repos\WizardGame\WizardGame\SkeletalAnimation\SkeletalModel.h(15,56): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\CollisionSystem.h(101,21): warning C4305: 'argument': truncation from 'double' to 'r32'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\text.h(23,50): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\text.h(29,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\text.h(29,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedObject.h(121,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(34,64): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(47,93): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(47,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(48,93): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(49,121): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(49,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   main.cpp
 C:\Users\lambe\source\repos\WizardGame\WizardGame\SkeletalAnimation\SkeletalModel.h(15,56): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\CollisionSystem.h(101,21): warning C4305: 'argument': truncation from 'double' to 'r32'
@@ -126,67 +113,67 @@ C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(9,24): warning C42
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(12,33): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(27,1): warning C4305: '+=': truncation from 'double' to 'float'
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(30,1): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(77,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(80,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(124,45): warning C4101: 'e': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(206,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(227,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(81,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(84,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(128,45): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(210,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(231,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(228,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(232,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(229,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(233,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(235,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(239,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(236,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(240,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(237,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(241,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(282,1): warning C4102: 'std': unreferenced label
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(291,43): warning C4101: 'e': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(303,10): warning C4101: 'buffer': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(321,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(286,1): warning C4102: 'std': unreferenced label
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(295,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(307,10): warning C4101: 'buffer': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(325,43): warning C4101: 'e': unreferenced local variable
 C:\Users\lambe\source\repos\WizardGame\WizardGame\prop.h(119,17): warning C4101: 's': unreferenced local variable
 C:\Users\lambe\source\repos\WizardGame\WizardGame\Minimap.h(25,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(172,1): warning C4805: '==': unsafe mix of type 'Uint8' and type 'bool' in operation
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(266,1): warning C4305: 'argument': truncation from 'double' to 'r32'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(279,20): warning C4305: 'argument': truncation from 'double' to 'r32'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(283,1): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(332,10): warning C4101: 'buffer': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(390,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(570,215): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(570,159): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(570,103): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(618,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(664,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(687,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(688,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(174,1): warning C4805: '==': unsafe mix of type 'Uint8' and type 'bool' in operation
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(268,1): warning C4305: 'argument': truncation from 'double' to 'r32'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(281,20): warning C4305: 'argument': truncation from 'double' to 'r32'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(285,1): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(334,10): warning C4101: 'buffer': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(392,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(572,215): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(572,159): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(572,103): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(620,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(666,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(689,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(695,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(819,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(820,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(690,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(691,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(697,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(821,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(822,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   world.cpp
 C:\Users\lambe\source\repos\WizardGame\WizardGame\SkeletalAnimation\SkeletalModel.h(15,56): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\CollisionSystem.h(101,21): warning C4305: 'argument': truncation from 'double' to 'r32'
@@ -207,71 +194,71 @@ C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(9,24): warning C42
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(12,33): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(27,1): warning C4305: '+=': truncation from 'double' to 'float'
 C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(30,1): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(77,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(80,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(124,45): warning C4101: 'e': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(206,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(227,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(81,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(84,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(128,45): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(210,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(231,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(228,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(232,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(229,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(233,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(235,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(239,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(236,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(240,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(237,1): warning C4305: '-=': truncation from 'double' to 'T'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(241,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(282,1): warning C4102: 'std': unreferenced label
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(291,43): warning C4101: 'e': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(303,10): warning C4101: 'buffer': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(321,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(286,1): warning C4102: 'std': unreferenced label
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(295,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(307,10): warning C4101: 'buffer': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(325,43): warning C4101: 'e': unreferenced local variable
 C:\Users\lambe\source\repos\WizardGame\WizardGame\prop.h(119,17): warning C4101: 's': unreferenced local variable
 C:\Users\lambe\source\repos\WizardGame\WizardGame\Minimap.h(25,1): warning C4305: '-=': truncation from 'double' to 'T'
           with
           [
               T=float
           ]
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(172,1): warning C4805: '==': unsafe mix of type 'Uint8' and type 'bool' in operation
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(266,1): warning C4305: 'argument': truncation from 'double' to 'r32'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(279,20): warning C4305: 'argument': truncation from 'double' to 'r32'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(283,1): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(332,10): warning C4101: 'buffer': unreferenced local variable
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(390,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(570,215): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(570,159): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(570,103): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(618,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(664,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(687,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(688,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(174,1): warning C4805: '==': unsafe mix of type 'Uint8' and type 'bool' in operation
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(268,1): warning C4305: 'argument': truncation from 'double' to 'r32'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(281,20): warning C4305: 'argument': truncation from 'double' to 'r32'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(285,1): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(334,10): warning C4101: 'buffer': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(392,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(572,215): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(572,159): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(572,103): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(620,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(666,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(689,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(695,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(819,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(820,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(690,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(691,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(697,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(821,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entitySystem.h(822,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\lambe\source\repos\WizardGame\WizardGame\world.cpp(23,46): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
   Generating code
-  112 of 5795 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    52 functions had inline decision re-evaluated but remain unchanged
+  7 of 5820 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    27 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   WizardGame.vcxproj -> C:\Users\lambe\source\repos\WizardGame\x64\Release\WizardGame.exe
