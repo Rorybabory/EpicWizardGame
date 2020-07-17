@@ -41,6 +41,7 @@ function player_Hit(e,e2,hits)
   e2:setColorFlash(e:random(0.0,0.3),e:random(0.6,1),e:random(0.6,1),1.0)
   -- e2:moveForwards(-30.0)
   -- e2:setFrozen(true)
+  e:playSound("./res/sounds/explosion/"..e:randomInt(1,4)..".wav")
   if (e2:getHP() == 0) then
     e:Shake(4.0)
 	if (e2:getFloat("scoreInc") ~= 0) then
@@ -99,7 +100,7 @@ function player_RunAbility(e)
       end
     end
     if (e:getString("Ability") == "Speed") then
-	  if (e:getFloat("AbilityCount") < 15) then
+	  if (e:getFloat("AbilityCount") < 120) then
         e:setFloat("Speed", e:getDefaultSpeed()*4.0)
 		e:setFloat("AbilityCount", e:getFloat("AbilityCount")+1)
 		e:setFOV(70.15);
@@ -127,7 +128,7 @@ function player_RunAbility(e)
 	end
     if (e:getString("Ability") == "Speed") then
 		if (e:getFloat("AbilityCount") > 0) then
-			e:setFloat("AbilityCount", e:getFloat("AbilityCount")-0.1);
+			e:setFloat("AbilityCount", e:getFloat("AbilityCount")-1);
 		end
 	end
 	
@@ -158,7 +159,7 @@ function player_Update(e)
   e:setSaturation(0.06+e:getFloat("FireCount")/10.0)
   player_RunAbility(e)
   e:setValue(e:getFloat("AbilityCount")/240.0-0.05)
-  if (e:getProjCount() >= 40) then
+  if (e:getProjCount() == 54) then
 	e:setPlayerTag("fire")
 	--e:playSound("./res/sounds/shoot.wav")
   end
@@ -185,7 +186,7 @@ function player_Update(e)
 	end
   end
   if (e:getKeyPressed() == "ESCAPE") then
-    e:kill()
+    e:stopProgram()
   end
   if (e:getBool("CanTime") == false) then
     e:setInverted(0)
@@ -223,7 +224,7 @@ function player_Start(e)
     e:setFloat("AbilityCount", 0)
     e:setFloat("FireCount", 0)
     e:setBool("CanTime", true)
-	
+	e:clearAbilities()
 	e:addAbility("Time")
 	e:addAbility("Speed")
 	e:addAbility("Teleport")

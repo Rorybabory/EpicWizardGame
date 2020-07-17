@@ -47,9 +47,10 @@ function test2_Update(e)
     e:moveForward(0.8)
     e:lookAtPlayer()
   end
-  if (e:getDistanceFromNearest("player") < 20 and e:isAnimationPlaying("attack") == false) then
+  if (e:getDistanceFromNearest("player") < 20 and e:isAnimationPlaying("attack") == false and e:getAnimFrame() > 25) then
     e:playAnimationTag("attack")
     test2_Hit(e,e:getNearestEntWithName("player"),1)
+	e:playSound("./res/sounds/hit.wav")
   end
 end
 function test2_Start(e)

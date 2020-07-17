@@ -120,19 +120,30 @@ function spawner_waveAlphaState(e)
 	end
 end
 function spawner_drawAbility(e)
+	print(e:getAbilityCount() .. " is the ability count")
 	e:setTextColor(1.0,1.0,1.0,1.0)
 	e:setText("menuCloseTip", "Press LCONTROL to close", -0.75, 0.8)
 	e:setGlobalBool("canPlayerMove", false)
 	e:setDrawScene(false)
+	--allow moving selection based on WASD
 	if (e:getMoveDirY() ~= 0) then
 		e:setFloat("selectCounter", e:getFloat("selectCounter")+1)
 		if (e:getFloat("selectCounter") > 15) then
 			e:setFloat("selectCounter", 0)
 			e:setGlobalFloat("selectedAbility", e:getGlobalFloat("selectedAbility")-e:getMoveDirY())
+			--push selection into bounds
+			if (e:getGlobalFloat("selectedAbility") == e:getAbilityCount()) then
+				e:setGlobalFloat("selectedAbility", e:getAbilityCount()-1)
+			end
+			if (e:getGlobalFloat("selectedAbility") < 0) then
+				e:setGlobalFloat("selectedAbility", 0)
+			end
+			--play sound effect
+			e:playSound("./res/sounds/menu.wav")
 		end
 	end
 	value = 0
-	while (value < 5)
+	while (value < e:getAbilityCount())
 	do
 		if (e:getGlobalFloat("selectedAbility") == value) then
 			e:setTextColor(0.0,0.4,1.0,1.0)
@@ -200,6 +211,7 @@ function spawner_Update(e)
 		end
 	end
 	e:UpdateKeyPresses()
+	
 end
 function spawner_Start(e)
     e:setHP(9999)

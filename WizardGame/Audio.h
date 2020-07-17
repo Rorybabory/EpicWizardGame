@@ -41,6 +41,7 @@ public:
 	}
 	void setFile(std::string file) {
 		chunk = Mix_LoadWAV(file.c_str());
+		
 	}
 	void reset() {
 		

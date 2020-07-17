@@ -783,3 +783,6 @@ void Entity::setScreenColor(glm::vec4 ScreenColor) {
 void Entity::setDrawScene(bool val) {
     drawScene = val;
 }
+void Entity::stopProgram() {
+    exit(0);
+}

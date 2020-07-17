@@ -467,6 +467,9 @@ public:
       .addFunction("getAbility", &Entity::getAbility)
       .addFunction("setScreenColor", &Entity::setScreenColor)
       .addFunction("setDrawScene", &Entity::setDrawScene)
+      .addFunction("stopProgram", &Entity::stopProgram)
+      .addFunction("getAbilityCount", &Entity::getAbilityCount)
+      .addFunction("clearAbilities", &Entity::clearAbilities)
     .endClass();
   }
   float Round(float x) {
@@ -545,6 +548,9 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void clearAbilities() { playerAbilities.clear(); }
+  int getAbilityCount() { return playerAbilities.size(); }
+  void stopProgram();
   void setDrawScene(bool val);
   void setScreenColor(glm::vec4 ScreenColor);
   void addAbility(std::string ability);

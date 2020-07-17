@@ -24,7 +24,7 @@ function tutorial_Hit(e,e2,hits)
 end
 
 function tutorial_Update(e)
-	
+	e:setGlobalBool("canPlayerMove", true)
 	e:setTextColor(1.0,1.0,1.0,e:getFloat("fade"))
 	--print("text fade is: " .. e:getFloat("fade") .. " and fade state is: " .. e:getString("fade"))
 	if (e:getString("lastTutText") ~= e:getString("tutText")) then
@@ -72,6 +72,8 @@ function tutorial_Update(e)
 		end
 	end
 	e:UpdateKeyPresses();
+	e:setCanBeHit(false)
+
 end
 function tutorial_Start(e)
     e:setHP(9999)

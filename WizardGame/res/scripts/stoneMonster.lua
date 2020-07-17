@@ -61,7 +61,7 @@ function stoneMonster_Update(e)
 			e:setCanBeHit(false)
 			if (e:getDistanceFromNearest("player") < 40 and e:getAnimFrame() == 144) then
 				e:damageNearestEnt("player", 4)
-				
+				e:playSound("./res/sounds/hit.wav")
 			end
 		else
 			e:lookAtPlayer()
