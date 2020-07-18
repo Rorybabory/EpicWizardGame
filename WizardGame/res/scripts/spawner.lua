@@ -85,6 +85,11 @@ function spawner_resolveSpawning(e)
 	if (e:getFloat("spawnValue") < e:getFloat("maxValue") and e:getFloat("spawnValue") < 10) then
 		e:setFloat("spawnValue", e:getFloat("spawnValue")+1)
 		rand = e:randomInt(0, 16)
+		if (e:getGlobalFloat("wave") < 3) then
+			rand = 7
+		elseif (e:getGlobalFloat("wave") > 7 and rand > 11) then
+			rand = e:randomInt(0, 6)
+		end
 		if (rand == 0) then
 			e:spawnEntity("necromancer", e:random(-260,260), e:random(-260,260))
 		elseif (rand == 1) then
@@ -211,7 +216,6 @@ function spawner_Update(e)
 		end
 	end
 	e:UpdateKeyPresses()
-	
 end
 function spawner_Start(e)
     e:setHP(9999)

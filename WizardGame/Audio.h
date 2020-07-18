@@ -38,6 +38,7 @@ public:
 			std::cout << "error\n";
 		}
 		chunk = Mix_LoadWAV(fileName.c_str());
+		Mix_Volume(-1,MIX_MAX_VOLUME/2.0);
 	}
 	void setFile(std::string file) {
 		chunk = Mix_LoadWAV(file.c_str());

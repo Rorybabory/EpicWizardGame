@@ -428,14 +428,15 @@ void Entity::FPSControllerUpdate(float speed) {
       pos += glm::cross(cameraC->getCamera().m_up, cameraC->getCamera().m_forward) * -speed;
       moved = true;
     }
-    //if (startPlayerVel != glm::vec3(0.0f,0.0f,0.0f)) {
-    //    playerVel = startPlayerVel;
-    //}
-
     if (startPos == pos) {
       collider.resetVelocity();
     }
-
+    /*glm::vec3 cameraAngle = AnglesFromVectors(cameraC->getCamera().m_forward, cameraC->getCamera().m_up);
+    std::cout << "cameraAngle X:" << cameraAngle.x << " Y:" << cameraAngle.y << " Z:" << cameraAngle.z << "\n";
+    if (cameraAngle.x < 90) {
+        cameraC->getCamera().m_up = lastCameraUp;
+    }*/
+    lastCameraUp = cameraC->getCamera().m_up;
 //    pos = cameraC->getCamera().m_position;
     cameraC->getCamera().m_position.y = 10.0f;
 }

@@ -40,7 +40,6 @@ extern std::string playerTag;
 extern std::vector<std::string> playerAbilities;
 extern bool drawScene;
 
-
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
                   pow(y-y2, 2));
@@ -59,6 +58,31 @@ private:
 
 class Entity {
 public:
+    //thanks stack exchange
+    template <typename T> int sign(T val) {
+        return (T(0) < val) - (val < T(0));
+    }
+    glm::vec3 AnglesFromVectors(glm::vec3 forward, glm::vec3 up)
+    {
+        // Yaw is the bearing of the forward vector's shadow in the xy plane.
+        float yaw = atan2(forward.y, forward.x);
+
+        // Pitch is the altitude of the forward vector off the xy plane, toward the down direction.
+        float pitch = -asin(forward.z);
+
+        // Find the vector in the xy plane 90 degrees to the right of our bearing.
+        float planeRightX = sin(yaw);
+        float planeRightY = -cos(yaw);
+
+        // Roll is the rightward lean of our up vector, computed here using a dot product.
+        float roll = asin(up[0] * planeRightX + up[1] * planeRightY);
+        // If we're twisted upside-down, return a roll in the range +-(pi/2, pi)
+        if (up.z < 0)
+            roll = sign(roll) * 3.14 - roll;
+
+        return glm::vec3(yaw * 180 / 3.14, pitch * 180 / 3.14, roll * 180 / 3.14);
+    }
+
   float sign (glm::vec2 p1, glm::vec2 p2, glm::vec2 p3) {
     return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
   }
@@ -534,8 +558,7 @@ public:
     auto cameraC = get<CameraComponent>();
     if (cameraC != NULL) {
         return cameraC->camera.m_forward;
-    }
-    else {
+    } else {
         static const glm::vec3 UP(0.0f, 1.0f, 0.0f);
         glm::mat4 rotation = glm::rotate(rot.y, UP);
         glm::vec3 forward = glm::vec3(glm::normalize(rotation * glm::vec4(glm::vec3(0, 0, 1), 0.0)));
@@ -765,6 +788,7 @@ public:
   glm::vec4 currentColor = glm::vec4(0.0,0.0,0.0,1.0);
   std::string map;
   bool changeMap = false;
+  glm::vec3 lastCameraUp = glm::vec3(0.0,0.0,1.0);
 protected:
 private:
   int checkCullingCount = 0;

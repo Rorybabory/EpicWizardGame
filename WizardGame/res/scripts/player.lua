@@ -185,9 +185,28 @@ function player_Update(e)
 		e:setFloat("MeleeCount",e:getFloat("MeleeCount")+1)
 	end
   end
-  if (e:getKeyPressed() == "ESCAPE") then
-    e:stopProgram()
+  if (e:getKeyPressed() ~= "ESCAPE") then
+	e:setBool("EscapeReleased", true)
   end
+  if (e:getBool("inCloseMenu") == true) then
+	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
+		e:setBool("EscapeReleased", false)
+		e:setBool("inCloseMenu", false)
+	end
+	e:setTextColor(1.0,0.0,0.0,0.0)
+	e:setText("close", "", -0.5, 0.5)
+  else
+	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
+		e:setBool("EscapeReleased", false)
+		e:setBool("inCloseMenu", true)
+	end
+	if (e:getKeyPressed() == "SPACE") then
+		e:stopProgram()
+	end
+	e:setTextColor(1.0,0.0,0.0,1.0)
+	e:setText("close", "Press SPACE to close\n           the game", -0.5, 0.5)
+  end
+  
   if (e:getBool("CanTime") == false) then
     e:setInverted(0)
     e:setGlobalFrozen(false)
@@ -224,11 +243,14 @@ function player_Start(e)
     e:setFloat("AbilityCount", 0)
     e:setFloat("FireCount", 0)
     e:setBool("CanTime", true)
+	e:setBool("inCloseMenu", true)
+	e:setBool("EscapeReleased", true)
+	
 	e:clearAbilities()
+	e:addAbility("Fire")
+	e:addAbility("Teleport")
 	e:addAbility("Time")
 	e:addAbility("Speed")
-	e:addAbility("Teleport")
-	e:addAbility("Fire")
 	e:addAbility("Dash")
 	e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 end
