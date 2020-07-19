@@ -45,6 +45,7 @@ function zombie_Update(e)
 	if (e:isAnimationPlaying("attack") == true) then
 		if (e:getDistanceFromNearest("player") < 16 and e:getAnimFrame() == 55) then
 			e:damageNearestEnt("player", 3)
+			e:playSound("./res/sounds/hit.wav")
 		end
 	end
 	e:moveForward(0.45)

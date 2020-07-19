@@ -53,10 +53,11 @@ public:
             mapFile << "        x = " << prop->objects[0]->getPos().x << ",\n";
             mapFile << "        y = " << prop->objects[0]->getPos().z << ",\n";
             if (prop->collision == true) {
-                mapFile << "        collides = true\n";
+                mapFile << "        collides = true,\n";
             }else {
-                mapFile << "        collides = false\n";
+                mapFile << "        collides = false,\n";
             }
+            mapFile << "        rot = " << prop->rot << "\n";
             mapFile << "    },\n";
         }
         for (Entity* entity : eSystem.entities) {
@@ -69,8 +70,8 @@ public:
         }
         mapFile << "}\n";
         mapFile.close();
-    }
-    void checkLoad(lua_State* L) {
+    }    void checkLoad(lua_State* L) {
+
         for (Entity* e : eSystem.entities) {
             if (e->map != "") {
                 //std::cout << "LOADING MAP: " << e->map << "\n\n\n\n\n\n\n\n";

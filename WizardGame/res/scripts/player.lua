@@ -25,13 +25,13 @@ player = {
   },
   {
 	componentName = "GUIComponent",
-	font = "./res/Avara.ttf",
+	font = "./res/fonts/CaslonAntique.ttf",
 	color = {
 		r = 0,
 		g = 1,
 		b = 0
 	},
-	size = 25
+	size = 35
   }
 }
 
@@ -222,6 +222,7 @@ function player_Update(e)
   e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 end
 function player_Start(e)
+	e:setGlobalBool("canPlayerMove", true)
 	e:setParticleSpread(1.5)
 	e:setParticleModel("./res/models/fire.obj");
 	e:setFloat("SpeedMod", 0)
@@ -245,7 +246,7 @@ function player_Start(e)
     e:setBool("CanTime", true)
 	e:setBool("inCloseMenu", true)
 	e:setBool("EscapeReleased", true)
-	
+		
 	e:clearAbilities()
 	e:addAbility("Fire")
 	e:addAbility("Teleport")

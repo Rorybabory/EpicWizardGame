@@ -44,6 +44,7 @@ function skeleton_Update(e)
 	if (e:isAnimationPlaying("attack") == true) then
 		if (e:getDistanceFromNearest("player") < 12 and e:getAnimFrame() == 55) then
 			e:damageNearestEnt("player", 2)
+			e:playSound("./res/sounds/hit.wav")
 			e:setBool("backup", true)
 		end
 	end

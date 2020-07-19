@@ -25,13 +25,13 @@ player = {
   },
   {
 	componentName = "GUIComponent",
-	font = "./res/Avara.ttf",
+	font = "./res/fonts/CaslonAntique.ttf",
 	color = {
 		r = 0,
 		g = 1,
 		b = 0
 	},
-	size = 25
+	size = 35
   }
 }
 
@@ -41,6 +41,7 @@ function player_Hit(e,e2,hits)
   e2:setColorFlash(e:random(0.0,0.3),e:random(0.6,1),e:random(0.6,1),1.0)
   -- e2:moveForwards(-30.0)
   -- e2:setFrozen(true)
+  e:playSound("./res/sounds/explosion/"..e:randomInt(1,4)..".wav")
   if (e2:getHP() == 0) then
     e:Shake(4.0)
 	if (e2:getFloat("scoreInc") ~= 0) then
@@ -59,8 +60,29 @@ function player_Hit(e,e2,hits)
   end
 end
 function player_RunAbility(e)
-  --print(e:getFloat("AbilityCount"))
+  print(e:getFloat("DashCount"))
   if (e:getKeyPressed() == "LSHIFT") then
+	if (e:getString("Ability") == "Dash") then
+		if (e:getBool("CanDash") == true) then
+			e:moveForward(5.0)
+			if (e:getDistanceFromNearestEnt() < 15) then
+				if (e:getBool("hasDamagedDash") == false) then
+					e:damageNearest(4)
+					e:Shake(7)
+					e:setBool("hasDamagedDash", true)
+				end
+			end
+			e:setFloat("DashCount", e:getFloat("DashCount")+1)
+			if (e:getFloat("DashCount") > 20) then
+				e:setBool("CanDash", false)
+			end
+		else
+			e:setFloat("DashCount", e:getFloat("DashCount")-1)
+			if (e:getFloat("DashCount") < 1) then
+				e:setBool("CanDash", true)
+			end
+		end
+	end
 	if (e:getString("Ability") == "Fire") then
 		if (e:getFloat("FireCount") <= 0) then
 			if (e:getDistanceFromNearestEnt() < 35) then
@@ -78,7 +100,7 @@ function player_RunAbility(e)
       end
     end
     if (e:getString("Ability") == "Speed") then
-	  if (e:getFloat("AbilityCount") < 15) then
+	  if (e:getFloat("AbilityCount") < 120) then
         e:setFloat("Speed", e:getDefaultSpeed()*4.0)
 		e:setFloat("AbilityCount", e:getFloat("AbilityCount")+1)
 		e:setFOV(70.15);
@@ -96,14 +118,17 @@ function player_RunAbility(e)
       end
     end
   else
+	e:setFloat("DashCount", 0)
     e:setFloat("Speed", e:getDefaultSpeed())
 	e:setFOV(70);
 	if (e:getFloat("FireCount") > 0) then
 		e:setFloat("FireCount", e:getFloat("FireCount")-0.2);
+	else
+		e:setBool("hasDamagedDash", false)
 	end
     if (e:getString("Ability") == "Speed") then
 		if (e:getFloat("AbilityCount") > 0) then
-			e:setFloat("AbilityCount", e:getFloat("AbilityCount")-0.1);
+			e:setFloat("AbilityCount", e:getFloat("AbilityCount")-1);
 		end
 	end
 	
@@ -134,7 +159,7 @@ function player_Update(e)
   e:setSaturation(0.06+e:getFloat("FireCount")/10.0)
   player_RunAbility(e)
   e:setValue(e:getFloat("AbilityCount")/240.0-0.05)
-  if (e:getProjCount() >= 40) then
+  if (e:getProjCount() == 54) then
 	e:setPlayerTag("fire")
 	--e:playSound("./res/sounds/shoot.wav")
   end
@@ -160,34 +185,56 @@ function player_Update(e)
 		e:setFloat("MeleeCount",e:getFloat("MeleeCount")+1)
 	end
   end
-  if (e:getKeyPressed() == "ESCAPE") then
-    e:kill()
+  if (e:getKeyPressed() ~= "ESCAPE") then
+	e:setBool("EscapeReleased", true)
   end
+  if (e:getBool("inCloseMenu") == true) then
+	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
+		e:setBool("EscapeReleased", false)
+		e:setBool("inCloseMenu", false)
+	end
+	e:setTextColor(1.0,0.0,0.0,0.0)
+	e:setText("close", "", -0.5, 0.5)
+  else
+	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
+		e:setBool("EscapeReleased", false)
+		e:setBool("inCloseMenu", true)
+	end
+	if (e:getKeyPressed() == "SPACE") then
+		e:stopProgram()
+	end
+	e:setTextColor(1.0,0.0,0.0,1.0)
+	e:setText("close", "Press SPACE to close\n           the game", -0.5, 0.5)
+  end
+  
   if (e:getBool("CanTime") == false) then
     e:setInverted(0)
     e:setGlobalFrozen(false)
   end
   -- if (e:doesEntityExist("test2") == true) then
   --   print(e:getPo
-  if (e:getPaused() == false) then
+  if (e:getPaused() == false and e:getGlobalBool("canPlayerMove") == true) then
     e:FPSControllerUpdate(e:getFloat("Speed")*e:getFloat("SpeedMod"))
   end
   e:UpdateKeyPresses();
   
   e:setUIText(e:getString("Ability") .. ": " .. e:getFloat("TimeCount"))
-  
+  e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 end
 function player_Start(e)
-	
+	e:setGlobalBool("canPlayerMove", true)
 	e:setParticleSpread(1.5)
 	e:setParticleModel("./res/models/fire.obj");
 	e:setFloat("SpeedMod", 0)
     e:setFloat("TimeLength", 120)
     e:setHP(10)
     e:setFloat("ShieldCount", 0)
+	e:setFloat("DashCount", 0)
+	e:setBool("CanDash", true)
     -- e:TopDown_Start()
     e:setFloat("TimeCount", 0)
-    e:setString("Ability", "Fire")
+    
+	e:setBool("hasDamagedDash", false)
 	e:setFloat("Score", 0)
 	e:setFloat("ScoreDisplay", 0)
 	e:setFloat("MeleeCount", 0)
@@ -197,4 +244,14 @@ function player_Start(e)
     e:setFloat("AbilityCount", 0)
     e:setFloat("FireCount", 0)
     e:setBool("CanTime", true)
+	e:setBool("inCloseMenu", true)
+	e:setBool("EscapeReleased", true)
+		
+	e:clearAbilities()
+	e:addAbility("Fire")
+	e:addAbility("Teleport")
+	e:addAbility("Time")
+	e:addAbility("Speed")
+	e:addAbility("Dash")
+	e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 end

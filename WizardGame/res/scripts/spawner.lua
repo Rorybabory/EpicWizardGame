@@ -2,13 +2,13 @@ spawner = {
 
   {
 	componentName = "GUIComponent",
-	font = "./res/Avara.ttf",
+	font = "./res/fonts/CaslonAntique.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 30
+	size = 40
   }
 }
 function spawner_Hit(e,e2,hits)
