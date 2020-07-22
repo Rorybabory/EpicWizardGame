@@ -6,7 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <stdlib.h>
-#include <glfreetype/TextRenderer.hpp>
+#include "TextRenderer.h"
 #include "object.h"
 #include "CollisionSystem.h"
 

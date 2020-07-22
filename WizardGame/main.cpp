@@ -16,8 +16,6 @@
 #include "camera.h"
 #include "object.h"
 #include "world.h"
-#define WIDTH 800
-#define HEIGHT 600
 #define LUAINTF_LINK_LUA_COMPILED_IN_CXX 1
 #include "luaLibrary.h"
 #include "GraphicsComponent.h"
@@ -34,15 +32,28 @@ extern "C" {
 #include "audio/audio.h"
 }
 #include "skybox.h"
+#include "Globals.h"
+
+//#include <ft2build.h>
+//#include <freetype/freetype.h>
+//#include <freetype/ftglyph.h>
+//#include <freetype/ftoutln.h>
+//#include <freetype/fttrigon.h>
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 #undef main
-extern std::vector<std::string> mods;
 
+extern std::vector<std::string> mods;
+extern bool close;
+extern bool resetFramebuffer;
+extern bool resetWindow;
+//extern Display display;
+//extern FrameBuffer postProcessing;
+//extern void initWindow();
 int main()
 {
-
+    std::cout << "starting program\n";
     bool Left = false;
     bool Right = false;
     // Vertex vertices[] = {Vertex(glm::vec3(-0.5f,-0.5f,0), glm::vec2(0.0,0.0)),
@@ -50,23 +61,48 @@ int main()
     //                      Vertex(glm::vec3(0.5f,-0.5f,0),  glm::vec2(1.0,0.0))
     //                     };
     unsigned int indices[] = {0,1,2};
-    Display display(WIDTH,HEIGHT, "Wizard Game!");
+    
+    Display display(Width,Height, "Wizard Game!");
     float counter = 0.0f;
     mods.push_back("testMod");
     World world;
+    std::cout << "about to initialise Framebuffer\n";
     FrameBuffer postProcessing;
+    //display.init(Width, Height, "Wizard Game!");
+    initAudio();
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     ImGui_ImplSDL2_InitForOpenGL(display.m_window, display.m_glContext);
     const char* glsl_version = "#version 130";
-
     ImGui_ImplOpenGL3_Init(glsl_version);
-    initAudio();
-    
+    glViewport(0, 0, 1920, 1080);
     Skybox skybox;
+
+    //FT_Library library;
+    //FT_Init_FreeType(&library);
+    std::cout << "finished init\n\n\n";
     // std::cout << e->getType() << "X:" << pos.x << " Y:" << pos.y << " Z:" << pos.z << '\n';
-    while(!display.isClosed()) {
+    while(!display.m_isClosed) {
+        //resize window if needed
+        if (resetFramebuffer == true) {
+            postProcessing = FrameBuffer();
+            resetFramebuffer = false;
+        }
+        if (resetWindow == true) {
+            //display.init(Width, Height, "Wizard Game!");
+            SDL_SetWindowSize(display.m_window, Width, Height);
+            IMGUI_CHECKVERSION();
+            ImGui::CreateContext();
+            ImGuiIO& io = ImGui::GetIO();
+            ImGui_ImplSDL2_InitForOpenGL(display.m_window, display.m_glContext);
+            const char* glsl_version = "#version 130";
+            ImGui_ImplOpenGL3_Init(glsl_version);
+            resetWindow = false;
+        }
+
+
+
         world.Update();
         postProcessing.BindFrameBuffer();
 
@@ -83,13 +119,11 @@ int main()
         postProcessing.RenderFrameBuffer();
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
     }
     endAudio();
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
-
     return 0;
 }

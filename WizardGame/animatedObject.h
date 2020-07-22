@@ -99,7 +99,8 @@ public:
           }
       }
   }
-  void Draw(Camera camera, int id) {
+  void Draw(Camera camera, int id, bool isUI) {
+    
       if (hasInit == false) {
           init();
           hasInit = true;
@@ -107,12 +108,41 @@ public:
       if (calculatedMesh == false) {
           return;
       }
-    shader.Bind(color, colorFlash);
+
+      if (!isUI) {
+          glDisable(GL_DEPTH_TEST);
+          transform.getPos().y = 0.85;
+          
+          shader.Bind(glm::vec4(10, 10, 10, 0.5), glm::vec4(10, 10, 10, 0));
+          shader.Update(transform, camera);
+          animations[id]->Draw();
+          glEnable(GL_DEPTH_TEST);
+      }
+      else {
+          glEnable(GL_DEPTH_TEST);
+      }
     tex.Bind(0);
+    shader.Bind(color, colorFlash);
     shader.Update(transform, camera);
     animations[id]->Draw();
     tex.UnBind();
     shader.UnBind();
+  }
+  void DrawWhite(Camera camera, int id) {
+      if (hasInit == false) {
+          init();
+          hasInit = true;
+      }
+      if (calculatedMesh == false) {
+          return;
+      }
+      
+      shader.Bind(glm::vec4(10,10,10,0.1), glm::vec4(10, 10, 10, 0));
+      tex.Bind(0);
+      shader.Update(transform, camera);
+      animations[id]->Draw();
+      tex.UnBind();
+      shader.UnBind();
   }
   bool Update(int id, double speedModifier) {
       if (animations.size()<=0) {
@@ -199,7 +229,6 @@ double lastTime = 0.0;
 double time;
 Shader shader;
 glm::vec3 rotation;
-Shader shaderOutline;
 // std::string folder;
 std::vector<animatedMesh*> animations;
 std::vector<std::string> files;

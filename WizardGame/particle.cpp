@@ -9,7 +9,7 @@ Emitter::Emitter(glm::vec3 Velocity, float Life, int max_particles, float Random
 	this->Life = Life;
 	this->max_particles = max_particles;
 	this->Randomness = Randomness;
-	particles.resize(max_particles);
+	/*particles.resize(max_particles);*/
 }
 int Emitter::getFirstInactiveParticle() {
 	for (int i = 0; i < max_particles; i++) {
@@ -25,7 +25,7 @@ void Emitter::clearParticles() {
 	}
 }
 void Emitter::addParticles(int num, glm::vec3 pos, glm::vec4 Color) {
-	for (int i = 0; i <= num; i++) {
+	/*for (int i = 0; i <= num; i++) {
 		int first = getFirstInactiveParticle();
 		particles[first].enabled = true;
 		particles[first].Position = pos;
@@ -33,10 +33,10 @@ void Emitter::addParticles(int num, glm::vec3 pos, glm::vec4 Color) {
 		particles[first].Color = Color;
 		particles[first].Velocity = Velocity + glm::vec3(random(-Randomness, Randomness), random(-Randomness, Randomness), random(-Randomness, Randomness));
 		particles[first].Rotation = glm::vec3(random(0.0,3.0), random(0.0, 3.0), random(0.0, 3.0));
-	}
+	}*/
 }
 void Emitter::drawParticles(Camera camera) {
-	if (hasInit == false) {
+	/*if (hasInit == false) {
 		mesh = Mesh("./res/particle.obj", false);
 		shader.LoadShader("./res/basicShader");
 		hasInit = true;
@@ -52,7 +52,7 @@ void Emitter::drawParticles(Camera camera) {
 			mesh.Draw();
 		}
 	}
-	shader.UnBind();
+	shader.UnBind();*/
 }
 void Emitter::updateVelocity(int i) {
 	if (particles[i].Velocity.x > 0.0f) {
@@ -73,7 +73,7 @@ void Emitter::updateVelocity(int i) {
 }
 
 void Emitter::updateParticles() {
-	for (int i = 0; i < max_particles; i++) {
+	/*for (int i = 0; i < max_particles; i++) {
 		if (particles[i].enabled == true) {
 			updateVelocity(i);
 			particles[i].Position += particles[i].Velocity;
@@ -82,7 +82,7 @@ void Emitter::updateParticles() {
 				particles[i].enabled = false;
 			}
 		}
-	}
+	}*/
 }
 void Emitter::setModel(std::string filename) {
 	//mesh = Mesh(filename,false);

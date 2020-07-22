@@ -6,12 +6,20 @@
 #include <glm/glm.hpp>
 #include "animatedObject.h"
 #include <LuaBridge/LuaBridge.h>
-
-
 #include "Component.h"
-
+#include "Projectile.h"
+extern q3Scene* scenePointer;
+struct ProjData {
+    Mesh mesh;
+    Shader shader;
+};
 class ProjectileComponent : public Component {
 public:
+    float random(float min, float max) {
+        float random = ((float)rand()) / (float)RAND_MAX;
+        float range1 = max - min;
+        return (random * range1) + min;
+    }
   ProjectileComponent(luabridge::LuaRef& componentTable) {
     auto modelRef = componentTable["model"];
     auto colorRRef = componentTable["colorR"];
@@ -38,27 +46,20 @@ public:
     }else{
       std::cout << "ERROR: PROJECTILE DATA IS INVALID TYPE..." << '\n';
     }
+    ObjectFile = new Object(model, color, "./res/basicShader", glm::vec3(0, 0, 0), false);
+    ObjectFile->setScale(glm::vec3(2.0f, 2.0f, 2.0f));
   }
   void setModel(std::string model) {
     this->model = model;
   }
-  void drawLineBetweenTwoPoints(glm::vec3 pos1, glm::vec3 pos2) {
-      glLineWidth(10.0);
-      glBegin(GL_LINES);
-      glVertex3f(pos1.x, pos1.y, pos1.z);
-      glVertex3f(pos2.x, pos2.y, pos2.z);
-      glEnd();
-  }
   void Draw(Camera camera) {
     if (!objects.empty()) {
+      //projShader.Bind(color, glm::vec4(0.0));
+      ObjectFile->shader.Bind(color, glm::vec4(0.0));
       for (int i = 0; i < objects.size(); i++) {
-          if (objects[i]->hasInitMesh == false) {
-              objects[i]->initObject(model, color, "./res/basicShader", false);
-          }
-        if (objects[i]->destroy == false) {
-          objects[i]->Draw(camera);          
-        }
+          ObjectFile->Draw(camera, objects[i]->transform);
       }
+      ObjectFile->shader.UnBind();
     }
   }
   glm::vec3 RadiansToFront(glm::vec3 radians) {
@@ -81,39 +82,44 @@ public:
   // }
   void Update() {
     for (int i = 0; i < objects.size(); i++) {
+      //std::cout << "DRAWING PROJECTILE NUMBER " << i << " at X:" << objects[i]->transform.getPos().x << " Y: " << objects[i]->transform.getPos().y << " Z: " << objects[i]->transform.getPos().z << " and init: " << objects[i]->hasInit << "\n";
+
       // std::cout << objects[i]->counter << " ";
       // std::cout << glm::degrees(FrontToRadians(objects[i]->lastDir).y) << '\n';
-      if (objects[i]->hasInit) {
-        glm::vec3 dir = glm::vec3(objects[i]->projB.body->GetLinearVelocity().x,objects[i]->projB.body->GetLinearVelocity().y,objects[i]->projB.body->GetLinearVelocity().z);
-        if (dir.x-objects[i]->lastDir.x != 0 &&
-            dir.y-objects[i]->lastDir.y != 0 &&
-            dir.z-objects[i]->lastDir.z != 0) {
-              // std::cout << "CHANGE DIRECTION" << '\n';
-              objects[i]->timesBounced++;
-        }
-        objects[i]->projB.body->SetToAwake();
-        objects[i]->setPos(glm::vec3(objects[i]->projB.getPos().x,objects[i]->projB.getPos().y,objects[i]->projB.getPos().z));
-        if (objects[i]->destroy == false) {
-          objects[i]->delay++;
-          if (objects[i]->delay > range) {
-            //projectileEmitters[i]->Emit(1);
-            objects[i]->delay = 0;
+//      if (objects[i]->hasInit == true) {
+          //glm::vec3 dir = glm::vec3(objects[i]->projB.body->GetLinearVelocity().x, objects[i]->projB.body->GetLinearVelocity().y, objects[i]->projB.body->GetLinearVelocity().z);
+          //if (fabs(dir.x - objects[i]->lastDir.x) > 12.0 &&
+          //    fabs(dir.z - objects[i]->lastDir.z) > 12.0) {
+          //    objects[i]->timesBounced++;
+          //}
+          glm::vec3 posToSet = glm::vec3(objects[i]->projB.getPos().x, objects[i]->projB.getPos().y, objects[i]->projB.getPos().z);
+          objects[i]->transform.setPos(posToSet);
+          //std::cout << "running update code\n";
+          if (objects[i]->destroy == false) {
+              objects[i]->delay++;
+              if (objects[i]->delay > range) {
+                  //projectileEmitters[i]->Emit(1);
+                  objects[i]->delay = 0;
+              }
           }
-        }
+          // vobjects[i]->transform.m_pos += (objects[i]->forward * speed);
 
-      }
-      // objects[i]->moveBy(objects[i]->forward*speed);
-      objects[i]->counter++;
-      if (objects[i]->counter >= range) {
-        // objects.erase(objects.begin()+i);
-        objects[i]->destroy = true;
-      }
-      if (objects[i]->destroy == true) {
-        objects[i]->counter2++;
-        if (objects[i]->counter2>=2) {
-          objects[i]->boxDestroy = true;
-        }
-      }
+          // objects[i]->moveBy(objects[i]->forward*speed);
+          objects[i]->counter++;
+          if (objects[i]->counter >= range) {
+              objects.erase(objects.begin()+i);
+              objects[i]->destroy = true;
+              //.std::cout << "destroyed projectile " << i << "\n";
+          }
+          if (objects[i]->destroy == true) {
+              objects[i]->counter2++;
+              if (objects[i]->counter2 >= 2) {
+                  objects[i]->boxDestroy = true;
+              }
+          }
+
+      //}
+      
       // if (objects[i]->destroy == true) {
       //   delete objects[i];
       //   objects.erase(objects.begin()+i);
@@ -123,11 +129,7 @@ public:
   }
   void collUpdate() {
     for (int i = 0; i < objects.size(); i++) {
-      if (objects[i]->hasInit) {
-        objects[i]->lastDir = glm::vec3(objects[i]->projB.body->GetLinearVelocity().x,objects[i]->projB.body->GetLinearVelocity().y,objects[i]->projB.body->GetLinearVelocity().z);
-        objects[i]->projB.body->SetTransform(q3Vec3(objects[i]->getPos().x,objects[i]->getPos().y,objects[i]->getPos().z),q3Vec3(0.0f,0.0f,0.0f),0.0f);
-        // std::cout << "PROJ POS: " << objects[i]->getPos().y << std::endl;
-      }
+        objects[i]->projB.body->SetTransform(q3Vec3(objects[i]->transform.getPos().x, objects[i]->transform.getPos().y, objects[i]->transform.getPos().z), q3Vec3(0.0f, 0.0f, 0.0f), 0.0f);
     }
   }
   bool checkCollisionWithBox(glm::vec2 pos, glm::vec2 scale) {
@@ -148,19 +150,57 @@ public:
     if (delayCount>delay) {
       delayCount = 0;
       color.a = 1.0;
-      //Object * o = new Object(model,color,"./res/basicShader",glm::vec3(startPos.x+(forward.x*7.0f),height+(forward.y*2.0f),startPos.y+(forward.z*7.0f)),false);
-      Object* o = new Object();
-      o->hasInit = false;
-      o->setPos(glm::vec3(startPos.x + (forward.x * 7.0f), height + (forward.y * 2.0f), startPos.y + (forward.z * 7.0f)));
-
+      
+      Projectile * o;
+      o = new Projectile();
+      glm::vec3 start = glm::vec3(startPos.x + (forward.x * 7.0f), height + (forward.y * 2.0f), startPos.y + (forward.z * 7.0f));
+      o->transform.setPos(start);
+      //std::cout << "Firing at X: " << start.x << " Y: " << start.y << " Z: " << start.z << "\n";
       o->forward = forward;
-      o->startPos = glm::vec3(startPos.x,0.0,startPos.y);
+      glm::vec3 sc = glm::vec3(2.0f, 2.0f, 2.0f);
+      o->transform.setScale(sc);
+      o->projB.init(glm::vec3(2.0f, 2.0f, 2.0f), start, scenePointer, eDynamicBody);
+      // o->projB.setPos(glm::vec3(o->projB.getPos().x-o->forward.x*5.0f,o->projB.getPos().y,o->projB.getPos().z-o->forward.z*5.0f));
+
+      o->projB.body->SetLinearVelocity(q3Vec3(o->forward.x * speed * SpeedMultiplier * 100.0f, o->forward.y * speed * SpeedMultiplier * 100.0f, o->forward.z * speed * SpeedMultiplier * 100.0f));
       objects.push_back(o);
-      o->setScale(glm::vec3(2.0f,2.0f,2.0f));
       //o->startPos = glm::vec3(startPos.x,height,startPos.y);
       return true;
     } 
     return false;
+  }
+  bool FireMultiple(glm::vec2 startPos, glm::vec3 forward, int num) {
+      delayCount++;
+      if (delayCount > delay) {
+          delayCount = 0;
+          std::cout << "FIRING LOL!\n";
+
+          for (int i = 0; i <= num; i++) {
+              
+              color.a = 1.0;
+              Projectile o;
+              glm::vec3 start = glm::vec3(startPos.x + (forward.x * 7.0f), height + (forward.y * 2.0f), startPos.y + (forward.z * 7.0f));
+              o.transform.setPos(start);
+              o.forward = forward;
+              glm::vec3 sc = glm::vec3(2.0f, 2.0f, 2.0f);
+              o.transform.setScale(sc);
+              objects.push_back(&o);
+          }
+          return true;
+      }
+      return false;
+  }
+  bool FireInstant(glm::vec2 startPos, glm::vec3 forward) {
+        color.a = 1.0;
+        Projectile o;
+        glm::vec3 start = glm::vec3(startPos.x + (forward.x * 7.0f), height + (forward.y * 2.0f), startPos.y + (forward.z * 7.0f));
+        o.transform.setPos(start);
+        o.forward = forward;
+        glm::vec3 sc = glm::vec3(2.0f, 2.0f, 2.0f);
+        o.transform.setScale(sc);
+
+        objects.push_back(&o);
+        return true;
   }
   void setSpeedMultiplier(double SpeedMultiplier) {
     this->SpeedMultiplier = SpeedMultiplier;
@@ -175,13 +215,16 @@ public:
     return color;
   }
   void setScale(float scale) {
-    object.setScale(glm::vec3(scale,scale,scale));
+    //object.setScale(glm::vec3(scale,scale,scale));
   }
   void setSpeed(float speed) {
     this->speed = speed;
   }
-Object object;
-std::vector<Object*> objects;
+  void setSpread(float spread) {
+      this->spread = spread;
+  }
+
+std::vector<Projectile*> objects;
 double SpeedMultiplier;
 float speed;
 float height;
@@ -190,11 +233,16 @@ int delayCount;
 bool emitDelay = false;
 protected:
 private:
+  float spread = 0.000;
   int data = 0;
   std::string owner;
   glm::vec4 color = glm::vec4(0.0f,0.7f,1.0f,1.0f);
   std::string folder;
   float range;
   std::string model;
+  bool hasInit = false;
+  Mesh projMesh;
+  Shader projShader;
+  Object* ObjectFile;
 };
 #endif

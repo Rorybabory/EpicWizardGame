@@ -5,7 +5,8 @@
 #include "shader.h"
 #include "transform.h"
 #include <string>
-#include <glfreetype/TextRenderer.hpp>
+#include "TextRenderer.h"
+
 class Text {
 public:
   Text(int size, std::string file) {

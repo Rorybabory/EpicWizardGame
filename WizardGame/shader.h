@@ -18,6 +18,7 @@ public:
   void TextBind(int x, int y);
   void UnBind();
   void Update(const Transform& transform, const Camera& camera);
+  void Update(const Transform& transform);
   virtual ~Shader();
   void InitShader(const std::string& fileName);
   glm::vec4 color = glm::vec4(0.0f,0.0f,0.0f,1.0f);

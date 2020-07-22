@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -28,7 +28,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -41,7 +41,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -113,6 +113,8 @@
       <ConformanceMode>true</ConformanceMode>
       <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\include;C:\Users\lambe\source\repos\WizardGame\WizardGame\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,7 +160,11 @@
       <PreprocessorDefinitions>
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <Optimization>Full</Optimization>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,7 +172,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;C:\Users\lambe\source\repos\WizardGame\WizardGame\freetype2-master\objs\Win32\Debug;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;imgui.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>MAPFILE</MapFileName>
+      <IgnoreSpecificDefaultLibraries>ucrtbased.dll;vcruntime140d.dll;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -202,10 +211,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Ability.h" />
     <ClInclude Include="animatedMesh.h" />
+    <ClInclude Include="animatedMeshData.h" />
     <ClInclude Include="animatedObject.h" />
     <ClInclude Include="AssimpConverter.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="audio\audio.h" />
     <ClInclude Include="BasicComponent.h" />
     <ClInclude Include="camera.h" />
@@ -245,12 +257,13 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="NpcComponent.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="ObjectComponent.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="ozzMesh.h" />
     <ClInclude Include="particle.h" />
     <ClInclude Include="postProcessing.h" />
     <ClInclude Include="ProjComponent.h" />
-    <ClInclude Include="projectile.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="prop.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="script.h" />

@@ -70,8 +70,8 @@ public:
         }
         mapFile << "}\n";
         mapFile.close();
-    }    void checkLoad(lua_State* L) {
-
+    }    
+    void checkLoad(lua_State* L) {
         for (Entity* e : eSystem.entities) {
             if (e->map != "") {
                 //std::cout << "LOADING MAP: " << e->map << "\n\n\n\n\n\n\n\n";
@@ -87,9 +87,9 @@ public:
         
     }
     void Update(lua_State * L) {
-        auto update = std::async(&EntitySystem::Update, &eSystem, L);
+        //auto update = std::async(&EntitySystem::Update, &eSystem, L);
 
-        //eSystem.Update(L);
+        eSystem.Update(L);
         if (eSystem.save == true) {
             writeToFile();
             eSystem.save = false;
@@ -97,10 +97,24 @@ public:
         
         
     }
+    void readEntityFile(lua_State * L) {
+        std::ifstream in_file{ "./res/scripts/entities" };
+        if (in_file.is_open()) {
+            std::string line;
+            while (!in_file.eof()) {
+                getline(in_file, line);
+                luah::loadScript(L, convertPath("./res/scripts/" + line + ".lua"));
+            }
+        }
+        else {
+            std::cout << "UNABLE TO LOAD ENTITY FILE\n";
+        }
+    }
     void restartMap(std::string file, lua_State * L) {
         std::string path = "./res/maps/";
         path += file;
         path += ".lua";
+        readEntityFile(L);
 
         luah::loadScript(L, path);
         luabridge::LuaRef mapRef = luabridge::getGlobal(L, file.c_str());
@@ -108,6 +122,10 @@ public:
         eSystem.entities.clear();
         eSystem.props.clear();
         eSystem.resetFloor();
+        /*for (int i = 0; i < entRef.length(); ++i) {
+            std::string name = entRef[i + 1].cast<std::string>();
+            luah::loadScript(L, convertPath("./res/scripts/" + name + ".lua"));
+        }*/
         for (int i = 0; i < mapRef.length(); ++i) {
             luabridge::LuaRef item = mapRef[i + 1];
             if (item["type"] == "prop") {
@@ -133,9 +151,11 @@ public:
 
     }
   void init(std::string fileName, lua_State* L) {
+
       this->fileName = fileName;
     luah::loadScript(L,"./res/maps/" + fileName + ".lua");
     luabridge::LuaRef mapRef = luabridge::getGlobal(L,fileName.c_str());
+    readEntityFile(L);
 
     for (int i = 0; i < mapRef.length(); ++i) {
       luabridge::LuaRef item = mapRef[i+1];

@@ -1,4 +1,4 @@
-#include "object.h"
+ #include "object.h"
 #include "obj_loader.h"
 #include <fstream>
 #include <string>
@@ -138,7 +138,18 @@ void Object::Draw(Camera camera) {
     }
     shader.Bind(color, glm::vec4(0.0));
     shader.Update(transform, camera);
-    
     mesh.Draw();
     shader.UnBind();
+}
+void Object::Draw(Camera camera, Transform trans) {
+    if (hasInitMesh2 == false) {
+        mesh.InitMesh(model);
+        shader.InitShader(d.shaderFile);
+        outline.InitShader("./res/outline");
+        hasInitMesh2 = true;
+    }
+
+    shader.Update(trans, camera);
+    mesh.Draw();
+
 }

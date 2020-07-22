@@ -40,6 +40,7 @@ public:
   void UpdateMinMax();
   glm::vec3 getMeshPos();
   void Draw(Camera camera);
+  void Draw(Camera camera, Transform trans);
   void Update();
   Box projB;
   Transform transform;

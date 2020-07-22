@@ -18,7 +18,6 @@ public:
 
     if (folderRef.isString()) {
       setFolder(folderRef.cast<std::string>());
-
     }else{
       std::cout << "Error, Folder Name is not a string!" << '\n';
     }
@@ -27,9 +26,7 @@ public:
   }
   void setFolder(const std::string& folder) {
     this->folder = folder;
-    std::cout << "hasent run object\n";
     object.reset(this->folder, colorFlash);
-    std::cout << "run object\n";
 
   }
   std::string getFolder() const {
@@ -42,7 +39,10 @@ public:
     return animID;
   }
   void Draw(Camera camera) {
-    object.Draw(camera, animID);
+    object.Draw(camera, animID, useUICam);
+  }
+  void DrawWhite(Camera camera) {
+      object.DrawWhite(camera, animID);
   }
   void Update(double speedModifier) {
     object.Update(animID, speedModifier);
@@ -153,13 +153,16 @@ public:
   bool playingDefault = true;
   glm::vec4 colorFlash = glm::vec4(0.0f,0.7f,1.0f,1.0f);
   glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+  bool useUICam = false;
+  
     std::string folder;
     std::string defaultAnim;
     std::map<std::string, int> AnimationTags;
 protected:
 private:
-  int slowCount = 0;
-  int animID = 0;
-  int testingCount = 0;
+    
+    int slowCount = 0;
+    int animID = 0;
+    int testingCount = 0;
 };
 #endif

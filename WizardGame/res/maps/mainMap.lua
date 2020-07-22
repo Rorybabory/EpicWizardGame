@@ -100,15 +100,6 @@ mainMap = {
     },
     {
         type = "prop",
-        file = "house3",
-        scale = 2,
-        x = 152.941,
-        y = 109.412,
-        collides = true,
-        rot = 2.35619
-    },
-    {
-        type = "prop",
         file = "house4",
         scale = 2,
         x = -169.412,
@@ -132,7 +123,7 @@ mainMap = {
         x = 77.6471,
         y = 16.4706,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -141,7 +132,7 @@ mainMap = {
         x = -55.2941,
         y = 131.765,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -150,7 +141,7 @@ mainMap = {
         x = -128.235,
         y = 21.1765,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -159,7 +150,7 @@ mainMap = {
         x = -71.7647,
         y = -103.529,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -168,7 +159,7 @@ mainMap = {
         x = 107.059,
         y = -210.588,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -177,7 +168,7 @@ mainMap = {
         x = 252.941,
         y = -278.824,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -186,7 +177,7 @@ mainMap = {
         x = -240,
         y = -207.059,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -195,7 +186,7 @@ mainMap = {
         x = -237.647,
         y = -114.118,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -204,7 +195,7 @@ mainMap = {
         x = -85.8823,
         y = 240,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -213,7 +204,7 @@ mainMap = {
         x = 227.059,
         y = 38.8235,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -291,6 +282,19 @@ mainMap = {
         type = "entity",
         file = "player",
         x = -60.0,
+        y = 0.0,
+    },
+	
+	{
+        type = "entity",
+        file = "spawner",
+        x = 0.0,
+        y = 0.0,
+    },
+	{
+        type = "entity",
+        file = "abilityManager",
+        x = 0.0,
         y = 0.0,
     },
 }

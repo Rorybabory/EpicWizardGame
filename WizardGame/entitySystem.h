@@ -2,8 +2,6 @@
 #define ESYSTEM_H
 #include "entity.h"
 #include "luaLibrary.h"
-#define WIDTH 800
-#define HEIGHT 600
 #include "skybox.h"
 #include "camera.h"
 #include "messaging.h"
@@ -27,6 +25,9 @@
 extern double FPS;
 extern int entityCount;
 extern bool drawScene;
+extern std::vector<std::string> loadedScripts;
+extern q3Scene* scenePointer;
+extern bool resetText;
 
 struct drawData {
     bool isConsoleOpen = false;
@@ -51,9 +52,167 @@ extern void drawText();
 extern bool restartFile;
 extern std::vector<std::string> mods;
 extern std::vector<glm::vec2> entityPos;
-
+extern lua_State* LPointer;
 class EntitySystem {
 public:
+    void addFunctions(lua_State* L) {
+        using namespace luabridge;
+        getGlobalNamespace(L)
+            .beginNamespace("util")
+            .addFunction("getDistance", &getDistance)
+            .endNamespace()
+            .beginClass<Entity>("Entity")
+            // .addFunction("Damage",&Entity::Damage)
+            .addFunction("setAnimation", &Entity::setAnimation)
+            .addFunction("playAnimation", &Entity::playAnimation)
+            .addFunction("getAnimation", &Entity::getAnimation)
+            .addFunction("setPos", &Entity::setPos)
+            .addFunction("getX", &Entity::getX)
+            .addFunction("getY", &Entity::getY)
+            .addFunction("getZ", &Entity::getZ)
+            .addFunction("setColorFlash", &Entity::setColorFlash)
+            .addFunction("setColor", &Entity::setColor)
+            .addFunction("lookAt", &Entity::lookAt)
+            .addFunction("lookAtPlayer", &Entity::lookAtPlayer)
+            .addFunction("moveForward", &Entity::moveForward)
+            .addFunction("moveBackward", &Entity::moveBackward)
+            .addFunction("Strafe", &Entity::Strafe)
+            .addFunction("write", &Entity::write)
+            .addFunction("random", &Entity::random)
+            .addFunction("randomInt", &Entity::randomInt)
+            .addFunction("setScale", &Entity::setScale)
+            .addFunction("getPlayerDistance", &Entity::getPlayerDistance)
+            .addFunction("getKeyDirectionX", &Entity::getKeyDirectionX)
+            .addFunction("getKeyDirectionY", &Entity::getKeyDirectionY)
+            .addFunction("FPSControllerUpdate", &Entity::FPSControllerUpdate)
+            .addFunction("kill", &Entity::kill)
+            .addFunction("getHP", &Entity::getHP)
+            .addFunction("setHP", &Entity::setHP)
+            .addFunction("addCounter", &Entity::addCounter)
+            .addFunction("updateCounter", &Entity::updateCounter)
+            .addFunction("getCount", &Entity::getCount)
+            .addFunction("setCount", &Entity::setCount)
+            .addFunction("killProgram", &Entity::killProgram)
+            .addFunction("spawnEntity", &Entity::spawnEntity)
+            .addFunction("Fire", &Entity::Fire)
+            .addFunction("FireMultiple", &Entity::FireMultiple)
+            .addFunction("FireInstant", &Entity::FireInstant)
+            .addFunction("getFloat", &Entity::getFloat)
+            .addFunction("setFloat", &Entity::setFloat)
+            .addFunction("getGlobalFloat", &Entity::getGlobalFloat)
+            .addFunction("setGlobalFloat", &Entity::setGlobalFloat)
+            .addFunction("getGlobalBool", &Entity::getGlobalBool)
+            .addFunction("setGlobalBool", &Entity::setGlobalBool)
+            .addFunction("getBool", &Entity::getBool)
+            .addFunction("setBool", &Entity::setBool)
+            .addFunction("getString", &Entity::getString)
+            .addFunction("setString", &Entity::setString)
+            .addFunction("getAnimFrame", &Entity::getAnimFrame)
+            .addFunction("getKeyPressed", &Entity::getKeyPressed)
+            .addFunction("setCanBeHit", &Entity::setCanBeHit)
+            .addFunction("getCanBeHit", &Entity::getCanBeHit)
+            .addFunction("setFOV", &Entity::setFOV)
+            .addFunction("TopDownUpdate", &Entity::TopDownUpdate)
+            .addFunction("isFirstPerson", &Entity::isFirstPerson)
+            .addFunction("lookAtNearest", &Entity::lookAtNearest)
+            .addFunction("getDistanceFromNearest", &Entity::getDistanceFromNearest)
+            .addFunction("getDistanceFromNearestNot", &Entity::getDistanceFromNearestNot)
+            .addFunction("getDistanceFromNearestEnt", &Entity::getDistanceFromNearestEnt)
+            .addFunction("getPositionFromNearestX", &Entity::getPositionFromNearestX)
+            .addFunction("getPositionFromNearestY", &Entity::getPositionFromNearestY)
+            .addFunction("doesEntityExist", &Entity::doesEntityExist)
+            .addFunction("setGlobalFrozen", &Entity::setGlobalFrozen)
+            .addFunction("getGlobalFrozen", &Entity::getGlobalFrozen)
+            .addFunction("setFrozen", &Entity::setFrozen)
+            .addFunction("getFrozen", &Entity::getFrozen)
+            .addFunction("getNearestEntWithName", &Entity::getNearestEntWithName)
+            .addFunction("getNearestEntity", &Entity::getNearestEntity)
+            .addFunction("getDistanceBetweenTwoPointsAPI", &Entity::getDistanceBetweenTwoPointsAPI)
+            .addFunction("Shake", &Entity::Shake)
+            .addFunction("isPlayer", &Entity::isPlayer)
+            .addFunction("setInverted", &Entity::setInverted)
+            .addFunction("pushInsideLevel", &Entity::pushInsideLevel)
+            .addFunction("restartCollisionBox", &Entity::restartCollisionBox)
+            .addFunction("playDamageAnimation", &Entity::playDamageAnimation)
+            .addFunction("setDamageAnimation", &Entity::setDamageAnimation)
+            .addFunction("UpdateKeyPresses", &Entity::UpdateKeyPresses)
+            .addFunction("setAnimationTag", &Entity::setAnimationTag)
+            .addFunction("playAnimationTag", &Entity::playAnimationTag)
+            .addFunction("isAnimationPlaying", &Entity::isAnimationPlaying)
+            .addFunction("getLastX", &Entity::getLastX)
+            .addFunction("getLastY", &Entity::getLastY)
+            .addFunction("getLastZ", &Entity::getLastZ)
+            .addFunction("setCollisionBox", &Entity::setCollisionBox)
+            .addFunction("Delay", &Entity::Delay)
+            .addFunction("setUIText", &Entity::setUIText)
+            .addFunction("getPaused", &Entity::getPaused)
+            .addFunction("setPaused", &Entity::setPaused)
+            .addFunction("getDefaultSpeed", &Entity::getDefaultSpeed)
+            .addFunction("damageNearest", &Entity::damageNearest)
+            .addFunction("damageNearestEnt", &Entity::damageNearestEnt)
+            .addFunction("setBrightness", &Entity::setBrightness)
+            .addFunction("getProjCount", &Entity::getProjCount)
+            .addFunction("setProjCount", &Entity::setProjCount)
+            .addFunction("Emit", &Entity::Emit)
+            .addFunction("copyPlayerRot", &Entity::copyPlayerRot)
+            .addFunction("setRot", &Entity::setRot)
+            .addFunction("setPlayerTag", &Entity::setPlayerTag)
+            .addFunction("getPlayerTag", &Entity::getPlayerTag)
+            .addFunction("resetFrame", &Entity::resetFrame)
+            .addFunction("setHue", &Entity::setHue)
+            .addFunction("setSaturation", &Entity::setSaturation)
+            .addFunction("setValue", &Entity::setValue)
+            .addFunction("setParticleSpread", &Entity::setParticleSpread)
+            .addFunction("setParticleModel", &Entity::setParticleModel)
+            .addFunction("playSound", &Entity::playSound)
+            .addFunction("setCollide", &Entity::setCollide)
+            .addFunction("getDefaultAnim", &Entity::getDefaultAnim)
+            .addFunction("getAnimationID", &Entity::getAnimationID)
+            .addFunction("hasAnimation", &Entity::hasAnimation)
+            .addFunction("showHealth", &Entity::showHealth)
+            .addFunction("setHPColor", &Entity::setHPColor)
+            .addFunction("getType", &Entity::getTypeLua)
+            .addFunction("setText", &Entity::setText)
+            .addFunction("getEntityCount", &Entity::getEntityCount)
+            .addFunction("setTextColor", &Entity::setTextColor)
+            .addFunction("getMoveDirX", &Entity::getMoveDirX)
+            .addFunction("getMoveDirY", &Entity::getMoveDirY)
+            .addFunction("getArrowDirX", &Entity::getArrowDirX)
+            .addFunction("getArrowDirY", &Entity::getArrowDirY)
+            .addFunction("setMapTarget", &Entity::setMapTarget)
+            .addFunction("swapMap", &Entity::swapMap)
+            .addFunction("round", &Entity::Round)
+            .addFunction("addAbility", &Entity::addAbility)
+            .addFunction("getAbility", &Entity::getAbility)
+            .addFunction("setScreenColor", &Entity::setScreenColor)
+            .addFunction("setDrawScene", &Entity::setDrawScene)
+            .addFunction("stopProgram", &Entity::stopProgram)
+            .addFunction("getAbilityCount", &Entity::getAbilityCount)
+            .addFunction("clearAbilities", &Entity::clearAbilities)
+            .addFunction("getAbilityDescription", &Entity::getAbilityDescription)
+            .addFunction("setSpread", &Entity::setSpread)
+            .addFunction("setProjColor", &Entity::setProjColor)
+            .addFunction("setProjDelay", &Entity::setProjDelay)
+
+            .addFunction("setObjectPos", &Entity::setObjectPos)
+            .addFunction("setObjectColor", &Entity::setObjectColor)
+            .addFunction("setObjectScale", &Entity::setObjectScale)
+            .addFunction("setEnemyTarget", &Entity::setEnemyTarget)
+            .addFunction("getObjectX", &Entity::getObjectX)
+            .addFunction("getObjectY", &Entity::getObjectY)
+            .addFunction("getObjectZ", &Entity::getObjectZ)
+            .addFunction("setUICam", &Entity::setUICam)
+            .addFunction("setDrawUI", &Entity::setDrawUI)
+            .addFunction("setProjRange", &Entity::setProjRange)
+            .addFunction("setTextSize", &Entity::setTextSize)
+            .addFunction("setImage", &Entity::setImage)
+            .addFunction("setImageTransform", &Entity::setImageTransform)
+            .addFunction("setImageDraw", &Entity::setImageDraw)
+            .addFunction("setMouseCapture", &Entity::setMouseCapture)
+            .addFunction("setScreenResolution", &Entity::setScreenResolution)
+                
+            .endClass();
+    }
     std::string removeWord(std::string str, std::string word)
     {
         if (str.find(word) != std::string::npos)
@@ -163,8 +322,8 @@ public:
        SDL_GetMouseState(&xMouse, &yMouse);
        float xPlacePos = (float)xMouse;
        float yPlacePos = (float)yMouse;
-       xPlacePos -= WIDTH / 2.0;
-       yPlacePos -= HEIGHT / 2.0;
+       xPlacePos -= Width / 2.0;
+       yPlacePos -= Height / 2.0;
        xPlacePos = -xPlacePos/1.7f;
        yPlacePos = -yPlacePos/1.7f;
        xPlacePos *= 2.0;
@@ -182,7 +341,7 @@ public:
     return value + ((nearest-(value % nearest)) % nearest);
   }
   void addEntity(std::string script, std::string type, lua_State* L) {
-    luaL_openlibs(L);
+    //luaL_openlibs(L);
     luah::loadScript(L,script);
     luabridge::LuaRef entityRef = luabridge::getGlobal(L,"entities");
     for (int i = 0; i < entityRef.length(); ++i) {
@@ -192,7 +351,7 @@ public:
     Entity * e = loadEntity(L,type);
     e->setUpCollider(&scene,e->scaleColl);
     e->LPointer = L;
-    e->OnStart(L);
+    //e->OnStart(L);
     entities.push_back(e);
   }
   void addProp(std::string folder,glm::vec3 scale,glm::vec3 pos1, float rot, bool collide) {
@@ -201,17 +360,18 @@ public:
     props.push_back(p);
   }
   void addEntityAtPos(std::string script, std::string type, glm::vec2 pos, lua_State* L) {
-      {
-          Timer t = Timer("loading entity script");
-          luaL_openlibs(L);
-          entityPos.push_back(pos);
-          luah::loadScript(L, convertPath("./res/scripts/" + type + ".lua"));
-          //std::cout << "path is: " << convertPath("./res/scripts/" + type + ".lua") << "\n";
-      }
       Entity* e;
+          
+          if (L != nullptr && functionsAdded == false) {
+              functionsAdded = true;
+              addFunctions(L);
+          }
       {
-          Timer t = Timer("adding entity");
+          Timer t = Timer("adding entity " + type);
           e = loadEntity(L, type);
+          
+      }
+      std::cout << "\n\n\n\n\n\n";
           //std::cout << "loaded entity with type: " << type << "\n";
           if (type != "player") {
               e->setPos(pos.x, 0.0f, pos.y);
@@ -226,9 +386,6 @@ public:
           e->startingPos = pos;
           e->pos = glm::vec3(pos.x, 0.0f, pos.y);
           this->L = L;
-
-      }
-      
   }
   void addEntityAtPos2(std::string script, std::string type, glm::vec2 pos, lua_State* L) {
       entitySpawnData data;
@@ -278,11 +435,13 @@ public:
   void resetFloor() {
       floor.init(glm::vec3(1000.0f, 1.0, 1000.0f), glm::vec3(0.0f, 0.0f, 0.0f), &scene, eStaticBody);
   }
-  EntitySystem ()  : scene(1.0/180.0), clickObject("./res/X.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",false) {
+  EntitySystem ()  : scene(1.0/60.0), clickObject("./res/X.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",false) {
     floor.init(glm::vec3(1000.0f, 1.0, 1000.0f), glm::vec3(0.0f, 0.0f, 0.0f), &scene, eStaticBody);
-
+    scene.SetIterations(5);
     topDownCamera.InitCam(glm::vec3(0, 1000, 0), 70.0, 800.0f / 600.0f, 0.01f, 2000.0f);
     topDownCamera.Pitch(1.57);
+
+    LPointer = L;
     //mapOfConsoleCommands["print"] = &runPrintCommand;
     //mapOfConsoleCommands.emplace("help", &EntitySystem::helpCommand);
     //mapOfConsoleCommands.emplace("spawnEntity", &EntitySystem::spawnEntityCommand);
@@ -313,6 +472,8 @@ public:
   void checkSpawnedEntities(lua_State* L) {
     for (Entity * e : entities) {
       for (SpawnData sD : e->spawnedEntityData) {
+        //auto addEnt = std::async(&EntitySystem::addEntityAtPos, this, "res/scripts/entities.lua", sD.name, sD.pos, L);
+        
         addEntityAtPos("res/scripts/entities.lua",sD.name,sD.pos,L);
       }
       if (e->spawnedEntityData.size()>0) {
@@ -346,15 +507,6 @@ public:
 
   void spawnEntities(lua_State * L) {
       for (entitySpawnData data : spawnData) {
-          luaL_openlibs(L);
-          luah::loadScript(L, data.script);
-          luabridge::LuaRef entityRef = luabridge::getGlobal(L, "entities");
-
-          for (int i = 0; i < entityRef.length(); ++i) {
-              std::string name = entityRef[i + 1].cast<std::string>();
-          }
-          luah::loadScript(L, "res/scripts/" + data.type + ".lua");
-
           Entity* e = loadEntity(L, data.type);
           std::cout << "added entity with type: " << data.type << "\n";
 
@@ -389,13 +541,12 @@ public:
     setHeroTarget();
     checkForCollisionError();
     //checkForConsole();
+    scenePointer = &scene;
+    scene.setTimescale(1.0 / (FPS));
     entityCount = entities.size();
     double timer = SDL_GetTicks();
     if (isConsoleOpen || isLevelEditorOpen) {
         SDL_SetRelativeMouseMode(SDL_FALSE);
-    }
-    else {
-        SDL_SetRelativeMouseMode(SDL_TRUE);
     }
   //  clearText();
   //  addTextBox(*text,glm::vec2(-0.9f,0.9f), glm::vec3(1.0f,1.0f,0.0f), 30);
@@ -419,13 +570,28 @@ public:
     //   DumpToFile();
     //   dumped = true;
     // }
+    if (resetText == true) {
+        bool hasReset = true;
+        for (int i = 0; i < entities.size(); i++) {
+            auto guiC = entities[i]->get<GUIComponent>();
+            if (guiC != NULL) {
+                if (guiC->resetFont == false) {
+                    hasReset = false;
+                }
+            }
+        }
+        if (hasReset == true) {
+            resetText = false;
+        }
+    }
     
     for (int i = 0; i<entities.size(); i++) {
-      entityPos[i] = glm::vec2(entities[i]->pos.x, entities[i]->pos.z);
+      //entityPos[i] = glm::vec2(entities[i]->pos.x, entities[i]->pos.z);
       
       // if (entities[i]->type == "player") {
       //   std::cout << entities[i]->collider.body->GetTransform( ).position.z << "\n";
       // }
+      
       entities[i]->allEntities = &entities;
       entities[i]->scenePointer = &scene;
       entities[i]->speedModifier = speedMultiplier;
@@ -450,7 +616,7 @@ public:
           //delete entities[i];
           entities[i]->emitter.particles.clear();
           free(entities[i]);
-          entityPos.erase(entityPos.begin() + i);
+          //entityPos.erase(entityPos.begin() + i);
           entities.erase(entities.begin() + i);
           //std::cout << "killed entity\n";
       }
@@ -471,9 +637,6 @@ public:
         entities[i]->lastPos = entities[i]->pos;
     }
     scene.Step();
-    scene.Step();
-    scene.Step();
-
     for (Entity * e : entities) {
         if (e->map != "") {
             std::string val = e->map;
@@ -484,18 +647,12 @@ public:
         text = e->textPointer;
         e->modText = false;
       }
-      // if (e->moved == false && e->type == "player") {
-      //   e->pos.x = e->startingPos.x;
-      //   e->pos.z = e->startingPos.y;
-      //   e->collider.setPos(glm::vec3(e->startingPos.x, 0.0, e->startingPos.y));
-      // }
       if (e->hasCollision) {
           if (e->type != "player") {
               e->pos = glm::vec3(e->collider.getPos().x, 0.0f, e->collider.getPos().z);
           }
           else {
               e->pos = glm::vec3(e->collider.getPos().x, 0.0f, e->collider.getPos().z);
-
               //e->setCamPos(glm::vec3(e->collider.getPos().x,2.0f,e->collider.getPos().z));
               //e->collider.setPos(e->getCamPos());
           }
@@ -525,7 +682,6 @@ public:
       if (projc != NULL) {
         for (int i = 0; i < projc->objects.size(); i++) {
           if (projc->objects[i]->boxDestroy == true) {
-
             scene.RemoveBody(projc->objects[i]->projB.body);
             delete projc->objects[i];
             projc->objects.erase(projc->objects.begin()+i);
@@ -563,18 +719,7 @@ public:
       }
       if (projc != NULL) {
         if (!projc->objects.empty()) {
-          for (Object * o : projc->objects) {
-
-            if (o->hasInit == false) {
-              o->projB.init(glm::vec3(2.0f,2.0f,2.0f),glm::vec3(0.0f,0.0f,0.0f),&scene,eDynamicBody);
-              // o->projB.setPos(glm::vec3(o->projB.getPos().x-o->forward.x*5.0f,o->projB.getPos().y,o->projB.getPos().z-o->forward.z*5.0f));
-
-              o->projB.body->SetLinearVelocity(q3Vec3(o->forward.x*projc->speed*projc->SpeedMultiplier*100.0f,o->forward.y*projc->speed*projc->SpeedMultiplier*100.0f,o->forward.z*projc->speed*projc->SpeedMultiplier*100.0f));
-              o->hasInit = true;
-            }else {
-              // std::cout << "Forward Firing:" << o->projB.body->GetLinearVelocity().y << std::endl;
-            }
-          }
+          
           // for (o : projc->objects) {
           //   o->projB.init(glm::vec3(1.0f,1.0f,1.0f),glm::vec3(0.0f,0.0f,0.0f),&scene,eDynamicBody);
           // }
@@ -610,22 +755,23 @@ public:
        bool coll = false;
        for (Entity * eTarget : entities) {
          auto projc = eTarget->get<ProjectileComponent>();
-
+         
          if (projc != NULL) {
-           for (Object * o : projc->objects) {
+           for (Projectile * o : projc->objects) {
+               
             // o->Draw(getMainCam());
             if (eTarget->type != e->type) {
               // float dist = sqrt(pow(e->pos.x-o->getPos().x,2)+
               //                    pow(e->pos.z-o->getPos().z,2)*1.0f);
-              float dist3d = sqrt(pow(e->pos.x - o->getPos().x, 2) +
-                                  pow(e->pos.y - o->getPos().y, 2) +
-                                  pow(e->pos.z - o->getPos().z, 2) * 1.0);
+              float dist3d = sqrt(pow(e->pos.x - o->transform.getPos().x, 2) +
+                                  pow(e->pos.y - o->transform.getPos().y, 2) +
+                                  pow(e->pos.z - o->transform.getPos().z, 2) * 1.0);
               // std::cout << "PROJECTILE Y: " << o->getPos().y << " MIN Y: " << e->projMin.y << "\n";
-              if (e->getCollisionWithPoint(o->getPos()) == true && e->type != eTarget->type && !e->dead) {
+              if (e->getCollisionWithPoint(o->transform.getPos()) == true && e->type != eTarget->type && !e->dead) {
                 if (e->canBeHit && frozen == false && o->destroy == false && e->canBeHit == true) {
                   coll = true;
                   o->destroy = true;
-                  eTarget->Hit(o->timesBounced+1,e);
+                  eTarget->Hit(1,e);
                 }
               }
             }
@@ -765,6 +911,7 @@ public:
           if (isConsoleOpen == true && canKey == true) {
               isConsoleOpen = false;
               canKey = false;
+              SDL_SetRelativeMouseMode(SDL_TRUE);
           }
           else if (isConsoleOpen == false && canKey == true) {
               isConsoleOpen = true;
@@ -777,6 +924,7 @@ public:
           if (isLevelEditorOpen == true && canKey2 == true) {
               isLevelEditorOpen = false;
               canKey2 = false;
+              SDL_SetRelativeMouseMode(SDL_TRUE);
           }
           else if (isLevelEditorOpen == false && canKey2 == true) {
               isLevelEditorOpen = true;
@@ -800,6 +948,11 @@ public:
           if (projc != NULL) {
               projc->Draw(getMainCam());
           }
+      }
+  }
+  void DrawUI() {
+      for (Entity* e : entities) {
+          e->DrawUI();
       }
   }
   void Draw(double deltaTime) {
@@ -880,9 +1033,12 @@ public:
       }
     }
     Camera badCam;
-    std::cout << "No entity with a camera" << '\n';
+    //std::cout << "No entity with a camera" << '\n';
     return badCam;
   }
+  bool scriptsLoaded = false;
+  //bind lua functions for entities
+  bool functionsAdded = false;
   //vector storing player pos.
   glm::vec3 playerPos;
   bool frozen = false;
@@ -904,6 +1060,7 @@ public:
   std::vector<Entity*> entities;
   //vector storing all props in this system
   std::vector<Prop*> props;
+
   std::vector<entitySpawnData> spawnData;
 
   std::vector<Entity*> startEnt;

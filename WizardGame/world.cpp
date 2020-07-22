@@ -4,6 +4,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
 #include <future>
+extern bool drawUI;
 extern bool drawScene;
 extern double FPS;
 void World::Update() {
@@ -35,7 +36,9 @@ void World::Draw() {
   if (drawScene == true) {
         testMap.eSystem.Draw(deltaTime);
   }
-  
+  if (drawUI == true) {
+      testMap.eSystem.DrawUI();
+  }
   testMap.eSystem.drawText();
 }
 World::~World() {}

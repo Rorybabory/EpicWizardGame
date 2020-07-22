@@ -1,0 +1,22 @@
+﻿  TextRenderer.cpp
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(56,24): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(56,45): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(103,34): warning C4244: 'argument': conversion from 'FT_Int' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(104,43): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(112,49): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(114,46): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(115,60): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(115,46): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(120,45): warning C4244: 'argument': conversion from 'FT_Pos' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\glfreetype\TextRenderer.cpp(251,78): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in freetype.lib(freetype.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: glewInit already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: glewIsSupported already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: glewGetExtension already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: glewGetErrorString already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: glewGetString already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: wglewInit already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: wglewIsSupported already defined in glew32.lib(glew32.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: wglewGetExtension already defined in glew32.lib(glew32.dll); second definition ignored
+OpenGL32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in freetype.lib(freetype.dll); second definition ignored
+  glfreetype.vcxproj -> C:\Users\lambe\source\repos\WizardGame\x64\Release\glfreetype.lib

@@ -1,0 +1,16 @@
+﻿  pch.cpp
+  ChildFrm.cpp
+  ClassView.cpp
+  FileView.cpp
+  MainFrm.cpp
+  OutputWnd.cpp
+  PropertiesWnd.cpp
+  Setup.cpp
+  SetupDoc.cpp
+  SetupView.cpp
+  ViewTree.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 628 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Setup.vcxproj -> C:\Users\lambe\source\repos\WizardGame\x64\Release\Setup.exe

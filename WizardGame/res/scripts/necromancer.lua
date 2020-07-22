@@ -47,7 +47,7 @@ function necromancer_Update(e)
 		e:setPos(e:random(-50, 50)+e:getX(),0.0,e:random(-50, 50)+e:getZ())
 		e:setFloat("teleportCount", 0)
 	end
-    if (e:getFloat("raiseCount") > 240) then
+    if (e:getFloat("raiseCount") > 300) then
         e:setFloat("raiseCount", 0)
         e:playAnimationTag("raise")
 		if (e:getEntityCount() < 12) then

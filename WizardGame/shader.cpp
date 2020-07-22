@@ -140,7 +140,11 @@ void Shader::Update(const Transform& transform, const Camera& camera) {
 
   glUniformMatrix4fv(m_uniforms[TRANSFORM_U],1,GL_FALSE, &model[0][0]);
 }
+void Shader::Update(const Transform& transform) {
+    glm::mat4 model = transform.GetModel();
 
+    glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+}
 std::string Shader::LoadShader(const std::string& fileName)
 {
     std::ifstream file;

@@ -48,15 +48,16 @@ function zombie_Update(e)
 			e:playSound("./res/sounds/hit.wav")
 		end
 	end
-	e:moveForward(0.45)
+	e:moveForward(e:getFloat("speed"))
 	e:setColor(1.0,1.0,1.0,1.0)
-
+	e:setFloat("speed",(e:getGlobalFloat("wave")/18)+0.3)
 end
 function zombie_Start(e)
     e:setHP(4)
     e:lookAtPlayer()
     e:setScale(1.2+e:random(0,0.2))
     e:setFloat("raiseCount", 0)
+	e:setFloat("speed", 0.45)
     e:setCollisionBox(1.5,1.5,4.2)
     e:restartCollisionBox()
     e:setAnimationTag("default",2)

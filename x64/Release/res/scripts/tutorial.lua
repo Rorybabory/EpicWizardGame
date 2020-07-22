@@ -2,13 +2,13 @@ tutorial = {
 
   {
 	componentName = "GUIComponent",
-	font = "./res/Avara.ttf",
+	font = "./res/fonts/CaslonAntique.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 30
+	size = 40
   }
 }
 function tutorial_Hit(e,e2,hits)
@@ -33,16 +33,16 @@ function tutorial_Update(e)
 	end
 	if (e:getString("fading") == "in") then
 		e:setFloat("fade", e:getFloat("fade")+0.01)
-		e:setText("tutorial", e:getString("tutText"), -0.7, 0.0)
+		e:setText("tutorial", e:getString("tutText"), -0.7, 0.1)
 		if (e:getFloat("fade") > 1.0) then
 			e:setString("fading", "")
 		end
 	elseif (e:getString("fading") == "out") then
 		e:setFloat("fade", e:getFloat("fade")-0.01)
-		e:setText("tutorial", e:getString("fadeOutText"), -0.7, 0.0)
+		e:setText("tutorial", e:getString("fadeOutText"), -0.7, 0.1)
 
 		if (e:getFloat("fade") < 0.01) then
-			e:setText("tutorial", e:getString("tutText"), -0.7, 0.0)
+			e:setText("tutorial", e:getString("tutText"), -0.7, 0.1)
 			e:setString("fading", "in")
 		end
 	end
@@ -55,7 +55,7 @@ function tutorial_Update(e)
 	elseif (e:getFloat("tutStage") == 1) then
 		if (e:getKeyPressed() == "SPACE") then
 			e:setFloat("tutStage", 2)
-			e:setString("tutText", "You can now hold SHIFT \n to use your ability\n The default ability \n damages any enemies \n nearby. You get \n new ones later.")
+			e:setString("tutText", "You can now hold SHIFT \n to use your ability\n The default ability \n damages any enemies \n nearby. You can change it later.")
 		end
 	elseif (e:getFloat("tutStage") == 2) then
 		if (e:getKeyPressed() == "LSHIFT") then
@@ -65,8 +65,8 @@ function tutorial_Update(e)
 		end
 	elseif (e:getFloat("tutStage") == 3) then
 		if (e:getEntityCount() < 3) then
-			e:setString("tutText", "You finished \n the tutorial!\n Now press SHIFT to start \n a game!")
-			if (e:getKeyPressed() == "LSHIFT") then
+			e:setString("tutText", "You finished the tutorial!\n Now press TAB to start \n a game!")
+			if (e:getKeyPressed() == "TAB") then
 				e:setMapTarget("mainMap")
 			end
 		end
@@ -86,6 +86,6 @@ function tutorial_Start(e)
 	e:showHealth(false)
 	e:setString("fading", "")
 	e:setTextColor(1.0,1.0,1.0,1.0)
-	e:setText("tutorial", e:getString("tutText"), -0.7, 0.0)
+	e:setText("tutorial", e:getString("tutText"), -0.7, 0.1)
 end
 

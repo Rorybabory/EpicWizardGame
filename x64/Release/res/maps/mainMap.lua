@@ -100,15 +100,6 @@ mainMap = {
     },
     {
         type = "prop",
-        file = "house3",
-        scale = 2,
-        x = 152.941,
-        y = 109.412,
-        collides = true,
-        rot = 2.35619
-    },
-    {
-        type = "prop",
         file = "house4",
         scale = 2,
         x = -169.412,
@@ -295,8 +286,8 @@ mainMap = {
     },
 	{
         type = "entity",
-        file = "spawner",
-        x = -60.0,
+        file = "abilityManager",
+        x = 0.0,
         y = 0.0,
-    },
+    }
 }

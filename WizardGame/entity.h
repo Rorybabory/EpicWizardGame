@@ -15,11 +15,13 @@
 #include "particle.h"
 #include <LuaBridge/LuaBridge.h>
 #include <memory>
+#include "ObjectComponent.h"
 #include "GraphicsComponent.h"
 #include "StaticGraphicsComponent.h"
 #include "NpcComponent.h"
 #include "GUIComponent.h"
 #include "CameraComponent.h"
+#include "AudioComponent.h"
 #include "Component.h"
 #include <qu3e/q3.h>
 #include "CollisionSystem.h"
@@ -27,19 +29,33 @@
 #include "Audio.h"
 #include "HealthBar.h"
 #include <map>
+#include "Ability.h"
+#include "Timer.h"
+#include "Globals.h"
 #ifndef ENTITY_H
 #define ENTITY_H
+
+extern glm::vec2 enemyTarget;
 extern float brightness;
 extern float cullDistance;
 extern float red;
 extern std::map<std::string, float> GlobalFloatsVars;
 extern std::map<std::string, bool> GlobalBoolsVars;
 extern glm::vec4 screenColor;
-
+extern bool drawUI;
 extern std::string playerTag;
 extern std::vector<std::string> playerAbilities;
+extern std::vector<std::string> playerAbilitiesDesc;
 extern bool drawScene;
-
+extern float Width;
+extern float Height;
+extern double FPS;
+extern q3Scene* scenePointer;
+extern lua_State * LPointer;
+extern bool resetWindow;
+extern bool resetFramebuffer;
+extern bool resetCamera;
+extern bool resetText;
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
                   pow(y-y2, 2));
@@ -132,7 +148,9 @@ public:
   //CollisionObject("./res/cube.obj",glm::vec4(0.0f,1.0f,0.0f,1.0f),"./res/basicShader",true),
   //                                                              CollisionObject2("./res/cube.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",true),
                                                                 emitter(glm::vec3(0.0), 100, 100, 1.0, true){
-      UICam.InitCam(glm::vec3(0, 0, 0), 70, 800.0f / 600.0f, 0.01f, 1000.0f);
+      Timer addingUICam = Timer("adding UI camera");
+      UICam.InitCam(glm::vec3(0, 0, 0), 70, Width / Height, 0.01f, 1000.0f);
+      UICam.Pitch(1.57);
   }
   void CompileLuaFunctions(lua_State* L) {
     std::string UpdateString = type + "_Update";
@@ -147,8 +165,8 @@ public:
       // std::cout << "YOU HIT A " << type << " AT " << pos.x << " " << pos.z << " with " << hits << " hits" << '\n';
       std::string HitString = type + "_Hit";
       try {
-//        auto hit = luabridge::getGlobal(L,HitString.c_str());
-        HitFunction(this,ent,hits);
+        //auto hit = luabridge::getGlobal(L,HitString.c_str());
+          HitFunction(this,ent,hits);
       }catch(luabridge::LuaException const& e) {
         std::cout << "MISSING HIT FUNCTION..." << '\n';
       }
@@ -178,10 +196,18 @@ public:
           guiC->Draw();
       }
   }
+  void DrawUI() {
+      auto gfxc = get<GraphicsComponent>();
+      if (gfxc != NULL && gfxc->useUICam == true) {
+          gfxc->Update(speedModifier);
+          gfxc->Draw(UICam);
+      }
+  }
   void Draw(Camera cam, bool f) {
     auto gfxc = get<GraphicsComponent>();
-    if (type != "player" && showHP == true) {
-        bar.Draw(cam, pos + glm::vec3(0.0, projMax.y+1.0, 0.0));
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        objc->Draw(&cam);
     }
     checkCullingCount++;
     if (checkCullingCount > 20) {
@@ -190,27 +216,25 @@ public:
     }
     
     emitter.drawParticles(cam);
-    if (gfxc != NULL && !dead) {
-      if (f == false && frozen == false && isPaused == false) {
-        gfxc->Update(speedModifier);
 
+    if (gfxc != NULL && !dead) {
+      if (f == false && frozen == false && isPaused == false && gfxc->useUICam == false) {
+        gfxc->Update(speedModifier);
       }
       if (isPaused != true) {
-          if (type == "hand") {
-              gfxc->Draw(UICam);
-          }
-          else {
-              gfxc->Draw(cam);
+          if (gfxc->useUICam == false) {
+              gfxc->Draw(cam);   
           }
       }
-      
     }
     auto sgfxc = get<StaticGraphicsComponent>();
     if (sgfxc != NULL && !dead) {
       sgfxc->Update();
       sgfxc->Draw(cam);
     }
-    
+    if (type != "player" && showHP == true) {
+        bar.Draw(cam, pos + glm::vec3(0.0, projMax.y + 1.0, 0.0));
+    }
   }
   bool getCollisionWithPoint(glm::vec3 point) {
     return  (point.x >= projMin.x-3.0f && point.x <= projMax.x+3.0f) &&
@@ -218,6 +242,7 @@ public:
             (point.z >= projMin.z-3.0f && point.z <= projMax.z+3.0f);
   }
   void Update(lua_State* L, q3Scene * scene) {
+      
     emitter.updateParticles();
     pushInsideLevel();
     auto graphics = get<GraphicsComponent>();
@@ -260,6 +285,7 @@ public:
         if (sgraphics->color.z < 0.0) {sgraphics->color.z = 0.0;}
     }
     if (graphics != NULL) {
+        
       if (graphics->colorFlash.x > 0.0) {graphics->colorFlash.x-=0.03;}
       if (graphics->colorFlash.y > 0.0) {graphics->colorFlash.y-=0.03;}
       if (graphics->colorFlash.z > 0.0) {graphics->colorFlash.z-=0.03;}
@@ -310,10 +336,10 @@ public:
     std:string UpdateString = type + "_Update";
     try {
       if (!dead && !frozen) {
-        // UpdateFunction = luabridge::getGlobal(L,UpdateString.c_str());
-        UpdateFunction(this);
-      }else {
-        pos = glm::vec3(999.0f,999.0f,999.0f);
+          {
+              UpdateFunction(this);
+          }
+        
       }
 
     }catch(luabridge::LuaException const& e) {
@@ -362,145 +388,16 @@ public:
     else {
         collider.init(scale, glm::vec3(500.0f, 500.0f, 0.0f), scene, eDynamicBody);
     }
-    
   }
-  //ADDS FUNTIONS FOR API
-  void addFunctions(lua_State* L) {
-    using namespace luabridge;
-    getGlobalNamespace(L)
-      .beginNamespace("util")
-      .addFunction("getDistance",&getDistance)
-      .endNamespace()
-      .beginClass<Entity>("Entity")
-      // .addFunction("Damage",&Entity::Damage)
-      .addFunction("setAnimation",&Entity::setAnimation)
-      .addFunction("playAnimation",&Entity::playAnimation)
-      .addFunction("getAnimation",&Entity::getAnimation)
-      .addFunction("setPos",&Entity::setPos)
-      .addFunction("getX",&Entity::getX)
-      .addFunction("getY",&Entity::getY)
-      .addFunction("getZ",&Entity::getZ)
-      .addFunction("setColorFlash",&Entity::setColorFlash)
-      .addFunction("setColor", &Entity::setColor)
-      .addFunction("lookAt",&Entity::lookAt)
-      .addFunction("lookAtPlayer",&Entity::lookAtPlayer)
-      .addFunction("moveForward",&Entity::moveForward)
-      .addFunction("moveBackward",&Entity::moveBackward)
-      .addFunction("Strafe",&Entity::Strafe)
-      .addFunction("write",&Entity::write)
-      .addFunction("random",&Entity::random)
-      .addFunction("randomInt", &Entity::randomInt)
-      .addFunction("setScale",&Entity::setScale)
-      .addFunction("getPlayerDistance",&Entity::getPlayerDistance)
-      .addFunction("getKeyDirectionX",&Entity::getKeyDirectionX)
-      .addFunction("getKeyDirectionY",&Entity::getKeyDirectionY)
-      .addFunction("FPSControllerUpdate",&Entity::FPSControllerUpdate)
-      .addFunction("kill",&Entity::kill)
-      .addFunction("getHP",&Entity::getHP)
-      .addFunction("setHP",&Entity::setHP)
-      .addFunction("addCounter",&Entity::addCounter)
-      .addFunction("updateCounter",&Entity::updateCounter)
-      .addFunction("getCount",&Entity::getCount)
-      .addFunction("setCount",&Entity::setCount)
-      .addFunction("killProgram",&Entity::killProgram)
-      .addFunction("spawnEntity",&Entity::spawnEntity)
-      .addFunction("Fire", &Entity::Fire)
-      .addFunction("getFloat", &Entity::getFloat)
-      .addFunction("setFloat", &Entity::setFloat)
-      .addFunction("getGlobalFloat", &Entity::getGlobalFloat)
-      .addFunction("setGlobalFloat", &Entity::setGlobalFloat)
-      .addFunction("getGlobalBool", &Entity::getGlobalBool)
-      .addFunction("setGlobalBool", &Entity::setGlobalBool)
-      .addFunction("getBool", &Entity::getBool)
-      .addFunction("setBool", &Entity::setBool)
-      .addFunction("getString", &Entity::getString)
-      .addFunction("setString", &Entity::setString)
-      .addFunction("getAnimFrame", &Entity::getAnimFrame)
-      .addFunction("getKeyPressed", &Entity::getKeyPressed)
-      .addFunction("setCanBeHit", &Entity::setCanBeHit)
-      .addFunction("setFOV", &Entity::setFOV)
-      .addFunction("TopDownUpdate", &Entity::TopDownUpdate)
-      .addFunction("isFirstPerson", &Entity::isFirstPerson)
-      .addFunction("lookAtNearest", &Entity::lookAtNearest)
-      .addFunction("getDistanceFromNearest", &Entity::getDistanceFromNearest)
-      .addFunction("getDistanceFromNearestNot", &Entity::getDistanceFromNearestNot)
-      .addFunction("getDistanceFromNearestEnt", &Entity::getDistanceFromNearestEnt)
-      .addFunction("getPositionFromNearestX", &Entity::getPositionFromNearestX)
-      .addFunction("getPositionFromNearestY", &Entity::getPositionFromNearestY)
-      .addFunction("doesEntityExist", &Entity::doesEntityExist)
-      .addFunction("setGlobalFrozen", &Entity::setGlobalFrozen)
-      .addFunction("getGlobalFrozen", &Entity::getGlobalFrozen)
-      .addFunction("setFrozen", &Entity::setFrozen)
-      .addFunction("getFrozen", &Entity::getFrozen)
-      .addFunction("getNearestEntWithName", &Entity::getNearestEntWithName)
-      .addFunction("getNearestEntity", &Entity::getNearestEntity)
-      .addFunction("getDistanceBetweenTwoPointsAPI", &Entity::getDistanceBetweenTwoPointsAPI)
-      .addFunction("Shake", &Entity::Shake)
-      .addFunction("isPlayer", &Entity::isPlayer)
-      .addFunction("setInverted", &Entity::setInverted)
-      .addFunction("pushInsideLevel", &Entity::pushInsideLevel)
-      .addFunction("restartCollisionBox", &Entity::restartCollisionBox)
-      .addFunction("playDamageAnimation", &Entity::playDamageAnimation)
-      .addFunction("setDamageAnimation", &Entity::setDamageAnimation)
-      .addFunction("UpdateKeyPresses", &Entity::UpdateKeyPresses)
-      .addFunction("setAnimationTag", &Entity::setAnimationTag)
-      .addFunction("playAnimationTag", &Entity::playAnimationTag)
-      .addFunction("isAnimationPlaying", &Entity::isAnimationPlaying)
-      .addFunction("getLastX", &Entity::getLastX)
-      .addFunction("getLastY", &Entity::getLastY)
-      .addFunction("getLastZ", &Entity::getLastZ)
-      .addFunction("setCollisionBox", &Entity::setCollisionBox)
-      .addFunction("Delay", &Entity::Delay)
-      .addFunction("setUIText", &Entity::setUIText)
-      .addFunction("getPaused", &Entity::getPaused)
-      .addFunction("setPaused", &Entity::setPaused)
-      .addFunction("getDefaultSpeed", &Entity::getDefaultSpeed)
-      .addFunction("damageNearest", &Entity::damageNearest)
-      .addFunction("damageNearestEnt", &Entity::damageNearestEnt)
-      .addFunction("setBrightness", &Entity::setBrightness)
-      .addFunction("getProjCount", &Entity::getProjCount)
-      .addFunction("setProjCount", &Entity::setProjCount)
-      .addFunction("Emit", &Entity::Emit)
-      .addFunction("copyPlayerRot", &Entity::copyPlayerRot)
-      .addFunction("setRot", &Entity::setRot)
-      .addFunction("setPlayerTag", &Entity::setPlayerTag)
-      .addFunction("getPlayerTag", &Entity::getPlayerTag)
-      .addFunction("resetFrame", &Entity::resetFrame)
-      .addFunction("setHue", &Entity::setHue)
-      .addFunction("setSaturation", &Entity::setSaturation)
-      .addFunction("setValue", &Entity::setValue)
-      .addFunction("setParticleSpread", &Entity::setParticleSpread)
-      .addFunction("setParticleModel", &Entity::setParticleModel)
-      .addFunction("playSound", &Entity::playSound)
-      .addFunction("setCollide", &Entity::setCollide)
-      .addFunction("getDefaultAnim", &Entity::getDefaultAnim)
-      .addFunction("getAnimationID", &Entity::getAnimationID)
-      .addFunction("hasAnimation", &Entity::hasAnimation)
-      .addFunction("showHealth", &Entity::showHealth)
-      .addFunction("setHPColor", &Entity::setHPColor)
-      .addFunction("getType", &Entity::getTypeLua)
-      .addFunction("setText", &Entity::setText)
-      .addFunction("getEntityCount", &Entity::getEntityCount)
-      .addFunction("setTextColor", &Entity::setTextColor)
-      .addFunction("getMoveDirX", &Entity::getMoveDirX)
-      .addFunction("getMoveDirY", &Entity::getMoveDirY)
-      .addFunction("setMapTarget", &Entity::setMapTarget)
-      .addFunction("swapMap", &Entity::swapMap)
-      .addFunction("round", &Entity::Round)
-      .addFunction("addAbility", &Entity::addAbility)
-      .addFunction("getAbility", &Entity::getAbility)
-      .addFunction("setScreenColor", &Entity::setScreenColor)
-      .addFunction("setDrawScene", &Entity::setDrawScene)
-      .addFunction("stopProgram", &Entity::stopProgram)
-      .addFunction("getAbilityCount", &Entity::getAbilityCount)
-      .addFunction("clearAbilities", &Entity::clearAbilities)
-    .endClass();
-  }
+ 
   float Round(float x) {
       return round(x);
   }
   void setCanBeHit(bool val) {
     this->canBeHit = val;
+  }
+  bool getCanBeHit() {
+      return canBeHit;
   }
   void setFloat(std::string name, float value) {
     FloatsVars[name] = value;
@@ -571,15 +468,37 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
-  void clearAbilities() { playerAbilities.clear(); }
+  void setScreenResolution(float width, float height);
+  void setMouseCapture(bool value);
+  void setImageDraw(std::string tag, bool draw);
+  void setImageTransform(float x, float y, float width, float height);
+  void setImage(std::string tag, std::string src);
+  void setTextSize(int textSize);
+  void setProjRange(int range);
+  float getObjectX();
+  float getObjectY();
+  float getObjectZ();
+  void setEnemyTarget(float x, float y);
+  void setObjectPos(float x, float y, float z);
+  void setObjectScale(float sc);
+  void setObjectColor(float r, float g, float b, float a);
+  void setProjColor(float r, float g, float b, float a);
+  void setProjDelay(int del);
+  void FireMultiple(int num);
+  void FireInstant();
+  void setSpread(float s);
+  void clearAbilities() { playerAbilities.clear(); playerAbilitiesDesc.clear();}
   int getAbilityCount() { return playerAbilities.size(); }
   void stopProgram();
   void setDrawScene(bool val);
   void setScreenColor(glm::vec4 ScreenColor);
-  void addAbility(std::string ability);
+  void addAbility(std::string ability, std::string description);
+  std::string getAbilityDescription(int val);
   std::string getAbility(int val);
   void swapMap() { changeMap = true; }
   void setMapTarget(std::string val) { map = val; }
+  float getArrowDirX() { return arrowDirection.x; }
+  float getArrowDirY() { return arrowDirection.y; }
   float getMoveDirX() { return moveDirection.x; }
   float getMoveDirY() { return moveDirection.y; }
   void setTextColor(float r, float g, float b, float a);
@@ -666,8 +585,8 @@ public:
   std::string getKeyPressed();
   void TopDownUpdate();
   void FPSControllerUpdate(float speed);
-  int getHP();
-  void setHP(int hp);
+  float getHP();
+  void setHP(float hp);
   void addCounter(int start);
   bool updateCounter(int counter,int end);
   int getCount();
@@ -683,6 +602,8 @@ public:
   void setPaused(bool val) { isPaused = val; }
   void Emit(int num, float r, float g, float b, float a);
   bool hasAnimation(std::string anim);
+  void setUICam(bool val);
+  void setDrawUI(bool val);
   //END API FUNCTIONS
 
   template <typename T>
@@ -731,7 +652,7 @@ public:
   glm::vec3 pos;
   glm::vec3 rot;
   std::string fire_type = "fireball";
-  int hp;
+  float hp;
   int count = 0;
   std::vector<int> counters;
   std::vector<std::string> spawnedEntityNames;
@@ -776,7 +697,6 @@ public:
   bool isPaused;
   float mainSpeed = 0.6f;
   bool godmode = false;
-  std::vector<glm::vec3> locations;
   Emitter emitter;
   int emitCount = 0;
   bool hasCollision = false;
@@ -785,10 +705,12 @@ public:
   HealthBar bar;
   float maxHP = -1.0;
   glm::vec2 moveDirection;
+  glm::vec2 arrowDirection;
   glm::vec4 currentColor = glm::vec4(0.0,0.0,0.0,1.0);
   std::string map;
   bool changeMap = false;
   glm::vec3 lastCameraUp = glm::vec3(0.0,0.0,1.0);
+  bool hasOnStart = false;
 protected:
 private:
   int checkCullingCount = 0;
@@ -806,55 +728,68 @@ template <typename T>
 void addComponent(Entity* e, luabridge::LuaRef& componentTable) {
   e->addComponent(std::type_index(typeid(T)), new T(componentTable));
 }
-static Entity* loadEntity(lua_State* L, const std::string& type) {
-
+static Entity* loadEntity(lua_State* L, const std::string& type) {  
+  Timer entityConstructor = Timer("entity constructor");
   auto e = new Entity(L);
-
+  entityConstructor.Stop();
   e->setType(type);
-  e->addFunctions(L);
-  std::cout << "added functions\n";
-
+  //e->addFunctions(L);
   luabridge::LuaRef entityRef = luabridge::getGlobal(L,type.c_str());
   for (int i = 0; i < entityRef.length(); ++i) {
     std::string componentName = entityRef[i+1]["componentName"];
     if (componentName == "GraphicsComponent") {
-      luabridge::LuaRef gcTable = entityRef[i+1];
-      std::cout << "about to add graphics component\n";
-      addComponent<GraphicsComponent>(e,gcTable);
-      std::cout << "added graphics component\n";
-
+        Timer timer("adding graphics component");
+        luabridge::LuaRef gcTable = entityRef[i+1];
+        addComponent<GraphicsComponent>(e,gcTable);
     }if (componentName == "StaticGraphicsComponent") {
-      luabridge::LuaRef sgcTable = entityRef[i+1];
-      addComponent<StaticGraphicsComponent>(e,sgcTable);
+        Timer timer("adding static graphics component");
+        luabridge::LuaRef sgcTable = entityRef[i+1];
+        addComponent<StaticGraphicsComponent>(e,sgcTable);
     }else if (componentName == "GUIComponent") {
-      luabridge::LuaRef guiTable = entityRef[i+1];
-      addComponent<GUIComponent>(e,guiTable);
+        Timer timer("adding GUI component");
+        luabridge::LuaRef guiTable = entityRef[i+1];
+        addComponent<GUIComponent>(e,guiTable);
     }else if (componentName == "CameraComponent") {
-      luabridge::LuaRef camTable = entityRef[i+1];
-      addComponent<CameraComponent>(e,camTable);
+        Timer timer("adding camera component");
+        luabridge::LuaRef camTable = entityRef[i+1];
+        addComponent<CameraComponent>(e,camTable);
     }else if (componentName == "BasicComponent") {
-      luabridge::LuaRef basicTable = entityRef[i+1];
-      // e->onStartFunc = basicTable["onStart"];
+        Timer timer("adding basic component");
+        luabridge::LuaRef basicTable = entityRef[i+1];
+        // e->onStartFunc = basicTable["onStart"];
     }else if (componentName == "ProjComponent") {
-      luabridge::LuaRef camTable = entityRef[i+1];
-      addComponent<ProjectileComponent>(e,camTable);
+        Timer timer("adding projectile component");
+        luabridge::LuaRef camTable = entityRef[i + 1];
+        addComponent<ProjectileComponent>(e, camTable);
+    }else if (componentName == "ObjectComponent") {
+        Timer timer("adding object component");
+        luabridge::LuaRef objTable = entityRef[i+1];
+        addComponent<ObjectComponent>(e,objTable);
     }else if (componentName == "CollisionComponent") {
-      luabridge::LuaRef collisionTable = entityRef[i+1];
-      luabridge::LuaRef scaleTable = collisionTable["scale"];
-      luabridge::LuaRef x = scaleTable["x"];
-      luabridge::LuaRef z = scaleTable["y"];
-      luabridge::LuaRef y = scaleTable["z"];
-      e->Min.x = -x.cast<float>();
-      e->Min.y = -y.cast<float>();
-      e->Min.z = -z.cast<float>();
-      e->Max.x = x.cast<float>();
-      e->Max.y = y.cast<float>();
-      e->Max.z = z.cast<float>();
-      e->scaleColl = glm::vec3(x.cast<float>(),z.cast<float>(),y.cast<float>());
-      e->hasCollision = true;
+        Timer timer("adding collision component");
+        luabridge::LuaRef collisionTable = entityRef[i+1];
+        luabridge::LuaRef scaleTable = collisionTable["scale"];
+        luabridge::LuaRef x = scaleTable["x"];
+        luabridge::LuaRef z = scaleTable["y"];
+        luabridge::LuaRef y = scaleTable["z"];
+        e->Min.x = -x.cast<float>();
+        e->Min.y = -y.cast<float>();
+        e->Min.z = -z.cast<float>();
+        e->Max.x = x.cast<float>();
+        e->Max.y = y.cast<float>();
+        e->Max.z = z.cast<float>();
+        e->scaleColl = glm::vec3(x.cast<float>(),z.cast<float>(),y.cast<float>());
+        e->hasCollision = true;
+    }
+    else if (componentName == "AuidioComponent") {
+        Timer timer("adding audio component");
+        luabridge::LuaRef audioTable = entityRef[i + 1];
+        addComponent<AudioComponent>(e, audioTable);
+
     }
     // std::cout << "Added " << componentName << " to " << type << '\n';
   }
+  Timer t = Timer("compiling lua function");
   e->CompileLuaFunctions(L);
   return e;
 }

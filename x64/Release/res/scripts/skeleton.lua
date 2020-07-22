@@ -57,7 +57,7 @@ function skeleton_Update(e)
 			e:setFloat("switchMode", 0);
 		end
 	else
-		if (e:getGlobalFloat("wave") > 5) then
+		if (e:getGlobalFloat("wave") > 12) then
 			e:moveForward(0.9)
 		else
 			e:moveForward(0.6)

@@ -15,7 +15,18 @@
 #include <vector>
 #include "mesh.h"
 #include "transform.h"
-
+struct Frame {
+    enum {
+        POSITION_VB,
+        TEXCOORD_VB,
+        NORMAL_VB,
+        INDEX_VB,
+        NUM_BUFFERS
+    };
+    GLuint vertexBuffer;
+    GLuint m_vertexArrayObject;
+    GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+};
 class animatedMesh {
 public:
   animatedMesh(std::string fileName);
@@ -40,6 +51,7 @@ public:
   IndexedModel modelSave;
   IndexedModel model;
   std::vector<IndexedModel> models;
+  std::vector<Frame> openglModels;
   float count = 0;
   glm::vec4 color;
   glm::vec3 min;

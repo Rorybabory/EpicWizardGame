@@ -92,6 +92,12 @@ void animatedMesh::CalculateSkeletalModel() {
         model2.indices.push_back(i);
       }
       models.push_back(model2);
+      //Frame frame;
+      //glGenVertexArrays(1, &frame.m_vertexArrayObject);
+      //glBindVertexArray(frame.m_vertexArrayObject);
+      //glGenBuffers(NUM_BUFFERS, frame.m_vertexArrayBuffers);
+
+      //openglModels.push_back(frame);
   }
 }
 void animatedMesh::UpdateMesh(const IndexedModel& model) {
@@ -164,6 +170,12 @@ bool animatedMesh::Update(int renderFrame) {
       }
       // model2.CalcNormals();
       models.push_back(model2);
+      //Frame frame;
+      //glGenVertexArrays(1, &frame.m_vertexArrayObject);
+      //glBindVertexArray(frame.m_vertexArrayObject);
+      //glGenBuffers(NUM_BUFFERS, frame.m_vertexArrayBuffers);
+
+      //openglModels.push_back(frame);
       // std::cout << "Updating Mesh Real Time..." << '\n';
     }
           // std::cout << "INDICES SIZE: " << indices.size() << std::endl;
@@ -180,39 +192,6 @@ bool animatedMesh::Update(int renderFrame) {
     return false;
   }
 }
-// void animatedMesh::InitMeshThread(const IndexedModel& model) {
-//   modelSave = model;
-//   numIndices = indices.size();
-// glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-// glBufferData(GL_ARRAY_BUFFER, sizeof(model.positions[0]) * model.positions.size(), &model.positions[0], GL_DYNAMIC_DRAW);
-//   glEnableVertexAttribArray(0);
-//   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-// glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-// glBufferData(GL_ARRAY_BUFFER, sizeof(model.normals[0]) * model.normals.size(), &model.normals[0], GL_DYNAMIC_DRAW);
-// glEnableVertexAttribArray(2);
-// glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-// glBindVertexArray(0);
-// // std::cout << "Animation Time: " << sModel.m_Animation.Duration*60.0f << '\n';
-// Duration = sModel.m_Animation.Duration*(sModel.m_Animation.Duration*60.0f);
-// std::cout << "Durration = " << Duration << " for: " << fileName << '\n';
-// for (float i = 0; i<=Duration; i++) {
-//   IndexedModel model2;
-//   sModel.Update((float)(16.0f)/1000);
-//   model1 = sModel.m_Meshes[0];
-//   for (int i = 0; i < indices.size(); i++) {
-//     int f = indices[i];
-//     model2.positions.push_back(model1.pTransformedVertices[f]);
-//     model2.normals.push_back(model1.pTransformedNormals[f]);
-//   }
-//   for(unsigned int i = 0; i < indices.size(); i++) {
-//     model2.indices.push_back(i);
-//   }
-//   models.push_back(model2);
-//   // std::cout << "Updated " << i << "..." << '\n';
-//
-// }
-// MeshStored = true;
-// }
 void animatedMesh::InitMeshModel(const IndexedModel& model)
 {
   // std::thread init (&animatedMesh::InitMeshThread,this,model);
@@ -223,19 +202,18 @@ void animatedMesh::InitMeshModel(const IndexedModel& model)
 
   glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(model.positions[0]) * model.positions.size(), &model.positions[0], GL_DYNAMIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+  glEnableVertexAttribArray(0);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
   glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(model.texCoords[0]) * model.texCoords.size(), &model.texCoords[0], GL_DYNAMIC_DRAW);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(model.texCoords[0]) * model.texCoords.size(), &model.texCoords[0], GL_DYNAMIC_DRAW);
+  glEnableVertexAttribArray(1);
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
   glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(model.normals[0]) * model.normals.size(), &model.normals[0], GL_DYNAMIC_DRAW);
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
+  glBufferData(GL_ARRAY_BUFFER, sizeof(model.normals[0]) * model.normals.size(), &model.normals[0], GL_DYNAMIC_DRAW);
+  glEnableVertexAttribArray(2);
+  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
   glBindVertexArray(0);
   // std::cout << "Animation Time: " << sModel.m_Animation.Duration*60.0f << '\n';
@@ -246,19 +224,19 @@ void animatedMesh::InitMeshModel(const IndexedModel& model)
 
 void animatedMesh::InitMesh()
 {
-  IndexedModel model;
-  for (int i = 0; i < indices.size(); i++) {
-    int f = indices[i];
-    model.positions.push_back(*verts[f].GetPos());
-  }
-for(unsigned int i = 0; i < numVertices; i++)
-{
-  model.positions.push_back(*verts[i].GetPos());
-  model.texCoords.push_back(*verts[i].GetTexCoord());
-  model.normals.push_back(*verts[i].GetNormal());
-}
-for(unsigned int i = 0; i < indices.size(); i++) {
-  model.indices.push_back(i);
-}
-InitMeshModel(model);
+    IndexedModel model;
+    for (int i = 0; i < indices.size(); i++) {
+        int f = indices[i];
+        model.positions.push_back(*verts[f].GetPos());
+    }
+    for(unsigned int i = 0; i < numVertices; i++)
+    {
+        model.positions.push_back(*verts[i].GetPos());
+        model.texCoords.push_back(*verts[i].GetTexCoord());
+        model.normals.push_back(*verts[i].GetNormal());
+    }
+    for(unsigned int i = 0; i < indices.size(); i++) {
+        model.indices.push_back(i);
+    }
+    InitMeshModel(model);
 }

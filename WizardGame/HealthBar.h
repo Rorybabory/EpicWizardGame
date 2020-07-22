@@ -24,12 +24,12 @@ public:
 		}
 		if (targetValue != value) {
 			if (targetValue > value) {
-				value += 0.005;
-			}
-			else {
-				value -= 0.005;
+				value += 0.02;
+			} else {
+				value -= 0.02;
 			}
 		}
+		//value += ((float)(targetValue != value)) *((float)(targetValue > value)) * 0.02f;
 		float tempRot = 0.0;
 		glm::vec2 targetPos = glm::vec2(mainCam.m_position.x, mainCam.m_position.z);
 		targetPos.x = targetPos.x - pos.x;

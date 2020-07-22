@@ -147,6 +147,8 @@ public:
 	// accurate when dumped upon scene initialization, instead of mid-
 	// simulation.
 	void Dump( FILE* file ) const;
+	
+	void setTimescale(float timescale) {m_dt = timescale;}
 
 private:
 	q3ContactManager m_contactManager;

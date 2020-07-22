@@ -1,5 +1,6 @@
 #include "FrameBuffer.h"
 #include <string>
+#include "Timer.h"
 extern float red;
 extern glm::vec4 screenColor;
 void FrameBuffer::BindFrameBuffer() {
@@ -7,9 +8,11 @@ void FrameBuffer::BindFrameBuffer() {
     glEnable(GL_DEPTH_TEST);
     int h = glGetUniformLocation(ppShader.m_program, "horizontal");
     glUniform1i(h, horizontal);
-
+    
 }
 void FrameBuffer::RenderFrameBuffer() {
+    
+    glViewport(0, 0, Width, Height);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
     glDisable(GL_DEPTH_TEST);
 
@@ -31,6 +34,13 @@ void FrameBuffer::RenderFrameBuffer() {
     glBindTexture(GL_TEXTURE_2D, depthbuffer);
 
     quad.Draw();
+}
+void FrameBuffer::resetFramebuffer() {
+    //
+    glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width, Height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glBindTexture(textureColorbuffer, 0);
+
 }
 FrameBuffer::~FrameBuffer()
 {

@@ -1,8 +1,10 @@
 #include "entity.h"
+
 extern int screenInverted;
 extern glm::vec3 hsv;
 extern glm::vec2 levelSize;
 extern int entityCount;
+extern void closeProgram();
 float Entity::lookAtNearest(std::string targetType) {
     float nearestDist = 100000.0;
     glm::vec2 nearestPos;
@@ -173,7 +175,7 @@ void Entity::spawnEntity(std::string name, float x, float y) {
 }
 
 void Entity::killProgram() {
-    exit(0);
+    closeProgram();
 }
 
 // bool Entity::GetCollisionWithPoints() {
@@ -190,7 +192,7 @@ void Entity::kill() {
     collider.body->RemoveAllBoxes();
     auto projc = get<ProjectileComponent>();
     if (projc != NULL) {
-      for (Object * o : projc->objects) {
+      for (Projectile * o : projc->objects) {
         delete o;
       }
       projc->objects.clear();
@@ -199,8 +201,8 @@ void Entity::kill() {
 
 float Entity::getPlayerDistance() {
     float x;
-    x=sqrt(pow(playerPos.x-pos.x, 2) +
-           pow(playerPos.z-pos.z, 2));
+    x=sqrt(pow(enemyTarget.x-pos.x, 2) +
+           pow(enemyTarget.y-pos.z, 2));
     return x;
 }
 
@@ -225,7 +227,7 @@ int Entity::randomInt(int min, int max) {
 }
 
 void Entity::lookAtPlayer() {
-    glm::vec2 targetPos = glm::vec2(playerPos.x,playerPos.z);
+    glm::vec2 targetPos = enemyTarget;
     targetPos.x = targetPos.x - pos.x;
     targetPos.y = targetPos.y - pos.z;
     float targetAngle = RADS_TO_DEGS(-(atan2(targetPos.y, targetPos.x))+1.57f);
@@ -412,20 +414,22 @@ void Entity::FPSControllerUpdate(float speed) {
     std::string lastKey = keypressed;
 //    playerVel = glm::vec3(0.0f,0.0f,0.0f);
     glm::vec3 startPlayerVel = glm::vec3(0.0f,0.0f,0.0f);
+    float deltaTime = 1/FPS;
+    float multiplier = 1;
     if (keys[SDL_SCANCODE_S]){
-      pos += cameraC->getCamera().m_forward * -speed;
+      pos += cameraC->getCamera().m_forward * -speed * multiplier;
       moved = true;
     }
     if (keys[SDL_SCANCODE_W]){
-      pos += cameraC->getCamera().m_forward*speed;
+      pos += cameraC->getCamera().m_forward*speed * multiplier;
       moved = true;
     }
     if (keys[SDL_SCANCODE_A]){
-      pos += glm::cross(cameraC->getCamera().m_up, cameraC->getCamera().m_forward) * speed;
+      pos += glm::cross(cameraC->getCamera().m_up, cameraC->getCamera().m_forward) * speed * multiplier;
       moved = true;
     }
     if (keys[SDL_SCANCODE_D]){
-      pos += glm::cross(cameraC->getCamera().m_up, cameraC->getCamera().m_forward) * -speed;
+      pos += glm::cross(cameraC->getCamera().m_up, cameraC->getCamera().m_forward) * -speed * multiplier;
       moved = true;
     }
     if (startPos == pos) {
@@ -462,6 +466,9 @@ void Entity::UpdateKeyPresses() {
   else if (keys[SDL_SCANCODE_Q]) {
       tempKeyPressed = "Q";
   }
+  else if (keys[SDL_SCANCODE_RETURN]) {
+      tempKeyPressed = "ENTER";
+  }
   moveDirection = glm::vec2(0.0, 0.0);
   if (keys[SDL_SCANCODE_W]) {
       moveDirection.y += 1.0;
@@ -475,6 +482,20 @@ void Entity::UpdateKeyPresses() {
   if (keys[SDL_SCANCODE_D]) {
       moveDirection.x += 1.0;
   }
+
+  arrowDirection = glm::vec2(0.0, 0.0);
+  if (keys[SDL_SCANCODE_UP]) {
+      arrowDirection.y += 1.0;
+  }
+  if (keys[SDL_SCANCODE_LEFT]) {
+      arrowDirection.x -= 1.0;
+  }
+  if (keys[SDL_SCANCODE_DOWN]) {
+      arrowDirection.y -= 1.0;
+  }
+  if (keys[SDL_SCANCODE_RIGHT]) {
+      arrowDirection.x += 1.0;
+  }
   if (tempKeyPressed != keypressed) {
     keyCount++;
     if (keyCount > 3) {
@@ -483,11 +504,11 @@ void Entity::UpdateKeyPresses() {
     }
   }
 }
-int Entity::getHP() {
+float Entity::getHP() {
     return hp;
 }
 
-void Entity::setHP(int hp) {
+void Entity::setHP(float hp) {
     this->hp = hp;
     if (maxHP == -1.0) {
         maxHP = hp;
@@ -516,7 +537,18 @@ int Entity::getCount() {
 void Entity::setCount(int count) {
     this->count=count;
 }
-
+void Entity::FireInstant() {
+    auto projC = get<ProjectileComponent>();
+    if (projC != nullptr) {
+        projC->Fire(glm::vec2(pos.x, pos.z), getForward());
+    }
+}
+void Entity::FireMultiple(int num) {
+    auto projC = get<ProjectileComponent>();
+    if (projC != nullptr) {
+        projC->FireMultiple(glm::vec2(pos.x, pos.z), getForward(), num);
+    }
+}
 bool Entity::Fire() {
     if (!dead) {
       auto projC = get<ProjectileComponent>();
@@ -535,11 +567,9 @@ bool Entity::Fire() {
       }
     }
 }
-
 void Entity::setGlobalFrozen(bool f) {
     globalFrozen = f;
 }
-
 Entity* Entity::getNearestEntWithName(std::string entityName) {
     Entity * nearest = nullptr;
     float dist = 10000.0f;
@@ -680,7 +710,6 @@ void Entity::damageNearestEnt(std::string ent, int damage) {
 }
 void Entity::playSound(std::string file) {
     sound.setFile(file);
-    sound.reset();
     sound.play();
 }
 void Entity::setBrightness(float b) {
@@ -770,13 +799,16 @@ int Entity::getEntityCount() {
 void Entity::setTextColor(float r, float g, float b, float a) {
     currentColor = glm::vec4(r, g, b, a);
 }
-void Entity::addAbility(std::string ability) {
+void Entity::addAbility(std::string ability, std::string description) {
     playerAbilities.push_back(ability);
+    playerAbilitiesDesc.push_back(description);
 }
 std::string Entity::getAbility(int val) {
     return playerAbilities[val];
 }
-
+std::string Entity::getAbilityDescription(int val) {
+    return playerAbilitiesDesc[val ];
+}
 void Entity::setScreenColor(glm::vec4 ScreenColor) {
     screenColor = ScreenColor;
 }
@@ -785,5 +817,118 @@ void Entity::setDrawScene(bool val) {
     drawScene = val;
 }
 void Entity::stopProgram() {
-    exit(0);
+    closeProgram();
+}
+void Entity::setSpread(float s) {
+    auto projC = get<ProjectileComponent>();
+    if (projC != nullptr) {
+        projC->setSpread(s);
+    }
+}
+void Entity::setProjColor(float r, float g, float b, float a) {
+    auto projC = get<ProjectileComponent>();
+    if (projC != nullptr) {
+        projC->setColor(glm::vec4(r, g, b, a));
+    }
+}
+void Entity::setProjDelay(int del) {
+    auto projC = get<ProjectileComponent>();
+    if (projC != nullptr) {
+        projC->delay = del;
+    }
+}
+void Entity::setObjectPos(float x, float y, float z) {
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        objc->setPos(glm::vec3(x, y, z));
+    }
+}
+void Entity::setObjectScale(float sc) {
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        objc->setScale(glm::vec3(sc));
+    }
+}
+void Entity::setObjectColor(float r, float g, float b, float a) {
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        objc->setColor(glm::vec4(r, g, b, a));
+    }
+}
+void Entity::setEnemyTarget(float x, float y) {
+    enemyTarget = glm::vec2(x, y);
+}
+float Entity::getObjectX() {
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        return objc->getPos().x;
+    }
+}
+float Entity::getObjectY() {
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        return objc->getPos().y;
+    }
+}
+float Entity::getObjectZ() {
+    auto objc = get<ObjectComponent>();
+    if (objc != nullptr) {
+        return objc->getPos().z;
+    }
+}
+
+void Entity::setUICam(bool val) {
+    auto graphicsC = get<GraphicsComponent>();
+    if (graphicsC != nullptr) {
+        graphicsC->useUICam = val;
+    }
+}
+void Entity::setDrawUI(bool val) {
+    drawUI = val;
+}
+void Entity::setProjRange(int range) {
+    auto projC = get<ProjectileComponent>();
+    if (projC != nullptr) {
+        projC->setRange(range);
+    }
+}
+void Entity::setTextSize(int textSize) {
+    auto guiC = get<GUIComponent>();
+    if (guiC != NULL) {
+        guiC->setTextSize(textSize);
+    }
+}
+void Entity::setImageTransform(float x, float y, float width, float height) {
+    auto guiC = get<GUIComponent>();
+    if (guiC != NULL) {
+        guiC->setImageTransform(glm::vec2(x,y), glm::vec2(width, height));
+    }
+}
+void Entity::setImage(std::string tag, std::string src) {
+    auto guiC = get<GUIComponent>();
+    if (guiC != NULL) {
+        guiC->setImage(tag, src);
+    }
+}
+void Entity::setImageDraw(std::string tag, bool draw) {
+    auto guiC = get<GUIComponent>();
+    if (guiC != NULL) {
+        guiC->setDraw(tag, draw);
+    }
+}
+void Entity::setMouseCapture(bool value) {
+    if (value == true) {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+    }
+    else {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+}
+void Entity::setScreenResolution(float width, float height) {
+    Width = width;
+    Height = height;
+    resetCamera = true;
+    resetFramebuffer = true;
+    resetWindow = true;
+    resetText = true;
 }
