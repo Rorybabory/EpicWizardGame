@@ -734,6 +734,9 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
   entityConstructor.Stop();
   e->setType(type);
   //e->addFunctions(L);
+  if (e->type == "mainMenu") {
+      std::cout << "adding menu components\n\n\n\n\n";
+  }
   luabridge::LuaRef entityRef = luabridge::getGlobal(L,type.c_str());
   for (int i = 0; i < entityRef.length(); ++i) {
     std::string componentName = entityRef[i+1]["componentName"];
@@ -748,6 +751,9 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
     }else if (componentName == "GUIComponent") {
         Timer timer("adding GUI component");
         luabridge::LuaRef guiTable = entityRef[i+1];
+        if (e->type == "mainMenu") {
+            std::cout << "adding gui component to main menu\n";
+        }
         addComponent<GUIComponent>(e,guiTable);
     }else if (componentName == "CameraComponent") {
         Timer timer("adding camera component");

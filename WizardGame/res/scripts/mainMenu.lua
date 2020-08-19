@@ -1,5 +1,4 @@
 mainMenu = {
-
   {
 	componentName = "GUIComponent",
 	font = "./res/fonts/CaslonAntique.ttf",
@@ -19,7 +18,7 @@ function mainMenu_Update(e)
 	e:setFloat("selectedLast", e:getFloat("selected"))
 	e:UpdateKeyPresses()
 	e:setCanBeHit(false)
-	
+	--
 	--Perform action when enter is pressed
 	if (e:getKeyPressed() == "ENTER") then
 		if (e:getFloat("selected") == 0) then

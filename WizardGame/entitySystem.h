@@ -591,7 +591,7 @@ public:
       // if (entities[i]->type == "player") {
       //   std::cout << entities[i]->collider.body->GetTransform( ).position.z << "\n";
       // }
-      
+        
       entities[i]->allEntities = &entities;
       entities[i]->scenePointer = &scene;
       entities[i]->speedModifier = speedMultiplier;
@@ -744,12 +744,23 @@ public:
           e->isPaused = false;
       }
       isTopDown = isLevelEditorOpen;
-
+      /*if (e->type == "mainMenu") {
+          auto guiComp = e->get<GUIComponent>();
+          if (guiComp != NULL) {
+              std::cout << "main menu has GUI Component\n";
+          }
+          else {
+              std::cout << "main menu has no GUI Component\n";
+          }
+      }*/
       if (frozen == false && isConsoleOpen == false && isLevelEditorOpen == false) {
         e->Update(L,&scene);
       }else {
         if (e->type == "player" && isConsoleOpen == false && isLevelEditorOpen == false) {
           e->Update(L,&scene);
+        }
+        if (e->type == "mainMenu" && isConsoleOpen == false && isLevelEditorOpen == false) {
+            e->Update(L, &scene);
         }
       }
        bool coll = false;

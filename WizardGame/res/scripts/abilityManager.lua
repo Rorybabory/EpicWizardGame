@@ -79,8 +79,9 @@ function abilityManager_eraseAbility(e)
 	e:setMouseCapture(true)
 	e:setImageDraw("direction", false)
 	e:setDrawUI(false)
-	e:setGlobalBool("drawPlayerUI", true)
 	e:setDrawScene(true)
+	e:setGlobalBool("drawPlayerUI", true)
+	--e:setDrawScene(true)
 	e:setGlobalBool("canPlayerMove", true)
 	e:setTextColor(1.0,1.0,1.0,0.0)
 	e:setText("menuCloseTip", "", -0.75, 0.8)
@@ -107,7 +108,7 @@ function abilityManager_Update(e)
 	else
 		e:setBool("isBetween", true)
 	end
-	if (e:getBool("isBetween") == true and e:getGlobalBool("isInMenu") == false) then
+	if (e:getBool("isBetween") == true and e:getGlobalBool("isInMenu") == false and e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(1.0,1.0,1.0,1.0)
 		e:setText("menuTip", "Press Q to Open Ability Menu", -0.75, -0.4)
 		if (e:getKeyPressed() == "Q") then

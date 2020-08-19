@@ -44,7 +44,9 @@ player = {
 	size = 35
   }
 }
-
+local round = function(a, prec)
+    return math.floor(a + 0.5*prec) -- where prec is 10^n, starting at 0
+end
 
 function player_Hit(e,e2,hits)
   if (e2:getCanBeHit() == true) then
@@ -199,19 +201,30 @@ function player_updateIllusion(e)
 	end
 end
 function player_drawText(e)
-	e:setTextColor(0.0,1.0,0.0,1.0)
-	e:setText("health", "health: " .. e:getHP(), 0.6, -0.9)
-	if (e:getGlobalBool("enabled") == true) then
-		e:setText("score", "score: " .. e:getFloat("ScoreDisplay"), -0.3, 0.9)
+	if (e:getGlobalBool("inPauseMenu") == true) then
+		e:setTextColor(0.0,1.0,0.0,1.0)
+		e:setText("health", "health: " .. e:getHP(), 0.6, -0.9)
+		if (e:getGlobalBool("enabled") == true) then
+			e:setText("score", "score: " .. e:getFloat("ScoreDisplay"), -0.3, 0.9)
+		else
+			e:setText("score", "Last Score: " .. e:getGlobalFloat("lastScore"), -0.3, 0.9)
+		end
 	else
-		e:setText("score", "Last Score: " .. e:getGlobalFloat("lastScore"), -0.3, 0.9)
+		player_clearText(e)
+	end
+	
+end
+function player_checkSelect(e, value)
+	if (e:getFloat("selectedPauseOption") == value) then
+		e:setTextColor(0.0,0.0,1.0,1.0)
+	else
+		e:setTextColor(1.0,0.0,0.0,1.0)
 	end
 end
 function player_clearText(e)
 	e:setTextColor(0.0,1.0,0.0,0.0)
 	e:setText("health", "", 0.6, -0.9)
 	e:setText("score", "", -0.3, 0.9)
-	
 end
 function player_Update(e)
   player_updateIllusion(e)
@@ -256,24 +269,62 @@ function player_Update(e)
   if (e:getKeyPressed() ~= "ESCAPE") then
 	e:setBool("EscapeReleased", true)
   end
-  if (e:getBool("inCloseMenu") == true) then
+  if (e:getGlobalBool("inPauseMenu") == true) then
 	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
 		e:setBool("EscapeReleased", false)
-		e:setBool("inCloseMenu", false)
+		e:setGlobalBool("inPauseMenu", false)
 	end
 	e:setTextColor(1.0,0.0,0.0,0.0)
 	e:setText("close", "", -0.5, 0.5)
+	e:setText("pause", "", -0.5, 0.8)
+	e:setText("mainMenu", "", -0.9, -0.2)
+	e:setText("return", "", -0.9, -0.4)
   else
+	e:setDrawScene(false)
+	e:setGlobalFrozen(true)
 	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
 		e:setBool("EscapeReleased", false)
-		e:setBool("inCloseMenu", true)
+		e:setGlobalBool("inPauseMenu", true)
+		if (e:getGlobalBool("isInMenu") == false) then
+			e:setDrawScene(true)
+			e:setGlobalFrozen(false)
+		end
 	end
 	if (e:getKeyPressed() == "SPACE") then
-		e:stopProgram()
+		if (e:getFloat("selectedPauseOption") == 0) then
+			e:stopProgram()
+		elseif (e:getFloat("selectedPauseOption") == 1) then
+			e:setMapTarget("mainMenu")
+		elseif (e:getFloat("selectedPauseOption") == 2) then
+			e:setGlobalBool("inPauseMenu", true)
+			if (e:getGlobalBool("isInMenu") == false) then
+				e:setDrawScene(true)
+				e:setGlobalFrozen(false)
+			end
+		end
 	end
+	if (e:getMoveDirY() ~= 0 or e:getArrowDirY() ~= 0) then
+		e:setFloat("selectCount", e:getFloat("selectCount")+1)
+		if (e:getFloat("selectCount") > 30) then
+			e:setFloat("selectedPauseOption", e:getFloat("selectedPauseOption")-e:getArrowDirY()-e:getMoveDirY())
+			if (e:getFloat("selectedPauseOption") > 2) then
+				e:setFloat("selectedPauseOption", 2)
+			elseif (e:getFloat("selectedPauseOption") < 0) then
+				e:setFloat("selectedPauseOption", 0)
+			end
+			e:setFloat("selectCount", 0)
+		end
+	else 
+		e:setFloat("selectCount", 25)
+	end
+	player_checkSelect(e, 0)
+	e:setText("close", "close the game", -0.9, 0.0)
+	player_checkSelect(e, 1)
+	e:setText("mainMenu", "Go to main menu", -0.9, -0.2)
+	player_checkSelect(e, 2)
+	e:setText("return", "return to game", -0.9, -0.4)
 	e:setTextColor(1.0,0.0,0.0,1.0)
-	e:setText("close", "Press SPACE to close\n           the game", -0.5, 0.5)
-	
+	e:setText("pause", "PAUSED", -0.9, 0.8)
 	
 
   end
@@ -284,7 +335,7 @@ function player_Update(e)
   end
   -- if (e:doesEntityExist("test2") == true) then
   --   print(e:getPo
-  if (e:getPaused() == false and e:getGlobalBool("canPlayerMove") == true) then
+  if (e:getPaused() == false and e:getGlobalBool("canPlayerMove") == true and e:getGlobalBool("inPauseMenu") == true) then
     e:FPSControllerUpdate(e:getFloat("Speed")*e:getFloat("SpeedMod"))
   end
   e:UpdateKeyPresses();
@@ -312,7 +363,7 @@ function player_Start(e)
     e:setFloat("AbilityCount", 0)
     e:setFloat("FireCount", 0)
     e:setBool("CanTime", true)
-	e:setBool("inCloseMenu", true)
+	e:setGlobalBool("inPauseMenu", true)
 	e:setBool("EscapeReleased", true)
 	e:setBool("hasIllusion", false)
 	e:setFloat("illusionCount", 0.0)
@@ -325,5 +376,8 @@ function player_Start(e)
 	e:addAbility("Rapid Fire", "Be able to fire\n very fast, \nbut deal less damage")
 	e:addAbility("Illusion", "Create Illusions\n that enemies \n will think is you")
 	e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
+	
+	e:setFloat("selectedPauseOption", 0)
+	e:setFloat("selectCount", 0)
 	--e:setScreenResolution(1920,1080)
 end

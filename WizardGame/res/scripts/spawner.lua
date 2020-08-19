@@ -59,7 +59,7 @@ function spawner_newSpawn(e)
 	else
 		e:setFloat("hasAbilities", 3)
 	end
-	if (e:getEntityCount() < e:getFloat("hasAbilities") and e:getGlobalBool("isInMenu") == false) then
+	if (e:getEntityCount() < e:getFloat("hasAbilities") and e:getGlobalBool("isInMenu") == false and e:getGlobalBool("inPauseMenu") == true) then
 		e:setGlobalBool("isBetween", true)
 		if (e:getGlobalFloat("wave") ~= 0 ) then
 			e:setTextColor(1.0,1.0,1.0,1.0)
@@ -142,7 +142,7 @@ function spawner_Update(e)
 		spawner_resolveSpawning(e)
 
 		--print("number of entities is: " .. e:getEntityCount())
-	else
+	elseif (e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(0.0,0.0,1.0,0.0)
 		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
 		e:setTextColor(1.0,1.0,1.0,1.0)
