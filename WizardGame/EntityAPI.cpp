@@ -94,6 +94,20 @@ float Entity::getDistanceFromNearestEnt() {
     }
     return nearestDist;
 }
+float Entity::getDistanceFromNearestEnemy() {
+    float nearestDist = 100000.0;
+    for (Entity* e : *allEntities) {
+        if (e->type != type && e->canBeHit == true) {
+            float x;
+            x = sqrt(pow(e->pos.x - pos.x, 2) +
+                pow(e->pos.z - pos.z, 2));
+            if (x < nearestDist) {
+                nearestDist = x;
+            }
+        }
+    }
+    return nearestDist;
+}
 void Entity::setDamageAnimation(int anim) {
   damageAnim = anim;
 }
@@ -584,6 +598,7 @@ Entity* Entity::getNearestEntWithName(std::string entityName) {
         }
       }
     }
+
     if (nearest == nullptr) {
         return NULL;
     }
@@ -693,6 +708,18 @@ void Entity::damageNearest(int damage) {
         }
     }
     Hit(damage, nearest);
+}
+int Entity::damageWithinADistance(int damage, int distance) {
+    int x = 0;
+    for (Entity* e : *allEntities) {
+        if (e->type != type && e->canBeHit == true) {
+            if (distance > getDistanceBetweenTwoPoints(glm::vec2(pos.x, pos.z), glm::vec2(e->pos.x, e->pos.z))) {
+                Hit(damage, e);
+                x++;
+            }
+        }
+    }
+    return x;
 }
 void Entity::damageNearestEnt(std::string ent, int damage) {
     Entity* nearest = nullptr;
@@ -931,4 +958,19 @@ void Entity::setScreenResolution(float width, float height) {
     resetFramebuffer = true;
     resetWindow = true;
     resetText = true;
+}
+void Entity::setObjectModel(std::string model) {
+    auto objC = get<ObjectComponent>();
+    if (objC != NULL) {
+        objC->object.initObject(model, objC->color, "./res/basicShader", false);
+    }
+}
+int Entity::getHighscore() {
+    return getHighScore();
+}
+void Entity::setHighscore(int val) {
+    setHighScore(val);
+}
+float Entity::sinFunc(float x) {
+    return sin(x);
 }

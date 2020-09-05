@@ -15,6 +15,10 @@ struct ProjData {
 };
 class ProjectileComponent : public Component {
 public:
+    float yawFromForward(glm::vec3 forward)
+    {
+        return atan2(forward.z, forward.x);
+    }
     float random(float min, float max) {
         float random = ((float)rand()) / (float)RAND_MAX;
         float range1 = max - min;
@@ -46,8 +50,8 @@ public:
     }else{
       std::cout << "ERROR: PROJECTILE DATA IS INVALID TYPE..." << '\n';
     }
-    ObjectFile = new Object(model, color, "./res/basicShader", glm::vec3(0, 0, 0), false);
-    ObjectFile->setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+    ObjectFile = new Object(model, color, "./res/projShader", glm::vec3(0, 0, 0), false);
+    ObjectFile->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
   }
   void setModel(std::string model) {
     this->model = model;
@@ -82,16 +86,6 @@ public:
   // }
   void Update() {
     for (int i = 0; i < objects.size(); i++) {
-      //std::cout << "DRAWING PROJECTILE NUMBER " << i << " at X:" << objects[i]->transform.getPos().x << " Y: " << objects[i]->transform.getPos().y << " Z: " << objects[i]->transform.getPos().z << " and init: " << objects[i]->hasInit << "\n";
-
-      // std::cout << objects[i]->counter << " ";
-      // std::cout << glm::degrees(FrontToRadians(objects[i]->lastDir).y) << '\n';
-//      if (objects[i]->hasInit == true) {
-          //glm::vec3 dir = glm::vec3(objects[i]->projB.body->GetLinearVelocity().x, objects[i]->projB.body->GetLinearVelocity().y, objects[i]->projB.body->GetLinearVelocity().z);
-          //if (fabs(dir.x - objects[i]->lastDir.x) > 12.0 &&
-          //    fabs(dir.z - objects[i]->lastDir.z) > 12.0) {
-          //    objects[i]->timesBounced++;
-          //}
           glm::vec3 posToSet = glm::vec3(objects[i]->projB.getPos().x, objects[i]->projB.getPos().y, objects[i]->projB.getPos().z);
           objects[i]->transform.setPos(posToSet);
           //std::cout << "running update code\n";
@@ -102,14 +96,13 @@ public:
                   objects[i]->delay = 0;
               }
           }
-          // vobjects[i]->transform.m_pos += (objects[i]->forward * speed);
-
-          // objects[i]->moveBy(objects[i]->forward*speed);
           objects[i]->counter++;
-          if (objects[i]->counter >= range) {
+          if (objects[i]->counter > range - 30) {
+              objects[i]->transform.m_scale = glm::vec3(objects[i]->transform.getScale().x - 0.04);
+          }
+          if (objects[i]->transform.m_scale.x < 0.0) {
               objects.erase(objects.begin()+i);
               objects[i]->destroy = true;
-              //.std::cout << "destroyed projectile " << i << "\n";
           }
           if (objects[i]->destroy == true) {
               objects[i]->counter2++;
@@ -157,11 +150,10 @@ public:
       o->transform.setPos(start);
       //std::cout << "Firing at X: " << start.x << " Y: " << start.y << " Z: " << start.z << "\n";
       o->forward = forward;
-      glm::vec3 sc = glm::vec3(2.0f, 2.0f, 2.0f);
+      glm::vec3 sc = glm::vec3(2.3f, 2.3f, 2.3f);
       o->transform.setScale(sc);
-      o->projB.init(glm::vec3(2.0f, 2.0f, 2.0f), start, scenePointer, eDynamicBody);
+      o->projB.init(glm::vec3(2.3f, 2.3f, 2.3f), start, scenePointer, eDynamicBody);
       // o->projB.setPos(glm::vec3(o->projB.getPos().x-o->forward.x*5.0f,o->projB.getPos().y,o->projB.getPos().z-o->forward.z*5.0f));
-
       o->projB.body->SetLinearVelocity(q3Vec3(o->forward.x * speed * SpeedMultiplier * 100.0f, o->forward.y * speed * SpeedMultiplier * 100.0f, o->forward.z * speed * SpeedMultiplier * 100.0f));
       objects.push_back(o);
       //o->startPos = glm::vec3(startPos.x,height,startPos.y);
@@ -173,7 +165,6 @@ public:
       delayCount++;
       if (delayCount > delay) {
           delayCount = 0;
-          std::cout << "FIRING LOL!\n";
 
           for (int i = 0; i <= num; i++) {
               

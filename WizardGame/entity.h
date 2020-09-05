@@ -56,6 +56,11 @@ extern bool resetWindow;
 extern bool resetFramebuffer;
 extern bool resetCamera;
 extern bool resetText;
+extern bool resetScripts;
+extern bool shakeScreen;
+
+extern void setHighScore(int val);
+extern int getHighScore();
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
                   pow(y-y2, 2));
@@ -200,7 +205,7 @@ public:
       auto gfxc = get<GraphicsComponent>();
       if (gfxc != NULL && gfxc->useUICam == true) {
           gfxc->Update(speedModifier);
-          gfxc->Draw(UICam);
+          gfxc->Draw(UICam, hitCount);
       }
   }
   void Draw(Camera cam, bool f) {
@@ -223,7 +228,7 @@ public:
       }
       if (isPaused != true) {
           if (gfxc->useUICam == false) {
-              gfxc->Draw(cam);   
+              gfxc->Draw(cam, hitCount);   
           }
       }
     }
@@ -248,12 +253,15 @@ public:
     auto graphics = get<GraphicsComponent>();
     auto cameraC = get<CameraComponent>();
     auto sgraphics = get<StaticGraphicsComponent>();
+    if (hitCount > 0.0) {
+        hitCount -= 0.01;
+    }
     textPointer = new std::string("DANK");
     if (godmode == true) {
         hp = 99;
     }
     if (type == "player") {
-        red = getDistanceFromNearestEnt();
+        red = getDistanceFromNearestEnemy();
         if (red < 40) {
             red /= 160.0;
             red = 0.25 - red;
@@ -468,6 +476,11 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  float sinFunc(float x);
+  int getHighscore();
+  void setHighscore(int val);
+  void setScreenShake(bool val) { shakeScreen = val; }
+  void setObjectModel(std::string model);
   void setScreenResolution(float width, float height);
   void setMouseCapture(bool value);
   void setImageDraw(std::string tag, bool draw);
@@ -496,7 +509,7 @@ public:
   std::string getAbilityDescription(int val);
   std::string getAbility(int val);
   void swapMap() { changeMap = true; }
-  void setMapTarget(std::string val) { map = val; }
+  void setMapTarget(std::string val) { map = val; resetScripts = true; }
   float getArrowDirX() { return arrowDirection.x; }
   float getArrowDirY() { return arrowDirection.y; }
   float getMoveDirX() { return moveDirection.x; }
@@ -526,6 +539,7 @@ public:
   void setProjCount(float count);
   void setBrightness(float b);
   void damageNearest(int damage);
+  int damageWithinADistance(int damage, int distance);
   void damageNearestEnt(std::string ent, int damage);
   float getDefaultSpeed() { return mainSpeed; }
   void setUIText(std::string text);
@@ -552,6 +566,7 @@ public:
   bool doesEntityExist(std::string targetType);
   float getDistanceFromNearest(std::string targetType);
   float getDistanceFromNearestEnt();
+  float getDistanceFromNearestEnemy();
   float getPositionFromNearestX(std::string targetType);
   float getPositionFromNearestY(std::string targetType);
   void isFirstPerson(bool firstPerson);
@@ -711,6 +726,7 @@ public:
   bool changeMap = false;
   glm::vec3 lastCameraUp = glm::vec3(0.0,0.0,1.0);
   bool hasOnStart = false;
+  float hitCount = 0;
 protected:
 private:
   int checkCullingCount = 0;
@@ -720,6 +736,7 @@ private:
   // LuaEntityHandle handle;
   float lastDist = 0.0f;
   bool countData = false;
+  
   SDL_Event e;
   std::vector<glm::vec2> proj;
   Camera UICam;
@@ -734,12 +751,15 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
   entityConstructor.Stop();
   e->setType(type);
   //e->addFunctions(L);
-  if (e->type == "mainMenu") {
-      std::cout << "adding menu components\n\n\n\n\n";
-  }
+  
   luabridge::LuaRef entityRef = luabridge::getGlobal(L,type.c_str());
+  if (e->type == "mainMenu") {
+      std::cout << "adding menu components" << " menu Ref length is: " << entityRef.length() << " first component is: " << entityRef[1]["componentName"] << "\n\n\n\n\n";
+  }
   for (int i = 0; i < entityRef.length(); ++i) {
+      
     std::string componentName = entityRef[i+1]["componentName"];
+    std::cout << "component name is " << componentName << "\n";
     if (componentName == "GraphicsComponent") {
         Timer timer("adding graphics component");
         luabridge::LuaRef gcTable = entityRef[i+1];

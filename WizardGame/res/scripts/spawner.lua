@@ -11,15 +11,7 @@ spawner = {
   }
 }
 function spawner_Hit(e,e2,hits)
-  -- e2:setColor(0.0,0.0,0.0,1.0)
-  e2:setHP(e2:getHP()-hits)
-  -- if (e:getAnimation() == 2) then
-  --   e:playAnimation(0)
-  -- end
-  if (e2:isPlayer() == true) then
-    e2:Shake(5.0)
-  end
-  e2:write(e2:getHP())
+
 end
 function spawner_easeOutCubic(t)
     return 1 + (t-1) * t * t;
@@ -85,25 +77,36 @@ function spawner_startWave(e)
 		e:setFloat("maxValue", 10)
 	end
 end
+function spawner_spawnFunction(e, name)
+	e:setPos(e:random(-260,260), 0.0 ,e:random(-260,260))
+	while (e:getDistanceBetweenTwoPointsAPI(e:getPositionFromNearestX("player"),e:getPositionFromNearestY("player"), e:getX(), e:getZ()) < 100)
+	do
+		print("reset  position for spawned entity\n\n\n\n")
+		e:setPos(e:random(-260,260), 0.0 ,e:random(-260,260))
+	end
+	e:spawnEntity(name, e:getX(), e:getZ())
+end
 function spawner_resolveSpawning(e)
 	if (e:getFloat("spawnValue") < e:getFloat("maxValue") and e:getFloat("spawnValue") < 10) then
 		e:setFloat("spawnValue", e:getFloat("spawnValue")+1)
 		rand = e:randomInt(0, 16)
 		if (e:getGlobalFloat("wave") < 5) then
 			rand = 7
+		elseif (e:getGlobalFloat("wave") < 10) then
+			rand = e:randomInt(2, 13)
 		elseif (e:getGlobalFloat("wave") > 13) then
 			rand = e:randomInt(0, 7)
 		end
 		if (rand == 0) then
-			e:spawnEntity("necromancer", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "necromancer")
 		elseif (rand == 1) then
-			e:spawnEntity("stoneMonster", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "stoneMonster")
 		elseif (rand == 2) then
-			e:spawnEntity("test2", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "test2")
 		elseif (rand == 3 or rand == 4 or rand == 5) then
-			e:spawnEntity("skeleton", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "skeleton")
 		else
-			e:spawnEntity("zombie", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "zombie")
 		end
 	end
 end

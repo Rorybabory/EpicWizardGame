@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+
 #include <map>
 #include <vector>
 #include "animatedMesh.h"
@@ -55,7 +57,34 @@ bool drawUI = false;
 bool close = false;
 
 q3Scene* scenePointer;
+
+bool resetScripts = false;
+
+
+bool shakeScreen = true;
 void closeProgram() { close = true; }
+
+int getHighScore() {
+	std::fstream myfile("./res/save.dat", std::ios_base::in);
+	int a;
+	while (myfile >> a)
+	{
+	}
+	a = (a >> 1);
+	myfile.close();
+	return a;
+}
+void setHighScore(int val) {
+	ofstream myfile;
+	myfile.open("./res/save.dat");
+	val = (val << 1);
+	myfile << val;
+	myfile.close();
+
+	std::cout << "SET THE HIGH SCORE TO " << val << "\n\n\n\n\n\n\n";
+	myfile.close();
+}
+
 void addTextBox(std::string text, glm::vec2 pos, glm::vec3 color, int scale) {
 	Text * object = new Text(scale, "./res/Ubuntu-B.ttf");
 	textPositions.push_back(pos);

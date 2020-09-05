@@ -16,6 +16,7 @@ public:
         float b = colorRef["b"];
         float a = colorRef["a"];
         object.initObject(folderRef.cast<std::string>(), glm::vec4(r, g, b, a), "./res/basicShader", false);
+        color = glm::vec4(r, g, b, a);
     }
     
     
@@ -28,8 +29,10 @@ public:
     void setPos(glm::vec3 pos) { object.setPos(pos); }
     void setColor(glm::vec4 c) { object.setColor(c); }
     glm::vec3 getPos() { return object.getPos(); }
-private:
     Object object;
+    glm::vec4 color;
+private:
+    
 };
 
 #endif

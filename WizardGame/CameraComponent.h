@@ -14,7 +14,7 @@
 extern float Width;
 extern float Height;
 extern bool resetCamera;
-
+extern bool shakeScreen;
 class CameraComponent : public Component {
 public:
   CameraComponent(luabridge::LuaRef& componentTable) {
@@ -55,7 +55,10 @@ public:
     //  camera.m_position = glm::vec3(0.0f,500.0f,0.0f);
     //}
      // std::cout << "forward.x: " << camera.m_forward.x << "   forward.z: " << camera.m_forward.z << "\n";
-    camera.UpdateShake();
+      if (shakeScreen == true) {
+          camera.UpdateShake();
+      }
+    
   }
 
   int x = 0;

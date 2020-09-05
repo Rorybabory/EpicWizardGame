@@ -29,7 +29,7 @@ Texture::Texture(const std::string& fileName) {
 
   glGenFramebuffers(1, &m_frameBuffer);
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_frameBuffer);
-
+  this->fileName = fileName;
 }
 
 Texture::Texture() {}

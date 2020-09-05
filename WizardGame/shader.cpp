@@ -4,6 +4,8 @@
 #include <string>
 #include "GL/glew.h"
 #include "mesh.h"
+#include <SDL2/SDL.h>
+
 extern int screenInverted;
 extern float brightness;
 void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
@@ -110,7 +112,7 @@ void Shader::Bind() {
   glUniform3f(HSVLocation, hsv.x,hsv.y,hsv.z);
   if (screenInverted == true) {glUniform1i(BoolLocation, 1);}
   if (screenInverted == false) {glUniform1i(BoolLocation, 0);}
-
+  glUniform1f(glGetUniformLocation(m_program, "time"), SDL_GetTicks());
 }
 void Shader::TextBind(int x, int y) {
   glUseProgram(m_program);
@@ -131,6 +133,20 @@ void Shader::Bind(glm::vec4 color, glm::vec4 colorFlash) {
   int BoolLocation = glGetUniformLocation(m_program,"inverted");
   glUniform1i(BoolLocation, screenInverted);
 }
+void Shader::Bind(glm::vec4 color, glm::vec4 colorFlash, float hitCount) {
+    glUseProgram(m_program);
+    int colorLocation = glGetUniformLocation(m_program, "color");
+    glUniform4f(colorLocation, color.x, color.y, color.z, color.w);
+    int colorFlashLocation = glGetUniformLocation(m_program, "colorFlash");
+    glUniform4f(colorFlashLocation, colorFlash.x, colorFlash.y, colorFlash.z, colorFlash.w);
+
+    int BoolLocation = glGetUniformLocation(m_program, "inverted");
+    glUniform1i(BoolLocation, screenInverted);
+    int hitLoc = glGetUniformLocation(m_program, "hitCount");
+    //std::cout << hitCount << "\n";
+    glUniform1f(hitLoc, hitCount);
+}
+
 void Shader::UnBind() {
   glUseProgram(0);
 }

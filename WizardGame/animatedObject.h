@@ -99,7 +99,7 @@ public:
           }
       }
   }
-  void Draw(Camera camera, int id, bool isUI) {
+  void Draw(Camera camera, int id, bool isUI, float hitCount) {
     
       if (hasInit == false) {
           init();
@@ -122,7 +122,7 @@ public:
           glEnable(GL_DEPTH_TEST);
       }
     tex.Bind(0);
-    shader.Bind(color, colorFlash);
+    shader.Bind(color, colorFlash, hitCount);
     shader.Update(transform, camera);
     animations[id]->Draw();
     tex.UnBind();

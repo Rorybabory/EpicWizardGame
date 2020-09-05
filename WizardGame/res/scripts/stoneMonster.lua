@@ -77,7 +77,7 @@ function stoneMonster_Update(e)
 	--e:setAnimationTag("damaged",e:getAnimationID("default"))
 end
 function stoneMonster_Start(e)
-    e:setHP(15)
+    e:setHP(9)
     e:lookAtPlayer()
     e:setScale(2.8)
     e:setCollisionBox(3,3,6.0)

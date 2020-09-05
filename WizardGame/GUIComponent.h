@@ -38,7 +38,7 @@ public:
         glm::vec3 color = glm::vec3(colorRef["r"], colorRef["g"], colorRef["b"]);
         this->textSize = sizeRef;
         this->font = fontRef;
-        Font.init((fontRef).c_str(), sizeRef);
+        resetSize();
     }
     int CalculateLocX(float val, float size) {
         float newVal = val * Width;
@@ -58,7 +58,7 @@ public:
         textMap[tag] = data;
     }
     void setImage(std::string tag, std::string src) {
-        ImageData data;
+        ImageData data;        
         data.tex = new Texture(src);
         data.transform = new Transform();
         data.transform->m_pos = glm::vec3(stData.pos.x, stData.pos.y, 0.0);
@@ -69,13 +69,16 @@ public:
         stData.pos = pos;
         stData.scale = scale;
     }
+    void resetSize() {
+        float size = (Width / 800.0f);
+        size *= textSize;
+        std::cout << "SIZE: " << size << "\n\n\n\n";
+        Font.init(font.c_str(), size);
+    }
     void Draw() {
-        if (resetText == true && resetFont == false) {
-            float size = (Width / 800.0f);
-            size *= textSize;
-            std::cout << "SIZE: " << size << "\n\n\n\n";
-            Font.init(font.c_str(), size);
-            resetFont = true;
+        if (resetText == true) {
+            resetSize();
+            resetText = false;
         }
         for (auto const& x : textMap) {
             glColor4f(x.second.color.r, x.second.color.g, x.second.color.b, x.second.color.a);
@@ -104,7 +107,6 @@ public:
         //Font.clean();
         shader.~Shader();
         imageMesh.~Mesh();
-        
     }
     void setTextSize(int tsize) {
         textSize = tsize;
@@ -125,6 +127,5 @@ private:
     Shader shader;
     Transform transform;
     StoredImageData stData;
-    
 };
 #endif

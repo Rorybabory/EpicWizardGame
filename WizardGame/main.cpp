@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include "SkeletalAnimation/Types.h"
@@ -79,10 +80,15 @@ int main()
     glViewport(0, 0, 1920, 1080);
     Skybox skybox;
 
-    //FT_Library library;
-    //FT_Init_FreeType(&library);
     std::cout << "finished init\n\n\n";
-    // std::cout << e->getType() << "X:" << pos.x << " Y:" << pos.y << " Z:" << pos.z << '\n';
+
+    std::fstream myfile("./res/save.dat", std::ios_base::in);
+    int a;
+    while (myfile >> a)
+    {
+        printf("%f ", a);
+    }
+    std::cout << "\n\n\n\n\n";
     while(!display.m_isClosed) {
         //resize window if needed
         if (resetFramebuffer == true) {

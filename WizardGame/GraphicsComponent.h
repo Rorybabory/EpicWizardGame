@@ -38,8 +38,8 @@ public:
   int getAnimID() {
     return animID;
   }
-  void Draw(Camera camera) {
-    object.Draw(camera, animID, useUICam);
+  void Draw(Camera camera, float hitC) {
+    object.Draw(camera, animID, useUICam, hitC);
   }
   void DrawWhite(Camera camera) {
       object.DrawWhite(camera, animID);

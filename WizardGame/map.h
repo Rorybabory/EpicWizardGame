@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <experimental/filesystem>
+#include "Timer.h"
 extern std::vector<std::string> mods;
 extern bool restartFile;
 class Map {
@@ -88,7 +89,6 @@ public:
     }
     void Update(lua_State * L) {
         //auto update = std::async(&EntitySystem::Update, &eSystem, L);
-
         eSystem.Update(L);
         if (eSystem.save == true) {
             writeToFile();

@@ -44,7 +44,7 @@ function zombie_Update(e)
 	end
 	if (e:isAnimationPlaying("attack") == true) then
 		if (e:getDistanceFromNearest("player") < 16 and e:getAnimFrame() == 55) then
-			e:damageNearestEnt("player", 3)
+			e:damageNearestEnt("player", 2)
 			e:playSound("./res/sounds/hit.wav")
 		end
 	end
@@ -53,7 +53,7 @@ function zombie_Update(e)
 	e:setFloat("speed",(e:getGlobalFloat("wave")/18)+0.3)
 end
 function zombie_Start(e)
-    e:setHP(4)
+    e:setHP(3)
     e:lookAtPlayer()
     e:setScale(1.2+e:random(0,0.2))
     e:setFloat("raiseCount", 0)

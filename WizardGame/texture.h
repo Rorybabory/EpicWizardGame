@@ -26,6 +26,8 @@ public:
   // void RenderText(Camera cam,Shader &s,std::string text, GLfloat x, GLfloat y, GLfloat scale);
   void InitTex(const std::string& fileName);
   virtual ~Texture();
+  std::string fileName;
+
 protected:
 private:
   FT_Library ft;

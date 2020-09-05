@@ -52,26 +52,41 @@ function abilityManager_drawAbility(e)
 			if (e:getGlobalFloat("selectedAbility") < 0) then
 				e:setGlobalFloat("selectedAbility", 0)
 			end
-			
-			
+			e:setFloat("TextX",0.0)
+			e:setFloat("DescX",0.0)
+			e:setBool("MovingDesc", true)
 			--play sound effect
 			e:playSound("./res/sounds/menu.wav")
 		end
+	end
+	if (e:getBool("MovingDesc") == true) then
+		e:setFloat("DescX",e:getFloat("DescX")+0.05)
+	end
+	
+	if (e:getFloat("DescX") > -0.06 and e:getFloat("DescX") < 0.00) then
+		e:setBool("MovingDesc", false)
+	end
+	if (e:getFloat("DescX")>1.5) then
+		e:setFloat("DescX", -2.0)
+		e:setString("abilityText", e:getAbilityDescription(e:getGlobalFloat("selectedAbility")))
+	end
+	if (e:getFloat("TextX") < 0.04) then
+		e:setFloat("TextX",e:getFloat("TextX")+0.004)
 	end
 	value = 0
 	while (value < e:getAbilityCount())
 	do
 		if (e:getGlobalFloat("selectedAbility") == value) then
 			e:setTextColor(0.0,0.4,1.0,1.0)
-			e:setText("ability"..value, e:getAbility(value), -0.85, 0.4-(value/5))
+			e:setText("ability"..value, e:getAbility(value), -0.85+e:getFloat("TextX"), 0.4-(value/5))
 		else
 			e:setTextColor(1.0,0.1,0.0,1.0)
 			e:setText("ability"..value, e:getAbility(value), -0.9, 0.4-(value/5))
 		end
 		value=value+1
 	end
-	e:setTextColor(1.0,1.0,1.0,1.0)
-	e:setText("abilityDescription", e:getAbilityDescription(e:getGlobalFloat("selectedAbility")), -0.5, 0.0)
+	e:setTextColor(1.0,1.0,1.0,1.0-e:getFloat("DescX"))
+	e:setText("abilityDescription", e:getString("abilityText"), -0.5, 0.0+e:getFloat("DescX"))
 	e:setGlobalBool("drawPlayerUI", false)
 	e:setDrawUI(true)
 end
@@ -97,7 +112,7 @@ function abilityManager_eraseAbility(e)
 end
 function abilityManager_Update(e)
 	--setting inverted from anim frame on Time ability
-	if (e:getAnimFrame() > 37 and e:getAnimFrame() < 85 and e:getGlobalFloat("selectedAbility") == 2) then
+	if (e:getAnimFrame() > 37 and e:getAnimFrame() < 85 and e:getGlobalFloat("selectedAbility") == 2 and e:getGlobalBool("isInMenu") == true) then
 		e:setInverted(1)
 	else
 		e:setInverted(0)
@@ -124,12 +139,11 @@ function abilityManager_Update(e)
 	if (e:getGlobalBool("isInMenu") == true) then
 		if (e:getKeyPressed() == "ENTER") then
 			e:setGlobalBool("isInMenu", false)
-			abilityManager_eraseAbility(e)
+			e:setInverted(0)
 		end
-		if (e:getArrowDirY() ~= 0 or e:getMoveDirY() ~= 0) then
-			abilityManager_drawAbility(e)
-		end
+		abilityManager_drawAbility(e)
 	else
+		abilityManager_eraseAbility(e)
 	end
 	e:setCanBeHit(false)
 	e:UpdateKeyPresses()
@@ -169,6 +183,10 @@ function abilityManager_Start(e)
 	e:setUICam(true)
 	e:setImageTransform(-0.4,0.7,0.55,0.33)
 	e:setImage("direction", "./res/textures/menuDirections.png")
+	e:setFloat("TextX",0.0)
+	e:setFloat("DescX",0.0)
+	e:setBool("MovingDesc", true)
+	e:setString("abilityText", "")
 	abilityManager_eraseAbility(e)
 end
 

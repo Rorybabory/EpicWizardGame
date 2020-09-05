@@ -28,7 +28,6 @@ extern bool drawScene;
 extern std::vector<std::string> loadedScripts;
 extern q3Scene* scenePointer;
 extern bool resetText;
-
 struct drawData {
     bool isConsoleOpen = false;
     std::vector<Prop*> propsPointer;
@@ -53,6 +52,9 @@ extern bool restartFile;
 extern std::vector<std::string> mods;
 extern std::vector<glm::vec2> entityPos;
 extern lua_State* LPointer;
+extern void setHighScore(int val);
+extern int getHighScore();
+
 class EntitySystem {
 public:
     void addFunctions(lua_State* L) {
@@ -193,7 +195,6 @@ public:
             .addFunction("setSpread", &Entity::setSpread)
             .addFunction("setProjColor", &Entity::setProjColor)
             .addFunction("setProjDelay", &Entity::setProjDelay)
-
             .addFunction("setObjectPos", &Entity::setObjectPos)
             .addFunction("setObjectColor", &Entity::setObjectColor)
             .addFunction("setObjectScale", &Entity::setObjectScale)
@@ -210,8 +211,13 @@ public:
             .addFunction("setImageDraw", &Entity::setImageDraw)
             .addFunction("setMouseCapture", &Entity::setMouseCapture)
             .addFunction("setScreenResolution", &Entity::setScreenResolution)
-                
-            .endClass();
+            .addFunction("damageWithinADistance", &Entity::damageWithinADistance)
+            .addFunction("setObjectModel", &Entity::setObjectModel)
+            .addFunction("setScreenShake", &Entity::setScreenShake)
+            .addFunction("setHighScore", &Entity::setHighscore)
+            .addFunction("getHighScore", &Entity::getHighscore)
+            .addFunction("sin", &Entity::sinFunc)
+        .endClass();
     }
     std::string removeWord(std::string str, std::string word)
     {
@@ -366,6 +372,7 @@ public:
               functionsAdded = true;
               addFunctions(L);
           }
+      
       {
           Timer t = Timer("adding entity " + type);
           e = loadEntity(L, type);
@@ -437,7 +444,7 @@ public:
   }
   EntitySystem ()  : scene(1.0/60.0), clickObject("./res/X.obj",glm::vec4(1.0f,0.0f,0.0f,1.0f),"./res/basicShader",false) {
     floor.init(glm::vec3(1000.0f, 1.0, 1000.0f), glm::vec3(0.0f, 0.0f, 0.0f), &scene, eStaticBody);
-    scene.SetIterations(5);
+    scene.SetIterations(4);
     topDownCamera.InitCam(glm::vec3(0, 1000, 0), 70.0, 800.0f / 600.0f, 0.01f, 2000.0f);
     topDownCamera.Pitch(1.57);
 
@@ -607,8 +614,9 @@ public:
       
       if (entities[i]->type == "player") {
         if (entities[i]->killed == true) {
-          /*DumpToFile();
-          exit(0);*/
+            if (entities[i]->FloatsVars["Score"] > getHighScore()) {
+                setHighScore(entities[i]->FloatsVars["Score"]);
+            }
             load = true;
         }
       }
@@ -782,6 +790,7 @@ public:
                 if (e->canBeHit && frozen == false && o->destroy == false && e->canBeHit == true) {
                   coll = true;
                   o->destroy = true;
+                  e->hitCount = 1;
                   eTarget->Hit(1,e);
                 }
               }
