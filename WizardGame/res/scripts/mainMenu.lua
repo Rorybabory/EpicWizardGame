@@ -178,6 +178,9 @@ function mainMenu_Update(e)
 		e:setFloat("textOffset", e:getFloat("textOffset")-0.02)
 	elseif ((e:getFloat("textOffset") < 0)) then
 		e:setFloat("textOffset", 0)
+	elseif (e:getBool("soundPlayed")==false) then
+		e:playSound("./res/sounds/explosion/"..e:randomInt(1,4)..".wav")
+		e:setBool("soundPlayed", true)
 	end
 	e:setFloat("selectedLast", e:getFloat("selected"))
 	e:UpdateKeyPresses()
@@ -243,6 +246,9 @@ function mainMenu_Start(e)
 	e:setFloat("selectedLast", 1.0)
 	e:setImageTransform(-0.12,-0.88,0.4,0.25)
 	e:setImage("test", "./res/textures/menuDirections.png")
+	
+	e:setBool("soundPlayed", false)
+
 	
 	--0 is 800x600
 	--1 is 1024x768

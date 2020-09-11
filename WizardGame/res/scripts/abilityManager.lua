@@ -111,6 +111,7 @@ function abilityManager_eraseAbility(e)
 	e:setText("abilityDescription", "", 0.1, 0.0)
 end
 function abilityManager_Update(e)
+	
 	--setting inverted from anim frame on Time ability
 	if (e:getAnimFrame() > 37 and e:getAnimFrame() < 85 and e:getGlobalFloat("selectedAbility") == 2 and e:getGlobalBool("isInMenu") == true) then
 		e:setInverted(1)
@@ -136,7 +137,7 @@ function abilityManager_Update(e)
 		e:setText("menuTip", "", -0.75, -0.4)
 	end
 	
-	if (e:getGlobalBool("isInMenu") == true) then
+	if (e:getGlobalBool("isInMenu") == true and e:getGlobalBool("inPauseMenu") == true) then
 		if (e:getKeyPressed() == "ENTER") then
 			e:setGlobalBool("isInMenu", false)
 			e:setInverted(0)
@@ -144,9 +145,14 @@ function abilityManager_Update(e)
 		abilityManager_drawAbility(e)
 	else
 		abilityManager_eraseAbility(e)
+		if (e:getGlobalBool("inPauseMenu") == false) then
+			e:setDrawScene(true)
+		end
 	end
+	
 	e:setCanBeHit(false)
 	e:UpdateKeyPresses()
+	e:setBool("lastPause", e:getGlobalBool("inPauseMenu"))
 end
 function abilityManager_Start(e)
     e:setHP(9999)
@@ -169,7 +175,7 @@ function abilityManager_Start(e)
 	e:setBool("isBetween", false)
 	e:setGlobalBool("isInMenu", false)
 	e:setGlobalBool("drawPlayerUI", true)
-	
+	e:setBool("lastPause", false)
 	e:setAnimationTag("default",6)
 	e:setAnimationTag("fire",0)
 	e:setAnimationTag("teleport",1)

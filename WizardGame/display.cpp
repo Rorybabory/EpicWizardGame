@@ -41,7 +41,7 @@ Display::Display(int width, int height, const std::string& title)
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
         std::cout << "error\n";
     }
-    Mix_Volume(-1, MIX_MAX_VOLUME / 2.0);
+    Mix_Volume(-1, MIX_MAX_VOLUME / 50.0);
 }
 
 Display::~Display()

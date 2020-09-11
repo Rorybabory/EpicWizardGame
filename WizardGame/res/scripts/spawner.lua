@@ -51,6 +51,7 @@ function spawner_newSpawn(e)
 	else
 		e:setFloat("hasAbilities", 3)
 	end
+	
 	if (e:getEntityCount() < e:getFloat("hasAbilities") and e:getGlobalBool("isInMenu") == false and e:getGlobalBool("inPauseMenu") == true) then
 		e:setGlobalBool("isBetween", true)
 		if (e:getGlobalFloat("wave") ~= 0 ) then
@@ -64,8 +65,10 @@ function spawner_newSpawn(e)
 			spawner_startWave(e)
 		end
 	else
+		e:setTextColor(1.0,1.0,1.0,0.0)
 		e:setText("betweenText", "", -1.0, 0.0)
 	end
+	
 end
 function spawner_startWave(e)
 	e:setFloat("maxValue", e:getGlobalFloat("wave"))
@@ -133,10 +136,16 @@ function spawner_waveAlphaState(e)
 	if (e:getFloat("waveAlpha") < 0.1) then
 		e:setFloat("waveAlpha", 0)
 	end
+	
 end
 function spawner_Update(e)
 	e:setCanBeHit(false)
-	if (e:getGlobalBool("enabled") == true) then
+	if (e:getGlobalBool("inPauseMenu") == false) then
+		e:setTextColor(1.0,1.0,1.0,0.0)
+		e:setText("betweenText", "", -1.0, 0.0)
+		print ("not drawing tab")
+	end
+	if (e:getGlobalBool("enabled") == true and e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(0.0,0.0,1.0,e:getFloat("waveAlpha"))
 		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
 		e:setText("pressStart", "", -0.3, 0.0)
@@ -155,6 +164,10 @@ function spawner_Update(e)
 			e:setGlobalBool("enabled", true)
 			--print("start round")
 		end
+	else
+		e:setTextColor(0.0,0.0,0.0,0.0)
+		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
+		e:setText("pressStart", "Press SPACE to Start", -0.6, 0.0)
 	end
 	e:UpdateKeyPresses()
 end

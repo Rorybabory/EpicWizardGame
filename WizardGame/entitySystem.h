@@ -616,6 +616,7 @@ public:
         if (entities[i]->killed == true) {
             if (entities[i]->FloatsVars["Score"] > getHighScore()) {
                 setHighScore(entities[i]->FloatsVars["Score"]);
+                std::cout << "SET NEW HIGH SCORE TO: " << entities[i]->FloatsVars["Score"] << "\n";
             }
             load = true;
         }

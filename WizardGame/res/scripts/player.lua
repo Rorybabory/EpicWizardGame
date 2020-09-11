@@ -127,8 +127,8 @@ function player_RunAbility(e)
 		if (e:getFloat("FireCount") <= 0) then
 			x = e:damageWithinADistance(5,35)
 			e:Shake(x*7)
-			e:setFloat("Score", e:getFloat("Score")+(30*x));
-			e:Emit(100,1.0,0.5,0.3,0.8)
+			e:setFloat("Score", e:getFloat("Score")+(10*x));
+			--e:Emit(100,1.0,0.5,0.3,0.8)
 			e:setFloat("FireCount", 10)
 		end
 	end
@@ -286,6 +286,7 @@ function player_Update(e)
 	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
 		e:setBool("EscapeReleased", false)
 		e:setGlobalBool("inPauseMenu", false)
+		e:setDrawScene(true)
 	end
 	e:setTextColor(1.0,0.0,0.0,0.0)
 	e:setText("close", "", -0.5, 0.5)
@@ -294,6 +295,7 @@ function player_Update(e)
   else
 	e:setDrawScene(false)
 	e:setGlobalFrozen(true)
+	
 	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
 		e:setBool("EscapeReleased", false)
 		e:setGlobalBool("inPauseMenu", true)
@@ -349,7 +351,7 @@ function player_Update(e)
   e:UpdateKeyPresses()
   e:setUIText(e:getString("Ability") .. ": " .. e:getFloat("TimeCount"))
   e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
-  
+  print(e:getGlobalBool("inPauseMenu"))
 end
 function player_Start(e)
 	e:setGlobalBool("canPlayerMove", true)
