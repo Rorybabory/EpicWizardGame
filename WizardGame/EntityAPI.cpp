@@ -157,7 +157,12 @@ float Entity::getPositionFromNearestY(std::string targetType) {
 }
 void Entity::Shake(float amount) {
   auto camera = get<CameraComponent>();
-  camera->Shake(amount);
+  if (camera != NULL) {
+      camera->Shake(amount);
+  }
+  else {
+      std::cout << "ERROR: entity does not have a camera component\n";
+  }
 }
 void Entity::isFirstPerson(bool firstPerson) {
 	auto camera = get<CameraComponent>();

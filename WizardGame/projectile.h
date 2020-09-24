@@ -15,4 +15,6 @@ struct Projectile {
 	bool hasInit;
 	int delay;
 	int timesBounced = 0;
+	std::vector<glm::vec3> lastPos;
+	int recordPosCount = 0;
 };

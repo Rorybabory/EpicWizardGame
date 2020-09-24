@@ -145,7 +145,7 @@ function abilityManager_Update(e)
 		abilityManager_drawAbility(e)
 	else
 		abilityManager_eraseAbility(e)
-		if (e:getGlobalBool("inPauseMenu") == false) then
+		if (e:getGlobalBool("inPauseMenu") == true) then
 			e:setDrawScene(true)
 		end
 	end

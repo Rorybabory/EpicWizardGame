@@ -19,24 +19,23 @@ function mainMenu_Hit(e,e2,hits)
 end
 function mainMenu_drawStart(e)
 	e:setTextColor(1.0,1.0,1.0,e:getFloat("fadeValue"))
-	e:setText("startGame", "Start Game", -0.43+e:getFloat("textOffset"), 0.1)
-	e:setText("playTutorial", "Play Tutorial", -0.45+e:getFloat("textOffset"), -0.2)
-	e:setText("exitGame", "Quit the Game", -0.53+e:getFloat("textOffset"), -0.5)
-	e:setText("options", "Open Settings Menu", -0.7+e:getFloat("textOffset"), -0.8)
+	e:setText("startGame", "Start Game", -0.43+e:getFloat("textOffset")+e:getFloat("shakeOffset"), 0.1+e:getFloat("textVerticalOffset"))
+	e:setText("playTutorial", "Play Tutorial", -0.45+e:getFloat("textOffset")+e:getFloat("shakeOffset"), -0.2+e:getFloat("textVerticalOffset"))
+	e:setText("exitGame", "Quit the Game", -0.53+e:getFloat("textOffset")+e:getFloat("shakeOffset"), -0.5+e:getFloat("textVerticalOffset"))
+	e:setText("options", "Open Settings Menu", -0.7+e:getFloat("textOffset")+e:getFloat("shakeOffset"), -0.8+e:getFloat("textVerticalOffset"))
 	e:setTextColor(1.0,1.0,1.0,1.0)
-	e:setText("gameName", "The Wizard Game", -0.63+e:getFloat("textOffset"), 0.65)
 	if (e:getFloat("selected") == 0.0) then
 		e:setTextColor(1.0,0.0,0.0,e:getFloat("fadeValue"))
-		e:setText("startGame", "Start Game", -0.43+e:getFloat("textOffset"), 0.1)
+		e:setText("startGame", "Start Game", -0.43+e:getFloat("textOffset")+e:getFloat("shakeOffset"), 0.1+e:getFloat("textVerticalOffset"))
 	elseif (e:getFloat("selected") == 1.0) then
 		e:setTextColor(1.0,0.0,0.0,e:getFloat("fadeValue"))
-		e:setText("playTutorial", "Play Tutorial", -0.45+e:getFloat("textOffset"), -0.2)
+		e:setText("playTutorial", "Play Tutorial", -0.45+e:getFloat("textOffset")+e:getFloat("shakeOffset"), -0.2+e:getFloat("textVerticalOffset"))
 	elseif (e:getFloat("selected") == 2.0) then
 		e:setTextColor(1.0,0.0,0.0,e:getFloat("fadeValue"))
-		e:setText("exitGame", "Quit the Game", -0.53+e:getFloat("textOffset"), -0.5)
+		e:setText("exitGame", "Quit the Game", -0.53+e:getFloat("textOffset")+e:getFloat("shakeOffset"), -0.5+e:getFloat("textVerticalOffset"))
 	elseif (e:getFloat("selected") == 3.0) then
 		e:setTextColor(1.0,0.0,0.0,e:getFloat("fadeValue"))
-		e:setText("options", "Open Settings Menu", -0.7+e:getFloat("textOffset"), -0.8)
+		e:setText("options", "Open Settings Menu", -0.7+e:getFloat("textOffset")+e:getFloat("shakeOffset"), -0.8+e:getFloat("textVerticalOffset"))
 	end
 end
 function mainMenu_eraseStart(e)
@@ -73,10 +72,6 @@ function mainMenu_checkSelect(e, value)
 	end
 end
 function mainMenu_DrawOptions(e)
-	e:setTextColor(1.0,1.0,1.0,1.0)
-
-	e:setText("gameName", "The Wizard Game", -0.63+e:getFloat("textOffset"), 0.65)
-
 	mainMenu_checkSelect(e, 0)
 	mainMenu_DrawResolutionText(e)
 	mainMenu_checkSelect(e, 1)
@@ -110,7 +105,7 @@ function mainMenu_UpdateStart(e)
 			e:stopProgram()
 		elseif (e:getFloat("selected") == 3) then
 			e:setBool("fadeText", true)
-			
+			e:playSound("./res/sounds/menu.wav")
 		end
 		e:setBool("canEnterPress", false)
 	end
@@ -157,7 +152,9 @@ function mainMenu_UpdateOptions(e)
 			if (e:getFloat("ResolutionSetting") > 5) then
 				e:setFloat("ResolutionSetting", 0)
 			end
+			e:playSound("./res/sounds/menu.wav")
 		elseif (e:getFloat("selected") == 1) then
+			e:playSound("./res/sounds/menu.wav")
 			if (e:getBool("shakeScreen") == true) then
 				e:setBool("shakeScreen", false)
 			else
@@ -168,19 +165,32 @@ function mainMenu_UpdateOptions(e)
 			e:setScreenShake(e:getBool("shakeScreen"))
 		elseif (e:getFloat("selected") == 3) then
 			e:setBool("fadeText", true)
+			e:playSound("./res/sounds/menu.wav")
 			
 		end
 		e:setBool("canEnterPress", false)
 	end
 end
 function mainMenu_Update(e)
+	if (e:getBool("canWiggle") == true) then
+		e:setFloat("shakeCount",e:getFloat("shakeCount")+0.2)
+		e:setFloat("wiggleCount",e:getFloat("wiggleCount")+0.02)
+	end
+	e:setFloat("shakeOffset", ((e:sin(e:getFloat("shakeCount"))/10.0)*(e:getFloat("shake"))))
+	e:setImageTransform(e:getFloat("textOffset")+e:getFloat("shakeOffset"),0.5+(e:sin(e:getFloat("wiggleCount"))/100.0),1.0,0.7)
+	e:setImage("title", "./res/textures/Title.png")
+	e:setImageTransform(e:getFloat("textOffset")+e:getFloat("shakeOffset"),-0.9+(e:sin(e:getFloat("wiggleCount")+124)/150.0),0.55,0.36)
+	e:setImage("test", "./res/textures/menuDirections.png")
+
 	if (e:getFloat("textOffset") > 0) then
-		e:setFloat("textOffset", e:getFloat("textOffset")-0.02)
+		e:setFloat("textOffset", e:getFloat("textOffset")-0.03)
 	elseif ((e:getFloat("textOffset") < 0)) then
 		e:setFloat("textOffset", 0)
 	elseif (e:getBool("soundPlayed")==false) then
-		e:playSound("./res/sounds/explosion/"..e:randomInt(1,4)..".wav")
+		e:playSound("./res/sounds/menuExplode.wav")
 		e:setBool("soundPlayed", true)
+		e:setFloat("shake", 1.0)
+		e:setBool("canWiggle", true)
 	end
 	e:setFloat("selectedLast", e:getFloat("selected"))
 	e:UpdateKeyPresses()
@@ -215,6 +225,11 @@ function mainMenu_Update(e)
 			e:setFloat("fadeValue", e:getFloat("fadeValue")+0.03)		
 		end
 	end
+	if (e:getFloat("shake") > 0.0) then
+		e:setFloat("shake", e:getFloat("shake")-0.01)
+	else
+		e:setFloat("shake", 0.0)
+	end
 end
 function mainMenu_Start(e)
 	print(mainMenu_interp(e,1))
@@ -226,7 +241,6 @@ function mainMenu_Start(e)
 	e:setString("fading", "")
 	e:setTextColor(1.0,1.0,1.0,1.0)
 	e:setFloat("selectCount", 0)
-	e:setText("gameName", "The Wizard Game", -0.63, 0.65)
 	e:setBool("fadeText", false)
 	e:setFloat("fadeValue", 1.0)
 	e:setTextColor(1.0,0.0,0.0,1.0)
@@ -244,12 +258,11 @@ function mainMenu_Start(e)
 
 	e:setFloat("selected", 0.0)
 	e:setFloat("selectedLast", 1.0)
-	e:setImageTransform(-0.12,-0.88,0.4,0.25)
-	e:setImage("test", "./res/textures/menuDirections.png")
 	
 	e:setBool("soundPlayed", false)
-
+	e:setFloat("shake", 0.0)
 	
+	e:setFloat("textVerticalOffset", 0.03)
 	--0 is 800x600
 	--1 is 1024x768
 	--2 is 1280x1024
@@ -259,5 +272,9 @@ function mainMenu_Start(e)
 	e:setFloat("ResolutionSetting", 0)
 	e:setBool("shakeScreen", true)
 	e:setBool("canEnterPress", true)
+	e:setFloat("shakeOffset", 0.0)
+	e:setFloat("shakeCount", 0)
+	e:setBool("canWiggle", false)
+	e:playSound("./res/sounds/menuBuildUp.wav")
 end
 

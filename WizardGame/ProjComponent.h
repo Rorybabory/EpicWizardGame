@@ -24,7 +24,7 @@ public:
         float range1 = max - min;
         return (random * range1) + min;
     }
-  ProjectileComponent(luabridge::LuaRef& componentTable) {
+  ProjectileComponent(luabridge::LuaRef& componentTable) : trailShader("./res/basicShader"){
     auto modelRef = componentTable["model"];
     auto colorRRef = componentTable["colorR"];
     auto colorGRef = componentTable["colorG"];
@@ -60,10 +60,23 @@ public:
     if (!objects.empty()) {
       //projShader.Bind(color, glm::vec4(0.0));
       ObjectFile->shader.Bind(color, glm::vec4(0.0));
+      glLineWidth(10.5);
       for (int i = 0; i < objects.size(); i++) {
-          ObjectFile->Draw(camera, objects[i]->transform);
-      }
+          ObjectFile->Draw(camera, objects[i]->transform);      }
+
       ObjectFile->shader.UnBind();
+      //trailShader.Bind();
+      //trailShader.Update();
+      //for (int i = 0; i < objects.size(); i++) {
+      //    glColor3f(color.r, color.g, color.b);
+      //    glBegin(GL_LINES);
+      //    for (glm::vec3 pos : objects[i]->lastPos) {
+      //        glVertex3f(pos.x, pos.y, pos.z);
+      //    }
+      //    glEnd();
+
+      //}
+      //trailShader.UnBind();
     }
   }
   glm::vec3 RadiansToFront(glm::vec3 radians) {
@@ -88,11 +101,15 @@ public:
     for (int i = 0; i < objects.size(); i++) {
           glm::vec3 posToSet = glm::vec3(objects[i]->projB.getPos().x, objects[i]->projB.getPos().y, objects[i]->projB.getPos().z);
           objects[i]->transform.setPos(posToSet);
-          //std::cout << "running update code\n";
+          //objects[i]->lastPos.push_back(objects[i]->transform.getPos());
+          //objects[i]->recordPosCount++;
+          //if (objects[i]->recordPosCount > 12) {
+          //    
+          //    objects[i]->recordPosCount = 0;
+          //}
           if (objects[i]->destroy == false) {
               objects[i]->delay++;
               if (objects[i]->delay > range) {
-                  //projectileEmitters[i]->Emit(1);
                   objects[i]->delay = 0;
               }
           }
@@ -110,15 +127,7 @@ public:
                   objects[i]->boxDestroy = true;
               }
           }
-
-      //}
-      
-      // if (objects[i]->destroy == true) {
-      //   delete objects[i];
-      //   objects.erase(objects.begin()+i);
-      // }
     }
-    // std::cout << "" << '\n';
   }
   void collUpdate() {
     for (int i = 0; i < objects.size(); i++) {
@@ -222,6 +231,7 @@ float height;
 int delay;
 int delayCount;
 bool emitDelay = false;
+
 protected:
 private:
   float spread = 0.000;
@@ -234,6 +244,8 @@ private:
   bool hasInit = false;
   Mesh projMesh;
   Shader projShader;
+  Shader trailShader;
+
   Object* ObjectFile;
 };
 #endif

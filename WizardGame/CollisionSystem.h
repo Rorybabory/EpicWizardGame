@@ -19,11 +19,10 @@ public:
   }
 
   void init(glm::vec3 scale,glm::vec3 pos, q3Scene * scene,q3BodyType type) {
-
     q3BodyDef bodyDef;
     bodyDef.axis = q3Vec3(0.01f,0.01f,0.01f);
     bodyDef.bodyType = type;
-    bodyDef.gravityScale = 6.0f;
+    bodyDef.gravityScale = 3.5f;
     body = scene->CreateBody(bodyDef);
     body->SetTransform(q3Vec3(pos.x,pos.y,pos.z));
     q3BoxDef boxDef;

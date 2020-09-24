@@ -71,6 +71,7 @@ function spawner_newSpawn(e)
 	
 end
 function spawner_startWave(e)
+	
 	e:setFloat("maxValue", e:getGlobalFloat("wave"))
 	e:setGlobalFloat("wave", e:getGlobalFloat("wave")+1)
 	e:setFloat("waveAlphaState", 1)
@@ -90,6 +91,7 @@ function spawner_spawnFunction(e, name)
 	e:spawnEntity(name, e:getX(), e:getZ())
 end
 function spawner_resolveSpawning(e)
+	
 	if (e:getFloat("spawnValue") < e:getFloat("maxValue") and e:getFloat("spawnValue") < 10) then
 		e:setFloat("spawnValue", e:getFloat("spawnValue")+1)
 		rand = e:randomInt(0, 16)
@@ -153,6 +155,12 @@ function spawner_Update(e)
 		spawner_newSpawn(e)
 		spawner_resolveSpawning(e)
 
+		--if (e:getGlobalFloat("brightness") > -2) then
+		--	e:setGlobalFloat("brightness", e:getGlobalFloat("brightness")-0.05)
+		--else
+		--end
+		
+		--e:setGlobalFloat("brightness", 0)
 		--print("number of entities is: " .. e:getEntityCount())
 	elseif (e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(0.0,0.0,1.0,0.0)

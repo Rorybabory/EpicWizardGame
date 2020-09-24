@@ -47,7 +47,7 @@ public:
     }
     int CalculateLocY(float val, float size) {
         float size2 = size - (size / 10);
-        return (int)((((val / 1.0f) * size) / 2) + (size / 2)) - (val * (textSize * (Width / 800)));
+        return (int)((((val / 1.0f) * size) / 2.0f) + (size / 2.0f)) - (val * (textSize * (Width / 800.0f)));
     }
     void setText(std::string tag, std::string text, glm::vec2 pos, glm::vec4 color) {
         TextData data;
@@ -58,13 +58,31 @@ public:
         textMap[tag] = data;
     }
     void setImage(std::string tag, std::string src) {
-        ImageData data;        
-        data.tex = new Texture(src);
-        data.transform = new Transform();
-        data.transform->m_pos = glm::vec3(stData.pos.x, stData.pos.y, 0.0);
-        data.transform->m_scale = glm::vec3(stData.scale.x, stData.scale.y, 1.0);
-        imageMap[tag] = data;
+        if (imageMap.count(tag)) {
+            if (imageMap[tag].tex->fileName == src) {
+                imageMap[tag].transform->m_pos = glm::vec3(stData.pos.x, stData.pos.y, 0.0);
+                imageMap[tag].transform->m_scale = glm::vec3(stData.scale.x, stData.scale.y, 1.0);
+            }
+            else {
+                ImageData data;
+                data.tex = new Texture(src);
+                data.transform = new Transform();
+                data.transform->m_pos = glm::vec3(stData.pos.x, stData.pos.y, 0.0);
+                data.transform->m_scale = glm::vec3(stData.scale.x, stData.scale.y, 1.0);
+                imageMap[tag] = data;
+            }
+        }
+        else {
+            ImageData data;
+            data.tex = new Texture(src);
+            data.transform = new Transform();
+            data.transform->m_pos = glm::vec3(stData.pos.x, stData.pos.y, 0.0);
+            data.transform->m_scale = glm::vec3(stData.scale.x, stData.scale.y, 1.0);
+            imageMap[tag] = data;
+        }
+        
     }
+    
     void setImageTransform(glm::vec2 pos, glm::vec2 scale) {
         stData.pos = pos;
         stData.scale = scale;
@@ -84,8 +102,8 @@ public:
             glColor4f(x.second.color.r, x.second.color.g, x.second.color.b, x.second.color.a);
             glfreetype::print(Font, CalculateLocX(x.second.pos.x, (float)Width), CalculateLocY(x.second.pos.y, (float)Height), x.second.text.c_str());
 
-            glColor4f(x.second.color.r, x.second.color.g, x.second.color.b, x.second.color.a-(x.second.color.a/1.35));
-            glfreetype::print(Font, CalculateLocX(x.second.pos.x, (float)Width), CalculateLocY(x.second.pos.y, (float)Height)-((Width / 800.0f)*4), x.second.text.c_str());
+            glColor4f(x.second.color.r, x.second.color.g, x.second.color.b, x.second.color.a*0.2);
+            glfreetype::print(Font, CalculateLocX(x.second.pos.x, (float)Width), CalculateLocY(x.second.pos.y, (float)Height)-((Width / 800.0f)*6), x.second.text.c_str());
         }
         if (imageMap.empty() == false) {
             shader.Bind();

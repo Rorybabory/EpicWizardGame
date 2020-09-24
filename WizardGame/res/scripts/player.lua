@@ -84,10 +84,10 @@ end
 function player_RunAbility(e)
   if (e:getString("Ability") == "Rapid Fire") then
 		e:setProjColor(0.8,0.15,0.0,0.8)
-		e:setProjDelay(5)
+		e:setProjDelay(8)
 		e:setProjRange(100)
   else
-		e:setProjColor(0.5,1.0,1.0,1.0)
+		e:setProjColor(0.5,1.0,1.0,0.9)
 		e:setProjDelay(30)
 		e:setProjRange(300)
   end
@@ -103,8 +103,8 @@ function player_RunAbility(e)
 	end
 	if (e:getString("Ability") == "Dash") then
 		if (e:getBool("CanDash") == true) then
-			e:moveForward(5.0*e:getMoveDirY())
-			e:Strafe(e:getMoveDirX()*-5.0)
+			e:moveForward(3.0*e:getMoveDirY())
+			e:Strafe(e:getMoveDirX()*-3.0)
 			if (e:getDistanceFromNearestEnt() < 15) then
 				if (e:getBool("hasDamagedDash") == false) then
 					e:damageNearest(5)
@@ -113,7 +113,7 @@ function player_RunAbility(e)
 				end
 			end
 			e:setFloat("DashCount", e:getFloat("DashCount")+1)
-			if (e:getFloat("DashCount") > 7) then
+			if (e:getFloat("DashCount") > 11) then
 				e:setBool("CanDash", false)
 			end
 		else
@@ -125,7 +125,7 @@ function player_RunAbility(e)
 	end
 	if (e:getString("Ability") == "Fire") then
 		if (e:getFloat("FireCount") <= 0) then
-			x = e:damageWithinADistance(5,35)
+			x = e:damageWithinADistance(5,20)
 			e:Shake(x*7)
 			e:setFloat("Score", e:getFloat("Score")+(10*x));
 			--e:Emit(100,1.0,0.5,0.3,0.8)
@@ -134,9 +134,9 @@ function player_RunAbility(e)
 	end
     if (e:getString("Ability") == "Teleport") then
 	e:setFloat("AbilityCount", e:getFloat("AbilityCount")+1)
-      if (e:getFloat("AbilityCount") > 50) then
-        e:moveForward(e:getMoveDirY()*200.0)
-		e:Strafe(e:getMoveDirX()*-200.0)
+      if (e:getFloat("AbilityCount") > 15) then
+        e:moveForward(e:getMoveDirY()*50.0)
+		e:Strafe(e:getMoveDirX()*-50.0)
         e:setFloat("AbilityCount", 0)
       end
     end
@@ -166,7 +166,7 @@ function player_RunAbility(e)
     e:setFloat("Speed", e:getDefaultSpeed())
 	e:setFOV(70);
 	if (e:getFloat("FireCount") > 0) then
-		e:setFloat("FireCount", e:getFloat("FireCount")-0.2);
+		e:setFloat("FireCount", e:getFloat("FireCount")-0.12);
 	else
 		e:setBool("hasDamagedDash", false)
 	end
@@ -231,13 +231,17 @@ function player_clearText(e)
 	e:setTextColor(0.0,1.0,0.0,0.0)
 	e:setText("health", "", 0.6, -0.9)
 	e:setText("score", "", -0.3, 0.9)
+	
 end
 function player_Update(e)
+  --player_setHearts(e)
   player_updateIllusion(e)
   if (e:getGlobalBool("drawPlayerUI") == true) then
 	player_drawText(e)
+	--player_setHearts(e)
   else
 	player_clearText(e)
+	--player_clearHearts(e)
   end
   --e:setTextColor(0.0,1.0,0.0,0.5)
   --e:setText("score2", "score: " .. e:getFloat("Score"), -0.3, 0.9)
@@ -246,14 +250,11 @@ function player_Update(e)
   end
   e:setSaturation(0.06+e:getFloat("FireCount")/10.0)
   player_RunAbility(e)
-  e:setValue(e:getFloat("AbilityCount")/240.0-0.05)
+  e:setValue((e:getFloat("AbilityCount")/240.0-0.05)+e:getGlobalFloat("brightness"))
   if (e:getProjCount() == 54) then
 	e:setPlayerTag("fire")
 	--e:playSound("./res/sounds/shoot.wav")
   end
-  
-  
-  
   if (e:getKeyPressed() == "SPACE") then
 	if (e:getString("Ability") == "Illusion") then
 		e:setFloat("illusionCount",0.0)
@@ -283,7 +284,7 @@ function player_Update(e)
 	e:setBool("EscapeReleased", true)
   end
   if (e:getGlobalBool("inPauseMenu") == true) then
-	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true) then
+	if (e:getKeyPressed() == "ESCAPE" and e:getBool("EscapeReleased") == true and e:getGlobalBool("isInMenu") == false) then
 		e:setBool("EscapeReleased", false)
 		e:setGlobalBool("inPauseMenu", false)
 		e:setDrawScene(true)
@@ -305,7 +306,6 @@ function player_Update(e)
 		end
 	end
 	if (e:getKeyPressed() == "ENTER") then
-		
 		if (e:getFloat("selectedPauseOption") == 0) then
 			e:stopProgram()
 
@@ -351,7 +351,31 @@ function player_Update(e)
   e:UpdateKeyPresses()
   e:setUIText(e:getString("Ability") .. ": " .. e:getFloat("TimeCount"))
   e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
-  print(e:getGlobalBool("inPauseMenu"))
+  --print(e:getGlobalBool("inPauseMenu"))
+end
+function player_setHearts(e)
+	x = 0
+	while (x < 10) do
+		x=x+1
+		if (x<6) then
+			e:setImageTransform(0.3+(x/9),-0.8,0.055,0.055)
+		else
+			e:setImageTransform(0.3+((x-5)/9),-0.9,0.055,0.055)
+		end
+		if (x-1 < e:getHP()) then
+			e:setImage("heart"..tostring(x), "./res/textures/heart/heart.png")
+		else
+			e:setImage("heart"..tostring(x), "./res/textures/heart/heartEmpty.png")
+		end
+		e:setImageDraw("heart"..tostring(x), true)
+	end
+end
+function player_clearHearts(e)
+	x = 0
+	while (x < 10) do
+		x=x+1;
+		e:setImageDraw("heart"..tostring(x), false)
+	end
 end
 function player_Start(e)
 	e:setGlobalBool("canPlayerMove", true)
@@ -380,17 +404,18 @@ function player_Start(e)
 	e:setFloat("illusionCount", 0.0)
 	e:clearAbilities()
 	e:addAbility("Fire", "Damage enemies \n within a radius \n and gives more points")
-	e:addAbility("Teleport", "Quickly teleport\n the direction \n you are moving")
+	--e:addAbility("Teleport", "Quickly teleport\n the direction \n you are moving")
 	e:addAbility("Time", "Stop Time for \n a moment")
 	e:addAbility("Speed", "Go very fast for\n about a second")
 	e:addAbility("Dash", "Dash Forward a short\n distance and damage any\n enemies you hit")
-	e:addAbility("Rapid Fire", "Be able to fire\n very fast, \nbut deal less damage")
+	e:addAbility("Rapid Fire", "Be able to fire\n very fast")
 	e:addAbility("Illusion", "Create Illusions that fades over\ntime that enemies \nwill think is you.\nFiring destroys the illusion")
 	--e:addAbility("Shock Wave", "Launch enemies backwards")
 	e:setString("Ability", e:getAbility(e:getGlobalFloat("selectedAbility")))
 	
-	
 	e:setFloat("selectedPauseOption", 0)
 	e:setFloat("selectCount", 0)
 	--e:setScreenResolution(1920,1080)
+	--player_setHearts(e)
+
 end
