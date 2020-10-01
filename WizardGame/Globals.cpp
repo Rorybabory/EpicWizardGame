@@ -103,3 +103,41 @@ void drawText() {
 		texts[i]->Draw(textStrings[i],textPositions[i],glm::vec4(colors[i].r,colors[i].g,colors[i].b,1.0f),800,600);
 	}
 }
+std::string removeWord(std::string str, std::string word)
+{
+	if (str.find(word) != std::string::npos)
+	{
+		size_t p = -1;
+		std::string tempWord = word + " ";
+		while ((p = str.find(word)) != std::string::npos)
+			str.replace(p, tempWord.length(), "");
+		tempWord = " " + word;
+		while ((p = str.find(word)) != std::string::npos)
+			str.replace(p, tempWord.length(), "");
+	}
+	return str;
+}
+std::string convertPath(std::string input) {
+	std::string temp = input;
+	for (std::string folder : mods) {
+		bool exist = std::experimental::filesystem::exists("./mods/" + folder + "/" + removeWord(input, "./res"));
+		if (exist) {
+			temp = "./mods/" + folder + "/" + removeWord(input, "./res");
+		}
+
+	}
+	return temp;
+}
+void readEntityFile(lua_State* L) {
+	std::ifstream in_file{ "./res/scripts/entities" };
+	if (in_file.is_open()) {
+		std::string line;
+		while (!in_file.eof()) {
+			getline(in_file, line);
+			luah::loadScript(L, convertPath("./res/scripts/" + line + ".lua"));
+		}
+	}
+	else {
+		std::cout << "UNABLE TO LOAD ENTITY FILE\n";
+	}
+}

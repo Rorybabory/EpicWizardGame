@@ -1,5 +1,6 @@
 #include "animatedMesh.h"
 #include <thread>
+#include "Timer.h"
 animatedMesh::animatedMesh(std::string fileName) {
   //std::cout << fileName << '\n';
   this->fileName = fileName;
@@ -102,6 +103,7 @@ void animatedMesh::CalculateSkeletalModel() {
 }
 void animatedMesh::UpdateMesh(const IndexedModel& model) {
   if (MeshStored) {
+      Timer t = Timer("Update Model");
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(model.positions[0]) * model.positions.size(), &model.positions[0], GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);

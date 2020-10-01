@@ -35,13 +35,13 @@ player = {
   },
   {
 	componentName = "GUIComponent",
-	font = "./res/fonts/CaslonAntique.ttf",
+	font = "./res/fonts/PolygonParty.ttf",
 	color = {
 		r = 0,
 		g = 1,
 		b = 0
 	},
-	size = 35
+	size = 28
   }
 }
 local round = function(a, prec)
@@ -125,8 +125,8 @@ function player_RunAbility(e)
 	end
 	if (e:getString("Ability") == "Fire") then
 		if (e:getFloat("FireCount") <= 0) then
-			x = e:damageWithinADistance(5,20)
-			e:Shake(x*7)
+			x = e:damageWithinADistance(5,30)
+			e:Shake(x*5)
 			e:setFloat("Score", e:getFloat("Score")+(10*x));
 			--e:Emit(100,1.0,0.5,0.3,0.8)
 			e:setFloat("FireCount", 10)
@@ -181,7 +181,7 @@ function player_RunAbility(e)
     if (e:getString("Ability") == "Time") then
       e:setInverted(0)
       e:setGlobalFrozen(false)
-      e:setBool("CanTime",true);
+      e:setBool("CanTime",true)
 	  if (e:getFloat("AbilityCount")>0) then
         e:setFloat("AbilityCount",e:getFloat("AbilityCount")-2)
 	  end
@@ -209,11 +209,11 @@ end
 function player_drawText(e)
 	if (e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(0.0,1.0,0.0,1.0)
-		e:setText("health", "health: " .. e:getHP(), 0.6, -0.9)
+		e:setText("health", "health: " .. e:getHP(), 0.4, -0.9)
 		if (e:getGlobalBool("enabled") == true) then
 			e:setText("score", "score: " .. e:getFloat("ScoreDisplay"), -0.3, 0.9)
 		else
-			e:setText("score", "High Score: " .. e:getHighScore(), -0.3, 0.9)
+			e:setText("score", "High Score: " .. e:getHighScore(), -0.45, 0.9)
 		end
 	else
 		player_clearText(e)
@@ -307,7 +307,7 @@ function player_Update(e)
 	end
 	if (e:getKeyPressed() == "ENTER") then
 		if (e:getFloat("selectedPauseOption") == 0) then
-			e:stopProgram()
+			e:setMapTarget("mainMenu")
 
 		elseif (e:getFloat("selectedPauseOption") == 1) then
 			e:setGlobalBool("inPauseMenu", true)
@@ -332,9 +332,9 @@ function player_Update(e)
 		e:setFloat("selectCount", 25)
 	end
 	player_checkSelect(e, 0)
-	e:setText("close", "close the game", -0.9, 0.0)
+	e:setText("close", "Go to Main Menu", -0.9, 0.0)
 	player_checkSelect(e, 1)
-	e:setText("return", "return to game", -0.9, -0.4)
+	e:setText("return", "Return to Game", -0.9, -0.4)
 	e:setTextColor(1.0,0.0,0.0,1.0)
 	e:setText("pause", "PAUSED", -0.9, 0.8)
   end
@@ -381,7 +381,7 @@ function player_Start(e)
 	e:setGlobalBool("canPlayerMove", true)
 	e:setParticleModel("./res/models/fire.obj");
 	e:setFloat("SpeedMod", 0)
-    e:setFloat("TimeLength", 120)
+    e:setFloat("TimeLength", 150)
     e:setHP(10)
     e:setFloat("ShieldCount", 0)
 	e:setFloat("DashCount", 0)

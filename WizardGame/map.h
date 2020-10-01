@@ -12,6 +12,7 @@
 #include "Timer.h"
 extern std::vector<std::string> mods;
 extern bool restartFile;
+extern void readEntityFile(lua_State* L);
 class Map {
 public:
     std::string removeWord(std::string str, std::string word)
@@ -97,7 +98,7 @@ public:
         
         
     }
-    void readEntityFile(lua_State * L) {
+    /*void readEntityFile(lua_State * L) {
         std::ifstream in_file{ "./res/scripts/entities" };
         if (in_file.is_open()) {
             std::string line;
@@ -109,7 +110,7 @@ public:
         else {
             std::cout << "UNABLE TO LOAD ENTITY FILE\n";
         }
-    }
+    }*/
     void restartMap(std::string file, lua_State * L) {
         std::string path = "./res/maps/";
         path += file;

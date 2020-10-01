@@ -1,14 +1,13 @@
 tutorial = {
-
   {
 	componentName = "GUIComponent",
-	font = "./res/fonts/CaslonAntique.ttf",
+	font = "./res/fonts/PolygonParty.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 40
+	size = 30
   }
 }
 function tutorial_Hit(e,e2,hits)
@@ -33,16 +32,16 @@ function tutorial_Update(e)
 	end
 	if (e:getString("fading") == "in") then
 		e:setFloat("fade", e:getFloat("fade")+0.01)
-		e:setText("tutorial", e:getString("tutText"), -0.7, 0.1)
+		e:setText("tutorial", e:getString("tutText"), -0.85, 0.1)
 		if (e:getFloat("fade") > 1.0) then
 			e:setString("fading", "")
 		end
 	elseif (e:getString("fading") == "out") then
 		e:setFloat("fade", e:getFloat("fade")-0.01)
-		e:setText("tutorial", e:getString("fadeOutText"), -0.7, 0.1)
+		e:setText("tutorial", e:getString("fadeOutText"), -0.85, 0.1)
 
 		if (e:getFloat("fade") < 0.01) then
-			e:setText("tutorial", e:getString("tutText"), -0.7, 0.1)
+			e:setText("tutorial", e:getString("tutText"), -0.85, 0.1)
 			e:setString("fading", "in")
 		end
 	end
@@ -50,12 +49,12 @@ function tutorial_Update(e)
 	if (e:getFloat("tutStage") == 0) then
 		if (e:getKeyPressed() == "ENTER") then
 			e:setFloat("tutStage", 1)
-			e:setString("tutText", "Great! Now hold down \n SPACE to shoot!")
+			e:setString("tutText", "Great! Now hold down \nSPACE to shoot!")
 		end
 	elseif (e:getFloat("tutStage") == 1) then
 		if (e:getKeyPressed() == "SPACE") then
 			e:setFloat("tutStage", 2)
-			e:setString("tutText", "You can now hold SHIFT \n to use your ability\n The default ability \n damages any enemies \n nearby. You can change it later.")
+			e:setString("tutText", "You can now hold SHIFT \nto use your ability\nThe default ability \ndamages any enemies \nnearby. You can change it later.")
 		end
 	elseif (e:getFloat("tutStage") == 2) then
 		if (e:getKeyPressed() == "LSHIFT") then
@@ -65,7 +64,7 @@ function tutorial_Update(e)
 		end
 	elseif (e:getFloat("tutStage") == 3) then
 		if (e:getEntityCount() < 3) then
-			e:setString("tutText", "You finished the tutorial!\n Now press TAB to start \n a game!")
+			e:setString("tutText", "You finished the tutorial!\nNow press TAB to start \na game!")
 			if (e:getKeyPressed() == "TAB") then
 				e:setMapTarget("mainMap")
 			end
@@ -80,12 +79,13 @@ function tutorial_Start(e)
 	e:setPos(10000,10000,10000)
 	e:setFloat("tutStage", 0)
 	e:setFloat("fade", 1.0)
-	e:setString("lastTutText", "Hello! Use WASD to move\n Mouse to look around\n press ENTER to continue")
-	e:setString("tutText", "Hello! Use WASD to move\n Mouse to look around\n press ENTER to continue")
+	e:setString("lastTutText", "Hello! Use WASD to move\nMouse to look around\npress ENTER to continue")
+	e:setString("tutText", "Hello! Use WASD to move\nMouse to look around\npress ENTER to continue")
 	e:setString("fadeOutText", "")
 	e:showHealth(false)
 	e:setString("fading", "")
 	e:setTextColor(1.0,1.0,1.0,1.0)
-	e:setText("tutorial", e:getString("tutText"), -0.7, 0.1)
+	e:setText("tutorial", e:getString("tutText"), -0.85, 0.1)
+	e:setDrawScene(true)
 end
 

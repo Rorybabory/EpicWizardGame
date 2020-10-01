@@ -951,8 +951,7 @@ void Entity::setImageDraw(std::string tag, bool draw) {
 void Entity::setMouseCapture(bool value) {
     if (value == true) {
         SDL_SetRelativeMouseMode(SDL_TRUE);
-    }
-    else {
+    } else {
         SDL_SetRelativeMouseMode(SDL_FALSE);
     }
 }

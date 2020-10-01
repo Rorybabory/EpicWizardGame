@@ -1,13 +1,13 @@
 spawner = {
   {
 	componentName = "GUIComponent",
-	font = "./res/fonts/CaslonAntique.ttf",
+	font = "./res/fonts/PolygonParty.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 40
+	size = 30
   }
 }
 function spawner_Hit(e,e2,hits)
@@ -56,9 +56,11 @@ function spawner_newSpawn(e)
 		e:setGlobalBool("isBetween", true)
 		if (e:getGlobalFloat("wave") ~= 0 ) then
 			e:setTextColor(1.0,1.0,1.0,1.0)
-			e:setText("betweenText", "Press TAB to go to next wave.", -0.75, 0.0)
+			e:setText("betweenText", "Press TAB to go to next wave", -0.8, 0.0)
+			e:setText("betweenText2", "Press ESCAPE to pause at any time", -0.95, -0.5)
 			if (e:getKeyPressed() == "TAB") then
 				e:setText("betweenText", "", -1.0, 0.0)
+				e:setText("betweenText2", "", -1.0, 0.0)
 				spawner_startWave(e)
 			end
 		else
@@ -67,6 +69,8 @@ function spawner_newSpawn(e)
 	else
 		e:setTextColor(1.0,1.0,1.0,0.0)
 		e:setText("betweenText", "", -1.0, 0.0)
+		e:setText("betweenText2", "", -1.0, 0.0)
+
 	end
 	
 end
@@ -145,11 +149,15 @@ function spawner_Update(e)
 	if (e:getGlobalBool("inPauseMenu") == false) then
 		e:setTextColor(1.0,1.0,1.0,0.0)
 		e:setText("betweenText", "", -1.0, 0.0)
+		e:setText("betweenText2", "", -1.0, 0.0)
+
 		print ("not drawing tab")
 	end
 	if (e:getGlobalBool("enabled") == true and e:getGlobalBool("inPauseMenu") == true) then
-		e:setTextColor(0.0,0.0,1.0,e:getFloat("waveAlpha"))
-		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
+		if (e:getGlobalFloat("wave")-1 ~= 0) then
+			e:setTextColor(0.0,0.0,1.0,e:getFloat("waveAlpha"))
+			e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.2, -0.5)
+		end
 		e:setText("pressStart", "", -0.3, 0.0)
 		spawner_waveAlphaState(e)
 		spawner_newSpawn(e)

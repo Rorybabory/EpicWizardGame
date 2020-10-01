@@ -32,13 +32,25 @@ struct StoredImageData {
 class GUIComponent : public Component {
 public:
     GUIComponent(luabridge::LuaRef& componentTable) : shader("./res/guiShader"), imageMesh("./res/postRender.obj", true) {
-        std::string fontRef = componentTable["font"];
-        auto colorRef = componentTable["color"];
-        auto sizeRef = componentTable["size"];
-        glm::vec3 color = glm::vec3(colorRef["r"], colorRef["g"], colorRef["b"]);
-        this->textSize = sizeRef;
-        this->font = fontRef;
-        resetSize();
+        if (componentTable.isNil() == false) {
+            std::string fontRef = componentTable["font"];
+            auto colorRef = componentTable["color"];
+            auto sizeRef = componentTable["size"];
+            glm::vec3 color = glm::vec3(colorRef["r"], colorRef["g"], colorRef["b"]);
+            this->textSize = sizeRef;
+            this->font = fontRef;
+            resetSize();
+
+        }
+        else {
+            std::string fontRef = "./res/fonts/PolygonParty.ttf";
+            auto sizeRef = 42;
+            glm::vec3 color = glm::vec3(0, 0, 1);
+            this->textSize = sizeRef;
+            this->font = fontRef;
+            resetSize();
+        }
+        
     }
     int CalculateLocX(float val, float size) {
         float newVal = val * Width;

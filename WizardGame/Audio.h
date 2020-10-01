@@ -50,6 +50,7 @@ public:
 		chunk = nullptr;
 		Mix_Quit();
 	}
-private:
 	Mix_Chunk* chunk;
+private:
+	
 };

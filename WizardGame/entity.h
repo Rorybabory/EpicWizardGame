@@ -61,6 +61,7 @@ extern bool shakeScreen;
 
 extern void setHighScore(int val);
 extern int getHighScore();
+extern void readEntityFile(lua_State* L);
 static float getDistance(float x, float y, float x2,float y2) {
   float result = sqrt(pow(x-x2, 2) +
                   pow(y-y2, 2));
@@ -754,7 +755,13 @@ static Entity* loadEntity(lua_State* L, const std::string& type) {
   
   luabridge::LuaRef entityRef = luabridge::getGlobal(L,type.c_str());
   if (e->type == "mainMenu") {
-      std::cout << "adding menu components" << " menu Ref length is: " << entityRef.length() << " first component is: " << entityRef[1]["componentName"] << "\n\n\n\n\n";
+      //janky workaround to a bug related to going to the main menu
+      Timer timer("adding GUI component");
+      luabridge::LuaRef guiTable = entityRef[0];
+      if (e->type == "mainMenu") {
+          std::cout << "adding gui component to main menu\n";
+      }
+      addComponent<GUIComponent>(e, guiTable);
   }
   for (int i = 0; i < entityRef.length(); ++i) {
       

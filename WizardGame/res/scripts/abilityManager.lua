@@ -5,13 +5,13 @@ abilityManager = {
   },
   {
 	componentName = "GUIComponent",
-	font = "./res/fonts/CaslonAntique.ttf",
+	font = "./res/fonts/PolygonParty.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 40
+	size = 30
   }
 }
 function abilityManager_Hit(e,e2,hits)
@@ -99,7 +99,7 @@ function abilityManager_eraseAbility(e)
 	--e:setDrawScene(true)
 	e:setGlobalBool("canPlayerMove", true)
 	e:setTextColor(1.0,1.0,1.0,0.0)
-	e:setText("menuCloseTip", "", -0.75, 0.8)
+	e:setText("menuCloseTip", "", -0.8, 0.8)
 	value = 0
 	
 	while (value < e:getAbilityCount())
@@ -113,7 +113,7 @@ end
 function abilityManager_Update(e)
 	
 	--setting inverted from anim frame on Time ability
-	if (e:getAnimFrame() > 37 and e:getAnimFrame() < 85 and e:getGlobalFloat("selectedAbility") == 2 and e:getGlobalBool("isInMenu") == true) then
+	if (e:getAnimFrame() > 37 and e:getAnimFrame() < 85 and e:getGlobalFloat("selectedAbility") == 1 and e:getGlobalBool("isInMenu") == true) then
 		e:setInverted(1)
 	else
 		e:setInverted(0)
@@ -126,7 +126,7 @@ function abilityManager_Update(e)
 	end
 	if (e:getBool("isBetween") == true and e:getGlobalBool("isInMenu") == false and e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(1.0,1.0,1.0,1.0)
-		e:setText("menuTip", "Press Q to Open Ability Menu", -0.75, -0.4)
+		e:setText("menuTip", "Press Q to Open Ability Menu", -0.8, -0.25)
 		if (e:getKeyPressed() == "Q") then
 			e:setGlobalBool("isInMenu", true)
 			abilityManager_drawAbility(e)

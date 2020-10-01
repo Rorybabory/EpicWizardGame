@@ -1,13 +1,13 @@
 mainMenu = {
   {
 	componentName = "GUIComponent",
-	font = "./res/fonts/CaslonAntique.ttf",
+	font = "./res/fonts/PolygonParty.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 60
+	size = 42
   }
 }
 function mainMenu_interp(e,t)
@@ -76,23 +76,23 @@ function mainMenu_DrawOptions(e)
 	mainMenu_DrawResolutionText(e)
 	mainMenu_checkSelect(e, 1)
 	if (e:getBool("shakeScreen") == true) then
-		e:setText("ScreenShake", "Screen Shake: ON", -0.9, -0.1)
+		e:setText("ScreenShake", "Screen Shake: ON", -0.95, -0.1)
 	else
-		e:setText("ScreenShake", "Screen Shake: OFF", -0.9, -0.1)
+		e:setText("ScreenShake", "Screen Shake: OFF", -0.95, -0.1)
 	end
 	
 	mainMenu_checkSelect(e, 2)
-	e:setText("Apply", "Apply", -0.9, -0.5)
+	e:setText("Apply", "Apply", -0.95, -0.5)
 	mainMenu_checkSelect(e, 3)
-	e:setText("Back", "Back", -0.9, -0.8)
+	e:setText("Back", "Back", -0.95, -0.8)
 end
 
 function mainMenu_ClearOptions(e)
 	e:setTextColor(1.0,1.0,1.0,0.0)
-	e:setText("Resolution", "Resolution: 800 by 600", -0.9, 0.2)
-	e:setText("ScreenShake", "Screen Shake: ON", -0.9, -0.1)
-	e:setText("Apply", "Apply", -0.9, -0.5)
-	e:setText("Back", "Back", -0.9, -0.8)
+	e:setText("Resolution", "Resolution: 800 by 600", -0.95, 0.2)
+	e:setText("ScreenShake", "Screen Shake: ON", -0.95, -0.1)
+	e:setText("Apply", "Apply", -0.95, -0.5)
+	e:setText("Back", "Back", -0.95, -0.8)
 end
 function mainMenu_UpdateStart(e)
 	--Perform action when enter is pressed in start menu
@@ -120,27 +120,27 @@ function mainMenu_DrawResolutionText(e)
 	if (e:getFloat("ResolutionSetting") == 0) then
 		e:setFloat("WindowWidth", 800)
 		e:setFloat("WindowHeight", 600)
-		e:setText("Resolution", "Resolution: 800 by 600", -0.9, 0.2)
+		e:setText("Resolution", "Resolution: 800 by 600", -0.95, 0.2)
 	elseif (e:getFloat("ResolutionSetting") == 1) then
 		e:setFloat("WindowWidth", 1024)
 		e:setFloat("WindowHeight", 768)
-		e:setText("Resolution", "Resolution: 1024 by 768", -0.9, 0.2)
+		e:setText("Resolution", "Resolution: 1024 by 768", -0.95, 0.2)
 	elseif (e:getFloat("ResolutionSetting") == 2) then
 		e:setFloat("WindowWidth", 1280)
 		e:setFloat("WindowHeight", 1024)
-		e:setText("Resolution", "Resolution: 1280 by 1024", -0.9, 0.2)
+		e:setText("Resolution", "Resolution: 1280 by 1024", -0.95, 0.2)
 	elseif (e:getFloat("ResolutionSetting") == 3) then
 		e:setFloat("WindowWidth", 1600)
 		e:setFloat("WindowHeight", 900)
-		e:setText("Resolution", "Resolution: 1600 by 900", -0.9, 0.2)
+		e:setText("Resolution", "Resolution: 1600 by 900", -0.95, 0.2)
 	elseif (e:getFloat("ResolutionSetting") == 4) then
 		e:setFloat("WindowWidth", 1680)
 		e:setFloat("WindowHeight", 1050)
-		e:setText("Resolution", "Resolution: 1680 by 1050", -0.9, 0.2)
+		e:setText("Resolution", "Resolution: 1680 by 1050", -0.95, 0.2)
 	elseif (e:getFloat("ResolutionSetting") == 5) then
 		e:setFloat("WindowWidth", 1920)
 		e:setFloat("WindowHeight", 1080)
-		e:setText("Resolution", "Resolution: 1920 by 1080", -0.9, 0.2)
+		e:setText("Resolution", "Resolution: 1920 by 1080", -0.95, 0.2)
 	end
 	
 end
@@ -177,9 +177,9 @@ function mainMenu_Update(e)
 		e:setFloat("wiggleCount",e:getFloat("wiggleCount")+0.02)
 	end
 	e:setFloat("shakeOffset", ((e:sin(e:getFloat("shakeCount"))/10.0)*(e:getFloat("shake"))))
-	e:setImageTransform(e:getFloat("textOffset")+e:getFloat("shakeOffset"),0.5+(e:sin(e:getFloat("wiggleCount"))/100.0),1.0,0.7)
+	e:setImageTransform(e:getFloat("textOffset")+e:getFloat("shakeOffset"),0.5+(e:sin(e:getFloat("wiggleCount"))/50.0),1.0,0.7)
 	e:setImage("title", "./res/textures/Title.png")
-	e:setImageTransform(e:getFloat("textOffset")+e:getFloat("shakeOffset"),-0.9+(e:sin(e:getFloat("wiggleCount")+124)/150.0),0.55,0.36)
+	e:setImageTransform(e:getFloat("textOffset")+e:getFloat("shakeOffset"),-0.95+(e:sin(e:getFloat("wiggleCount")+124)/150.0),0.55,0.36)
 	e:setImage("test", "./res/textures/menuDirections.png")
 
 	if (e:getFloat("textOffset") > 0) then
