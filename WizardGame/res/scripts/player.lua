@@ -113,7 +113,7 @@ function player_RunAbility(e)
 				end
 			end
 			e:setFloat("DashCount", e:getFloat("DashCount")+1)
-			if (e:getFloat("DashCount") > 11) then
+			if (e:getFloat("DashCount") > 35) then
 				e:setBool("CanDash", false)
 			end
 		else
@@ -125,11 +125,11 @@ function player_RunAbility(e)
 	end
 	if (e:getString("Ability") == "Fire") then
 		if (e:getFloat("FireCount") <= 0) then
-			x = e:damageWithinADistance(5,30)
+			x = e:damageWithinADistance(5,34)
 			e:Shake(x*5)
 			e:setFloat("Score", e:getFloat("Score")+(10*x));
 			--e:Emit(100,1.0,0.5,0.3,0.8)
-			e:setFloat("FireCount", 10)
+			e:setFloat("FireCount", 8)
 		end
 	end
     if (e:getString("Ability") == "Teleport") then
@@ -261,7 +261,7 @@ function player_Update(e)
 	end
     e:Fire()
 	if (e:getFloat("SpeedMod") > 0.3) then
-		e:setFloat("SpeedMod",e:getFloat("SpeedMod")-0.01)
+		e:setFloat("SpeedMod",e:getFloat("SpeedMod")-0.013)
 	end
   else
 	e:setProjCount(52)

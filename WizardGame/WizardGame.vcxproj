@@ -254,6 +254,7 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="messaging.h" />
     <ClInclude Include="Minimap.h" />
+    <ClInclude Include="modManager.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="NpcComponent.h" />
     <ClInclude Include="object.h" />

@@ -98,6 +98,7 @@ int main()
         if (resetWindow == true) {
             //display.init(Width, Height, "Wizard Game!");
             SDL_SetWindowSize(display.m_window, Width, Height);
+            SDL_SetWindowPosition(display.m_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
             IMGUI_CHECKVERSION();
             ImGui::CreateContext();
             ImGuiIO& io = ImGui::GetIO();

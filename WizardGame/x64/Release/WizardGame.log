@@ -1,12 +1,68 @@
-﻿  animatedMesh.cpp
+﻿  EntityAPI.cpp
 C:\Users\lambe\source\repos\WizardGame\WizardGame\SkeletalAnimation\SkeletalModel.h(15,56): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedMesh.cpp(25,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedMesh.cpp(28,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedMesh.cpp(77,27): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedMesh.cpp(203,30): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedMesh.cpp(234,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\lambe\source\repos\WizardGame\WizardGame\text.h(24,50): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\text.h(30,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\text.h(30,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\animatedObject.h(151,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(57,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(62,70): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(106,33): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(115,95): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(115,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(117,93): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\GUIComponent.h(118,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\ProjComponent.h(118,92): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lambe\source\repos\WizardGame\WizardGame\ProjComponent.h(166,184): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\ProjComponent.h(166,135): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\ProjComponent.h(166,86): warning C4244: 'argument': conversion from 'double' to 'r32', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(9,24): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\HealthBar.h(12,33): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(103,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(127,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(130,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(176,45): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(268,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(345,1): warning C4102: 'std': unreferenced label
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(354,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(366,10): warning C4101: 'buffer': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(384,43): warning C4101: 'e': unreferenced local variable
+C:\Users\lambe\source\repos\WizardGame\WizardGame\entity.h(505,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(119,70): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(247,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(298,53): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(299,53): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(304,18): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(305,18): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(442,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(758,17): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(762,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\lambe\source\repos\WizardGame\WizardGame\EntityAPI.cpp(930,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Generating code
-  0 of 6195 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 6200 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

@@ -4,6 +4,9 @@ extern int screenInverted;
 extern glm::vec3 hsv;
 extern glm::vec2 levelSize;
 extern int entityCount;
+extern float Width;
+extern float Height;
+
 extern void closeProgram();
 float Entity::lookAtNearest(std::string targetType) {
     float nearestDist = 100000.0;
@@ -428,8 +431,11 @@ void Entity::FPSControllerUpdate(float speed) {
     startPos = cameraC->getCamera().m_position;
     SDL_PollEvent( &e );
     SDL_GetRelativeMouseState( &cameraC->x, &cameraC->y );
-    cameraC->getCamera().RotateY(((float)-cameraC->x/300.0f));
-    cameraC->getCamera().Pitch(((float)cameraC->y/300.0f));
+
+    float cameraMulX = 800 / Width;
+    float cameraMulY = 600 / Height;
+    cameraC->getCamera().RotateY(((float)-cameraC->x/300.0f)*cameraMulX);
+    cameraC->getCamera().Pitch(((float)cameraC->y/300.0f)*cameraMulY);
     std::string lastKey = keypressed;
 //    playerVel = glm::vec3(0.0f,0.0f,0.0f);
     glm::vec3 startPlayerVel = glm::vec3(0.0f,0.0f,0.0f);

@@ -51,7 +51,7 @@ function zombie_Update(e)
 	end
 	e:moveForward(e:getFloat("speed"))
 	e:setColor(1.0,1.0,1.0,1.0)
-	e:setFloat("speed",(e:getGlobalFloat("wave")/18)+0.3)
+	e:setFloat("speed",(e:getGlobalFloat("wave")/30)+0.3)
 end
 function zombie_Start(e)
     e:setHP(3)

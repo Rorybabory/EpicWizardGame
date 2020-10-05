@@ -22,6 +22,7 @@
 #include <cmath> 
 #include "Timer.h"
 #include "Minimap.h"
+#include "modManager.h"
 extern double FPS;
 extern int entityCount;
 extern bool drawScene;
@@ -219,32 +220,7 @@ public:
             .addFunction("sin", &Entity::sinFunc)
         .endClass();
     }
-    std::string removeWord(std::string str, std::string word)
-    {
-        if (str.find(word) != std::string::npos)
-        {
-            size_t p = -1;
-            std::string tempWord = word + " ";
-            while ((p = str.find(word)) != std::string::npos)
-                str.replace(p, tempWord.length(), "");
-            tempWord = " " + word;
-            while ((p = str.find(word)) != std::string::npos)
-                str.replace(p, tempWord.length(), "");
-        }
-        return str;
-    }
-    std::string convertPath(std::string input) {
-        std::string temp = input;
-        for (std::string folder : mods) {
-            std::string fileToCheck = std::string("./mods/" + folder + "/" + removeWord(input, "./res"));
-            //std::cout << "checking for mod file: " << fileToCheck << "\n";
-            bool exist = std::experimental::filesystem::exists(fileToCheck);
-            if (exist) {
-                temp = "./mods/" + folder + "/" + removeWord(input, "./res");
-            }
-        }
-        return temp;
-    }
+    
    void drawConsoleWindow() {
         ImGui::Begin("Console Window");
         ImGui::SetWindowSize(ImVec2(600, 600));
@@ -301,6 +277,7 @@ public:
        ImGui::End();
    }
    void drawSaveLoad() {
+
        ImGui::Begin("Save Load");
        ImGui::SetWindowSize(ImVec2(400, 100));
        ImGui::SetWindowPos(ImVec2(200.0f, 0.0f));

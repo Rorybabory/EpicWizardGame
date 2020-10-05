@@ -9,7 +9,7 @@
 #include "TextRenderer.h"
 #include "object.h"
 #include "CollisionSystem.h"
-
+#include "modManager.h"
 #include "luaLibrary.h" 
 extern std::vector<std::string> mods;
 
@@ -220,32 +220,7 @@ public:
   float rot;
   bool hasInitColl = false;
 private:
-    std::string removeWord(std::string str, std::string word)
-    {
-        if (str.find(word) != std::string::npos)
-        {
-            size_t p = -1;
-            std::string tempWord = word + " ";
-            while ((p = str.find(word)) != std::string::npos)
-                str.replace(p, tempWord.length(), "");
-            tempWord = " " + word;
-            while ((p = str.find(word)) != std::string::npos)
-                str.replace(p, tempWord.length(), "");
-        }
-        return str;
-    }
-    std::string convertPath(std::string input) {
-        std::string temp = input;
-        for (std::string folder : mods) {
-            std::string fileToCheck = std::string("./mods/" + folder + "/" + removeWord(input, "./res"));
-            std::cout << "checking for mod file: " << fileToCheck << "\n";
-            bool exist = std::experimental::filesystem::exists(fileToCheck);
-            if (exist) {
-                temp = "./mods/" + folder + "/" + removeWord(input, "./res");
-            }
-        }
-        return temp;
-    }
+    
   int id;
   Object collisionObject;
 };

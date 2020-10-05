@@ -10,36 +10,13 @@
 #include <fstream>
 #include <experimental/filesystem>
 #include "Timer.h"
+#include "modManager.h"
 extern std::vector<std::string> mods;
 extern bool restartFile;
 extern void readEntityFile(lua_State* L);
 class Map {
 public:
-    std::string removeWord(std::string str, std::string word)
-    {
-        if (str.find(word) != std::string::npos)
-        {
-            size_t p = -1;
-            std::string tempWord = word + " ";
-            while ((p = str.find(word)) != std::string::npos)
-                str.replace(p, tempWord.length(), "");
-            tempWord = " " + word;
-            while ((p = str.find(word)) != std::string::npos)
-                str.replace(p, tempWord.length(), "");
-        }
-        return str;
-    }
-    std::string convertPath(std::string input) {
-        std::string temp = input;
-        for (std::string folder : mods) {
-            bool exist = std::experimental::filesystem::exists("./mods/" + folder + "/" + removeWord(input, "./res"));
-            if (exist) {
-                temp = "./mods/" + folder + "/" + removeWord(input, "./res");
-            }
-
-        }
-        return temp;
-    }
+    
     void writeToFile() {
         std::string path = "./res/maps/";
         path += eSystem.mapPath;
@@ -136,13 +113,15 @@ public:
                 float y = item["y"];
                 bool collide = item["collides"];
                 float rot = item["rot"];
-
+                std::cout << "yeeeeeeeeeeeeee\n";
                 eSystem.addProp(convertPath(file), glm::vec3(scale, scale, scale), glm::vec3(x, 0.0f, y), rot, collide);
             }
             else if (item["type"] == "entity") {
                 std::string file = item["file"];
                 float x = item["x"];
                 float y = item["y"];
+                std::cout << "yeeeeeeeeeeeeee\n";
+
                 eSystem.addEntityAtPos("res/scripts/entities.lua", file, glm::vec2(x, y), L);
             }
             else {
@@ -167,11 +146,14 @@ public:
         float y = item["y"];
         bool collide = item["collides"];
         float rot = item["rot"];
+        std::cout << "yeeeeeeeeeeeeee\n";
         eSystem.addProp(convertPath(file),glm::vec3(scale,scale,scale),glm::vec3(x,0.0f,y), rot, collide);
       }else if (item["type"] == "entity") {
         std::string file = item["file"];
         float x = item["x"];
         float y = item["y"];
+        std::cout << "yeeeeeeeeeeeeee\n";
+
         eSystem.addEntityAtPos("res/scripts/entities.lua", file, glm::vec2(x,y),L);
       }else {
         std::cout << "ERROR: MAP: " << fileName << " HAS INVALID TYPED ITEM..." << "\n";
