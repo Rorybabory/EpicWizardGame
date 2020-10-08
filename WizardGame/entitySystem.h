@@ -218,6 +218,8 @@ public:
             .addFunction("setHighScore", &Entity::setHighscore)
             .addFunction("getHighScore", &Entity::getHighscore)
             .addFunction("sin", &Entity::sinFunc)
+            .addFunction("setAchievement", &Entity::setAchievement)
+                
         .endClass();
     }
     

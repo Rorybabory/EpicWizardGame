@@ -1,29 +1,17 @@
 spawner = {
   {
-    componentName = "GraphicsComponent",
-    folder = "./res/models/WizardUI"
-  },
-  {
 	componentName = "GUIComponent",
-	font = "./res/fonts/CaslonAntique.ttf",
+	font = "./res/fonts/PolygonParty.ttf",
 	color = {
 		r = 0,
 		g = 0,
 		b = 1
 	},
-	size = 40
-  },
+	size = 30
+  }
 }
 function spawner_Hit(e,e2,hits)
-  -- e2:setColor(0.0,0.0,0.0,1.0)
-  e2:setHP(e2:getHP()-hits)
-  -- if (e:getAnimation() == 2) then
-  --   e:playAnimation(0)
-  -- end
-  if (e2:isPlayer() == true) then
-    e2:Shake(5.0)
-  end
-  e2:write(e2:getHP())
+
 end
 function spawner_easeOutCubic(t)
     return 1 + (t-1) * t * t;
@@ -57,24 +45,37 @@ function spawner_oldSpawn(e)
 end
 function spawner_newSpawn(e)
 	--print("wave is: " .. e:getGlobalFloat("wave"))
-	e:setBool("isBetween", false)
-	if (e:getEntityCount() < 3 and e:getBool("isInMenu") == false) then
-		e:setBool("isBetween", true)
-		if (e:getGlobalFloat("wave") ~= 0) then
+	e:setGlobalBool("isBetween", false)
+	if (e:doesEntityExist("abilityManager") == true) then
+		e:setFloat("hasAbilities", 4)
+	else
+		e:setFloat("hasAbilities", 3)
+	end
+	
+	if (e:getEntityCount() < e:getFloat("hasAbilities") and e:getGlobalBool("isInMenu") == false and e:getGlobalBool("inPauseMenu") == true) then
+		e:setGlobalBool("isBetween", true)
+		if (e:getGlobalFloat("wave") ~= 0 ) then
 			e:setTextColor(1.0,1.0,1.0,1.0)
-			e:setText("betweenText", "Press TAB to go to next wave.", -0.75, 0.0)
+			e:setText("betweenText", "Press TAB to go to next wave", -0.8, 0.0)
+			e:setText("betweenText2", "Press ESCAPE to pause at any time", -0.95, -0.5)
 			if (e:getKeyPressed() == "TAB") then
 				e:setText("betweenText", "", -1.0, 0.0)
+				e:setText("betweenText2", "", -1.0, 0.0)
 				spawner_startWave(e)
 			end
 		else
 			spawner_startWave(e)
 		end
 	else
+		e:setTextColor(1.0,1.0,1.0,0.0)
 		e:setText("betweenText", "", -1.0, 0.0)
+		e:setText("betweenText2", "", -1.0, 0.0)
+
 	end
+	
 end
 function spawner_startWave(e)
+	
 	e:setFloat("maxValue", e:getGlobalFloat("wave"))
 	e:setGlobalFloat("wave", e:getGlobalFloat("wave")+1)
 	e:setFloat("waveAlphaState", 1)
@@ -84,25 +85,37 @@ function spawner_startWave(e)
 		e:setFloat("maxValue", 10)
 	end
 end
+function spawner_spawnFunction(e, name)
+	e:setPos(e:random(-260,260), 0.0 ,e:random(-260,260))
+	while (e:getDistanceBetweenTwoPointsAPI(e:getPositionFromNearestX("player"),e:getPositionFromNearestY("player"), e:getX(), e:getZ()) < 100)
+	do
+		print("reset  position for spawned entity\n\n\n\n")
+		e:setPos(e:random(-260,260), 0.0 ,e:random(-260,260))
+	end
+	e:spawnEntity(name, e:getX(), e:getZ())
+end
 function spawner_resolveSpawning(e)
+	
 	if (e:getFloat("spawnValue") < e:getFloat("maxValue") and e:getFloat("spawnValue") < 10) then
 		e:setFloat("spawnValue", e:getFloat("spawnValue")+1)
 		rand = e:randomInt(0, 16)
 		if (e:getGlobalFloat("wave") < 5) then
 			rand = 7
-		elseif (e:getGlobalFloat("wave") > 9) then
-			rand = e:randomInt(0, 6)
+		elseif (e:getGlobalFloat("wave") < 10) then
+			rand = e:randomInt(2, 13)
+		elseif (e:getGlobalFloat("wave") > 13) then
+			rand = e:randomInt(0, 7)
 		end
 		if (rand == 0) then
-			e:spawnEntity("necromancer", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "necromancer")
 		elseif (rand == 1) then
-			e:spawnEntity("stoneMonster", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "stoneMonster")
 		elseif (rand == 2) then
-			e:spawnEntity("test2", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "test2")
 		elseif (rand == 3 or rand == 4 or rand == 5) then
-			e:spawnEntity("skeleton", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "skeleton")
 		else
-			e:spawnEntity("zombie", e:random(-260,260), e:random(-260,260))
+			spawner_spawnFunction(e, "zombie")
 		end
 	end
 end
@@ -129,108 +142,35 @@ function spawner_waveAlphaState(e)
 	if (e:getFloat("waveAlpha") < 0.1) then
 		e:setFloat("waveAlpha", 0)
 	end
-end
-function spawner_drawAbility(e)
-	e:setAnimationTag("default",e:getGlobalFloat("selectedAbility"))
-	--print(e:getAbilityCount() .. " is the ability count")
-	e:setTextColor(1.0,1.0,1.0,1.0)
-	e:setText("menuCloseTip", "Press LCONTROL to close", -0.9, 0.8)
-	e:setGlobalBool("canPlayerMove", false)
-	e:setDrawScene(false)
-	--setting inverted from anim frame on Time ability
-	if (e:getAnimFrame() > 37 and e:getAnimFrame() < 85 and e:getGlobalFloat("selectedAbility") == 2) then
-		e:setInverted(1)
-	else
-		e:setInverted(0)
-	end
-	--allow moving selection based on WASD
-	if (e:getMoveDirY() ~= 0) then
-		e:setFloat("selectCounter", e:getFloat("selectCounter")+1)
-		if (e:getFloat("selectCounter") > 15) then
-			e:setFloat("selectCounter", 0)
-			e:setGlobalFloat("selectedAbility", e:getGlobalFloat("selectedAbility")-e:getMoveDirY())
-			e:resetFrame()
-			--push selection into bounds
-			if (e:getGlobalFloat("selectedAbility") == e:getAbilityCount()) then
-				e:setGlobalFloat("selectedAbility", e:getAbilityCount()-1)
-			end
-			if (e:getGlobalFloat("selectedAbility") < 0) then
-				e:setGlobalFloat("selectedAbility", 0)
-			end
-			
-			
-			--play sound effect
-			e:playSound("./res/sounds/menu.wav")
-		end
-	end
-	value = 0
-	while (value < e:getAbilityCount())
-	do
-		if (e:getGlobalFloat("selectedAbility") == value) then
-			e:setTextColor(0.0,0.4,1.0,1.0)
-		else
-			e:setTextColor(1.0,0.1,0.0,1.0)
-		end
-		
-		e:setText("ability"..value, e:getAbility(value), -0.9, 0.4-(value/5))
-		value=value+1
-	end
-	e:setTextColor(1.0,1.0,1.0,1.0)
-	e:setText("abilityDescription", e:getAbilityDescription(e:getGlobalFloat("selectedAbility")), -0.5, 0.0)
-	e:setGlobalBool("drawPlayerUI", false)
-	e:setDrawUI(true)
-end
-function spawner_eraseAbility(e)
-	e:setDrawUI(false)
-	e:setGlobalBool("drawPlayerUI", true)
-	e:setDrawScene(true)
-	e:setGlobalBool("canPlayerMove", true)
-	e:setTextColor(1.0,1.0,1.0,0.0)
-	e:setText("menuCloseTip", "", -0.75, 0.8)
-	value = 0
 	
-	while (value < e:getAbilityCount())
-	do
-		e:setText("ability"..value, "", -0.75, 0.5-(value/5))
-		value=value+1
-	end
-	e:setTextColor(1.0,1.0,1.0,0.0)
-	e:setText("abilityDescription", "", 0.1, 0.0)
 end
 function spawner_Update(e)
-	
-	--print("wave alpha is:" .. e:getFloat("waveAlpha"))
-	if (e:getBool("isBetween") == true and e:getBool("isInMenu") == false) then
-		e:setTextColor(1.0,1.0,1.0,1.0)
-		e:setText("menuTip", "Press Q to Open Ability Menu", -0.75, -0.4)
-		if (e:getKeyPressed() == "Q") then
-			e:setBool("isInMenu", true)
-		end
-	else
-		e:setTextColor(1.0,1.0,1.0,0.0)
-		e:setText("menuTip", "", -0.75, -0.4)
-	end
-	
-	if (e:getBool("isInMenu") == true) then
-		spawner_drawAbility(e)
-		if (e:getKeyPressed() == "LCTRL") then
-			e:setBool("isInMenu", false)
-		end
-	else
-		spawner_eraseAbility(e)
-		
-	end
 	e:setCanBeHit(false)
-	if (e:getGlobalBool("enabled") == true) then
-		e:setTextColor(0.0,0.0,1.0,e:getFloat("waveAlpha"))
-		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
+	if (e:getGlobalBool("inPauseMenu") == false) then
+		e:setTextColor(1.0,1.0,1.0,0.0)
+		e:setText("betweenText", "", -1.0, 0.0)
+		e:setText("betweenText2", "", -1.0, 0.0)
+
+		print ("not drawing tab")
+	end
+	if (e:getGlobalBool("enabled") == true and e:getGlobalBool("inPauseMenu") == true) then
+		if (e:getGlobalFloat("wave")-1 ~= 0) then
+			e:setTextColor(0.0,0.0,1.0,e:getFloat("waveAlpha"))
+			e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.2, -0.5)
+		end
 		e:setText("pressStart", "", -0.3, 0.0)
 		spawner_waveAlphaState(e)
 		spawner_newSpawn(e)
 		spawner_resolveSpawning(e)
 
+		--if (e:getGlobalFloat("brightness") > -2) then
+		--	e:setGlobalFloat("brightness", e:getGlobalFloat("brightness")-0.05)
+		--else
+		--end
+		
+		--e:setGlobalFloat("brightness", 0)
 		--print("number of entities is: " .. e:getEntityCount())
-	else
+	elseif (e:getGlobalBool("inPauseMenu") == true) then
 		e:setTextColor(0.0,0.0,1.0,0.0)
 		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
 		e:setTextColor(1.0,1.0,1.0,1.0)
@@ -240,6 +180,10 @@ function spawner_Update(e)
 			e:setGlobalBool("enabled", true)
 			--print("start round")
 		end
+	else
+		e:setTextColor(0.0,0.0,0.0,0.0)
+		e:setText("wave", "wave: " .. e:getGlobalFloat("wave")-1, -0.3, -0.5)
+		e:setText("pressStart", "Press SPACE to Start", -0.6, 0.0)
 	end
 	e:UpdateKeyPresses()
 end
@@ -264,21 +208,13 @@ function spawner_Start(e)
 	e:setFloat("selectCounter", 0)
 	e:setBool("betweenState", false)
 	e:setGlobalBool("enabled", false)
-	e:setBool("isBetween", false)
+	e:setGlobalBool("isBetween", false)
 	e:setBool("isInMenu", false)
 	e:setGlobalBool("drawPlayerUI", true)
 	
-	
-	e:setAnimationTag("default",6)
-	e:setAnimationTag("fire",0)
-	e:setAnimationTag("teleport",1)
-	e:setAnimationTag("time",2)
-	e:setAnimationTag("speed",3)
-	e:setAnimationTag("dash",4)
-	e:setAnimationTag("rapid fire",5)
-	e:setScale(10)
 	e:setRot(0.0,0.0,0.0)
 	e:showHealth(false)
 	e:setUICam(true)
+	
 end
 

@@ -48,52 +48,43 @@ mainMap = {
         type = "prop",
         file = "house2",
         scale = 2,
-        x = -97.6471,
-        y = -256.471,
+        x = -120.0,
+        y = -225.0,
         collides = true,
-        rot = 0
+        rot = 0.2
     },
     {
         type = "prop",
         file = "house2",
         scale = 2,
         x = 44.7059,
-        y = 249.412,
+        y = 220.0,
         collides = true,
-        rot = 3.14159
+        rot = 3.40345
     },
     {
         type = "prop",
         file = "house2",
         scale = 2,
-        x = -223.529,
-        y = 3.52941,
+        x = -210.0,
+        y = 0.0,
         collides = true,
-        rot = 1.5708
+        rot = 1.8
     },
     {
         type = "prop",
         file = "house2",
         scale = 2,
-        x = 236.471,
-        y = -112.941,
+        x = 215.0,
+        y = -100.0,
         collides = true,
-        rot = 4.71239
+        rot = 4.85
     },
     {
         type = "prop",
         file = "statue",
         scale = 2,
-        x = 236.471,
-        y = -112.941,
-        collides = true,
-        rot = 4.71239
-    },
-    {
-        type = "prop",
-        file = "statue",
-        scale = 2,
-        x = -1.17647,
+        x = -0,
         y = -0,
         collides = true,
         rot = 4.71239
@@ -111,8 +102,8 @@ mainMap = {
         type = "prop",
         file = "tower",
         scale = 3,
-        x = 245.882,
-        y = 229.412,
+        x = 263.0,
+        y = 263.0,
         collides = true,
         rot = 3.92699
     },
@@ -123,7 +114,7 @@ mainMap = {
         x = 77.6471,
         y = 16.4706,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -132,7 +123,7 @@ mainMap = {
         x = -55.2941,
         y = 131.765,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -141,7 +132,7 @@ mainMap = {
         x = -128.235,
         y = 21.1765,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -150,7 +141,7 @@ mainMap = {
         x = -71.7647,
         y = -103.529,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -159,7 +150,7 @@ mainMap = {
         x = 107.059,
         y = -210.588,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -168,7 +159,7 @@ mainMap = {
         x = 252.941,
         y = -278.824,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -177,7 +168,7 @@ mainMap = {
         x = -240,
         y = -207.059,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -186,7 +177,7 @@ mainMap = {
         x = -237.647,
         y = -114.118,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -195,7 +186,7 @@ mainMap = {
         x = -85.8823,
         y = 240,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -204,7 +195,7 @@ mainMap = {
         x = 227.059,
         y = 38.8235,
         collides = true,
-        rot = 3.92699
+        rot = 0
     },
     {
         type = "prop",
@@ -284,10 +275,17 @@ mainMap = {
         x = -60.0,
         y = 0.0,
     },
+	
+	{
+        type = "entity",
+        file = "spawner",
+        x = 0.0,
+        y = 0.0,
+    },
 	{
         type = "entity",
         file = "abilityManager",
         x = 0.0,
         y = 0.0,
-    }
+    },
 }

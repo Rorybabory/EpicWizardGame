@@ -28,7 +28,12 @@ vec3 rgb2hsv(vec3 c)
     float e = 1.0e-10;
     return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
 }
-
+float distance(vec2 a, vec2 b) 
+{ 
+    // Calculating distance 
+    return sqrt(pow(b.x - a.x, 2.0) +  
+                pow(b.y - a.y, 2.0) * 1.0); 
+} 
 vec3 hsv2rgb(vec3 c)
 {
     vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
@@ -43,7 +48,11 @@ vec3 createBox(vec2 uv, vec3 value, Box box) {
 	return value;
 }
 void main() {
-    vec3 value = texture(sampler,texCoord0).rgb;
+	vec2 newTexCoord = texCoord0;
+//	newTexCoord.x*=(distance(vec2(0.5,0.5),newTexCoord)*2.0);
+//	newTexCoord.y*=(distance(vec2(0.5,0.5),newTexCoord)*2.0);
+
+    vec3 value = texture(sampler,newTexCoord).rgb;
     if (inverted == 1.0) {
         value = vec3(1.0)-value;
     }

@@ -172,7 +172,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\lambe\source\repos\WizardGame\WizardGame\lib;C:\Users\lambe\source\repos\WizardGame\WizardGame\freetype2-master\objs\Win32\Debug;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glew32.lib;glew32s.lib;glfw3.lib;lua52.lib;qu3e.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;SDL2_mixer.lib;portaudio_x64.lib;steam_api64.lib</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>MAPFILE</MapFileName>
       <IgnoreSpecificDefaultLibraries>ucrtbased.dll;vcruntime140d.dll;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>

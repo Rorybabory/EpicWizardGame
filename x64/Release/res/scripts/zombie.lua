@@ -40,20 +40,21 @@ function zombie_Update(e)
 	if (e:getDistanceFromNearest("player") < 5 and e:isAnimationPlaying("attack") == false) then
 		e:resetFrame()
 		e:playAnimationTag("attack")
+		e:playSound("./res/sounds/attackCharge.wav")
 		print("attack")
 	end
 	if (e:isAnimationPlaying("attack") == true) then
 		if (e:getDistanceFromNearest("player") < 16 and e:getAnimFrame() == 55) then
-			e:damageNearestEnt("player", 3)
+			e:damageNearestEnt("player", 1)
 			e:playSound("./res/sounds/hit.wav")
 		end
 	end
 	e:moveForward(e:getFloat("speed"))
 	e:setColor(1.0,1.0,1.0,1.0)
-	e:setFloat("speed",(e:getGlobalFloat("wave")/18)+0.3)
+	e:setFloat("speed",(e:getGlobalFloat("wave")/30)+0.3)
 end
 function zombie_Start(e)
-    e:setHP(4)
+    e:setHP(3)
     e:lookAtPlayer()
     e:setScale(1.2+e:random(0,0.2))
     e:setFloat("raiseCount", 0)

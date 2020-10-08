@@ -34,7 +34,7 @@ extern "C" {
 }
 #include "skybox.h"
 #include "Globals.h"
-
+#include "steam/steam_api.h"
 //#include <ft2build.h>
 //#include <freetype/freetype.h>
 //#include <freetype/ftglyph.h>
@@ -52,8 +52,16 @@ extern bool resetWindow;
 //extern Display display;
 //extern FrameBuffer postProcessing;
 //extern void initWindow();
+void steamInit() {
+    if (!SteamAPI_Init())
+    {
+        printf("Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed).\n");
+    }
+    std::cout << "steam name is: " << SteamFriends()->GetPersonaName() << "\n";
+}
 int main()
 {
+    steamInit();
     std::cout << "starting program\n";
     bool Left = false;
     bool Right = false;

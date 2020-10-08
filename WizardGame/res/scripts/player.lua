@@ -125,7 +125,7 @@ function player_RunAbility(e)
 	end
 	if (e:getString("Ability") == "Fire") then
 		if (e:getFloat("FireCount") <= 0) then
-			x = e:damageWithinADistance(5,34)
+			x = e:damageWithinADistance(5,26)
 			e:Shake(x*5)
 			e:setFloat("Score", e:getFloat("Score")+(10*x));
 			--e:Emit(100,1.0,0.5,0.3,0.8)
@@ -378,6 +378,7 @@ function player_clearHearts(e)
 	end
 end
 function player_Start(e)
+	e:setAchievement("10,000")
 	e:setGlobalBool("canPlayerMove", true)
 	e:setParticleModel("./res/models/fire.obj");
 	e:setFloat("SpeedMod", 0)

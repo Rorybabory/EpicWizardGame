@@ -117,6 +117,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_11F4845B082D455E94327D2B3D2866DD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1208B6870F9E491FA297695E76B2284F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -124,6 +130,12 @@
         "Entry"
         {
         "MsmKey" = "8:_124FD3A754F4460F8304E73161A4EB82"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_12F5D69919BF48F8955DB860C68C5FD5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -267,6 +279,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_284E1A83628244A4B2685163FED89DFA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2859BE8192924FA89BDC353F8002A931"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -274,6 +292,12 @@
         "Entry"
         {
         "MsmKey" = "8:_2BC93A2AF2E34BAFB4C55D841EE67A2C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2CE9D456D654438C97EE6A8AA0BAF129"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -315,12 +339,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_362AB9E072217CFB9B1C18A441CE6593"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_369B2230EDAB46F2B5F9D12D5E8AB66B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -351,6 +369,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_40ED12B204D749108FFF3BA465238E9F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_40FA852226B24CA783DCBBAE5516EF88"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -358,6 +382,12 @@
         "Entry"
         {
         "MsmKey" = "8:_41B9CB28EFC049ACB31855016FA7BE94"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_42BD2E370D7D401FA08771D4EF7ED16E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -483,6 +513,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5961B3F313FD43BDB7AD803A2E0CFDFA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5A8E4D57C2EC42A6A7AA20D4DFCF1C00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -514,6 +550,12 @@
         "Entry"
         {
         "MsmKey" = "8:_5D8CD2653B1F41AFBB1D9932E685C9EB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5E1879CBD59E49D881C2BD61334FC3A3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -681,6 +723,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7A13ACBFFB8F4BCBA02B0CC3B5D92C5C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7AC699D62A9747729EF641F3E07D42DE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -705,6 +753,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7CE92752E01A4326997A48C73B208F23"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7D2142468EC14D34BA7612F960414FB7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -723,6 +777,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7E1C52C8B9734C018915F99ED8DD5C57"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7EEF1711FC774597940FD5ADEB7DC163"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -736,6 +796,12 @@
         "Entry"
         {
         "MsmKey" = "8:_7F1D632F295C4971947EB3130B915830"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7F3B0662F3604235AAE5E9D1E4F739FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -813,6 +879,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8EFDE7FEE3A749EBBE3A17FF540A3674"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_918A909CC84B4840B9A050A6D3E04ECA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -851,12 +923,6 @@
         {
         "MsmKey" = "8:_944A08E6539A47CA981AAF61C00A9981"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9451968C1F140985EA78B1D73E4581AB"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -922,6 +988,12 @@
         "Entry"
         {
         "MsmKey" = "8:_98551C984A1E4EAE9B9204107303AED0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9914DC84880B495789F599D10EA765C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1185,6 +1257,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C000308EB9D54BE099A54543D649B3A4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C000E5F657354897A286F9D36EB878A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1205,18 +1283,6 @@
         {
         "MsmKey" = "8:_C6693B36AE4D401DA8746945C8ED8956"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C9F76389F0E4A8C61FCD03F8AC36D443"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CE62B955F9434DF7637D82850AAC95F6"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1281,12 +1347,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D8311227B404A9847C33CDF2A6CA4229"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D8DD102491444541989F851327F5DBF4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1300,6 +1360,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DA7AB530CBD743969A52153FE765989D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DABB64207A264091A849D6DFF197B3DB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1389,14 +1455,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E95BD7C79D184C348B51A5BB114F8331"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EA20BD0D91954C67A5FF41E7841289FD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_ED338E69AC99B91FC816A9A618603B02"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
+        "MsmKey" = "8:_EDDBA3B8E7EE430B8C62799B17511DD0"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1461,6 +1533,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F5A32B8F819F435F820D9766B989E5A5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F5F64BBF6E6F4480ACDCC1E553BA7BE1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F726F2BF84A44D1F860320EA88D716DF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1469,12 +1553,6 @@
         {
         "MsmKey" = "8:_F9332CCC39364D90A3D7036A5586038E"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F9904B0F189571BC632B51BD16A8A042"
-        "OwnerKey" = "8:_13865DC020404BA88C577EEE54A3DC28"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1922,6 +2000,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11F4845B082D455E94327D2B3D2866DD"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\outline.vs"
+            "TargetName" = "8:outline.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1208B6870F9E491FA297695E76B2284F"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\props\\house3\\Body.obj"
@@ -1948,6 +2046,26 @@
             "TargetName" = "8:idle.dae"
             "Tag" = "8:"
             "Folder" = "8:_39EB99B28CA3491784388932DB460324"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_12F5D69919BF48F8955DB860C68C5FD5"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\outline.fs"
+            "TargetName" = "8:outline.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2402,6 +2520,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_284E1A83628244A4B2685163FED89DFA"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\particle.obj"
+            "TargetName" = "8:particle.obj"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2859BE8192924FA89BDC353F8002A931"
             {
             "SourcePath" = "8:..\\x64\\Release\\SDL2.dll"
@@ -2428,6 +2566,26 @@
             "TargetName" = "8:grassBase.obj"
             "Tag" = "8:"
             "Folder" = "8:_76ED3D5559674946A8B1B0B14123715B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CE9D456D654438C97EE6A8AA0BAF129"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\aShader.fs"
+            "TargetName" = "8:aShader.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2562,26 +2720,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_362AB9E072217CFB9B1C18A441CE6593"
-            {
-            "SourcePath" = "8:glew32.dll"
-            "TargetName" = "8:glew32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_369B2230EDAB46F2B5F9D12D5E8AB66B"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\props\\treeTown\\treeLeaves.obj"
@@ -2682,6 +2820,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40ED12B204D749108FFF3BA465238E9F"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\plane.obj"
+            "TargetName" = "8:plane.obj"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40FA852226B24CA783DCBBAE5516EF88"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\props\\house3\\Light.obj"
@@ -2708,6 +2866,26 @@
             "TargetName" = "8:1.wav"
             "Tag" = "8:"
             "Folder" = "8:_94491337F89A4D57B4B3EEE70008BBD7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42BD2E370D7D401FA08771D4EF7ED16E"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\basicShader.vs"
+            "TargetName" = "8:basicShader.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3122,6 +3300,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5961B3F313FD43BDB7AD803A2E0CFDFA"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\postRender.obj"
+            "TargetName" = "8:postRender.obj"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5A8E4D57C2EC42A6A7AA20D4DFCF1C00"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\scripts\\funRobot.lua"
@@ -3228,6 +3426,26 @@
             "TargetName" = "8:floor2.obj"
             "Tag" = "8:"
             "Folder" = "8:_BD77A3C831194B829EBE679E915C2C6A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5E1879CBD59E49D881C2BD61334FC3A3"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\post.vs"
+            "TargetName" = "8:post.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3782,6 +4000,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A13ACBFFB8F4BCBA02B0CC3B5D92C5C"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\cube.obj"
+            "TargetName" = "8:cube.obj"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7AC699D62A9747729EF641F3E07D42DE"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\props\\crate\\data.lua"
@@ -3862,6 +4100,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CE92752E01A4326997A48C73B208F23"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\save.dat"
+            "TargetName" = "8:save.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7D2142468EC14D34BA7612F960414FB7"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\maps\\newMap.lua"
@@ -3922,6 +4180,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7E1C52C8B9734C018915F99ED8DD5C57"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\ppShader.fs"
+            "TargetName" = "8:ppShader.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7EEF1711FC774597940FD5ADEB7DC163"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\scripts\\zombie.lua"
@@ -3968,6 +4246,26 @@
             "TargetName" = "8:skeleton.lua"
             "Tag" = "8:"
             "Folder" = "8:_7A8BE3D9809D4133957A7602E62D43BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F3B0662F3604235AAE5E9D1E4F739FA"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\post.fs"
+            "TargetName" = "8:post.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4222,6 +4520,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8EFDE7FEE3A749EBBE3A17FF540A3674"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\guiShader.vs"
+            "TargetName" = "8:guiShader.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_918A909CC84B4840B9A050A6D3E04ECA"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\maps\\mainMap.lua"
@@ -4360,26 +4678,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9451968C1F140985EA78B1D73E4581AB"
-            {
-            "SourcePath" = "8:SDL2_mixer.dll"
-            "TargetName" = "8:SDL2_mixer.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_950F8A4B0FE84D44A7D1259EA112EF36"
@@ -4588,6 +4886,26 @@
             "TargetName" = "8:mainBase.obj"
             "Tag" = "8:"
             "Folder" = "8:_D85E96E4C910422FA6B5C266EE8A5AFE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9914DC84880B495789F599D10EA765C1"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\aShader.vs"
+            "TargetName" = "8:aShader.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5462,6 +5780,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C000308EB9D54BE099A54543D649B3A4"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\ppShader.vs"
+            "TargetName" = "8:ppShader.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C000E5F657354897A286F9D36EB878A2"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\X.obj"
@@ -5540,46 +5878,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9F76389F0E4A8C61FCD03F8AC36D443"
-            {
-            "SourcePath" = "8:OPENGL32.dll"
-            "TargetName" = "8:OPENGL32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CE62B955F9434DF7637D82850AAC95F6"
-            {
-            "SourcePath" = "8:assimp-vc141-mt.dll"
-            "TargetName" = "8:assimp-vc141-mt.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CE9CC87CFCAF4D9AA54E07A63BB479D1"
@@ -5782,26 +6080,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D8311227B404A9847C33CDF2A6CA4229"
-            {
-            "SourcePath" = "8:IMM32.dll"
-            "TargetName" = "8:IMM32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D8DD102491444541989F851327F5DBF4"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\props\\background\\Mountains.obj"
@@ -5828,6 +6106,26 @@
             "TargetName" = "8:attack.dae"
             "Tag" = "8:"
             "Folder" = "8:_0B822C37C80040288E4A5D235C0FEADE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DABB64207A264091A849D6DFF197B3DB"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\projShader.vs"
+            "TargetName" = "8:projShader.vs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6122,6 +6420,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E95BD7C79D184C348B51A5BB114F8331"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\basicShader.fs"
+            "TargetName" = "8:basicShader.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EA20BD0D91954C67A5FF41E7841289FD"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\props\\wall1\\wallShadow.obj"
@@ -6142,10 +6460,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED338E69AC99B91FC816A9A618603B02"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EDDBA3B8E7EE430B8C62799B17511DD0"
             {
-            "SourcePath" = "8:freetype.dll"
-            "TargetName" = "8:freetype.dll"
+            "SourcePath" = "8:..\\x64\\Release\\res\\X.obj"
+            "TargetName" = "8:X.obj"
             "Tag" = "8:"
             "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
             "Condition" = "8:"
@@ -6159,7 +6477,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE67E656D9BD4B7CAB235B8B7AD73E50"
@@ -6362,6 +6680,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5A32B8F819F435F820D9766B989E5A5"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\projShader.fs"
+            "TargetName" = "8:projShader.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5F64BBF6E6F4480ACDCC1E553BA7BE1"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\res\\guiShader.fs"
+            "TargetName" = "8:guiShader.fs"
+            "Tag" = "8:"
+            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F726F2BF84A44D1F860320EA88D716DF"
             {
             "SourcePath" = "8:..\\WizardGame\\res\\ppShader.fs"
@@ -6400,26 +6758,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F9904B0F189571BC632B51BD16A8A042"
-            {
-            "SourcePath" = "8:SDL2.dll"
-            "TargetName" = "8:SDL2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_DC33B419825A4CEC94C19200311D7954"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA2018524FF845E88849C844DC1FA5BE"

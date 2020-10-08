@@ -68,7 +68,7 @@ function skeleton_Update(e)
 	
 end
 function skeleton_Start(e)
-    e:setHP(6)
+    e:setHP(5)
     e:lookAtPlayer()
     e:setScale(0.8)
     e:setCollisionBox(2.0,2.0,8)

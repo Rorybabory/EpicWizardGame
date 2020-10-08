@@ -26,6 +26,6 @@ void main() {
 	//depth /= 10;
     //gl_FragColor = vec4(color.rgb - vec3(depth),1.0);
 	
-
+	
 	gl_FragColor = color;
 }

@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "steam/steam_api.h"
 
 extern int screenInverted;
 extern glm::vec3 hsv;
@@ -431,6 +432,7 @@ void Entity::FPSControllerUpdate(float speed) {
     startPos = cameraC->getCamera().m_position;
     SDL_PollEvent( &e );
     SDL_GetRelativeMouseState( &cameraC->x, &cameraC->y );
+
 
     float cameraMulX = 800 / Width;
     float cameraMulY = 600 / Height;
@@ -983,4 +985,9 @@ void Entity::setHighscore(int val) {
 }
 float Entity::sinFunc(float x) {
     return sin(x);
+}
+void Entity::setAchievement(std::string name) {
+    if (SteamUserStats()->SetAchievement(name.c_str()) == true) {
+        std::cout << "added achievement\n\n\n\n\n\n\n\n\n\n";
+    }
 }

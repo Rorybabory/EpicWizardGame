@@ -477,6 +477,7 @@ public:
     std::cout << "Drew Projectiles" << std::endl;
   }
   //API FUNCTIONS
+  void setAchievement(std::string name);
   float sinFunc(float x);
   int getHighscore();
   void setHighscore(int val);
