@@ -378,6 +378,7 @@ function player_clearHearts(e)
 	end
 end
 function player_Start(e)
+	e:setAchievement("10,000")
 	e:setGlobalBool("canPlayerMove", true)
 	e:setParticleModel("./res/models/fire.obj");
 	e:setFloat("SpeedMod", 0)

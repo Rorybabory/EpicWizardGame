@@ -237,7 +237,7 @@ function player_Update(e)
   --player_setHearts(e)
   player_updateIllusion(e)
   if (e:getGlobalBool("drawPlayerUI") == true) then
-	player_drawText(e)
+	--player_drawText(e)
 	--player_setHearts(e)
   else
 	player_clearText(e)

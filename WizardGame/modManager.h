@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <experimental/filesystem>
+#include "luaLibrary.h"
+
 extern std::vector<std::string> mods;
 static int getCharCount(std::string file) {
     ifstream  fin(file);
@@ -32,6 +34,19 @@ static std::string removeWord(std::string str, std::string word)
             str.replace(p, tempWord.length(), "");
     }
     return str;
+}
+static void checkForModEntities(lua_State * L) {
+    std::cout << "";
+    for (const auto& dirEntry : std::experimental::filesystem::directory_iterator("./mods")) {
+        std::string path = dirEntry.path().string();
+        for (const auto& fileEntry : std::experimental::filesystem::directory_iterator(path+"/scripts/")) {
+            std::string value = fileEntry.path().string();
+            if (value.find(".lua") != std::string::npos) {
+                std::cout << "loading mod script: " << value << "\n";
+                luah::loadScript(L, value);
+            }
+        }
+    }
 }
 static std::string convertPath(std::string input) {
     std::string temp = input;

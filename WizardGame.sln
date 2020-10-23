@@ -7,9 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WizardGame", "WizardGame\Wi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.2", "..\lua-5.2.4\src\lua5.2.vcxproj", "{D74CA93F-92D7-4E11-9E74-01917C6B3066}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupProject", "SetupProject\SetupProject.vdproj", "{B57E8F66-4FA0-4479-9AC2-7A5A1ACB3775}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WizardGameInstaller", "SetupProject\SetupProject.vdproj", "{B57E8F66-4FA0-4479-9AC2-7A5A1ACB3775}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfreetype", "glfreetype\glfreetype.vcxproj", "{848E1922-705A-4987-9DB6-67C4F558139E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WorkshopUploader", "WorkshopUploader\WorkshopUploader.vcxproj", "{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,14 @@ Global
 		{848E1922-705A-4987-9DB6-67C4F558139E}.Release|x64.Build.0 = Release|x64
 		{848E1922-705A-4987-9DB6-67C4F558139E}.Release|x86.ActiveCfg = Release|Win32
 		{848E1922-705A-4987-9DB6-67C4F558139E}.Release|x86.Build.0 = Release|Win32
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Debug|x64.ActiveCfg = Debug|x64
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Debug|x64.Build.0 = Debug|x64
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Debug|x86.ActiveCfg = Debug|Win32
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Debug|x86.Build.0 = Debug|Win32
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Release|x64.ActiveCfg = Release|x64
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Release|x64.Build.0 = Release|x64
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Release|x86.ActiveCfg = Release|Win32
+		{7B60D38A-076D-4B03-B99D-B05D2C8BA4A4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
